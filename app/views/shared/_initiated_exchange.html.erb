@@ -1,0 +1,141 @@
+<!--Modal-->
+    <% @targ_listing = UserListing.find(@exch.targ_list_id)%>
+    <% @init_listing = UserListing.find(@exch.init_list_id)%>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-miss="modal" aria-hidden="true"></button>
+        <h3> An exchange has been initiated with you! </h3>
+    </div>
+
+    <div class="modal-body">
+        <!--user viewing -->
+        <div class='row-fluid'>
+            <div class='span4' id="userInfo">
+                <br>
+                <%= image_tag(current_user.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
+                <%= current_user.name %>
+            </div>
+        
+            <!--Kirpeep Exchage Status Logo -->
+            <div class='span4 align-center' id="exchangeStatus">
+                <p><%= image_tag('InitExchIco.png', {:width => '100px', :height => '100px'} ) %></p>
+            </div>
+            
+            <!--exchange partner -->
+            <div class='span4 align-right' id="exchangePartner" >
+                <span id="with">exchanging with</span><br>
+                <% if (current_user.id).to_s == (@init_listing.user.id).to_s %>
+                    <%= image_tag(@targ_listing.user.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+                    <br>
+                    <%= @targ_listing.user.name %>
+                <%else%>
+                    <%= image_tag(@init_listing.user.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+                    <br>
+                    <%= @init_listing.user.name %>
+                <%end%>
+            </div>
+        </div> <!-- .row-fluid-->                
+    
+        <!--opens middle section-->
+        <div class="row-fluid">
+        <!-- Left Side-->
+      		<div class="span6">
+            	<div>
+                    <span id="getting">You are getting...</span>
+                </div>
+
+            <% if @targ_listing.user.id == current_user.id %>
+                <% @offer_listing = @targ_listing %>
+                <% @need_listing = @init_listing %>
+            <%else%>
+                <% @offer_listing = @init_listing %>
+                <% @need_listing =  @targ_listing %>
+            <%end%>
+
+                <div class="rounded-offer shadow">
+                    <div>
+                        <%= image_tag(@offer_listing.photo.url, {:width => "50px", :height => '50px'}) %>
+                    </div>
+                    <div>
+                        <span>OFFERED</span> 
+                    </div>
+                    <div>
+                        <%= @offer_listing.title %>
+                        <%= @offer_listing.inventoryCount %>
+                        <%= @offer_listing.description %>
+                    </div> 
+                </div>
+            </div><!-- .span6-->
+
+            <!--Right Side-->
+            <div class="span6">
+                <div>
+                    <span id="getting">You are giving...</span>
+                </div>
+                <div class="rounded-need shadow">
+                    <div>
+                        <%= image_tag(@need_listing.photo.url, {:width => "50px", :height => '50px'} )%>
+                    </div>
+                    <div>
+                        <span>NEEDED</span> 
+                    </div>
+                        <%= @need_listing.title %>
+                        <%= @need_listing.quantity %> 
+                        <%= @targ_listing.quantityUnit %>
+                        Description: <%= @targ_listing.description %>
+                </div>
+            </div><!-- .span6-->
+        </div><!--.row-fluid-->
+
+        <!-- Exchange Message-->
+        <div class="row-fluid">
+            <span>Message</span>
+            <div class="rounded-map shadow" id="message" style="overflow:scroll; height: 100px;">
+                <% exch_message_link = ExchangeMessageLink.where(:exchange_id => @exch.id).first %>
+                <% current_message = Message.find(exch_message_link.message_id) %>
+                <% reply_message_id = current_message.id %>
+                <% begin %>
+                    <%= render :partial =>current_message, :locals => {:current_message => current_message} %>
+                    <% reply_message_id = current_message.id %>
+                    <% current_message = Message.where(:responseToMsgID => current_message.id).first %>
+                <% end while(current_message != nil) %>
+                <div>
+                    <%= form_for Message.new, :remote => true, :html => {:class => "reply_message"} do |f| %>
+         
+                        <%= f.hidden_field :initUser, :value => current_user.id %>
+                        <%= f.hidden_field :responseToMsgID, :value =>  reply_message_id %>
+                        <% if is_current_user(@init_listing.user) %>
+                            <%= f.hidden_field :targUser, :value => @targ_listing.user.id %>
+                        <% else %>
+                            <%= f.hidden_field :targUser, :value => @init_listing.user.id %>
+                        <% end %>
+                        <%= f.text_field :text %>
+                        
+                        <%= f.submit :reply, :class => "btn btn-primary" %>
+                    <% end %>
+                </div>
+            </div>
+        </div><!-- .row-fluid-->
+    </div>
+    
+    <!--Opens Bottom Section-->
+    <div class="modal-footer">
+        <div id="submitButton">
+            <% if((@exch.initUser).to_s == (current_user.id).to_s ) %>
+                <% if @exch.initAcpt %>
+                    <span>Waiting for user</span>
+                <%else%>
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <%= f.submit "Sign In", {:class => "btn btn-primary"} %>
+                <!--<%= button_to "Accept", accept_exchange_path(:exch_id => @exch.id, :user_id => @exch.initUser) %>-->
+                <%end%>
+            <%else%>
+                <% if @exch.targAcpt %>
+                    <span>Waiting for user</span>
+                <%else%>
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <%= button_to "Accept", accept_exchange_path(:exch_id => @exch.id, :user_id => @exch.targUser), {:class => "btn btn-primary"} %>
+                <%end%>
+            <%end%>    
+        </div>
+    </div>

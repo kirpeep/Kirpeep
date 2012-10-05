@@ -1,0 +1,76 @@
+<div class='row-fluid'>
+	<div class="accordion" id="messageAccordion">
+		<% i=0 %>
+		<% if !@messages.empty? %>
+			<% for message in messages %>
+				<% @targUser = User.find(message.targUser) %>
+				<% @initUser = User.find(message.initUser) %>
+				<% if message.isUnread?(current_user) %>
+					<div class="accordion-group unread">
+				<% else %>
+					<div class="accordion-group">
+				<% end %>
+	    			<div class="accordion-heading">
+	      				<a class="accordion-toggle" data-toggle="collapse" data-parent="#messageAccordion" href="#collapse<%= i %>">
+	        			
+							<div class='row-fluid'>
+								<div class="span4">
+									<% if (message.initUser).to_s == (current_user.id).to_s %>
+										<%= image_tag @targUser.profile.photo.url, {:width => "70px", :height => '70px'} %>
+										<%= User.find(message.targUser).name %>
+									<% else %>
+										<%= image_tag @initUser.profile.photo.url, {:width => "70px", :height => '70px'} %>
+										<%= User.find(message.initUser).name %>
+									<% end %>
+								</div>
+								<div class="span4">
+									<span>
+										<%= message.subject %> - <%= message.updated_at %>
+									</span>
+								</div>
+								<div class="span4">
+									<%# if message.type == 'InitiateExchange' %>
+										<%#= image_tag('InitExchIco.png', {:width => '70px', :height => '70px'}) %>
+									<%# elsif message.type == 'PerformExchange' %>
+										<%#= image_tag('PerfExchIco.png', {:width => '70px', :height => '70px'}) %>
+									<%# elsif message.type == 'RateExchange' %>
+										<%#= image_tag('RRExchIco.png', {:width => '70px', :height => '70px'}) %>
+									<%# else %>
+									<%#end%>
+								</div>
+							</div>
+						</a>
+					</div>
+					<div id="collapse<%= i %>" class="accordion-body collapse">
+				    	<div class="accordion-inner">
+				    		<% current_message = message %>
+				    		<% reply_message_id = current_message.id %>
+				    		<% begin %>
+				    			<%= render :partial =>current_message, :locals => {:current_message => current_message} %>
+			        			<% reply_message_id = current_message.id %>
+			        			<% current_message = Message.where(:responseToMsgID => current_message.id).first %>
+			        		<% end while(current_message != nil) %>
+				      	</div>
+				      	<div>
+				      		<%= form_for Message.new, :remote => true, :html => {:class => "reply_message"} do |f| %>
+				 
+					      		<%= f.hidden_field :initUser, :value => current_user.id %>
+					      		<%= f.hidden_field :responseToMsgID, :value =>  reply_message_id %>
+					      		<% if is_current_user(@initUser) %>
+					      			<%= f.hidden_field :targUser, :value => @targUser.id %>
+						      	<% else %>
+						      		<%= f.hidden_field :targUser, :value => @initUser.id %>
+						      	<% end %>
+						      	<%= f.text_field :text %>
+						      	
+						      	<%= f.submit :reply %>
+							<% end %>
+				      	</div>
+				    </div>
+				</div>
+				<% i+=1 %>	
+			<% end %>
+		<% end %>
+	</div>	
+</div>
+

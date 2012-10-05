@@ -1,0 +1,92 @@
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>Kirpeep | <%= @title %></title>
+<%= stylesheet_link_tag    "profile.css" %>
+<script type='text/javascript'>
+$(document).ready(function(){
+  $('#loc').mouseover(function(){
+    $('#loc').css('background-color','green');
+    $('#edit').css('display', 'inline');
+  });
+
+  $('#loc').mouseout(function(){
+    $('#loc').css('background-color','transparent');
+    $('#edit').css('display', 'none');
+  });
+    
+  $('#edit').click(function(){
+  //enter edit information here	
+  });
+  
+  //Exchange Modal JQuery
+  $('.dynamolink').click(function(event){
+      var path = $(this).attr('href');
+      $('#dynamobox').load(path);
+      $('#dynamobox').modal('show');
+      event.preventDefault();
+    });
+});
+</script>
+
+</head>
+
+<body>
+
+  <div class='container'>
+    <%= render 'shared/header' %>
+
+    <div><hr/></div>
+
+    <div id='main-contant' class='row'>
+      <%= flash[:error] %>
+
+        <%= flash[:notice] %><br>
+        <% @profile = @user.profile %>
+      	<div class='span4'>
+          <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
+        	<ul>
+            <li>Location: <%= @profile.location %></li>
+              <li>Languages: <%= @profile.languages %></li>
+              <li>Needs: <%= @user.needs.count %>/ Offers: <%= @user.needs.count %> </li>
+              <li>Completed Exchanges: <%# Exchange.where("type = ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', current_user.id, current_user.id).all%></li>
+             	<li>1 Review (stars)</li> 
+        	</ul>
+        </div>
+        
+        <div class='span8'>
+          <div id='profile-header'>
+          	<h2 class='profile-username'>
+              <%= @user.name %>
+            </h2>
+            <div class='tabbable'>
+              <ul class='nav nav-tabs'>
+                <li class='active'>
+                  <%= link_to 'Profile', '#profile' , {:id => 'profile_link', 'data-toggle' => 'tab'} %>
+                </li>
+                <li>
+                  <%= link_to 'Exchanges', '#exchanges' , {:id => 'exch_link', 'data-toggle' => 'tab'} %></li>
+              </ul>
+      	    
+              <div class="tab-content" >
+                <div id='profile' class="tab-pane active">
+                  <%= render :partial => 'profile', :locals => {:user => @user} %>
+                </div>
+                <div id='exchanges' class="tab-pane">
+                  <%= render :partial => 'exchange', :locals => {:user => @user} %>
+                </div>
+              </div> <!-- /.tab-content -->
+            </div><!-- /.tabbable -->
+          </div><!-- /#profile-header -->
+        </div> <!-- /.span8-->
+      </div><!-- .row-fluid-->
+
+    <%= render 'shared/footer' %>
+  </div>
+  <!-- Dynamobox Modal -->
+  <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+
+  <!-- List need modal -->
+  <%= render 'shared/list_need' %>
+
+  <!-- List offer modal -->
+  <%= render 'shared/list_offer' %>
+</body>

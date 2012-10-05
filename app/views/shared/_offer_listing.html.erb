@@ -1,0 +1,28 @@
+<!-- Offer Listing -->
+<div class="rounded-offer shadow">
+    <% if @targ_listing.type == "Offer" %>
+    <div style="">
+        <%= image_tag(@targ_listing.photo.url, {:width => "50px", :height => '50px'}) %>
+    </div>
+    <div style="">
+        <span>OFFERED</span> 
+    </div>
+    <div style="">
+        <span>
+        <%= @targ_listing.title %>
+        <%= @targ_listing.inventoryCount %>
+        <%= @targ_listing.description %>
+        <%= f.hidden_field(:targ_list_id, :value => @targ_listing.id ) %>
+        <%= f.hidden_field :targUser, :value => @targ_listing.user.id  %>
+        <!-- %= link_to 'EDIT', edit_offer_path(:id => offer.id) %-->
+        </span>
+    </div> 
+    <%else%>
+    <span id="selectNeed">Select a need or <%= link_to "create", new_offer_path, :class => "CreateOffer" %> a new one.</span>
+    <div>
+        <% needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
+        <%= f.select :init_list_id, options_for_select(needs_array) %>
+        <%= f.hidden_field :initUser, :value => current_user.id  %>
+    </div>
+    <%end%>
+</div><!-- End of Offer Listing -->

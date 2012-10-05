@@ -1,0 +1,127 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<%= stylesheet_link_tag "initiate_exchange" %>
+<%= javascript_include_tag "jquery.min" %>
+<script type="text/javascript">
+    function findSelectedListing(){
+        return $("select#user_listing_title").val();
+    }
+</script>
+</head>
+
+<body>
+
+<div class="Base">
+  <div id="central-col">
+  this <%= @targ_listing.type %> came from <%= @targ_listing.user.name %> --ID: <%= params[:targ_listing] %> TARG: <%=:targ %>
+  <div><span id="title">Initiate Exchange</span></div>
+  <div style="display:inline;">
+        <!--user viewing -->
+        <div id="userInfo">
+            <img id="userProfile">
+            <span id="userFullName">Method to pull user name</span>
+        </div>
+        
+        <!--Kirpeep Exchage Status Logo -->
+        <div id="exchangeStatus">
+            <img id="quarterComplete">
+        </div>
+        
+        <!--exchange partner -->
+        <div id="exchangePartner">
+            <span id="with">exchanging with</span>
+            <img id="exchangePartner">method to pull profile pic
+            <span id="partnerName">method to pull name</span>
+        </div>
+     	<div style="clear:both;"></div>
+    <!--closes top section-->
+  </div>
+    
+    <!--opens middle section-->
+    <div >
+    
+    <!--left side-->
+    
+    	
+
+  		<div style="float:left;">
+        	<div><span id="getting">You are getting...</span></div>
+    		<div id="rounded-offer">
+            	<div>
+                    <% if @targ_listing.type == "Offer" %>
+            		  <span id="offerTitle">Title:  <%= @targ_listing.title %></span>
+                	   <div>
+                		<!-- METHOD to pull img of need -->
+                    	<!-- METHOD to change img -->
+                	   </div>
+               		   <span id="amount">Inventory: <%= @targ_listing.inventoryCount %></span>
+                	   <span id="ofWhat">Unit: </span> <br/>
+                       <span id="description">Description: <%= @targ_listing.description %></span>
+                    <%else%>
+                        <span id="selectOffer">Select a need or (link to create)create a new one.</span>
+
+                        <div>
+                        <%= collection_select('user_listing', :title, @user.needs.all, :id, :id, {:prompt => true}) %>
+                        </div>
+                    <%end%>
+                </div>
+                	
+            </div>
+                
+    	</div>
+    <!--Right Side-->
+    <div><span id="giving">You are giving this...</span>
+    <div style="float:left;">
+    		<div id="rounded-need">
+    		  <% if @targ_listing.type == "Need" %>
+                      <span id="needTitle">Title:  <%= @targ_listing.title %></span>
+                       <div>
+                        <!-- METHOD to pull img of need -->
+                        <!-- METHOD to change img -->
+                       </div>
+                       <span id="amount">Inventory: <%= @targ_listing.quantity %></span>
+                       <span id="ofWhat">Unit: <%= @targ_listing.quantityUnit %></span> <br/>
+                       <span id="description">Description: <%= @targ_listing.description %></span>
+                <%else%>
+                    <span id="selectOffer">Select a need or (link to create)create a new one.
+                    </span>
+
+                    <div>
+                        <%= collection_select('user_listing', :title, @user.offers.all, :id, :title, {:prompt => true}) %>
+                    </div>
+                <%end%>
+                
+            </div>
+            <METHOD for dropdown>
+            </div>
+            
+            	
+                
+    	</div>
+        <div style="clear:both"></div>
+    
+    
+    <!--Closes Middle Section-->
+  	</div>
+    
+    <!--Opens Bottom Section-->
+    <div>
+    	<div style="float:right;">
+    		<div id="rounded-submit">
+    		<span id="submitButton">
+                
+                <%= link_to 'Submit', create_exchange_path(:targ_l_id => @targ_listing.id , :init_l_id => 3  )   %>
+            </span>
+    	</div>
+		<input type="range" name="slider-step" id="slider-step" value="150" min="0" max="5" step="1" />
+    <!--Closes Bottom Section-->
+    </div>
+        <div class="clear"></div>
+    </div>
+  </div>
+</body>
+</html>

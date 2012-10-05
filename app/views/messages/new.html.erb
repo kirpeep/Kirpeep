@@ -1,0 +1,55 @@
+  <%# This pops when message is clicked from profile page %>
+  <% @targUser = User.find(params[:id]) %>
+  <% @user_photo = @targUser.profile.photo.url %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Send Message</h3>
+  </div>
+  <%= form_for( @message, :html => { :multipart => true }) do |f| %>
+  	<%= f.hidden_field :targUser, :value => @targUser.id %>
+	<%= f.hidden_field :initUser, :value => current_user.id %>
+	<% if params[:reply_message_id] != nil%>
+		<%= f.hidden_field :responseToMsgID, :value => params[:reply_message_id] %>
+	<% end %>
+  <div class="modal-body">
+	  <% if @user.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+	      <ul>
+	      <% @user.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+
+
+	  <div class="field">
+	    <%= f.label :To %>
+	    <div>
+	    	<%= image_tag(@user_photo, {:width => '100px', :height => '100px'}) %>
+			<%= @targUser.name %>
+			<%= f.hidden_field :responseToMsgID, :value =>  "start" %>
+		</div>
+	  </div>
+	  <div class="field">
+	    <%= f.label :subject %><br />
+	    <%= f.text_field :subject  %><br />
+	  </div>
+	  <div class="field">
+	    <%= f.label :Message %><br />
+	    <%= f.text_area :text %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :photo %><br />
+	    <%= f.file_field :photo %>
+	  </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <%= f.submit 'Save', :class => 'btn btn-primary' %>
+
+    <% end %> <!-- end of form -->
+  </div>
+</div>

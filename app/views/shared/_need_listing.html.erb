@@ -1,0 +1,25 @@
+<div class="rounded-need shadow">
+    <% if @targ_listing.type == "Need" %>
+    <div style="">
+        <%= image_tag(@targ_listing.photo.url, {:width => "50px", :height => '50px'} )%>
+    </div>
+    <div style="">
+        <span>NEEDED</span> 
+    </div>
+    <div style="">
+        <%= @targ_listing.title %>
+        <%= @targ_listing.quantity %> <%= @targ_listing.quantityUnit %>
+        Description: <%= @targ_listing.description %>
+        
+        <%= f.hidden_field :targ_list_id, :value => @targ_listing.id %>
+        <%= f.hidden_field :targUser, :value => @targ_listing.user.id %>
+    </div>
+    <%else%>
+    <span id="selectOffer">Select an offer or (link to create)create a new one.</span>
+    <div>
+        <% offers_array = @user.offers.all.map { |offer| [offer.title, offer.id] } %> 
+        <%= f.select :init_list_id, options_for_select(offers_array) %>
+        <%= f.hidden_field(:initUser, :value => current_user.id ) %>
+    </div>
+    <%end%>
+</div>

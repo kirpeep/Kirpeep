@@ -1,0 +1,259 @@
+<%= stylesheet_link_tag    "results.css" %>
+
+<%= javascript_include_tag "results" %>
+<%= javascript_include_tag "jquery-ui.min" %>
+<%= javascript_include_tag "jquery-1.8.0.min" %>
+<%= javascript_include_tag 'jqcloud-1.0.1' %>
+<%= javascript_include_tag "fade" %>
+<script type='text/javascript'>  
+  var word_list = [
+     {text: "magnificent", weight: 10},
+     {text: "reciprocity", weight: 8, url: "http://jquery.com/", title: "jQuery Rocks!"},
+     {text: "first-rate", weight: 6},
+     {text: "free", weight: 4},
+     {text: "satisfying", weight: 2},
+     {text: "connection", weight: 1},
+     {text: "savings", weight: 3, url: "http://jquery.com/", title: "jQuery Rocks!"},
+     {text: "creative", weight: 5},
+     {text: "swap", weight: 7},
+     {text: "excellent", weight: 9},
+     {text: "fulfilling", weight: 10},
+     {text: "priceless", weight: 8, url: "http://jquery.com/", title: "jQuery Rocks!"},
+     {text: "cutting-edge", weight: 6},
+     {text: "network", weight: 4},
+     {text: "skills", weight: 2},
+     {text: "market", weight: 1},
+     {text: "gratifying", weight: 3, url: "http://jquery.com/", title: "jQuery Rocks!"},
+     {text: "bargain", weight: 5},
+     {text: "fun", weight: 7},
+     {text: "value", weight: 9},
+     {text: "revolutionary", weight: 10},
+     {text: "reciprocate", weight: 8, url: "http://jquery.com/", title: "jQuery Rocks!"},
+     {text: "barter", weight: 6},
+     {text: "refreshing", weight: 4},
+     {text: "exchange", weight: 2},
+     {text: "social", weight: 1},
+     {text: "innovative", weight: 3, url: "http://jquery.com/", title: "jQuery Rocks!"},
+     {text: "enthralling", weight: 5},
+     {text: "trade", weight: 7},
+     {text: "respect", weight: 9},
+     {text: "community", weight: 10}
+     // ...other words
+  ];
+  $(document).ready(function() {
+     $("#wordcloud").jQCloud(word_list);
+});
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Kirpeep | <%= @title %></title>
+
+
+
+</head>
+
+<body>
+  <div class="Base">
+    <div id="header">
+      <div class="align-left" style="padding: 0px 0px 0px 25px"><p>
+        <%= link_to image_tag('kirpeep_head.png'), root_url %> 
+        </p>
+      </div>
+      <div class="align-center">
+        <%= form_tag search_path, :method => 'get', :id => "item_search" do %>
+          <%= hidden_field_tag :direction, params[:direction] %>
+          <%= hidden_field_tag :sort, params[:sort] %>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "search", :style => 'width: 100px important;' %></td>
+        <% end %>
+      </div>
+      <div class="align-right">
+        <% if signed_in? %>
+          <div id="cssdd">
+            <ul>
+              <li><%= current_user.name %>
+                <ul><%= link_to 'View Profile', current_user %></ul>
+                <ul><%= link_to 'Sign Out' , 'destroy_session' %></ul>
+              </li>
+            </ul>
+          </div>
+        <% else %>
+          <a class="signin" href="#">LOGIN</a>
+        <%end%>
+      </div>
+    </div>
+
+    <div style="width: 100%"><hr/></div>
+
+    <div id="central-col">
+      <style type="text/css">
+          .current {
+                    padding-right: 12px;
+                    background-repeat: no-repeat;
+                    background-position: right center;
+          }
+
+          .asc {
+                background-image: url(arrow-up.png);
+                color: #DDD;
+          }
+
+          .desc {
+                background-image: url(arrow-down.png);
+          }
+      </style>
+
+      <% if params[:search].to_s == ''%>
+        <h1>Browse Listings</h1>
+      <%else%>
+        <h1>Search Results For <%= params[:search] %></h1> 
+      <%end%>
+      <div>
+        <div style="display:inline-block; vertical-align: top;">
+          <%= will_paginate @userlistings%>
+          <table>
+            <% for listing in @userlistings  %>
+              <% @user_photo = listing.user.profile.photo.url %>
+              <tr>
+          		  <% if listing.type == 'Offer' %>
+                  <div id="rounded-offer"  class='shadow'>
+      		    		  <div style="background-color:#FFF">
+                      <div style="float:left; width: 80%; height:40%">
+                        <span>OFFERED</span> 
+                        <div style="display:inline; font: Franklin Gothic Medium;"><%= listing.title %></div>
+                  					<p><%= listing.description %></p>
+                      </div>
+                      <div style=" display:none; float:left; width:20%; height:40%; text-align:right;">
+                        <%= image_tag('favorite.png') %> <!-- width="30" height="30" /><br /> -->
+                        <%= image_tag('kid.png') %> <!-- width="43" height="34" /> -->
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                    <div style="position:relative">
+                      <div style="position:absolute">
+              				  <div><%= link_to image_tag(@user_photo, {:width => '100px', :height => '100px'}), listing.user %></div> <!-- width="103" height="103" /> -->
+                  		  <div style="text-align:center"><%= image_tag('stars.png') %> </div>
+                      </div>
+                      <div id="offer-actions">
+                        <div>
+                          <%= image_tag('message.png') %> <!-- width="46" height="30" alt="Message" /> -->
+                          <% if signed_in? %>
+                          <a class="initiate" href="/users/initiate_exchange/<%= @user.id.to_s %>&<%= listing.id.to_s%>">    
+                            <%= image_tag('exchange.png') %>
+                          </a>
+                          <%else%>
+                          <%= image_tag('exchange.png') %>
+                          <%end%> <!--width="52" height="30" alt="Exchange" /> -->
+                          <%= image_tag('price.png', {:style => "display:none;"}) %>   <!--width="53" height="31" alt="Price" /> -->
+                          <%= image_tag('share.png', {:style => "display:none;"}) %>   <!-- width="36" height="36" /> -->
+                        </div>
+                        <div>
+                          <div id="offer-name">
+                            <%= listing.user.name %> <br />
+      								      <%= Exchange.where("id != ?",listing.user.id).all.count %> Exchanges<br />
+      								      Reviews (0)
+                          </div>
+                          <div>
+                            (<%= listing.user.needs.count %>) NEED
+                         	  <br />
+                            (<%= listing.user.offers.count %>) OFFER 
+                          </div>
+      						      </div>
+                      </div>
+                      <div id="offer-listing">
+                        <div>
+                          <%= image_tag(listing.photo.url, {:width => '100px', :height => '100px'}) %> <!-- width="103" height="103" /> -->
+      						      </div>
+                      </div>
+      				      </div>
+                  </div>
+                <%else%>
+                  <div id="rounded-need" style="color: #000;"  class='shadow'>
+                    <div style="background-color:#FFF">
+                      <div style="float:left; width: 80%; height:40%">
+      						      <span>NEED</span> 
+      						      <div style="display:inline; font: Franklin Gothic Medium;"><%= listing.title %></div>
+                  		  <p><%= listing.description %></p>
+                      </div>
+                      <div style=" display:none; float:left; width:20%; height:40%; text-align:right">
+                        <%= image_tag('favorite.png') %> <!-- width="30" height="30" /><br /> -->
+                        <%= image_tag('kid.png') %> <!-- width="43" height="34" /> -->
+                      </div>
+                      <div class="clear"></div>
+              		</div>
+      			
+      				    <div style="position:relative">
+              			<div style="position:absolute">
+              				<div><%= link_to image_tag(@user_photo, {:width => '100px', :height => '100px'}), listing.user %></div> <!-- width="103" height="103" /> -->
+                  		<div style="text-align:center"><%= image_tag('stars.png') %> </div>
+                  	</div>
+                  	<div id="offer-actions">
+                  		<div>
+                        <%= image_tag('message.png') %> <!-- width="46" height="30" alt="Message" /> -->
+                        <% if signed_in? %>
+                          <a class="initiate" href="/users/initiate_exchange/<%= @user.id.to_s %>&<%= listing.id.to_s%>">   
+                            <%= image_tag('exchange.png') %>
+                          </a> 
+                        <%else%>
+                          <%= image_tag('exchange.png') %>
+      	     						<%end%> 
+                        <%= image_tag('price.png', {:style => "display:none;"}) %>   <!--width="53" height="31" alt="Price" /> -->
+                        <%= image_tag('share.png', {:style => "display:none;"}) %>   <!-- width="36" height="36" /> -->
+                      </div>
+                      <div>
+        						  	<div id="offer-name">
+                          <%= listing.user.name %> <br />
+                          <%= Exchange.where("id != ?",listing.user.id).all.count %> Exchanges<br />
+                          Reviews (10)
+                        </div>
+                        <div>
+                          (<%= listing.user.needs.count %>) NEED
+                          <br />
+                          (<%= listing.user.offers.count %>) OFFER 
+                        </div>
+        						  </div>
+                    </div>
+                    <div id="offer-listing">
+      						    <div>
+                        <%= image_tag(listing.photo.url, {:width => '100px', :height => '100px'}) %> <!-- width="103" height="103" /> -->
+      						    </div>
+                    </div>
+                  </div>
+                
+                <%end%>
+    		
+                <div class="clear"></div>
+                </div>
+              </td>
+            </tr>
+            <%end%>
+          </table>
+          <%= will_paginate @userlistings%>
+        </div> 
+      
+        <!-- Tag Cloud-->
+        <div style="display:inline-block; vertical-align: top; ">
+          <div id="wordcloud" style="width: 400px; height: 350px; position: relative;margin-left: 20px;">
+              
+          </div>
+        </div>
+      </div>
+
+    <div id="footer">
+      <div>
+        Can’t find what you’re looking for? Try <span class="orange-mid">advanced search</span>, <span class="blue-mid">browse</span>, or <span class="green-mid">add your own listing</span>!
+      </div>
+      <hr />
+      <div id="bottom">
+        <div style=" text-align:left">about |   how it works  | faqs</div>
+        <div style=" margin:auto">© 2012 Kirpeep, Inc.</div>
+        <div style=" text-align:right">contact  |   terms of use  | privacy</div>
+      </div>
+    </div>
+  </div>
+  </div> 
+
+  <div id="fuzz">  
+      <div id="msgbawx" class="msgbox" >  
+      </div>  
+  </div>
+</body>

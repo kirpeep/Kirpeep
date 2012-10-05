@@ -1,0 +1,97 @@
+<!--div class="modal fade hide" id="InitiateExch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+    <% @initexch = InitiateExchange.new %>
+    <%= form_for(@initexch, :url => create_exchange_path) do |f| %>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Initiate Exchange</h3>
+        </div>
+        <div class="modal-body">
+        
+            <!--user viewing -->
+            <div class='row-fluid'>
+                <div class='span4' id="userInfo">
+                    <br>
+                    <%= image_tag(current_user.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
+                    <%= current_user.name %>
+                </div>
+
+                <!--Kirpeep Exchage Status Logo -->
+                <div class='span4 align-center' id="exchangeStatus">
+                    <p><%= image_tag('InitExchIco.png', {:width => '100px', :height => '100px'} ) %></p>
+                </div>
+
+                <!--exchange partner -->
+                <div class='span4 align-right' id="exchangePartner" >
+                    <span id="with">exchanging with</span><br>
+                    <%= image_tag(@targ_listing.user.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
+                    <%= @targ_listing.user.name %>
+                </div>
+            </div><!--closes top section-->
+
+            <!--opens middle section-->
+            <div class='row-fluid'>
+
+
+            <!--left side-->
+                <div class='span6'>
+                    <div><span id="getting">You are getting...</span></div>
+
+                    <!--offers -->
+                    <div class="tabbable tabs-left">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#offer" data-toggle="tab">Listing 1</a></li>
+                            <li id="new_link"><a href="exchanges/new" data-remote="true" data-toggle="tab">+</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="offer">
+                                <!-- Offer Listing -->
+                                <%= render :partial => 'shared/offer_listing', 
+                               :locals => {:targ_listing => @targ_listing, :user => @user, :f => f} %>
+                                <!-- End of Offer Listing --> 
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+
+
+                <!--Right Side-->
+                <div class='span6'>
+                    <div><span id="giving">You are giving this...</span></div>
+
+                    <!-- Needs-->
+                    <div class="tabbable tabs-right">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#need" data-toggle="tab">Listing 1</a></li>
+                            <li>+</li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="offer">
+                                <!-- Need Listing -->
+                                <%= render :partial => 'shared/need_listing', 
+                               :locals => {:targ_listing => @targ_listing, :user => @user, :f => f} %>
+                                <!--End of Need Listing-->
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!--Opens Bottom Section-->
+                <div class='row-fluid'>
+                    <%= fields_for Message.new do |message| %>
+                    <span>Message</span>
+                    <%= message.text_area :text, :class => 'rounded-map', :rows => '10', :style => "width:95%" %>
+                    <%= message.hidden_field :targUser, :value => @targ_listing.user.id %>
+                    <%= message.hidden_field :initUser, :value => current_user.id %>
+                    <%= f.hidden_field(:responseToMsgID, :value => 'exchange' ) %>
+                    <%end%>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            <%= f.submit 'Initiate Exchange', :class => "btn btn-primary" %> 
+        </div>
+    <% end %>
+<!--/div--> 

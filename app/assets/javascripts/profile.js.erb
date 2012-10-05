@@ -1,0 +1,40 @@
+
+
+$(document).ready(function(){
+
+  $('#messages').load('/messages/'+userID);
+  
+  $('#loc').mouseover(function(){
+    $('#loc').css('background-color','green');
+    $('#edit').css('display', 'inline');
+  });
+
+  $('#loc').mouseout(function(){
+    $('#loc').css('background-color','transparent');
+    $('#edit').css('display', 'none');
+  });
+    
+  $('#edit').click(function(){
+  //enter edit information here	
+  });
+
+  $('.best_in_place').best_in_place();
+  
+  //Exchange Modal JQuery
+  $('.dynamolink').click(function(event){
+    var path = $(this).attr('href');
+    $('#dynamobox').load(path);
+    $('#dynamobox').modal('show');
+    event.preventDefault();
+  });
+
+  //$('.reply_message').submitWithAjax();
+
+  //Unread Messages
+/*unread').click(function(event){
+    
+    $('#dynamobox').load(path);
+    $('#dynamobox').modal('show');
+    event.preventDefault();
+  });*/
+});

@@ -1,0 +1,49 @@
+<% @user = User.new %>
+
+<!--div class="modal fade hide" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"-->
+  <% params[:email] = (params[:email]).gsub("(dot)", ".") %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Sign Up</h3>
+  </div>
+
+  <%= form_for(@user, :html => { :multipart => true }) do |f| %>
+  <div class="modal-body">
+    <!-- 
+	  <%# if @user.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%#= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+	      <ul>
+	      <%# @user.errors.full_messages.each do |msg| %>
+	        <li><%#= msg %></li>
+	      <%# end %>
+	      </ul>
+	    </div>
+	  < %# end % -->
+	  <div class="field">
+	    <%= f.label :name %><br />
+	    <%= f.text_field :name %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :email %><br />
+	    <%= f.text_field :email, :value => params[:email] %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :password %><br />
+	    <%= f.text_field :password, :value => params[:pass] %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :password_confirmation %><br />
+	    <%= f.text_field :password_confirmation %>
+	  </div>
+	  <div class="actions">
+	    
+	  </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <%= f.submit 'Sign Up', :class => "btn btn-primary" %>
+    <% end %>
+  </div>
+<!--/div-->

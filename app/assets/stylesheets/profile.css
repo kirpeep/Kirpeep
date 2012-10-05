@@ -1,0 +1,184 @@
+@import url(bootstrap.min.css);
+
+#header{
+	margin-top: 15px;
+}
+
+#footer{
+	margin-top: 50px;
+}
+
+/*active tab Class*/
+.tab-links {
+	margin:10px 0 0 0;
+}
+.tab-links a {
+	text-decoration: none;
+	display: inline-block;
+	padding:5px 10px;
+	color:#ccc;
+}
+.tab-links a.active{
+	background:#fff;
+	color:#000;
+}
+
+
+/*AdBlock Color*/
+.adblock {
+	border:2px solid #B2B4B7;
+	background-color: #F1E6DF;
+	width: 312px;
+	height: 118px;
+}
+
+/*Orange Border*/
+.rounded-map {
+	background-color:#FFF;
+	border: 5px solid #FF931E;
+	border-radius: 20px;
+	overflow:hidden;
+}
+
+/*Style for offer listing */
+.rounded-offer {
+	margin-top: 10px;
+	background-color:#FFF;
+	border: 3px solid #3FA9F5;
+	border-radius: 20px;
+	padding: 5px 5px 5px 5px;
+	color: #000;
+}
+
+.rounded-offer span {
+	border: 3px solid #3FA9F5; +
+	background-color:#E6E6E6;
+	font: Franklin Gothic Heavy;
+}
+
+/*Style for need listing */
+.rounded-need {
+	margin-top: 10px;
+	background-color:#FFF;
+	border: 3px solid #0F0;
+	border-radius: 20px;
+	padding: 5px 5px 5px 5px;
+	color: #000;
+}
+
+.rounded-need span {
+	border: 3px solid #0F0; +
+	background-color:#E6E6E6;
+	font: Franklin Gothic Heavy;
+}
+
+/*unread message styling*/
+.unread {
+	background-color:#00FFFF;
+
+}
+
+/*Shadow effect for elements*/
+.shadow {
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+
+/*Alignment Classes*/
+.align-left {
+	text-align:left;
+	/*margin: 0px 0px 0px 25px;*/
+}
+.align-right {
+	text-align:right;
+}
+
+.align-center {
+	text-align:center;
+}
+
+/*Tag Cloud Styles*/
+/*Green Variation*/
+.green-sml {
+	color:#66CC33;
+	font-size:small;
+	font: Arial;
+	font-weight:600;
+}
+.green-mid {
+	color:#66CC33;
+	font-size:medium;
+	font: Arial;
+	font-weight:600;
+}
+.green-lrg {
+	color:#66CC33;
+	font-size:large;
+	font: Arial;
+	font-weight:600;
+}
+
+/*Orange Variations*/
+.orange-sml {
+	color:#FF9933;
+	font-size:small;
+	font: Arial;
+	font-weight:600;
+}
+.orange-mid {
+	color:#FF9933;
+	font-size:medium;
+	font: Arial;
+	font-weight:600;
+}
+.orange-lrg {
+	color:#FF9933;
+	font-size:large;
+	font: Arial;
+	font-weight:600;
+}
+
+/*Blue Variations*/
+.blue-sml {
+	color:#66CCCC;
+	font-size:small;
+	font: Arial;
+	font-weight:600;
+}
+.blue-mid {
+	color:#66CCCC;
+	font-size:medium;
+	font: Arial;
+	font-weight:600;
+}
+.blue-lrg {
+	color:#66CCCC;
+	font-size:large;
+	font: Arial;
+	font-weight:600;
+}
+
+/*Grey Variations*/
+.grey-sml {
+	color:#666666;
+	font-size:small;
+	font: Arial;
+	font-weight:600;
+}
+.grey-mid {
+	color:#666666;
+	font-size:medium;
+	font: Arial;
+	font-weight:600;
+}
+.grey-lrg {
+	color:#666666;
+	font-size:large;
+	font: Arial;
+	font-weight:600;
+}

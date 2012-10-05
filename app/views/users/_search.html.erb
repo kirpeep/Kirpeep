@@ -1,0 +1,20 @@
+
+<table class="results">
+	<tr>
+		<th><%= sortable 'title' %></th>
+		<th><%= sortable 'description' %></th>
+		<th><%= sortable 'type' %></th>
+		<th><%= sortable 'user' %></th>
+	</tr>
+	
+	<% for listing in @userlistings  %>
+		<tr>
+			<td><%= link_to listing.title, '/users/initiate_exchange/'+@user.id.to_s+'&'+listing.id.to_s ,:class => 'initiate_exchange'  %>
+			</td>
+			<td><%= listing.description %> </td>
+			<td><%= listing.type %> </td>
+			<td><%= listing.user.name %> </td>
+		</tr>
+	<%end%>
+</table>
+<%= will_paginate @userlistings%>

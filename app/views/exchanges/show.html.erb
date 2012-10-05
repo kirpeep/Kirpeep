@@ -1,0 +1,18 @@
+    <!--#remove :type == Exchange
+    #Ultimately Exchange will be
+    #PotentialExchanges, started from 
+    #searches that the user clicked through  
+    #but never initated -->
+
+    <% @exch = Exchange.find params[:id] %>
+    <% if(@exch.type == 'InitiateExchange' || @exch.type == 'Exchange')%> 
+        <%= render 'shared/initiated_exchange', :locals => {:exch => @exch} %>             
+    <%  elsif (@exch.type == 'PerformExchange') %>
+        <%= render 'shared/perform_exchange', :locals => {:exch => @exch}  %>
+    <% elsif (@exch.type == 'RateExchange') %>
+        <%= render 'shared/rate_exchange', :locals => {:exch => @exch} %>
+    <% elsif (@exch.type == 'PreviousExchange') %>
+        <%= render 'shared/previous_exchange', :locals => {:exch => @exch} %>
+    <%else%>
+        DAFAQ
+    <% end %>

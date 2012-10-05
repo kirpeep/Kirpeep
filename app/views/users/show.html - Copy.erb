@@ -1,0 +1,82 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Kirpeep | <%= @title %></title>
+<% stylesheet_link_tag('profile.css') %>
+</head>
+
+<body>
+<div class="Base">
+  <div id="header">
+  	<div class="align-left" style="padding: 0px 0px 0px 25px"><p><%= image_tag('kirpeep_head.png') %> 
+  	</p></div>
+	<div class="align-center">
+    	<table cellspacing="0">
+    		<tr>
+    			<td style="border:1px solid #999; padding: 0;"><input name="Search" type="text" value="Search" style="border:none" /></td>    
+            	<td style="border:1px solid #999; border-left:none; padding: 0;"><input name="Submit" type="image" src=<%= asset_path 'search.png' %> value="Go"  /></td>
+    		</tr>
+    	</table>
+    </div>
+    <div class="align-right"><span><%= @user.name %></span><br/> my offers/needs | my exchanges</div>
+  </div>
+  <div style="width: 100%"><hr/><div>
+  <div id="central-col">
+  	<div>
+    	<div style="float:left; background-color:#CCCCCC; width:30%">
+    		<img width="100px" height="100" />
+    		<div>
+ 		       	Location: <%= @user.profile.location %><br />
+        	    Affiliation: <br />
+       	   		Languages: <br />
+           		Needs / Offers <br />
+            	Completed Exchanges <br />
+            	1 Review (stars) <br />
+        	</div>
+    	</div>
+        
+    </div>
+    <div>
+    	<div>
+        	JimKstrings
+            Jim Kirpeep
+        </div>
+        <div style="background-color:#CCCCCC">
+        	Start Exchange | Send Mesage | Add to Trusted Contacts | Add To Group
+        </div>
+        <div> 
+        	Musician looking to tutor students or do quick exchanges for daily activities
+            
+            <div style="background-color: #F79225">
+            	<div style="float:left">NEEDS</div>
+                <div>OFFERS</div>
+            </div>
+            
+            Employment <br />
+			Professional Tutor, K Test Prep  2011-Present<br /><br />
+
+			Education<br />
+			University of Texas at Austin, BA Music<br /><br />
+
+			About<br />
+			I recently graduated from UT with a major in Music. I can tutor almost any instrument. I live near 				Barton Springs but am willing to drive or bike within 10 miles for exchanges.<br /><br />
+
+			Hobbies/Interests <br />
+			Music, traveling, couchsurfing, house-hunting, finding good deals<br /><br />
+        </div>
+        
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div id="footer">
+  	<div>
+    	Can’t find what you’re looking for? Try <span class="orange-mid">advanced search</span>, <span class="blue-mid">browse</span>, or <span class="green-mid">add your own listing</span>!
+    </div>
+    <hr />
+    <div id="bottom">
+    	<div style=" text-align:left">about	| 	how it works	|	faqs</div>
+        <div style=" margin:auto">© 2012 Kirpeep, Inc.</div>
+        <div style=" text-align:right">contact	| 	terms of use	|	privacy</div>
+    </div>
+  </div>
+  </div>
+</body>

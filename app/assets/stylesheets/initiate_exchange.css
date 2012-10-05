@@ -1,0 +1,347 @@
+@charset "utf-8";
+.Base {
+	position: absolute;
+    top: 10px;
+    left: 1px;
+    width:  100%;
+    min-height: 520px;
+    background-color: #FFF
+}
+
+/*Styling for title*/
+
+#title{
+	font-size:large;
+	font:"Times New Roman", Times, serif;
+}
+/* container for all header elements*/
+#header {
+     position: relative;
+     top: auto;
+     float: left;
+     width: 100%;
+     height: 100px;
+     background-color: #ffffff;
+} 
+
+/*container for all elements in the central column*/
+#central-col  {
+     position: relative;
+     
+     margin:auto;
+     width: 1024px;
+     height: auto;
+     background-color: #fff;
+     
+} 
+
+#central-col #left {
+	float:left;
+	padding: 0px 80px 0px 40px;
+}
+
+#central-col #right {
+	float:left; 
+	left: 630px;
+}
+
+#header div {
+	display: inline-block;
+	width: 32%;
+	float:left;
+}
+/*contents on the left of the header
+#header-left{
+	margin: 0 auto;
+	width: 20%;
+	float: left;
+    clear: none;
+}
+
+/*contents on the center of the header
+#header-center{
+	margin: 0 auto;
+	width: 60%;
+	text-align:center;
+	padding-top: 30px;
+}
+
+/*contents on the right of the header
+#header-right{
+	margin: 0 auto;
+	width:20%;
+	text-align:right;
+	float: right;
+    clear: none; 
+	vertical-align:super;
+}*/
+
+/*Style for footer*/
+#footer {
+	float:left;
+	width: 100%;
+}
+
+#bottom div {
+	display: inline-block;
+	width: 33%;
+    text-align: center;
+	float:left;
+}
+/*Style for map*/
+#rounded-map {
+	background-color:#FFF;
+	border: 5px solid #FF931E;
+	border-radius: 20px;
+	overflow:hidden;
+	width: 378px;	
+}
+
+
+
+/*AdBlock Color*/
+.adblock {
+	border:2px solid #B2B4B7;
+	background-color: #F1E6DF;
+	width: 312px;
+	height: 118px;
+}
+
+/*Style for offer listing */
+#rounded-offer {
+	margin-top: 60px;
+	background-color:#FFF;
+	border: 3px solid #3FA9F5;
+	border-radius: 20px;
+	width: 450px;
+	height:225px;
+	padding: 10px 10px 10px 10px;
+}
+
+#rounded-offer span {
+	border: 3px solid #3FA9F5; +
+	background-color:#E6E6E6;
+	font: Franklin Gothic Heavy;
+}
+
+#rounded-offer p{
+	font: Franklin Gothic Book;
+}
+
+#rounded-offer #offer-name {
+	float: left; padding: 0px 30px 0px 0px;
+}
+
+#rounded-offer #offer-actions {
+	position:absolute; 
+	left: 120px;
+}
+
+#rounded-offer #offer-listing {
+	position:absolute; 
+	left: 340px;	
+}
+/*Style for need listing */
+#rounded-need {
+	margin-top: 60px;
+	background-color: #FFF;
+	border: 3px solid #0F0;
+	border-radius: 20px;
+	width: 450px;
+	height: 225px;
+	padding: 10px 10px 10px 10px;
+}
+
+#rounded-need span {
+	border: 3px solid #0F0; +
+	background-color:#E6E6E6;
+	font: Franklin Gothic Heavy;
+}
+
+#rounded-need p{
+	font: Franklin Gothic Book;
+}
+
+/*css for drop down menus*/
+#cssdd *  { padding:0; margin: 0;}
+
+#cssdd { position: absolute;  z-index: 99; margin: 0 auto; float: left; line-height: 20px; }
+
+#cssdd a { display: block; background: #0F0; text-decoration: none;  }
+#cssdd a:hover { background:#000; color:#0F0;}
+
+
+#cssdd ul li { 
+	float: left; 
+	width: 109px;
+	border: 1px solid #F7931E;
+	background-color:#FFF;
+	font: franklin gothic demi;
+	margin: 0px 18px 0px 0px;
+	list-style-type:none;
+}
+
+#cssdd ul li:hover{ 
+	background-color: #999966;
+}
+
+#cssdd ul li ul li  { 
+	width:inherit; 
+	list-style-type:none;
+	background-color:#FFF;
+	border: none;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+
+#cssdd ul li ul li:hover  { 
+	width:inherit; 
+	list-style-type:none;
+	background-color:#FF931E;
+}
+#cssdd ul li ul, #cssdd:hover ul li ul, #cssdd:hover ul li:hover ul li ul{ 
+	display:none;
+	list-style-type:none; 
+	width: 109px;
+	}
+
+#cssdd:hover ul, #cssdd:hover ul li:hover ul, #cssdd:hover ul li:hover ul li:hover ul { 
+	display:block; 
+}
+
+#cssdd:hover ul li:hover ul li:hover ul { 
+	position: absolute;
+	background-color:#FFF;
+	margin-left: 120px;
+	margin-top: -20px;
+}
+
+
+.shadow {
+	-moz-box-shadow: 3px 3px 4px #000;
+	-webkit-box-shadow: 3px 3px 4px #000;
+	box-shadow: 3px 3px 4px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+
+/*Classes*/
+.align-left {
+	text-align:left;
+	/*margin: 0px 0px 0px 25px;*/
+}
+.align-right {
+	text-align:right;
+}
+
+.align-center {
+	text-align:center;
+}
+
+.clear {
+	clear:both;	
+}
+
+/*Tag Cloud Styles*/
+/*Green Variation*/
+.green-sml {
+	color:#66CC33;
+	font-size:small;
+	font: Arial;
+	font-weight:600;
+}
+.green-mid {
+	color:#66CC33;
+	font-size:medium;
+	font: Arial;
+	font-weight:600;
+}
+.green-lrg {
+	color:#66CC33;
+	font-size:large;
+	font: Arial;
+	font-weight:600;
+}
+
+/*Orange Variations*/
+.orange-sml {
+	color:#FF9933;
+	font-size:small;
+	font: Arial;
+	font-weight:600;
+}
+.orange-mid {
+	color:#FF9933;
+	font-size:medium;
+	font: Arial;
+	font-weight:600;
+}
+.orange-lrg {
+	color:#FF9933;
+	font-size:large;
+	font: Arial;
+	font-weight:600;
+}
+
+/*Blue Variations*/
+.blue-sml {
+	color:#66CCCC;
+	font-size:small;
+	font: Arial;
+	font-weight:600;
+}
+.blue-mid {
+	color:#66CCCC;
+	font-size:medium;
+	font: Arial;
+	font-weight:600;
+}
+.blue-lrg {
+	color:#66CCCC;
+	font-size:large;
+	font: Arial;
+	font-weight:600;
+}
+
+/*Grey Variations*/
+.grey-sml {
+	color:#666666;
+	font-size:small;
+	font: Arial;
+	font-weight:600;
+}
+.grey-mid {
+	color:#666666;
+	font-size:medium;
+	font: Arial;
+	font-weight:600;
+}
+.grey-lrg {
+	color:#666666;
+	font-size:large;
+	font: Arial;
+	font-weight:600;
+}
+/****************************************************************/
+
+#userInfo {
+	width: 30%;
+	float:left;
+}
+
+#exchangeStatus {
+	width: 30%;
+	float: left;
+}
+
+#exchangePartner {
+	width: 30%;
+	float: right;
+}

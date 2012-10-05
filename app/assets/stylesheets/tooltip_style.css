@@ -1,0 +1,25 @@
+/*body {background: #FFF url(Images/Home_MVP.png) repeat-x top;}*/
+
+#wrapper {width: 960px; margin: auto; padding: 50px 0;}
+	#main {width: 640px; height: 500px; margin-top: 7px; position: relative; float: left; background: transparent url(Images/exchange_icon.png) no-repeat;}
+
+	.tTip {width: 200px; postion: absolute; cursor: pointer; color: #666; font-weight: bold;}
+		#icon1 {display: block;}
+.tip{
+	width: 212px;
+	padding-top: 37px;
+	display: none;
+	position: absolute;
+	background: transparent url('images/tipTop.png') no-repeat top;
+	z-index: 500;
+}
+
+.tipMid{
+	background: transparent url('images/tipMid.png') repeat-y;
+	padding: 0px 25px 20px 25px;	
+}
+
+.tipBtm{
+	background: transparent url('images/tipBtm.png') no-repeat;
+	height: 32px;
+}

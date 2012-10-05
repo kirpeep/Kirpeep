@@ -1,0 +1,122 @@
+
+$(document).ready(function(){  
+  
+     //Adjust height of overlay to fill screen when page loads  
+   $("#fuzz").css("height", $(document).height());  
+  
+   //When the link that triggers the message is clicked fade in overlay/msgbox  
+   $(".alert").click(function(){ 
+      $('#msgbawx').load('/users/new') 
+      $("#fuzz").fadeIn();  
+      return false;  
+   });  
+   
+   $('#addListing').click(function(event){
+	  $("#fuzz").popUp();  
+	  event.preventDefault();
+	  return false;	
+   });
+  
+   //When the message box is closed, fade out  
+   $(".close").click(function(){  
+      $("#fuzz").fadeOut();  
+      return false;  
+   });
+   
+   //Fade signin box on
+   $(".signin").click(function(){  
+      $('#msgbawx').load('/sessions/new');
+      $("#fuzz").fadeIn();   
+      return false;  
+   });  
+
+   
+  $(".listneed").click(function(){  
+      $('#msgbawx').css('resize', 'both');
+      $('#msgbawx').css('left', '50%');
+      $('#msgbawx').css('top', '25%');
+      $("#fuzz").fadeIn();  
+      event.preventDefault();
+      return false;  
+   });  
+
+  $('.initiate').click(function(event){  
+      //$(this).css("display","none");
+      var initiate_exchange = $(this).attr('href');
+      $('#msgbawx').load(initiate_exchange);
+      /*$('#msgbawx').css('resize', 'both');
+      $('#msgbawx').css('left', '50%');
+      $('#msgbawx').css('top', '25%');
+      $('#msgbawx').css('margin-left', -($(this).width()/2));*/
+
+      
+      $("#fuzz").fadeIn();  
+      event.preventDefault();
+      return false;  
+   });  
+
+  $('#profile_link').click(function(event){
+    //$('#link').css("display", "none");
+    event.preventDefault();
+    var user = $(this).attr('href');
+    user = "/profile/"+user;
+    $('#profile_container').load(user);
+    return false;
+  });  
+
+  $('#exch_link').click(function(event){
+    //$('#link').css("display", "none");
+    var user = $(this).attr('href');
+    user = "/exchanges/"+user;
+    $('#profile_container').load(user);
+    event.preventDefault();
+    return false;
+  });
+
+  $('#message_link').click(function(event){
+    //$('#link').css("display", "none");
+    var user = $(this).attr('href');
+    user = "/messages/"+user;
+    $('#profile_container').load(user);
+    event.preventDefault();
+    return false;
+  });
+   //fade out signin box
+
+   // When a link is clicked  
+    $(".tab-links a").click(function (event) {  
+          
+        // switch all tabs off  
+        $(".active").removeClass("active");  
+          
+        // switch this tab on  
+        $(this).addClass("active");  
+          
+        // slide all elements with the class 'content' up  
+        $(".content").slideUp();  
+          
+        // Now figure out what the 'title' attribute value is and find the element with that id.  Then slide that down.  
+        var content_show = $(this).attr("title");  
+        $("#"+content_show).slideDown();  
+        
+   //Prevent link from executing
+   event.preventDefault();
+  
+   return false; 
+    });  
+
+   //When Clicked outside of message box, close Box    
+  $(document).mouseup(function (e){
+    var container = $("#fuzz");
+
+    if (container.has(e.target).length === 0)
+    {
+        container.fadeOut();
+    }
+});
+});  
+  
+//Adjust height of overlay to fill screen when browser gets resized  
+$(window).bind("resize", function(){  
+   $("#fuzz").css("height", $(window).height());  
+});  

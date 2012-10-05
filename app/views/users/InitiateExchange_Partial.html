@@ -1,0 +1,152 @@
+	-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link href="../../assets/stylesheets/initiate_exchange.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0-alpha.1/jquery.mobile-1.2.0-alpha.1.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0-alpha.1/jquery.mobile-1.2.0-alpha.1.min.js"></script>
+</head>
+
+
+<body>
+<a href="#popupBasic" data-rel="popup" data-position="window" data-transition="flip">
+<img src="../../assets/images/exchange.png" width="52" height="30" class="align-left"  /></a>
+
+<div data-role="popup" id="popupBasic">
+	<p>This could be the real thing.<p>
+<div class="Base">
+  <div id="header">
+  </div>
+<div style="width: 100%"><hr/><div>
+  <div id="central-col">
+  <!--Close Button, but not sure how to add image.  data-icon doesn't seem to be doing anything.-->
+  <a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Close Window</a>
+  
+ 
+ 
+  
+  <div><span id="title">Initiate Exchange</span></div>
+  <div style="display:inline;">
+        <!--user viewing -->
+        <div id="userInfo">
+			<div class="align-left" style="padding: 0px 0px 0px 25px">
+              <p><img src="../../assets/images/John Facebook Photo1.jpg" width="115" height="100" class="align-left"  /></p>
+             </div>            
+             <span id="userFullName">Method to pull user name</span>
+        </div>
+        
+        <!--Kirpeep Exchage Status Logo -->
+        <div id="exchangeStatus">
+			<div class="align-center" style="padding: 0px 0px 0px 25px">
+              <p><img src="../../assets/images/Initiate Exchange Symbol.png" width="120" height="105" class="align-left"  />
+              </p>
+            </div>          
+         </div>
+        
+        <!--exchange partner -->
+        <div id="exchangePartner">
+            <span id="with">exchanging with</span>
+            <div class="align-left" style="padding: 0px 0px 0px 25px">
+              <p><img src="../../assets/images/sara_70s.jpg" width="115" height="100" class="align-left"  /></p>
+            </div> 
+            <span id="partnerName">method to pull name</span>
+        </div>
+     	<div style="clear:both;"></div>
+    <!--closes top section-->
+  </div>
+    
+    <!--opens middle section-->
+    <div >
+    
+    <!--left side-->
+    
+    	
+
+  		<div style="float:left;">
+        	<div><span id="getting">You are getting...</span></div>
+    		<div id="rounded-offer">
+            	<div>
+                	<div data-role="fieldcontain">
+        				<label for="flip-5">Listing Type</label>
+        				<select name="flip-5" id="flip-1" data-role="slider" data-theme="a" data-track-theme="e">
+                		<option value="need">Need</option>
+                		<option value="offer">Offer</option>
+        				</select>
+					</div>
+                    
+                    <div data-role="fieldcontain">
+    				<label for="title"></label>
+    				<input type="text" name="title" id="title" value="Enter Title"  />
+                    <label for="quantity"></label>
+    				<div style="width:100px"><input type="text" name="quantity" id="quantity" value="How many?"  /></div>
+                    <label for="ofWHat"></label>
+    				<input type="text" name="ofWhat" id="ofWHat" value="of what?"  />
+                    <label for="description"></label>
+	      			<textarea name="description" id="description" >Description</textarea>
+					</div>	
+                	<div>
+                		<!-- METHOD to pull img of need -->
+                    	<!-- METHOD to change img -->
+                	</div>
+               		
+                	
+                </div>
+                	<span id="description">Description</span>
+                </div>
+                
+    	</div>
+    <!--Right Side-->
+    <div><span id="giving">You are giving this...</span>
+    <div style="float:left;">
+    		<div id="rounded-need">
+    		<span id="selectOffer">Select an offer or 
+            </span>
+            <a href="createListing_Partial.html" data-role="link" data-icon="createListing" data-rel="dialog">create</a>
+			<span id="selectOfferEnding"> a new one.
+            </span>
+            </div>
+            <label for="select-choice-0" class="select"></label>
+            <select name="select-choice-0" id="select-choice-0">
+            <option value="listing1">Select From Existing</option>
+            <option value="listing2">Coffee and Ibuprofen</option>
+            <option value="listing3">Free Booze</option>
+            <option value="listing4">Greenbacks</option>
+            </select>
+            </div>
+            
+            	
+                
+    	</div>
+        <div style="clear:both"></div>
+    
+    
+    <!--Closes Middle Section-->
+  	</div>
+    
+    <!--Opens Bottom Section-->
+    <div>
+    	
+    	<div style="float:right;">
+         <a href="index.html" data-role="button" data-icon="alert" data-iconpos="notext" data-inline="true">Report User</a>
+    	 <a href="index.html" data-role="button" data-inline="true" data-theme="c">Cancel</a>
+		 <a href="index.html" data-role="button" data-inline="true" data-theme="b">Initiate</a>
+         <br />
+           
+    	</div>
+        <div data-role="fieldcontain">
+          <label for="textarea"></label>
+	      <textarea name="message" id="message" >Type Message Here</textarea>
+          </div>
+         <a href="index.html" data-role="button" data-mini="true" data-theme="a" style="float:right;">Send Message</a>  
+    <!--Closes Bottom Section-->
+    </div>
+    <div class="clear"></div>
+  </div>
+  
+  </div>
+</div>
+</body>
+</html>
