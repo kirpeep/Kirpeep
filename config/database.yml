@@ -39,3 +39,14 @@ production:
   password: kirpeep2012
   host: 127.0.0.1
   socket: /var/run/mysqld/mysqld.sock
+
+kyle:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: KIRPEEP_TEST
+  pool: 5
+  username: root
+  password: root
+  host: localhost
+  socket: /var/run/mysqld/mysqld.sock
