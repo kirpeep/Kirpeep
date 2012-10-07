@@ -35,13 +35,7 @@
           <% for listing in @userlistings  %>
             <% next if listing.is_deleted || listing.nil? %>
             <% @user_photo = listing.user.profile.photo.url %>
-       		  <% if listing.type == 'Offer' %>
-            <!-- Offer Listing -->
-              Offer Here
-            <%else%>
-              <!-- Need Listing -->
-              Needs Here
-            <%end%>
+       		  <%= listing %> 
           <% end %>
           <!-- %= will_paginate @userlistings%-->
         </div>
