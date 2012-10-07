@@ -12,29 +12,32 @@
 	<!-- NEEDS-->
 	<div class='span6'>
 		<div>NEEDS - <%= user.needs.count %></div>
-		<div>
-			<% if is_current_user(user) %>
-				<%= link_to 'Add Need', new_need_path, {:class => 'dynamobox btn', 'role' => "button", 'data-toggle' => "modal" }%>
-			<% end %>
-		</div>
-		<% for need in user.needs %>
-			<% next if need.is_deleted %>
-			<div class="rounded-need">
-				<div>
-					<span>NEEDED</span> 
-			        <%= image_tag(need.photo.url(:small)) %>
-			    </div>
-				<div>                
-			        <ul>
-			        	<li><%= need.title %></li>
-			        	<li><%= need.description %></li>
-			        	<% if is_current_user(user) %>
-				        	<li><%= link_to 'EDIT', edit_need_path(:id => need.id), :class => 'dynamolink' %></li>
-						<% end %>
-					</ul>
-				</div>
+		<%= need %>
+		<%=begin %>  
+			<div>
+				<% if is_current_user(user) %>
+					<%= link_to 'Add Need', new_need_path, {:class => 'dynamobox btn', 'role' => "button", 'data-toggle' => "modal" }%>
+				<% end %>
 			</div>
-		<%end%>
+			<% for need in user.needs %>
+				<% next if need.is_deleted %>
+				<div class="rounded-need">
+					<div>
+						<span>NEEDED</span> 
+				        <%= image_tag(need.photo.url(:small)) %>
+				    </div>
+					<div>                
+				        <ul>
+				        	<li><%= need.title %></li>
+				        	<li><%= need.description %></li>
+				        	<% if is_current_user(user) %>
+					        	<li><%= link_to 'EDIT', edit_need_path(:id => need.id), :class => 'dynamolink' %></li>
+							<% end %>
+						</ul>
+					</div>
+				</div>
+			<%end %>
+		<%=end%>
 	</div> 
 	    
 	<!-- OFFERS-->
