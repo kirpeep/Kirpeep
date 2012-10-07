@@ -13,7 +13,7 @@
 	<div class='span6'>
 		<div>NEEDS - <%= user.needs.count %></div>
 		<%= need %>
-		<%=begin %>  
+		<% =begin %>  
 			<div>
 				<% if is_current_user(user) %>
 					<%= link_to 'Add Need', new_need_path, {:class => 'dynamobox btn', 'role' => "button", 'data-toggle' => "modal" }%>
@@ -37,7 +37,7 @@
 					</div>
 				</div>
 			<%end %>
-		<%=end%>
+		<% =end%>
 	</div> 
 	    
 	<!-- OFFERS-->
