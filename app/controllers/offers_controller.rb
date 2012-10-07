@@ -36,13 +36,22 @@ class OffersController < ApplicationController
     end
 
   end 
+
+  def show
+    @listing = Offer.find(params[:id]) 
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json 
+    end
+  end
   
   def edit
     @offer = Offer.find(params[:id])
     
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user }
+      format.json 
     end
   end
 

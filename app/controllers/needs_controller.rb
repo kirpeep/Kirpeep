@@ -36,13 +36,15 @@ class NeedsController < ApplicationController
     end
 
   end 
-  #def show
-  #  @profile = Profile.find(params[:id]) 
-  #  respond_to do |format|
-  #    format.html # show.html.erb
-  #    format.json { render json: @user }
-  #  end
-  #end
+  
+  def show
+    @listing = Need.find(params[:id]) 
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json 
+    end
+  end
 
   # GET /users/new
   # GET /users/new.json
@@ -57,7 +59,7 @@ class NeedsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user }
+      format.json
     end
   end
 
