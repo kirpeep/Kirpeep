@@ -15,7 +15,7 @@
 	  
 			<div>
 				<% if is_current_user(user) %>
-					<%= link_to 'Add Need', new_need_path, {:class => 'dynamobox btn', 'role' => "button", 'data-toggle' => "modal" }%>
+					<%= link_to 'Add Need', new_need_path, {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
 				<% end %>
 			</div>
 			<% for need in user.needs %>
@@ -46,7 +46,7 @@
 		<div>OFFERS - <%= user.offers.count %></div>
 		<div>
 			<% if is_current_user(user) %>
-				<%= link_to 'Add Offer', new_offer_path, {:class => 'dynamobox btn', 'role' => "button", 'data-toggle' => "modal" }%>
+				<%= link_to 'Add Offer', new_offer_path, {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
 			<% end %>
 		</div>
 		<% for offer in user.offers %>
