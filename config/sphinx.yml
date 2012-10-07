@@ -6,3 +6,6 @@ development:
 
 production:
   bin_path: '/usr/local/bin'
+
+john:
+  bin_path: '/usr/local/bin'
