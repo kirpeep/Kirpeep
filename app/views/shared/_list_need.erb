@@ -1,3 +1,21 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+       $('#new_need').submit(function(){
+           var valuesToSubmit = $(this).serialize();
+           console.log(valuesToSubmit);
+           $.ajax({
+               url: $(this).attr('action'), //sumbits it to the given url of the form
+               data: valuesToSubmit,
+               dataType: "JSON", // you want a difference between normal and ajax-calls, and json is standard
+               type: "POST"
+           }).success(function(json){
+                $('#dynamobox').modal('toggle');
+           });
+           return false; // prevents the normal post
+       });
+    });
+</script>
+
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">List A Need</h3>

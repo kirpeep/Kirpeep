@@ -41,8 +41,8 @@ class NeedsController < ApplicationController
     @listing = Need.find(params[:id]) 
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json 
+      #format.html # show.html.erb
+      format.json {render :json => @listing} 
     end
   end
 

@@ -21,6 +21,7 @@ TestApp::Application.routes.draw do
   match  '/accept_perform/' , :to => 'exchanges#accept_perform' , :as => 'accept_perform'
   match  '/rate_exchange/'  , :to => 'exchanges#rate_exchange' , :as => 'rate_exchange'
   match  '/sendmessage/:id&:reply_message_id'    , :to => 'messages#new'
+  match  '/users/:id/needs', :to => 'users#needs'
   
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
