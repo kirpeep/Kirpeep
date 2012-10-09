@@ -1,3 +1,4 @@
+
 <div class='row-fluid'> 
 	<% if is_current_user(user) %>
 		<%= best_in_place user.profile, :quickPitch%>
@@ -18,8 +19,10 @@
 					<%= link_to 'Add Need', new_need_path, {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
 				<% end %>
 			</div>
+                        <div id='needsContainer'></div>
+                        <% if false %>
 			<% for need in user.needs %>
-				<%= render :partial => 'needs/show', :locals => {:listing => need } %>
+				<%#= render :partial => 'needs/show', :locals => {:listing => need } %>
 				<% if false  # TODO:  REMOVE THIS BLOCK LATER -------------------- %>
 				<% next if need.is_deleted %>
 				<div class="rounded-need">
@@ -38,6 +41,7 @@
 					</div>
 				</div>
 			<%end %>
+                        <%end%>
 		<% end %>
 	</div> 
 	    
@@ -73,76 +77,4 @@
 </div>
 
 
-<script id="entry-template" type="text/x-handlebars-template">
-  {{each []}}
-      <div class="rounded-need">
-        <div class="row-fluid">
-          <span class="need-span">NEED</span>
-          <span>{{title}}</span>
-        </div>
-        <div class="row-fluid">
-          <p>{{description}}</p>
-        </div>
-        <div style= "display:none;">
-          <%#= image_tag('favorite.png') %> <!-- width="30" height="30" /><br /> -->
-          <%#= image_tag('kid.png') %> <!-- width="43" height="34" /> -->
-        </div>
-        <div class="row-fluid">
-          <div class="span3">
-            <%#= link_to image_tag(@user_photo, {:width => '100px', :height => '100px'}), listing.user, {:id => 'userImage', 'rel' =>'popover' } %>
-            <%#= image_tag('stars.png') %>
-          </div>
-          <div id="need-actions" class="span6">
-            <div class="row-fluid tool">
 
-              <!-- Message-->
-              <div class="span3">
-                <a href="/sendmessage/{{user.id}}&nil" class='dynamolink'>
-                  <%#= image_tag('message.png', :class=>"message", :title=>"message") %>
-                </a>
-              </div>
-              <!-- Initiate Exchange-->
-              <div class="span3 tTip" title="Exchange">
-                <% if signed_in? %>
-                    <a class="dynamolink" href="/initiate_exchange/<%= @user.id.to_s %>&{{id}}%>">
-                      <%#= image_tag('exchange.png') %>
-                    </a>
-
-                <%else%>
-                    <%#= image_tag('exchange.png', {:title=>"exchange"}) %>
-                <%end%>
-              </div>
-              <div class="span3">
-                <a class="dynamolink" href="/quicksale/{{id}}">
-                  <%#= image_tag('price.png') %>
-                </a>
-              </div>
-              <div class="span3">
-                <a class="dynamolink" href="/share/{{id}}">
-                  <%#= image_tag('share.png') %>
-                </a>
-              </div>
-            </div>
-            <div class="row-fluid">
-              <div class="span6" id="need-name">
-                {{user.name}} <br />
-                <%#= Exchange.where("id != ?",listing.user.id).all.count %> Exchanges<br />
-                Reviews (0)
-              </div>
-              <div class="span6">
-                (<%#= listing.user.needs.count %>) NEED
-                <br />
-                (<%#= listing.user.needs.count %>) need
-              </div>
-            </div>
-          </div>
-          <div id="need-listing" class="span3">
-            <div>
-              <%#= image_tag(listing.photo.url, {:width => '100px', :height => '100px'}) %> <!-- width="103" height="103" /> -->
-            </div>
-          </div>
-        </div>
-      </div>
-
-  {{/each}}
-</script>

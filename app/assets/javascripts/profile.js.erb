@@ -1,6 +1,21 @@
-
+function LoadNeeds(data)
+{
+    var source = $('#profileNeedsTemplate').html();
+    var template = Handlebars.compile(source);
+    var html = template(data);
+    $('#needsContainer').html(html);
+}
 
 $(document).ready(function(){
+  //Get Needs
+  $.ajax({
+    url: '/users/'+userID+'/needs.json',
+    dataType: 'JSON'
+  }).success(function(data){
+     LoadNeeds(data);
+  });
+
+ 
 
   $('#messages').load('/messages/'+userID);
   

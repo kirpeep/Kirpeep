@@ -1,19 +1,22 @@
 <script type="text/javascript">
-    $(document).ready(function(){
        $('#new_need').submit(function(){
            var valuesToSubmit = $(this).serialize();
-           console.log(valuesToSubmit);
            $.ajax({
                url: $(this).attr('action'), //sumbits it to the given url of the form
                data: valuesToSubmit,
                dataType: "JSON", // you want a difference between normal and ajax-calls, and json is standard
                type: "POST"
            }).success(function(json){
+                $.ajax({
+                  url: '/users/'+ userID +'/needs.json',
+		  dataType: 'JSON'
+		}).success(function(data){
+			LoadNeeds(data);
+		});
                 $('#dynamobox').modal('toggle');
            });
            return false; // prevents the normal post
        });
-    });
 </script>
 
 <div class="modal-header">
