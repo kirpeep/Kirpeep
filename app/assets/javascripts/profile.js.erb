@@ -9,7 +9,7 @@ function LoadNeeds(data)
 $(document).ready(function(){
   //Get Needs
   $.ajax({
-    url: '/users/'+userID+'/needs.json',
+    url: '/user_needs.json',
     dataType: 'JSON'
   }).success(function(data){
      LoadNeeds(data);

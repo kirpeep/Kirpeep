@@ -1,14 +1,15 @@
 <script type="text/javascript">
        $('#new_need').submit(function(){
            var valuesToSubmit = $(this).serialize();
+           console.log('pre ajax post');
            $.ajax({
-               url: $(this).attr('action'), //sumbits it to the given url of the form
+               url: '/list_need/'+userID, //$(this).attr('action'), //sumbits it to the given url of the form
                data: valuesToSubmit,
                dataType: "JSON", // you want a difference between normal and ajax-calls, and json is standard
                type: "POST"
            }).success(function(json){
                 $.ajax({
-                  url: '/users/'+ userID +'/needs.json',
+                  url: '/user_needs.json',
 		  dataType: 'JSON'
 		}).success(function(data){
 			LoadNeeds(data);

@@ -158,7 +158,7 @@ class UsersController < ApplicationController
   def needs
     # This method is meant to be an ajax
     #call to get all the users needs in JSON format
-    @needs = User.find(params[:id]).needs
+    @needs = current_user.needs
     respond_to do |format|
       format.json {render :json => @needs}
     end
