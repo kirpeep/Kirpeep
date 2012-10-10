@@ -42,13 +42,14 @@ gem 'rmagick'
 #File uploading Gem
 gem 'paperclip'
 
-
+gem 'rails-erd'
 #gem 'css_sprite' #More efficient CSS
 
 group :test, :development do
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'launchy'
+
 end
 
 #Run the following the following(each is a line)

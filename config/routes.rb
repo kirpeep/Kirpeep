@@ -3,7 +3,7 @@ TestApp::Application.routes.draw do
   match '/sessions/signin', :controller => 'sessions', :action => 'signin'
   
   match  'destroy_session',              :to => 'sessions#destroy'
-  match  '/list_need/:id',               :to => 'needs#new'
+  match  '/list_need/:id',               :to => 'needs#create'
   match  '/quicksale/:id',               :to => 'needs#quicksale'
   match  '/share/:id',                   :to => 'needs#share'
   match  '/list_offer/:id',              :to => 'offers#new'
@@ -21,7 +21,7 @@ TestApp::Application.routes.draw do
   match  '/accept_perform/' , :to => 'exchanges#accept_perform' , :as => 'accept_perform'
   match  '/rate_exchange/'  , :to => 'exchanges#rate_exchange' , :as => 'rate_exchange'
   match  '/sendmessage/:id&:reply_message_id'    , :to => 'messages#new'
-  
+  match  '/user_needs/', :to => 'users#needs'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
   # The priority is based upon order of creation:

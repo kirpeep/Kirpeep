@@ -155,6 +155,15 @@ class UsersController < ApplicationController
     render :partial => 'messages', :locals => {:user => @user, :messages => @messages}
   end
 
+  def needs
+    # This method is meant to be an ajax
+    #call to get all the users needs in JSON format
+    @needs = current_user.needs
+    respond_to do |format|
+      format.json {render :json => @needs}
+    end
+  end
+
   private 
 
     def signed_in_user

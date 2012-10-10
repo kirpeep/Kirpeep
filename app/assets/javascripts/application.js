@@ -15,6 +15,7 @@
 //= require jquery.purr
 //= require best_in_place
 //= require jquery_ujs
+//= require handlebars-1.0.rc.1.js
 
 /*jQuery.ajaxSetup({ 
   beforeSend: function(xhr) {
