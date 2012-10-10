@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
 
-  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy]
+  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot]
   #before_filter :correct_user, :only => [:show, :edit, :update, :destroy]
   
   def index
@@ -162,6 +162,12 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.json {render :json => @needs}
     end
+  end
+
+  def forgot
+    respond_to do |format|
+      format.html
+    end 
   end
 
   private 

@@ -22,6 +22,7 @@ TestApp::Application.routes.draw do
   match  '/rate_exchange/'  , :to => 'exchanges#rate_exchange' , :as => 'rate_exchange'
   match  '/sendmessage/:id&:reply_message_id'    , :to => 'messages#new'
   match  '/user_needs/', :to => 'users#needs'
+  match '/forgot/', :to => 'users#forgot'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
   # The priority is based upon order of creation:
