@@ -1,0 +1,154 @@
+
+
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>Kirpeep | <%= @title %></title>
+<%= javascript_tag do %>
+  window.userID = <%= current_user.id %>
+<% end %>
+<script id="profileNeedsTemplate" type="text/x-handlebars-template">
+<div>
+  {{#each []}}
+      <div class="rounded-need">
+        <div class="row-fluid">
+          <span class="need-span">NEED</span>
+          <span>{{title}}</span>
+        </div>
+        <div class="row-fluid">
+          <p>{{description}}</p>
+        </div>
+        <div style= "display:none;">
+          <%#= image_tag('favorite.png') %> <!-- width="30" height="30" /><br /> -->
+          <%#= image_tag('kid.png') %> <!-- width="43" height="34" /> -->
+        </div>
+        <div class="row-fluid">
+          <div class="span3">
+            <img src='/assets/{{imgURL}}' id='userImage' rel='popover' />
+            <%#= link_to image_tag(@user_photo, {:width => '100px', :height => '100px'}), listing.user, {:id => 'userImage', 'rel' =>'popover' } %>
+            <img src='/assets/stars.png' />
+            <%#= image_tag('stars.png') %>
+          </div>
+          <div id="need-actions" class="span6">
+            <div class="row-fluid tool">
+
+              <!-- Message-->
+              <div class="span3">
+                <a href="/sendmessage/{{user.id}}&nil" class='dynamolink'>
+                  <img src='/assets/message.png' class='message' title='message' />
+                  <%#= image_tag('message.png', :class=>"message", :title=>"message") %>
+                </a>
+              </div>
+              <!-- Initiate Exchange-->
+              <div class="span3 tTip" title="Exchange">
+                <% if @user.nil? %>
+                    <a class="dynamolink" href="/initiate_exchange/<%= @user.id.to_s %>&{{id}}%>">
+                      <%#= image_tag('exchange.png') %>
+                      <img src='/assets/exchange.png' />
+                    </a>
+
+                <%else%>
+                    <%#= image_tag('exchange.png', {:title=>"exchange"}) %>
+                    <img src='/assets/exchange.png' />
+                <%end%>
+              </div>
+              <div class="span3">
+                <a class="dynamolink" href="/quicksale/{{id}}">
+                  <%#= image_tag('price.png') %>
+                  <img src='/assets/price.png' />
+                </a>
+              </div>
+              <div class="span3">
+                <a class="dynamolink" href="/share/{{id}}">
+                  <%#= image_tag('share.png') %>
+                  <img src='/assets/share.png' />
+                </a>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span6" id="need-name">
+                {{user.name}} <br />
+                <%#= Exchange.where("id != ?",listing.user.id).all.count %> Exchanges<br />
+                Reviews (0)
+              </div>
+              <div class="span6">
+                (<%#= listing.user.needs.count %>) NEED
+                <br />
+                (<%#= listing.user.needs.count %>) need
+              </div>
+            </div>
+          </div>
+          <div id="need-listing" class="span3">
+            <div>
+              <img src='/assets/{{imgURL}}' style='width: 100px; height: 100px;' />
+              <%#= image_tag(listing.photo.url, {:width => '100px', :height => '100px'}) %> <!-- width="103" height="103" /> -->
+            </div>
+          </div>
+        </div>
+      </div>
+  {{/each}}
+</div>
+</script>
+<%= javascript_include_tag "profile.js" %>
+<%= stylesheet_link_tag    "profile.css" %>
+</head>
+
+<body>
+
+<div class='container'>
+  <%= render 'shared/header' %>
+
+  <div><hr/></div>
+
+  <div id='main-content' class='row'>
+    <div id="flash_notice">
+      <%= flash[:error] %>
+      <%= flash[:notice] %>
+    </div>
+      <% @profile = @user.profile %>
+    	<div class='span4'>
+        <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
+      	<ul>
+          <li>Location: <%= best_in_place @profile, :location %></li>
+            <li>Languages: <%= best_in_place @profile, :languages %></li>
+            <li>Needs / Offers </li>
+            <li>Completed Exchanges </li>
+           	<li>1 Review (stars)</li> 
+      	</ul>
+      </div>
+      
+      <div class='span8'>
+        <div id='profile-header'>
+        	<h2 class='profile-username'>
+            <%= @user.name %>
+          </h2>
+          <div class='tabbable'>
+            <ul class='nav nav-tabs'>
+              <li class='active'>
+                <%= link_to 'Profile', '#profile' , {:id => 'profile_link', 'data-toggle' => 'tab'} %>
+              </li>
+              <li>
+                <%= link_to 'Exchanges', '#exchanges' , {:id => 'exch_link', 'data-toggle' => 'tab'} %></li>
+              <li>
+                <%= link_to 'Messages', '#messages' , {:id => 'message_link', 'data-toggle' => 'tab'} %>
+              </li>
+            </ul>
+    	    
+            <div class="tab-content">
+              <div id='profile' class="tab-pane active">
+                <%= render :partial => 'profile', :locals => {:user => @user} %>
+              </div>
+              <div id='exchanges' class="tab-pane">
+                <%= render :partial => 'exchange', :locals => {:user => @user} %>
+              </div>
+              <div id='messages' class="tab-pane"></div>
+            </div> <!-- /.tab-content -->
+          </div><!-- /.tabbable -->
+        </div><!-- /#profile-header -->
+      </div> <!-- /.span8-->
+    </div><!-- #main-content .row -->
+
+    <%= render 'shared/footer' %>
+
+  <!-- Dynamobox Modal -->
+  <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+  
+</body>

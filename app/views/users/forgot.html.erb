@@ -1,0 +1,8 @@
+<h2>Reset Password</h2>
+<%= form_tag('/forgot', :method => 'POST') do %>
+   <div class='field'>
+      <%= label_tag(:email, 'Email') %><br />
+      <%= text_field_tag(:email) %>
+   </div>
+   <%= submit_tag('Save') %>
+<% end %>
