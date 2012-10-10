@@ -12,7 +12,7 @@
 
 	<!-- NEEDS-->
 	<div class='span6'>
-		<div>NEEDS - <%= user.needs.count %></div>
+		<div>NEEDS - <span id='needCount'><%= user.needs.count %></span></div>
 	  
 			<div>
 				<% if is_current_user(user) %>

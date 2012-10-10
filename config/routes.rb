@@ -3,7 +3,7 @@ TestApp::Application.routes.draw do
   match '/sessions/signin', :controller => 'sessions', :action => 'signin'
   
   match  'destroy_session',              :to => 'sessions#destroy'
-  match  '/list_need/:id',               :to => 'needs#new'
+  match  '/list_need/:id',               :to => 'needs#create'
   match  '/quicksale/:id',               :to => 'needs#quicksale'
   match  '/share/:id',                   :to => 'needs#share'
   match  '/list_offer/:id',              :to => 'offers#new'

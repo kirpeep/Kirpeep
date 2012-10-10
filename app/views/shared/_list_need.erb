@@ -12,7 +12,11 @@
                   url: '/user_needs.json',
 		  dataType: 'JSON'
 		}).success(function(data){
+			console.log(data);
 			LoadNeeds(data);
+			var count = parseInt($('#needCount').html());
+			count++;
+			$('#needCount').html(count);
 		});
                 $('#dynamobox').modal('toggle');
            });
