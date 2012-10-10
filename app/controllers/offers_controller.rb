@@ -11,8 +11,6 @@ class OffersController < ApplicationController
     @offer = Offer.new
 
     5.times {@offer.assets.build}
-
-    render :partial  => 'shared/list_offer' 
   end
 
   def create  

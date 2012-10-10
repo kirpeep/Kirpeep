@@ -19,9 +19,10 @@
 				<% end %>
 			</div>
 			<% for need in user.needs %>
+				<% next if need.is_deleted %>
 				<%= render :partial => 'needs/show', :locals => {:listing => need } %>
 				<% if false %>
-				<% next if need.is_deleted %>
+				
 				<div class="rounded-need">
 					<div>
 						<span>NEEDED</span> 
@@ -37,8 +38,9 @@
 						</ul>
 					</div>
 				</div>
-			<%end %>
-		<% end %>
+				<%end %>
+			<% end %>
+
 	</div> 
 	    
 	<!-- OFFERS-->
@@ -51,6 +53,9 @@
 		</div>
 		<% for offer in user.offers %>
 			<% next if offer.is_deleted %>
+			<%= render :partial => 'offers/show', :locals => {:listing => offer } %>
+			<!-- -comment out ruby code -->
+			<% if false %>
 			<div class="rounded-offer">
 				<div>
 					<span>OFFERED</span> 
@@ -68,6 +73,7 @@
 					</ul>
 				</div>
 			</div>
+			<% end %>
 		<%end%>
 	</div>
 </div> 

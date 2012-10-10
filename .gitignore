@@ -15,3 +15,15 @@
 /tmp
 /db/sphinx
 /.gitignore
+
+#Ignore Deltas
+/db/sphinx/*.*
+
+# Ignore .rvmrc
+/.rvmrc
+
+# Ignore Images
+/public/system/*.*
+
+# Ignore .gitignore
+/.gitignore

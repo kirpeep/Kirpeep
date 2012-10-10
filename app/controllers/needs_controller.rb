@@ -11,8 +11,6 @@ class NeedsController < ApplicationController
     @need = Need.new
 
     5.times {@need.assets.build}
-    
-    render :partial  => 'shared/list_need'
   end
 
   def create  
