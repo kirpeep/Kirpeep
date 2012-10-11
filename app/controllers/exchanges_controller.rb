@@ -33,6 +33,13 @@ class ExchangesController < ApplicationController
 
   end
 
+  def new
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   #Acceptance of initiated Exchange
   def accept_exchange
     exch = InitiateExchange.find(params[:exch_id])

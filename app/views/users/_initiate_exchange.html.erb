@@ -40,7 +40,7 @@
                     <div class="tabbable tabs-left">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#offer" data-toggle="tab">Listing 1</a></li>
-                            <li id="new_link"><a href="exchanges/new" data-remote="true" data-toggle="tab">+</a></li>
+                            <li id="new_link"><%= link_to "+", "exchanges/new", :remote => true %></li>
                         </ul>
                         <div class="tab-content" id="userExchItems">
                             <div class="tab-pane active" id="offer">
@@ -94,4 +94,30 @@
             <%= f.submit 'Initiate Exchange', :class => "btn btn-primary" %> 
         </div>
     <% end %>
+
+
+    <!-- This is a hack so that we can get multiitem exchanges functioning -->
+        
+        <div id="SelectNeedTmp" style="display:none">
+            <div class="tab-pane active" id="need1">
+                <span id="selNeed">Select a need or <%= link_to "create", new_offer_path, :class => "CreateOffer" %> a new one.</span>
+                <div>
+                    <% needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
+                    <%= select_tag :init_list_id, options_for_select(needs_array) %>
+                    <%= hidden_field_tag :initUser, :value => current_user.id  %>
+                </div>
+            </div>
+        </div>
+        <div id="OfferNeedTmp" style="display:none">
+            <div class="tab-pane active" id="offer1">
+                <span id="selectOffer">Select an offer or (link to create)create a new one.</span>
+                <div>
+                    <% offers_array = @user.offers.all.map { |offer| [offer.title, offer.id] } %> 
+                    <%= select_tag :init_list_id, options_for_select(offers_array) %>
+                    <%= hidden_field_tag (:initUser, :value => current_user.id ) %>
+                </div>
+            </div>
+        </div>
+    <!-- End o' shitty hack 'o matic script' -->
+
 <!--/div--> 
