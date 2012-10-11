@@ -1,1 +1,8 @@
 $('#new_link').before('<li><a href="#" data-toggle="tab">NEW</li>');
+
+$("#userExchItems").append("<div class='tab-pane active' id='offer'>
+                                <!-- Offer Listing -->
+                                <%= render :partial => 'shared/offer_listing', 
+                               :locals => {:targ_listing => @targ_listing, :user => @user, :f => f} %>
+                                <!-- End of Offer Listing --> 
+                            </div>");
