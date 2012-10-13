@@ -69,6 +69,9 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    # A user must activate via an activation email
+    # Before they are allowed to use the system - kyle
+    @user.active = false 
     @user.profile = Profile.new
 
     respond_to do |format|
@@ -168,6 +171,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
     end 
+  end
+
+  def process_forgot
+
   end
 
   private 

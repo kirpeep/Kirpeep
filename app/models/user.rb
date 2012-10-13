@@ -55,6 +55,12 @@ class User < ActiveRecord::Base
   	(user && user.salt == cookie_salt) ? user : nil
   end
 
+  # Helper method that will generate a token for the user account
+  # This will be used for things like reset/forgot passwords
+  def self.generateToken()
+	SecureRandom.urlsafe_base64
+  end
+
   private
 
   	def encrypt_password
