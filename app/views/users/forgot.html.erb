@@ -1,4 +1,12 @@
 <h2>Reset Password</h2>
+
+<% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+<% end %>
+
 <%= form_tag('/forgot', :method => 'POST') do %>
    <div class='field'>
       <%= label_tag(:email, 'Email') %><br />
