@@ -15,7 +15,7 @@ TestApp::Application.routes.draw do
   match  '/signup/',                     :to => 'users#new'
   match  '/signup/:email&:pass',         :to => 'users#new'
   #match  '/users/:id', :to => 'users#show', :as => 'profile'
-  match  '/search',           :to => 'users#search'
+  match  '/search/',           :to => 'search#search'
   match  '/create_exchange/', :to => 'exchanges#create'
   match  '/accept_exchange/', :to => 'exchanges#accept_exchange', :as => 'accept_exchange'
   match  '/accept_perform/' , :to => 'exchanges#accept_perform' , :as => 'accept_perform'
@@ -75,11 +75,10 @@ TestApp::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'sessions#index'
-  resources :offers
-  resources :needs
+  resources :userlistings
+  resources :search
   resources :users do |user|
-    resources :needs, :only => :create
-    resources :offers, :only => :create
+    resources :userlistings
     resources :profiles
   end
   resources :sessions#, :only => [:new, :create, :destroy]

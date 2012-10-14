@@ -34,7 +34,23 @@ var word_list = [
  // ...other words
 ];
 
+jQuery.fn.getTemplateAjax(path) {
+        var source;
+        var template;
+
+        $.ajax({
+            url: path, //ex. js/templates/mytemplate.handlebars
+            cache: true,
+            success: function(data) {
+                source    = data;
+                template  = Handlebars.compile(source);
+                $('#target').html(template);
+            }               
+        });         
+    })()
+
 $(document).ready(function() {
+
 	$("#wordcloud").jQCloud(word_list);
 
 	$('.tTip').betterTooltip(); 
