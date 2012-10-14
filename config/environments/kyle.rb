@@ -22,6 +22,19 @@ TestApp::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  $domain = 'http://localhost:3000'
+
+  # SMTP settings
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  :address              => "smtpout.secureserver.net",
+  :port                 => 25,
+  :domain               => 'kirpeep.com',
+  :user_name            => '<username>',
+  :password             => '<password>',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true  }
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 

@@ -8,7 +8,7 @@ require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
   
-  attr_accessible :email, :name, :password, :password_confirmation
+  attr_accessible :email, :name, :password, :password_confirmation, :token
   has_one :profile
   has_many :messages
   has_many :needs, :through => :profile
@@ -53,6 +53,12 @@ class User < ActiveRecord::Base
   def self.authenticate_with_salt(id, cookie_salt)
   	user = find_by_id(id)
   	(user && user.salt == cookie_salt) ? user : nil
+  end
+
+  # Helper method that will generate a token for the user account
+  # This will be used for things like reset/forgot passwords
+  def self.generateToken()
+	SecureRandom.urlsafe_base64
   end
 
   private

@@ -45,10 +45,11 @@ gem 'paperclip'
 gem 'rails-erd'
 #gem 'css_sprite' #More efficient CSS
 
-group :test, :development do
+group :test, :development, :kyle, :john do
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'launchy'
+	gem 'ruby-debug19'
 
 end
 
