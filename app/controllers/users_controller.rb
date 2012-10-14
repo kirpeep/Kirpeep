@@ -187,11 +187,8 @@ class UsersController < ApplicationController
        redirect_to('/forgot')
     else
        @token = User.generateToken
-       if @user.update_attributes({:token => @token.to_s})
-         flash[:notice] = 'An email was sent to your email account.'
-       else
-         flash[:error] = 'Hmmm... Something went wrong'
-       end 
+       @user.update_attribute(:token, @token.to_s)
+       flash[:notice] = 'An email was sent to your email account.'
        redirect_to('/forgot')
     end	
   end
