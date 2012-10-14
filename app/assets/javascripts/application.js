@@ -31,7 +31,7 @@ jQuery.fn.submitWithAjax = function() {
   })
 };
 //functions 
-jQuery.fn.insertTemplateAjax = function(path){
+jQuery.fn.insertTemplateAjax = function(path, dataobject){
     var source;
     var template;
 
@@ -39,9 +39,10 @@ jQuery.fn.insertTemplateAjax = function(path){
         url: path, //ex. js/templates/mytemplate.handlebars
         cache: true,
         success: function(data) {
+            alert(":)");
             source    = data;
             template  = Handlebars.compile(source);
-            $(this).html(template);
+            $(this).html(template(dataobjects));
         }               
     });         
 };

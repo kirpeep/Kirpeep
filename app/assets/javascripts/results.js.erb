@@ -34,20 +34,6 @@ var word_list = [
  // ...other words
 ];
 
-jQuery.fn.getTemplateAjax(path) {
-        var source;
-        var template;
-
-        $.ajax({
-            url: path, //ex. js/templates/mytemplate.handlebars
-            cache: true,
-            success: function(data) {
-                source    = data;
-                template  = Handlebars.compile(source);
-                $('#target').html(template);
-            }               
-        });         
-    })()
 
 $(document).ready(function() {
 
@@ -98,4 +84,8 @@ $(document).ready(function() {
     $.get($("#item_search").attr("action"), $("#item_search").serialize(), null, "script");
     return false;
   });
+
+  //$(".listingbox").insertTemplateAjax();
+  var listings = $("#listings").data('listings');
+  $("#listings").insertTemplateAjax(<%= asset_path("javascript/templates/show_need.html") %>, listings);
 });  
