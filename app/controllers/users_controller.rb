@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
 
-  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot]
+  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot, :reset_password, :process_reset_password]
   #before_filter :correct_user, :only => [:show, :edit, :update, :destroy]
   
   def index
@@ -174,7 +174,6 @@ class UsersController < ApplicationController
   end
 
   def process_forgot
-    debugger
     # First thing we need to do is check the user account
     if params[:email].nil?
        flash[:error] = 'We are sorry something went wrong. Please try again.'
@@ -188,9 +187,39 @@ class UsersController < ApplicationController
     else
        @token = User.generateToken
        @user.update_attribute(:token, @token.to_s)
+       UserMailer.forgot_email(@user).deliver
        flash[:notice] = 'An email was sent to your email account.'
        redirect_to('/forgot')
     end	
+  end
+  
+  def reset_password
+    if params[:id].nil? || params[:token].nil? 
+      redirect_to root_path, notice: 'Missing Requirements'  
+    else
+      @user = User.where("id = ? AND token = ?", params[:id], params[:token]).first!
+      if @user.nil?
+        redirect_to root_path, notice: 'Missing Requirements'
+      else
+        respond_to do |format|
+          format.html
+        end
+      end
+    end
+  end
+
+  def process_reset_password
+    if params[:id].nil? || params[:password].nil? || params[:confirm].nil?
+      redirect_to '/resetpassword', error: 'Missing some information'
+    else
+      if params[:password] != params[:confirm]
+        redirect_to '/resetpassword', error: 'Passwords do not match'
+      else
+        @user = User.find(params[:id])
+        @user.update_attribute(:password, params[:password])
+        redirect_to '/resetpassword', notice: 'Your password has been reset'
+      end
+    end 
   end
 
   private 
