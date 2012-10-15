@@ -27,7 +27,7 @@ TestApp::Application.routes.draw do
   post '/forgot', :to => 'users#process_forgot'
   get '/resetpassword/', :to => 'users#reset_password'
   post '/resetpassword/', :to => 'users#process_reset_password'
-
+  get '/activate/', :to => 'users#activate'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
   # The priority is based upon order of creation:

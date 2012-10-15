@@ -72,12 +72,14 @@ class UsersController < ApplicationController
     # A user must activate via an activation email
     # Before they are allowed to use the system - kyle
     @user.active = false 
+    @user.token = User.generateToken
     @user.profile = Profile.new
 
     respond_to do |format|
       if @user.save
+        UserMailer.activate_email(@user)
         sign_in @user
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: 'User was successfully created and your activation email has been sent.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html {  redirect_to root_url, notice: 'User was not successfully created.'  }
@@ -220,6 +222,21 @@ class UsersController < ApplicationController
         redirect_to '/resetpassword', notice: 'Your password has been reset'
       end
     end 
+  end
+
+  def activate
+    if params[:id].nil? || params[:token].nil?
+	redirect_to root_path, notice: 'Missing Requirements'
+    else
+       @user = User.where("id = ? AND token = ?", params[:id], params[:token]).first!
+       if @user.nil?
+         redirect_to root_path, notice: 'Missing Requirements'
+       else
+         @user.update_attribute(:Active, true)
+         sign_in @user
+         redirect_to root_path
+       end
+    end
   end
 
   private 
