@@ -15,7 +15,7 @@ class Offer < UserListing
 	       :thumb => "100x100#",
 	       :small  => "40x40" }
     
-	validates :inventoryCount, :length => {:minimum => 1}
+	#validates :inventoryCount, :length => {:minimum => 1}
 
 	
 end

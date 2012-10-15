@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     # A user must activate via an activation email
     # Before they are allowed to use the system - kyle
-    @user.active = false 
+    @user.Active = false 
     @user.profile = Profile.new
 
     respond_to do |format|

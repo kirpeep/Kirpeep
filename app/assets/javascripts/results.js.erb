@@ -1,41 +1,42 @@
-var ExchHTML = " ";
-var word_list = [
- {text: "magnificent", weight: 10},
- {text: "reciprocity", weight: 8, url: "http://jquery.com/", title: "jQuery Rocks!"},
- {text: "first-rate", weight: 6},
- {text: "free", weight: 4},
- {text: "satisfying", weight: 2},
- {text: "connection", weight: 1},
- {text: "savings", weight: 3, url: "http://jquery.com/", title: "jQuery Rocks!"},
- {text: "creative", weight: 5},
- {text: "swap", weight: 7},
- {text: "excellent", weight: 9},
- {text: "fulfilling", weight: 10},
- {text: "priceless", weight: 8, url: "http://jquery.com/", title: "jQuery Rocks!"},
- {text: "cutting-edge", weight: 6},
- {text: "network", weight: 4},
- {text: "skills", weight: 2},
- {text: "market", weight: 1},
- {text: "gratifying", weight: 3, url: "http://jquery.com/", title: "jQuery Rocks!"},
- {text: "bargain", weight: 5},
- {text: "fun", weight: 7},
- {text: "value", weight: 9},
- {text: "revolutionary", weight: 10},
- {text: "reciprocate", weight: 8, url: "http://jquery.com/", title: "jQuery Rocks!"},
- {text: "barter", weight: 6},
- {text: "refreshing", weight: 4},
- {text: "exchange", weight: 2},
- {text: "social", weight: 1},
- {text: "innovative", weight: 3, url: "http://jquery.com/", title: "jQuery Rocks!"},
- {text: "enthralling", weight: 5},
- {text: "trade", weight: 7},
- {text: "respect", weight: 9},
- {text: "community", weight: 10}
- // ...other words
-];
-
-
 $(document).ready(function() {
+	var ExchHTML = " ";
+	var word_list = [
+	 {text: "magnificent", weight: 10},
+	 {text: "reciprocity", weight: 8, url: "http://jquery.com/", title: "jQuery Rocks!"},
+	 {text: "first-rate", weight: 6},
+	 {text: "free", weight: 4},
+	 {text: "satisfying", weight: 2},
+	 {text: "connection", weight: 1},
+	 {text: "savings", weight: 3, url: "http://jquery.com/", title: "jQuery Rocks!"},
+	 {text: "creative", weight: 5},
+	 {text: "swap", weight: 7},
+	 {text: "excellent", weight: 9},
+	 {text: "fulfilling", weight: 10},
+	 {text: "priceless", weight: 8, url: "http://jquery.com/", title: "jQuery Rocks!"},
+	 {text: "cutting-edge", weight: 6},
+	 {text: "network", weight: 4},
+	 {text: "skills", weight: 2},
+	 {text: "market", weight: 1},
+	 {text: "gratifying", weight: 3, url: "http://jquery.com/", title: "jQuery Rocks!"},
+	 {text: "bargain", weight: 5},
+	 {text: "fun", weight: 7},
+	 {text: "value", weight: 9},
+	 {text: "revolutionary", weight: 10},
+	 {text: "reciprocate", weight: 8, url: "http://jquery.com/", title: "jQuery Rocks!"},
+	 {text: "barter", weight: 6},
+	 {text: "refreshing", weight: 4},
+	 {text: "exchange", weight: 2},
+	 {text: "social", weight: 1},
+	 {text: "innovative", weight: 3, url: "http://jquery.com/", title: "jQuery Rocks!"},
+	 {text: "enthralling", weight: 5},
+	 {text: "trade", weight: 7},
+	 {text: "respect", weight: 9},
+	 {text: "community", weight: 10}
+	 // ...other words
+	];
+
+
+
 
 	$("#wordcloud").jQCloud(word_list);
 
@@ -87,5 +88,5 @@ $(document).ready(function() {
 
   //$(".listingbox").insertTemplateAjax();
   var listings = $("#listings").data('listings');
-  $("#listings").insertTemplateAjax(<%= asset_path("javascript/templates/show_need.html") %>, listings);
+  $("#listings").insertTemplateAjax(<%= asset_path("templates/show_need.html") %>, listings);
 });  
