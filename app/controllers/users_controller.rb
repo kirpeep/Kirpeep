@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
 
-  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot, :reset_password, :process_reset_password, :new, :create]
+  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot, :reset_password, :process_reset_password]
   #before_filter :correct_user, :only => [:show, :edit, :update, :destroy]
   
   def index
