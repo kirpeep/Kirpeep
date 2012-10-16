@@ -39,7 +39,6 @@ class UserListing < ActiveRecord::Base
 	validates :title, :presence => true, :length => {:maximum => 50}
 	#validates :listingtype#, :presence => true
 
-
 	#def self.search(search)
   	#	if search
     #		where('title LIKE ?', "%#{search}%")

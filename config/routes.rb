@@ -3,10 +3,10 @@ TestApp::Application.routes.draw do
   match '/sessions/signin', :controller => 'sessions', :action => 'signin'
   
   match  'destroy_session',              :to => 'sessions#destroy'
-  match  '/list_need/:id',               :to => 'needs#create'
-  match  '/quicksale/:id',               :to => 'needs#quicksale'
-  match  '/share/:id',                   :to => 'needs#share'
-  match  '/list_offer/:id',              :to => 'offers#new'
+  match  '/create_listing/',          :to => 'userlistings#create'
+  #match  '/quicksale/:id',               :to => 'needs#quicksale'
+  #match  '/share/:id',                   :to => 'needs#share'
+  #match  '/list_offer/:id',              :to => 'offers#new'
   match  '/initiate_exchange/:id&:targ', :to => 'users#initiate_exchange'
   match  '/profile/:id',                 :to => 'users#profile'
   match  '/user_exchanges/:id',          :to => 'users#exchanges'
@@ -15,7 +15,7 @@ TestApp::Application.routes.draw do
   match  '/signup/',                     :to => 'users#new'
   match  '/signup/:email&:pass',         :to => 'users#new'
   #match  '/users/:id', :to => 'users#show', :as => 'profile'
-  match  '/search',           :to => 'users#search'
+  match  '/search/',           :to => 'search#search'
   match  '/create_exchange/', :to => 'exchanges#create'
   match  '/accept_exchange/', :to => 'exchanges#accept_exchange', :as => 'accept_exchange'
   match  '/accept_perform/' , :to => 'exchanges#accept_perform' , :as => 'accept_perform'
@@ -80,11 +80,10 @@ TestApp::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'sessions#index'
-  resources :offers
-  resources :needs
+  resources :userlistings
+  resources :search
   resources :users do |user|
-    resources :needs, :only => :create
-    resources :offers, :only => :create
+    resources :userlistings
     resources :profiles
   end
   resources :sessions#, :only => [:new, :create, :destroy]

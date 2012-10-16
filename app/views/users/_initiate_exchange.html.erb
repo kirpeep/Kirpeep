@@ -96,15 +96,15 @@
     <% end %>
 
 
-    <!-- This is a hack so that we can get multiitem exchanges functioning -->
+    <!-- This is a hack so that we can get multiitem exchanges functioning
         
         <div id="SelectNeedTmp" style="display:none">
             <div class="tab-pane active" id="need1">
-                <span id="selNeed">Select a need or <%= link_to "create", new_offer_path, :class => "CreateOffer" %> a new one.</span>
+                <span id="selNeed">Select a need or <%# link_to "create", new_offer_path, :class => "CreateOffer" %> a new one.</span>
                 <div>
-                    <% needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
-                    <%= select_tag :init_list_id, options_for_select(needs_array) %>
-                    <%= hidden_field_tag :initUser, :value => current_user.id  %>
+                    <%# needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
+                    <%#= select_tag :init_list_id, options_for_select(needs_array) %>
+                    <%#= hidden_field_tag :initUser, :value => current_user.id  %>
                 </div>
             </div>
         </div>
@@ -112,12 +112,12 @@
             <div class="tab-pane active" id="offer1">
                 <span id="selectOffer">Select an offer or (link to create)create a new one.</span>
                 <div>
-                    <% offers_array = @user.offers.all.map { |offer| [offer.title, offer.id] } %> 
-                    <%= select_tag :init_list_id, options_for_select(offers_array) %>
-                    <%= hidden_field_tag (:initUser, :value => current_user.id ) %>
+                    <%# offers_array = @user.offers.all.map { |offer| [offer.title, offer.id] } %> 
+                    <%# select_tag :init_list_id, options_for_select(offers_array) %>
+                    <%# hidden_field_tag (:initUser, :value => current_user.id ) %>
                 </div>
             </div>
         </div>
-    <!-- End o' shitty hack 'o matic script' -->
+    End o' shitty hack 'o matic script' -->
 
 <!--/div--> 

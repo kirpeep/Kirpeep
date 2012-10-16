@@ -31,14 +31,8 @@
 
 
           <!-- Be Sure to make partials for these listings-->
-          <% for listing in @userlistings  %>
-            <% next if listing.is_deleted || listing.nil? %>
-            <% @user_photo = listing.user.profile.photo.url %>
-            <% if listing.type == "Offer" %>
-       	      <%= render :partial => 'offers/show', :locals => {:listing => listing } %>
-            <% else %>
-              <%= render :partial => 'needs/show', :locals => {:listing => listing } %>
-            <% end %>
+          <% for listing in @userlistings  %>            
+            <%= listing.show_result_partial %>
           <% end %>
           <!-- %= will_paginate @userlistings%-->
         </div>

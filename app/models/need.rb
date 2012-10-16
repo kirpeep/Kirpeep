@@ -6,7 +6,7 @@
 
 class Need < UserListing
 	include SearchHelper
-	attr_accessible :quantity, :quantityUnit, :neededBy, :is_deleted
+	attr_accessible :id, :quantity, :quantityUnit, :neededBy, :is_deleted
 	
 	#paperclip
 	  has_attached_file :photo,

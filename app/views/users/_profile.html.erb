@@ -15,12 +15,12 @@
 	  
 			<div>
 				<% if is_current_user(user) %>
-					<%= link_to 'Add Need', new_need_path, {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+					<%= link_to 'Add Need', new_userlisting_path(:type => "need"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
 				<% end %>
 			</div>
 			<% for need in user.needs %>
 				<% next if need.is_deleted %>
-				<%= render :partial => 'needs/show', :locals => {:listing => need } %>
+				<%= render :partial => 'userlistings/show_need', :locals => {:listing => need } %>
 				<% if false %>
 				
 				<div class="rounded-need">
@@ -48,12 +48,12 @@
 		<div>OFFERS - <%= user.offers.count %></div>
 		<div>
 			<% if is_current_user(user) %>
-				<%= link_to 'Add Offer', new_offer_path, {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+				<%= link_to 'Add Offer', new_userlisting_path(:type => "offer"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
 			<% end %>
 		</div>
 		<% for offer in user.offers %>
 			<% next if offer.is_deleted %>
-			<%= render :partial => 'offers/show', :locals => {:listing => offer } %>
+			<%= render :partial => 'userlistings/show_offer', :locals => {:listing => offer } %>
 			<!-- -comment out ruby code -->
 			<% if false %>
 			<div class="rounded-offer">
