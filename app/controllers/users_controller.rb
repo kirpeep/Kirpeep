@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
 
-  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot]
+  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot, :reset_password, :process_reset_password]
   #before_filter :correct_user, :only => [:show, :edit, :update, :destroy]
   
   def index
@@ -71,13 +71,19 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     # A user must activate via an activation email
     # Before they are allowed to use the system - kyle
+<<<<<<< HEAD
     @user.Active = false 
+=======
+    @user.active = false 
+    @user.token = User.generateToken
+>>>>>>> origin/master
     @user.profile = Profile.new
 
     respond_to do |format|
       if @user.save
+        UserMailer.activate_email(@user)
         sign_in @user
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: 'User was successfully created and your activation email has been sent.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html {  redirect_to root_url, notice: 'User was not successfully created.'  }
@@ -159,7 +165,6 @@ class UsersController < ApplicationController
   end
 
   def process_forgot
-    debugger
     # First thing we need to do is check the user account
     if params[:email].nil?
        flash[:error] = 'We are sorry something went wrong. Please try again.'
@@ -173,9 +178,54 @@ class UsersController < ApplicationController
     else
        @token = User.generateToken
        @user.update_attribute(:token, @token.to_s)
+       UserMailer.forgot_email(@user).deliver
        flash[:notice] = 'An email was sent to your email account.'
        redirect_to('/forgot')
     end	
+  end
+  
+  def reset_password
+    if params[:id].nil? || params[:token].nil? 
+      redirect_to root_path, notice: 'Missing Requirements'  
+    else
+      @user = User.where("id = ? AND token = ?", params[:id], params[:token]).first!
+      if @user.nil?
+        redirect_to root_path, notice: 'Missing Requirements'
+      else
+        respond_to do |format|
+          format.html
+        end
+      end
+    end
+  end
+
+  def process_reset_password
+    if params[:id].nil? || params[:password].nil? || params[:confirm].nil?
+      redirect_to '/resetpassword', error: 'Missing some information'
+    else
+      if params[:password] != params[:confirm]
+        redirect_to '/resetpassword', error: 'Passwords do not match'
+      else
+        @user = User.find(params[:id])
+        @user.update_attribute(:password, params[:password])
+        redirect_to '/resetpassword', notice: 'Your password has been reset'
+      end
+    end 
+  end
+
+  def activate
+    if params[:id].nil? || params[:token].nil?
+	redirect_to root_path, notice: 'Missing Requirements'
+    else
+       @user = User.where("id = ? AND token = ?", params[:id], params[:token]).first!
+       if @user.nil?
+         redirect_to root_path, notice: 'Missing Requirements'
+       else
+         @user.update_attribute(:Active, true)
+         sign_in @user
+         redirect_to root_path
+       end
+    end
   end
 
   private 

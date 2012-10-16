@@ -39,6 +39,18 @@ module TestApp
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+    # SMTP settings
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+    :address              => "smtpout.secureserver.net",
+    :port                 => 25,
+    :domain               => 'kirpeep.com',
+    :user_name            => 'info@kirpeep.com',
+    :password             => '0112kiratx',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
+
+
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
     # like if you have constraints or database-specific column types

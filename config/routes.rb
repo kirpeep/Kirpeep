@@ -22,8 +22,12 @@ TestApp::Application.routes.draw do
   match  '/rate_exchange/'  , :to => 'exchanges#rate_exchange' , :as => 'rate_exchange'
   match  '/sendmessage/:id&:reply_message_id'    , :to => 'messages#new'
   match  '/user_needs/', :to => 'users#needs'
+  # Forgot password and password reset hacks
   get '/forgot/', :to => 'users#forgot'
   post '/forgot', :to => 'users#process_forgot'
+  get '/resetpassword/', :to => 'users#reset_password'
+  post '/resetpassword/', :to => 'users#process_reset_password'
+  get '/activate/', :to => 'users#activate'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
   # The priority is based upon order of creation:
