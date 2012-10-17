@@ -39,10 +39,9 @@ jQuery.fn.insertTemplateAjax = function(path, dataobject){
         url: path, //ex. js/templates/mytemplate.handlebars
         cache: true,
         success: function(data) {
-            alert(":)");
             source    = data;
             template  = Handlebars.compile(source);
-            $(this).html(template(dataobjects));
+            $(this[0]).html(template(dataobject));
         }               
     });         
 };
