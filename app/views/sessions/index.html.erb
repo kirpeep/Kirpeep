@@ -58,7 +58,7 @@
       <span id="signup" >Get Started by introducing yourself.</span>
       <%= form_tag("#", :method =>"get") do %>
       <%= text_field_tag :email, 'Email', {'data-inline' => 'true' }%>
-      <%= text_field_tag :password, 'Password',  {'data-inline' => 'true' } %>
+      <%= password_field_tag :password, 'Password',  {'data-inline' => 'true' } %>
       <%= link_to 'Sign up', "/signup/", { 'role' => "button", :class => "dynamosignup btn", 'data-toggle' => "modal"} %>
 
       <%end%>
