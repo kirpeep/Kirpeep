@@ -88,6 +88,5 @@ $(document).ready(function() {
 
   //$(".listingbox").insertTemplateAjax();
   var listings = $("#listings").data('url');
-  alert(listings);
-  $("#listings").insertTemplateAjax("assets/templates/show_need.html", listings);
+  $("#listings").insertTemplateAjax("assets/templates/show_need.handlebars", listings);
 });  
