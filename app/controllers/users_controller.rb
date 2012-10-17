@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
 
-  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot, :reset_password, :process_reset_password]
+  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot, :reset_password, :process_reset_password, :new, :create, :activate]
   #before_filter :correct_user, :only => [:show, :edit, :update, :destroy]
   
   def index
@@ -71,15 +71,14 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     # A user must activate via an activation email
     # Before they are allowed to use the system - kyle
-    @user.Active = 0 
+    @user.Active = false 
     @user.token = User.generateToken
     @user.profile = Profile.new
 
     respond_to do |format|
-      debugger
       if @user.save
         UserMailer.activate_email(@user).deliver
-        sign_in @user
+       # sign_in @user
         format.html { redirect_to @user, notice: 'User was successfully created and your activation email has been sent.' }
         format.json { render json: @user, status: :created, location: @user }
       else

@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
   has_many :modifiedExchanges, :through => :exchange
   has_and_belongs_to_many :searchQueries
 
-  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  email_regex = /^.+@.+$/
+  #old regex:    /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates(:name, :presence => true,
                    :length   => {:maximum => 50} )
