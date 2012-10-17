@@ -1,0 +1,67 @@
+<%= stylesheet_link_tag    "tooltip_style.css" %>
+<%= stylesheet_link_tag    "results.css" %>
+
+<%= javascript_include_tag 'jqcloud-1.0.1' %>
+<%= javascript_include_tag "jquery.betterTooltip" %>
+<%= javascript_include_tag "results" %>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Kirpeep | <%= @title %></title>
+
+</head>
+
+<body>
+  <div class="container">
+    <%= render 'shared/header' %>
+
+    <div style="width: 100%"><hr/></div>
+    <div class="row-fluid">
+      <div class="span5"> <!--yes, I know this is not indented right. I want to make sure it works first-->
+                          <!-- nice job on the comments, I was about to call you a bitch for nothing, good job -->
+        <div class="row-fluid">
+          <% if params[:search].to_s == ''%>
+            <h1>Browse Listings</h1>
+          <%else%>
+            <h1>Search Results For <%= params[:search] %></h1> 
+          <%end%>
+        </div>
+        <%= content_tag "div", :class => "row-fluid", :id => "listings", :data => {:url => @userlistings} do %>
+        <div class='row-fluid'>
+
+          <!-- % = will_paginate @userlistings%-->
+
+
+          <!-- Be Sure to make partials for these listings-->
+          <% for listing in @userlistings  %>
+            <div class="listingbox">:)</div>
+          <% end %>
+          <!-- %= will_paginate @userlistings%-->
+        </div>
+        <% end %>
+      </div><!-- .span4 -->
+      <div class="span5 offset2">
+        <!-- MAP 
+        <div class="rounded-map">
+          <iframe width="600" height="398" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=geekdom&amp;aq=&amp;sll=31.168934,-100.076842&amp;sspn=9.074154,12.634277&amp;ie=UTF8&amp;hq=geekdom&amp;hnear=&amp;t=m&amp;ll=29.428594,-98.491937&amp;spn=0.071946,0.071946&amp;output=embed"></iframe>
+        </div>-->
+        <!-- Tag Cloud-->
+        <div id="wordcloud" style="width: 400px; height: 350px; margin-left: 20px;"></div>
+        <!--AdBlocks-->
+        <div>  
+          <div class="adblock">AD</div>
+          <div class="adblock">AD</div>
+          <div class="adblock">AD</div>
+        </div>
+      </div><!-- .span5 .offset3--> 
+    </div>
+    <%= render 'shared/footer' %>
+  </div>
+
+
+  <!-- Dynamobox Modal -->
+  <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+  
+  <!-- Sign in Modal -->
+  <%= render 'shared/signin'  %>
+</body>
