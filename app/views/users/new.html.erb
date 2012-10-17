@@ -1,7 +1,7 @@
 <% @user = User.new %>
 
 <!--div class="modal fade hide" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"-->
-  <% params[:email] = (params[:email]).gsub("(dot)", ".") %>
+  <% params[:email] = (params[:email]).gsub("_", ".") %>
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Sign Up</h3>
