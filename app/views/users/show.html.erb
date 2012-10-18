@@ -24,7 +24,7 @@
     </div>
       <% @profile = @user.profile %>
     	<div class='span4'>
-        <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
+        <%= image_tag @profile.photo.url, {:width => '200px', :height => '200px'} %>
       	<ul>
           <li>Location: <%= best_in_place @profile, :location %></li>
             <li>Languages: <%= best_in_place @profile, :languages %></li>

@@ -118,13 +118,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def initiate_exchange
-    @user = current_user
-    @targ_listing = UserListing.find params[:targ]
-
-    render :partial  => 'initiate_exchange'
-  end
-
   def profile
     @user = User.find(params[:id])
 
