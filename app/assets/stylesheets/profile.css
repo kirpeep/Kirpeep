@@ -67,9 +67,14 @@
 }
 
 .rounded-need span {
-	border: 3px solid #0F0; +
-	background-color:#E6E6E6;
+/*	border: 3px solid #0F0; +
+	background-color:#E6E6E6; */
 	font: Franklin Gothic Heavy;
+}
+
+.need-span{
+  color: #0f0;
+  font-size: 18px;
 }
 
 /*unread message styling*/
@@ -181,4 +186,20 @@
 	font-size:large;
 	font: Arial;
 	font-weight:600;
+}
+
+.profileInfo{
+ list-style:none;
+}
+
+.profileInfo li{
+ padding-bottom: 5px;
+}
+
+#needLabel{
+ margin-right: 15px;
+}
+
+#offersLabel{
+ margin-right: 15px;
 }

@@ -1,19 +1,31 @@
-<div class='row-fluid'> 
-	<% if is_current_user(user) %>
-		<%= best_in_place user.profile, :quickPitch%>
+<div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
+        <% if is_current_user(user) %>
+		<em><%= best_in_place user.profile, :quickPitch%></em>
 	<% else %>
-		<%= user.profile.quickPitch %>
+		<em><%= user.profile.quickPitch %></em>
 	<% end %>
+       
 </div>
+<div class='row-fluid' style='margin-bottom: 20px;'>
+    <div class='span7 pull-left' style='font-weight:normal;' >
+      <strong>About</strong><br>
+     <!-- <hr style='margin: 10px  0 !important;' /> -->
+      <%= user.profile.about %>
+    </div>
+    <div class='span4 pull-right' style='font-weight:normal;'>
+     <strong>Education</strong><br>
+     <!-- <hr style='margin: 10px 0 !important;' /> -->
+     <%= user.profile.education %>
+   </div>
+</div>
+<hr />
 <div class='row-fluid'> 
 	
 	<!-- UserListings-->
 
 	<!-- NEEDS-->
 	<div class='span6'>
-		<div>NEEDS - <%= user.needs.count %></div>
-	  
-			<div>
+		<div><span id='needLabel'>NEEDS - <%= user.needs.count %></span> 
 				<% if is_current_user(user) %>
 					<%= link_to 'Add Need', new_userlisting_path(:type => "need"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
 				<% end %>
@@ -45,8 +57,7 @@
 	    
 	<!-- OFFERS-->
 	<div class='span6'>
-		<div>OFFERS - <%= user.offers.count %></div>
-		<div>
+		<div><span id='offersLabel'>OFFERS - <%= user.offers.count %></span>
 			<% if is_current_user(user) %>
 				<%= link_to 'Add Offer', new_userlisting_path(:type => "offer"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
 			<% end %>

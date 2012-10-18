@@ -11,14 +11,14 @@
 
   <div class='container'>
     <div class='row'>
-      <div class="sign-in align-right">
+      <div class="span3 sign-in pull-right">
       <% if signed_in? %>
         <div class="btn-group align-right">
           <a class="btn dropdown-toggle align-right" data-toggle="dropdown" href="#">
             <%= current_user.name %>
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu pull-right">
             <li><%= link_to 'View Profile', current_user %></li>
             <li><%= link_to 'Sign Out' , 'destroy_session' %></li> 
           </ul>
@@ -27,7 +27,7 @@
         <!-- Button to trigger modal -->
         <a href="#signin" role="button" class="btn" data-toggle="modal">Sign In</a>
     <%end%>
-    <p>About | How It Works | FAQs</p>
+    <p class='pull-right'>About | How It Works | FAQs</p>
     </div>
       
     

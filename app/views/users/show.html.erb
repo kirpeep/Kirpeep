@@ -18,19 +18,31 @@
   <div><hr/></div>
 
   <div id='main-content' class='row'>
-    <div id="flash_notice">
-      <%= flash[:error] %>
-      <%= flash[:notice] %>
+  
+    <% if flash[:notice] != nil %>
+    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
+       <button type="button" class="close" data-dismiss="alert">×</button>
+       <div id="flash_notice">
+         <%= flash[:notice] %>
+       </div>
     </div>
+    <% elsif flash[:error] != nil %>
+    <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
+       <button type="button" class="close" data-dismiss="alert">×</button>
+       <div id="flash_notice">
+         <%= flash[:error] %>
+       </div>
+    </div>
+    <% end %>
       <% @profile = @user.profile %>
     	<div class='span4'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
-      	<ul>
-          <li>Location: <%= best_in_place @profile, :location %></li>
-            <li>Languages: <%= best_in_place @profile, :languages %></li>
-            <li>Needs / Offers </li>
-            <li>Completed Exchanges </li>
-           	<li>1 Review (stars)</li> 
+      	<ul class='profileInfo'>
+          <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
+            <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
+            <li><strong>Needs / Offers</strong> </li>
+            <li><strong>Completed Exchanges</strong> </li>
+            <li><strong>1 Review (stars)<strong></li> 
       	</ul>
       </div>
       
