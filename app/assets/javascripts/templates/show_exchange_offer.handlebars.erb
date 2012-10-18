@@ -1,0 +1,12 @@
+<div class="rounded-offer shadow">
+    <div style="">
+        <%= image_tag(@targ_listing.photo.url, {:width => "50px", :height => '50px'}) %>
+    </div>
+    <div style="">
+        <span>
+        {{title}} 
+        {{description}}
+        <%= hidden_field_tag(:listing_id, :value => {{id}} ) %>
+        </span>
+    </div> 
+</div>

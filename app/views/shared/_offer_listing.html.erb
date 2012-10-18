@@ -23,7 +23,7 @@
         </span>
     </div> 
     <%else%>
-    <span id="selectNeed">Select a need or <%= link_to "create", new_offer_path, :class => "CreateOffer" %> a new one.</span>
+    <span id="selectNeed">Select a need or <%= link_to "create", new_userlisting_path(:type => "offer"), :class => "CreateOffer" %> a new one.</span>
     <div>
         <% needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
         <%= f.select :init_list_id, options_for_select(needs_array) %>

@@ -40,6 +40,14 @@ class ExchangesController < ApplicationController
     end
   end
 
+  def initiate_exchange
+    @initexch = InitiateExchange.new
+    @user = current_user
+    @targ_listing = UserListing.find params[:id]
+
+    render :partial  => 'initiate_exchange'
+  end
+
   #Acceptance of initiated Exchange
   def accept_exchange
     exch = InitiateExchange.find(params[:exch_id])
