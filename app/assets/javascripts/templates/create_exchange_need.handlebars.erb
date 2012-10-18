@@ -1,0 +1,11 @@
+<div class="rounded-need shadow">
+    <div>
+        <span id="selectNeed">Select a Offer or <%= link_to "create", new_userlisting_path(:type => "neec"), :class => "CreateOffer" %> a new one.
+        </span>
+    </div>
+    <div>
+        <% needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
+        <%= f.select :init_list_id, options_for_select(needs_array) %>
+        <%= f.hidden_field :initUser, :value => current_user.id  %>
+    </div>
+</div>
