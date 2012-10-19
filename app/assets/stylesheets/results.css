@@ -25,6 +25,10 @@
 	text-align:center;
 }
 
+.modal-body {
+    max-height: 800px;
+}
+
 /* Shadow*/
 .shadow {
 	-moz-box-shadow: 3px 3px 4px #000;

@@ -1,19 +1,27 @@
 <!--div class="modal fade hide" id="InitiateExch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+ <html>
+ <head>   
     <script type="text/javascript">
         $(document).ready(function() {
-            var listing = <%= @targ_listing.to_json %>
+            var listing = ":)"; 
             alert(listing);
             if($('#targlisting').hasClass("offer"))
             {
-                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_offer.handlebars.erb", listing);
+                /*$('#targlisting').insertTemplateAjax("assets/templates/show_exchange_offer.handlebars.erb", null);
                 $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_need.handlebars.erb", null;
             }
             else{
-                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_need.handlebars.erb", listing);
-                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_offer.handlebars.erb", null);
+                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_need.handlebars.erb", null);
+                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_offer.handlebars.erb", null);*/
+                alert(listing);
             }
-        }
+            else{
+                alert(listing+"!!");
+            }
+            
+        });
     </script>
+</head>
     <%= form_for(@initexch, :url => create_exchange_path) do |f| %>
         <%= f.hidden_field :initUser, :value => current_user.id  %>
         <%= f.hidden_field :targUser, :value => @targ_listing.user.id  %>
@@ -143,3 +151,4 @@
     End o' shitty hack 'o matic script' -->
 
 <!--/div--> 
+</html>
