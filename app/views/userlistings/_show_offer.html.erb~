@@ -71,7 +71,7 @@
   </div>
   <div class="row-fluid">
     <div class="span4 pull-left">
-      <%= link_to image_tag(listing.user.profile.photo.url), listing.user, {:id => 'userImage', 'rel' =>'popover' } %>
+      <%= link_to image_tag(listing.user.profile.photo.url, {:width => '100px', :height => 'auto'}), listing.user, {:id => 'userImage', 'rel' =>'popover' } %>
       <%= image_tag('stars.png') %>
     </div>
     

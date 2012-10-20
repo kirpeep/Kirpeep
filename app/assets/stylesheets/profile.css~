@@ -101,7 +101,7 @@
   background-size: 100%;
 }
 
-#userImage{
+.userImage{
  width: 100px !important;
  height: auto !important;
 }

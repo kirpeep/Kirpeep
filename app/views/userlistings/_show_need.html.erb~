@@ -1,6 +1,6 @@
-<div class="rounded-offer" onMouseOver="$(this).find('#need-actions').show();" onMouseOut="$(this).find('#need-actions').hide();"  >
-  <span class="offer-span">OFFERED</span><br />
-  <span class="offer-title"><%= listing.title %></span>
+<div class="rounded-need" onMouseOver="$(this).find('#need-actions').show();" onMouseOut="$(this).find('#need-actions').hide();"  >
+  <span class="need-span">NEEDED</span><br />
+  <span class="need-title"><%= listing.title %></span> 
   <div id="need-actions" class="span10" style='display:none'>
       <div class="row-fluid tool">
 
@@ -50,11 +50,10 @@
         </div>
       </div>
         
-    </div>
-
-    <div id="need-listing" class="span12" style='margin: 5px 5px;'>
+    </div> 
+ <div id="need-listing" class="span12" style='margin: 5px 5px;'>
       <div>
-        <% if listing.photo.url.empty? %>
+         <% if !listing.photo.url.empty? %>
           <%= image_tag(listing.photo.url, {}) %> <!-- width="103" height="103" /> -->
         <% else %>
           <div class='noListingImage'></div>
@@ -79,7 +78,7 @@
     <%#= listing.user.name %>
     </div>
 
-    <div style='font-weight:normal;'>
+    <div style='font-weight:normal; '>
     <div class="span4 pull-left" style='margin-top:15px;'>
         <%= Exchange.where("id != ?",listing.user.id).all.count %> Exchanges<br />
         Reviews (0)
@@ -90,5 +89,5 @@
           (<%= listing.user.needs.count %>) need 
     </div>
   </div>
-  </div> 
+  </div>
 </div>
