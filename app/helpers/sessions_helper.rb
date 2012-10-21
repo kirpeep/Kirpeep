@@ -35,12 +35,12 @@ module SessionsHelper
 
   def create
   	user = User.authenticate(params[:session][:email], 
-  							 params[:session][:password])
+                params[:session][:password])
 
   	if user.nil?
   		flash.now[:error] = "Invalid email/password combination."
   		@title = "Sign In"
-  		render 'new'
+  		redirect_to root_path
   	else 
   	    sign_in user
   	    flash.now[:error] = "Welcome, #{user.name}"

@@ -154,6 +154,7 @@ class UsersController < ApplicationController
   end
 
   def process_forgot
+    debugger
     # First thing we need to do is check the user account
     if params[:email].nil?
        flash[:error] = 'We are sorry something went wrong. Please try again.'
