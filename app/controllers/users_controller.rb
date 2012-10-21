@@ -147,6 +147,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def offers
+    if params[:id].nil?
+      flash[:error] = "Missing Requirements: ID"
+    else
+      @offers = User.find(params[:id]).offers
+      respond_to do |format|
+        format.json {render :json => @offers}
+      end
+    end
+  end
+
   def forgot
     respond_to do |format|
       format.html

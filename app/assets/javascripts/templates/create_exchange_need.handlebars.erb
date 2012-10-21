@@ -1,11 +1,29 @@
-<div class="rounded-need shadow">
+<script type="text/javascript">
+
+        $(document).ready(function() {
+            $.ajax({
+                    url: "/users/{{id}}/offers", 
+                    dataType: "JSON"
+                }).success(function(data){
+                	for(var item in data){
+                		$('#exchNeeds').append('<option value='+data[item].id+'>' + data[item].title + '</option>')
+                	}
+
+            });
+        });
+</script>
+
+                	<div class="rounded-need shadow">
+	<a type="button" class="close" aria-hidden="true">×</a>
     <div>
-        <span id="selectNeed">Select a Offer or <%= link_to "create", new_userlisting_path(:type => "neec"), :class => "CreateOffer" %> a new one.
+        <span id="selectNeed">Select a Need or <a href="/new_listing?type=need" class="CreateListing">Create</a> a new one.
         </span>
     </div>
     <div>
-        <% needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
-        <%= f.select :init_list_id, options_for_select(needs_array) %>
-        <%= f.hidden_field :initUser, :value => current_user.id  %>
+    	<span>
+           <select id="exchNeeds" style="width:150px"></select>
+    	</span>
+        <%# needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
+        <%#= select_tag :listing_id, options_for_select(needs_array) %>
     </div>
 </div>

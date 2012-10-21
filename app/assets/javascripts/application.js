@@ -31,7 +31,7 @@ jQuery.fn.submitWithAjax = function() {
   })
 };
 //functions 
-jQuery.fn.insertTemplateAjax = function(path, dataobject){
+jQuery.fn.insertTemplateAjax = function(path, dataobject, insert_method){
     var o = $(this[0]);
     var source;
     var template;
@@ -42,11 +42,45 @@ jQuery.fn.insertTemplateAjax = function(path, dataobject){
         success: function(data) {
             source    = data
             template  = Handlebars.compile(source);
-            //console.log(dataobject);
-            if(dataobject != null)
-              o.html(template(dataobject));
-            else
-              o.html(template);
+            console.log(dataobject);
+
+            switch(insert_method){
+              case "append":
+              case "behind":
+              case "after":
+              case "concat":
+              case "a":
+                if(dataobject != null)
+                  o.append(template(dataobject));
+                else
+                  o.append(template);
+                break;
+              case "before":
+              case "front":
+              case "b":
+                if(dataobject != null)
+                  o.before(template(dataobject));
+                else
+                  o.before(template);
+                break;
+              case "ow":
+              case "over":
+              case "overwrite":
+              case "replace":
+                if(dataobject != null)
+                  o.replaceWith(template(dataobject));
+                else
+                  o.replaceWith(template);
+                break;
+              case "insert":
+              default: 
+                if(dataobject != null)
+                  o.html(template(dataobject));
+                else
+                  o.html(template);
+                break;
+            }
+              
         }               
     });         
 };
