@@ -2,23 +2,32 @@
  <html>
  <head>   
     <script type="text/javascript">
+
         $(document).ready(function() {
-            var listing = ":)"; 
-            alert(listing);
+            context = {id: '<%= @targ_listing.user.id  %>'}
+
             if($('#targlisting').hasClass("offer"))
             {
-                /*$('#targlisting').insertTemplateAjax("assets/templates/show_exchange_offer.handlebars.erb", null);
-                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_need.handlebars.erb", null;
+                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_offer.handlebars.erb", null, "replace");
+                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_need.handlebars.erb", context, "replace");
             }
             else{
-                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_need.handlebars.erb", null);
-                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_offer.handlebars.erb", null);*/
-                alert(listing);
-            }
-            else{
-                alert(listing+"!!");
+                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_need.handlebars.erb", null, "replace");
+                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_offer.handlebars.erb", context, "replace");
             }
             
+            $(".tab-content").live("hover", function(){
+
+            });
+
+            $(".close").live("click", function(){
+                var e = $(this);
+                var tab = e.closest(".active").attr("id");
+                console.log("Tab ID: "+tab);
+                console.log("element: "+ e.html());
+                $("#"+tab).remove();
+                $("a[href='#"+tab+"']").remove();
+            });
         });
     </script>
 </head>
@@ -62,9 +71,9 @@
 
                     <!--offers -->
                     <div class="tabbable tabs-left">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs" id="userItems">
                             <li class="active"><a href="#offer" data-toggle="tab">Listing 1</a></li>
-                            <li id="new_link"><%= link_to "+", "exchanges/new", :remote => true %></li>
+                            <li id="new_link"><%= link_to "+", "exchanges/new?type=init", :remote => true %></li>
                         </ul>
                         <div class="tab-content" id="userExchItems">
                             <div class="tab-pane active" id="offer">
@@ -72,7 +81,7 @@
                                 <% if @targ_listing.type == "offer" %>
                                 <div class="offer" id="targlisting"></div>
                                 <%else%>
-                                <div class='create_offer' class="offer" id="initlisting"></div>
+                                <div class="need" id="targlisting"></div>
                                 <%end%>
                                 <!-- End of Offer Listing --> 
                             </div>
@@ -89,17 +98,17 @@
 
                     <!-- Needs-->
                     <div class="tabbable tabs-right">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#need" data-toggle="tab">Listing 1</a></li>
-                            <li>+</li>
+                        <ul class="nav nav-tabs" id="targItems">
+                            <li class="active"><a href="#needs" data-toggle="tab">Listing 1</a></li>
+                            <li id="targ_new_link"><%= link_to "+", "exchanges/new?type=targ", :remote => true %></li>
                         </ul>
-                        <div class="tab-content">
+                        <div class="tab-content" id="targExchItems">
                             <div class="tab-pane active" id="needs">
                                 <!-- Need Listing -->
-                                <% if @targ_listing.type == "need" %>
-                                <div class="need" id="targlisting"></div>
+                                <% if @targ_listing.type == "offer" %>
+                                <div class="need" id="initlisting"></div>
                                 <%else%>
-                                <div class='need' id="initlisting"></div>
+                                <div class="offer" id="initlisting"></div>
                                 <%end%>
                                 <!--End of Need Listing-->
                             </div>

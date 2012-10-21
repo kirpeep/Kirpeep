@@ -1,0 +1,8 @@
+var date = new Date();
+var time = date.getTime();
+$('#targItems .active').removeClass('active');
+$('#targExchItems .active').removeClass('active');
+$('#targ_new_link').before("<li class='active'><a href='#listing"+time+"' data-toggle='tab'>NEW</li>");
+
+$('#targExchItems').append("<div class='tab-pane active' id='listing"+time+"'><div id='addlisting'></div></div>");
+$('#addlisting').insertTemplateAjax("assets/templates/create_exchange_offer.handlebars.erb", null, "replace");

@@ -1,10 +1,13 @@
 <div class="rounded-offer shadow">
+    <a type="button" class="close" aria-hidden="true">×</a>
     <div>
-        <span id="selectOffer">Select a Offer or <%= link_to "create", new_userlisting_path(:type => "neec"), :class => "CreateOffer" %> a new one.
+        <span id="selectOffer">Select a Offer or 
+            <a href="/new_listing?type=offer" class="CreateListing">Create</a> a new one.
         </span>
     </div>
     <div>
-        <% offers_array = @user.offers.all.map { |offer| [offer.title, offer.id] } %> 
-        <%= f.select :listing_id, options_for_select(offers_array) %>
+        <span>I'm Like A drop down box and shit</span>
+        <%# offers_array = @user.offers.all.map { |offer| [offer.title, offer.id] } %> 
+        <%#= select_tag :listing_id, options_for_select(offers_array) %>
     </div>
 </div>

@@ -36,7 +36,13 @@ class ExchangesController < ApplicationController
   def new
     respond_to do |format|
       format.html
-      format.js
+      if params[:type] == "init"
+        render "new_init.js"
+        return
+      else
+        render "new_targ.js"
+        return
+      end
     end
   end
 
