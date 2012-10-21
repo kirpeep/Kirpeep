@@ -51,10 +51,11 @@
       </div>
         
     </div> 
- <div id="need-listing" class="span12" style='margin: 5px 5px;'>
+ <div id="need-listing" class="span12">
       <div>
-         <% if !listing.photo.url.empty? %>
-          <%= image_tag(listing.photo.url, {}) %> <!-- width="103" height="103" /> -->
+         
+         <% if !(listing.photo.url =~ /missing.png/) %>
+          <div style='background-image: url("<%= listing.photo.url %>");width:95%;height:205px;background-size:auto;'></div>
         <% else %>
           <div class='noListingImage'></div>
         <% end %>
