@@ -17,11 +17,11 @@
             if($('#targlisting').hasClass("offer"))
             {
                 $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_offer.handlebars.erb", listing, "replace");
-                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_need.handlebars.erb", context, "replace");
+                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_offer.handlebars.erb", userContext, "replace");
             }
             else{
-                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_need.handlebars.erb", listing, "replace");
-                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_offer.handlebars.erb", targContext, "replace");
+                $('#targlisting').insertTemplateAjax("assets/templates/create_exchange_need.handlebars.erb", targContext, "replace");
+                $('#initlisting').insertTemplateAjax("assets/templates/show_exchange_offer.handlebars.erb", listing, "replace");
             }
             
             $(".tab-content").live("hover", function(){
@@ -76,6 +76,7 @@
         });
     </script>
 </head>
+<% debugger %>
     <%= form_for(@initexch, :url => create_exchange_path) do |f| %>
         <%= f.hidden_field :initUser, :value => current_user.id  %>
         <%= f.hidden_field :targUser, :value => @targUser.id  %>
@@ -123,7 +124,7 @@
                         <div class="tab-content" id="userExchItems">
                             <div class="tab-pane active" id="offer">
                                 <!-- Offer Listing -->
-                                <% if @targListing.type == "offer" %>
+                                <% if @targListing.listingType == "offer" %>
                                 <div class="offer" id="targlisting"></div>
                                 <%else%>
                                 <div class="need" id="targlisting"></div>
@@ -150,7 +151,7 @@
                         <div class="tab-content" id="targExchItems">
                             <div class="tab-pane active" id="needs">
                                 <!-- Need Listing -->
-                                <% if @targListing.type == "offer" %>
+                                <% if @targListing.listingType == "offer" %>
                                 <div class="need" id="initlisting"></div>
                                 <%else%>
                                 <div class="offer" id="initlisting"></div>
