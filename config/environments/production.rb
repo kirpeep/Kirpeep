@@ -6,6 +6,8 @@ TestApp::Application.configure do
   ThinkingSphinx.deltas_enabled = true 
   ThinkingSphinx.updates_enabled = true
 
+  $domain = 'http://test.kirpeep.com'
+  
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true

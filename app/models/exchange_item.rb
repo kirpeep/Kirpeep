@@ -6,4 +6,6 @@
 
 class ExchangeItem < ActiveRecord::Base
   attr_accessible :exchange_id, :targ_user_id, :user_listing_id
+
+  belongs_to :exchange
 end

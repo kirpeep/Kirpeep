@@ -5,7 +5,10 @@ TestApp::Application.configure do
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
+  # Code is not reloaded between requests
   config.cache_classes = true
+  ThinkingSphinx.deltas_enabled = true 
+  ThinkingSphinx.updates_enabled = true
 
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
