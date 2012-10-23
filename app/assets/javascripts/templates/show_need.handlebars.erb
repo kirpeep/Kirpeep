@@ -1,8 +1,8 @@
 <div>
   {{#each []}}
-      <div class="rounded-need">
+      <div class="rounded-{{listingType}}">
         <div class="row-fluid">
-          <span class="need-span">NEED</span>
+          <span class="{{listingType}}-span">{{listingType}}</span>
           <span>{{title}}</span>
         </div>
         <div class="row-fluid">
@@ -19,7 +19,7 @@
             <img src='/assets/stars.png' />
             <%#= image_tag('stars.png') %>
           </div>
-          <div id="need-actions" class="span6">
+          <div id="{{listingType}}-actions" class="span6">
             <div class="row-fluid tool">
 
               <!-- Message-->
@@ -56,19 +56,19 @@
               </div>
             </div>
             <div class="row-fluid">
-              <div class="span6" id="need-name">
+              <div class="span6" id="{{listingType}}-name">
                 {{user.name}} <br />
                 <%#= Exchange.where("id != ?",listing.user.id).all.count %> Exchanges<br />
                 Reviews (0)
               </div>
               <div class="span6">
-                (<%#= listing.user.needs.count %>) NEED
+                (<%#= listing.user.{{listingType}}s.count %>) {{listingType}}
                 <br />
-                (<%#= listing.user.needs.count %>) need
+                (<%#= listing.user.{{listingType}}s.count %>) {{listingType}}
               </div>
             </div>
           </div>
-          <div id="need-listing" class="span3">
+          <div id="{{listingType}}-listing" class="span3">
             <div>
               <img src='/assets/{{imgURL}}' style='width: 100px; height: 100px;' />
               <%#= image_tag(listing.photo.url, {:width => '100px', :height => '100px'}) %> <!-- width="103" height="103" /> -->

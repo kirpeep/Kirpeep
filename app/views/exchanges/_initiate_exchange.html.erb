@@ -2,18 +2,26 @@
  <html>
  <head>   
     <script type="text/javascript">
-
+    var context;
         $(document).ready(function() {
-            context = {id: '<%= @targ_listing.user.id  %>'}
+            userContext = <%= @user.to_json.html_safe %>;
+            targContext = <%= @targListing.user.to_json.html_safe %>;
+            listing = <%= @targListing.to_json.html_safe %>;
+            if(console){ 
+                console.log("User: ");
+                console.log(userContext);
+                console.log("Targ: ");
+                console.log(targContext);
+            }
 
             if($('#targlisting').hasClass("offer"))
             {
-                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_offer.handlebars.erb", null, "replace");
+                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_offer.handlebars.erb", listing, "replace");
                 $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_need.handlebars.erb", context, "replace");
             }
             else{
-                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_need.handlebars.erb", null, "replace");
-                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_offer.handlebars.erb", context, "replace");
+                $('#targlisting').insertTemplateAjax("assets/templates/show_exchange_need.handlebars.erb", listing, "replace");
+                $('#initlisting').insertTemplateAjax("assets/templates/create_exchange_offer.handlebars.erb", targContext, "replace");
             }
             
             $(".tab-content").live("hover", function(){
@@ -23,17 +31,54 @@
             $(".close").live("click", function(){
                 var e = $(this);
                 var tab = e.closest(".active").attr("id");
-                console.log("Tab ID: "+tab);
-                console.log("element: "+ e.html());
                 $("#"+tab).remove();
                 $("a[href='#"+tab+"']").remove();
+            });
+
+            $(".selectListing").live("change", function(){
+                var listing = $(this).val();
+                var listingContainer = $(this).closest(".shadow")
+                if(listingContainer.attr("class").indexOf("offer") != -1){
+                    $.ajax({
+                        url: "/users/"+targContext['id']+"/need/"+listing,
+                        cache: true,
+                        success: function(data) {
+                            listingContainer.insertTemplateAjax("assets/templates/show_exchange_offer.handlebars.erb", data, "replace");
+                        }
+                    });
+                    
+                }
+                else{
+                    $.ajax({
+                        url: "/users/"+userContext['id']+"/offer/"+listing,
+                        cache: true,
+                        success: function(data) {
+                            listingContainer.insertTemplateAjax("assets/templates/show_exchange_need.handlebars.erb", data, "replace");
+                        }
+                    });
+                }
+                /*$.ajax({
+                    url: "/users/",
+                    cache: true,
+                    success: function(data) {
+                        source    = data;
+                        template  = Handlebars.compile(source);
+                    }
+                          
+                    }               
+                });*/ 
+                if(console){
+                    console.log("listing class");
+                    console.log(listingContainer.attr("class"));
+                }
+                $(this).replaceWith("<div>:)</div>");
             });
         });
     </script>
 </head>
     <%= form_for(@initexch, :url => create_exchange_path) do |f| %>
         <%= f.hidden_field :initUser, :value => current_user.id  %>
-        <%= f.hidden_field :targUser, :value => @targ_listing.user.id  %>
+        <%= f.hidden_field :targUser, :value => @targUser.id  %>
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Initiate Exchange</h3>
@@ -56,8 +101,8 @@
                 <!--exchange partner -->
                 <div class='span4 align-right' id="exchangePartner" >
                     <span id="with">exchanging with</span><br>
-                    <%= image_tag(@targ_listing.user.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
-                    <%= @targ_listing.user.name %>
+                    <%= image_tag(@targUser.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
+                    <%= @targUser.name %>
                 </div>
             </div><!--closes top section-->
 
@@ -78,7 +123,7 @@
                         <div class="tab-content" id="userExchItems">
                             <div class="tab-pane active" id="offer">
                                 <!-- Offer Listing -->
-                                <% if @targ_listing.type == "offer" %>
+                                <% if @targListing.type == "offer" %>
                                 <div class="offer" id="targlisting"></div>
                                 <%else%>
                                 <div class="need" id="targlisting"></div>
@@ -105,7 +150,7 @@
                         <div class="tab-content" id="targExchItems">
                             <div class="tab-pane active" id="needs">
                                 <!-- Need Listing -->
-                                <% if @targ_listing.type == "offer" %>
+                                <% if @targListing.type == "offer" %>
                                 <div class="need" id="initlisting"></div>
                                 <%else%>
                                 <div class="offer" id="initlisting"></div>
@@ -120,8 +165,8 @@
                 <div class='row-fluid'>
                     <%= fields_for Message.new do |message| %>
                     <span>Message</span>
-                    <%= message.text_area :text, :class => 'rounded-map', :rows => '10', :style => "width:95%" %>
-                    <%= message.hidden_field :targUser, :value => @targ_listing.user.id %>
+                    <%= message.text_area :text, :class => 'rounded-map', :rows => '4', :style => "width:95%" %>
+                    <%= message.hidden_field :targUser, :value => @targListing.user.id %>
                     <%= message.hidden_field :initUser, :value => current_user.id %>
                     <%= f.hidden_field(:responseToMsgID, :value => 'exchange' ) %>
                     <%end%>
@@ -133,31 +178,6 @@
             <%= f.submit 'Initiate Exchange', :class => "btn btn-primary" %> 
         </div>
     <% end %>
-
-
-    <!-- This is a hack so that we can get multiitem exchanges functioning
-        
-        <div id="SelectNeedTmp" style="display:none">
-            <div class="tab-pane active" id="need1">
-                <span id="selNeed">Select a need or <%# link_to "create", new_offer_path, :class => "CreateOffer" %> a new one.</span>
-                <div>
-                    <%# needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
-                    <%#= select_tag :init_list_id, options_for_select(needs_array) %>
-                    <%#= hidden_field_tag :initUser, :value => current_user.id  %>
-                </div>
-            </div>
-        </div>
-        <div id="OfferNeedTmp" style="display:none">
-            <div class="tab-pane active" id="offer1">
-                <span id="selectOffer">Select an offer or (link to create)create a new one.</span>
-                <div>
-                    <%# offers_array = @user.offers.all.map { |offer| [offer.title, offer.id] } %> 
-                    <%# select_tag :init_list_id, options_for_select(offers_array) %>
-                    <%# hidden_field_tag (:initUser, :value => current_user.id ) %>
-                </div>
-            </div>
-        </div>
-    End o' shitty hack 'o matic script' -->
 
 <!--/div--> 
 </html>

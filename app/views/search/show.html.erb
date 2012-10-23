@@ -27,17 +27,10 @@
           <%end%>
         </div>
         <%= content_tag "div", :class => "row-fluid", :id => "listings", :data => {:url => @userlistings.all} do %>
-        <div class='row-fluid'>
-
+        
           <!-- % = will_paginate @userlistings%-->
 
-
-          <!-- Be Sure to make partials for these listings-->
-          <% for listing in @userlistings  %>
-            <div class="listingbox">:)</div>
-          <% end %>
           <!-- %= will_paginate @userlistings%-->
-        </div>
         <% end %>
       </div><!-- .span4 -->
       <div class="span5 offset2">

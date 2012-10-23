@@ -1,3 +1,18 @@
+<script type="text/javascript">
+
+        $(document).ready(function() {
+            $.ajax({
+                    url: "/users/{{id}}/needs", 
+                    dataType: "JSON"
+                }).success(function(data){
+                    for(var item in data){
+                        $('#exchOffers').append('<option value='+data[item].id+'>' + data[item].title + '</option>')
+                    }
+
+            });
+        });
+</script>
+
 <div class="rounded-offer shadow">
     <a type="button" class="close" aria-hidden="true">×</a>
     <div>
@@ -6,7 +21,11 @@
         </span>
     </div>
     <div>
-        <span>I'm Like A drop down box and shit</span>
+        <span>
+            <select class="selectListing" id="exchOffers" style="width:150px">
+                <option value="-1">Select a Listing</option>
+            </select>
+        </span>
         <%# offers_array = @user.offers.all.map { |offer| [offer.title, offer.id] } %> 
         <%#= select_tag :listing_id, options_for_select(offers_array) %>
     </div>

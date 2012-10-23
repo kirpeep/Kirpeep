@@ -21,7 +21,9 @@
     </div>
     <div>
     	<span>
-           <select id="exchNeeds" style="width:150px"></select>
+        	<select class="selectListing" id="exchNeeds" style="width:150px">
+        		<option value="-1">Select a Listing</option>
+        	</select>
     	</span>
         <%# needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
         <%#= select_tag :listing_id, options_for_select(needs_array) %>

@@ -30,8 +30,10 @@ class UserlistingsController < ApplicationController
     listing = nil
     if(listingType == "offer")
       listing = user.profile.offers.new params[:offer] 
+      listing.listingType = 'offer'
     else
-      listing = user.profile.needs.new params[:need] 
+      listing = user.profile.needs.new params[:need]
+      listing.listingType = 'need' 
     end
 
     if listing.save
