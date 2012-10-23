@@ -37,20 +37,36 @@ $(document).ready(function(){
     <div><hr/></div>
 
     <div id='main-contant' class='row'>
-      <%= flash[:error] %>
-
-        <%= flash[:notice] %><br>
-        <% @profile = @user.profile %>
-      	<div class='span4'>
-          <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
-        	<ul>
-            <li>Location: <%= @profile.location %></li>
-              <li>Languages: <%= @profile.languages %></li>
-              <li>Needs: <%= @user.needs.count %>/ Offers: <%= @user.needs.count %> </li>
-              <li>Completed Exchanges: <%# Exchange.where("type = ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', current_user.id, current_user.id).all%></li>
-             	<li>1 Review (stars)</li> 
-        	</ul>
-        </div>
+      <% if flash[:notice] != nil %>
+    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
+       <button type="button" class="close" data-dismiss="alert">×</button>
+       <div id="flash_notice">
+         <%= flash[:notice] %>
+       </div>
+    </div>
+    <% elsif flash[:error] != nil %>
+    <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
+       <button type="button" class="close" data-dismiss="alert">×</button>
+       <div id="flash_notice">
+         <%= flash[:error] %>
+       </div>
+    </div>
+    <% end %>
+      <% @profile = @user.profile %>
+      
+    	<div class='span4'>
+        <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
+      	<ul class='profileInfo'>
+          <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
+            <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>
+            <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
+            <li><strong>Birth Date:</strong> <%= best_in_place @profile, :birthdate %></li>
+            <li><strong>Gender:</strong> <%= best_in_place @profile, :gender %></li>
+            <li><strong>Needs / Offers</strong> </li>
+            <li><strong>Completed Exchanges</strong> </li>
+            <li><strong>1 Review (stars)<strong></li> 
+      	</ul>
+      </div>
         
         <div class='span8'>
           <div id='profile-header'>

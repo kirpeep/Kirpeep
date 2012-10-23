@@ -55,7 +55,7 @@
       <div>
          
          <% if !(listing.photo.url =~ /missing.png/) %>
-          <div style='background-image: url("<%= listing.photo.url %>");width:95%;height:250px;background-size:auto auto;background-repeat: no-repeat;'></div>
+          <div style='background-image: url("<%= listing.photo.url %>");width:95%;height:250px;background-size:100% 100%;background-repeat: no-repeat;'></div>
         <% else %>
           <div class='noListingImage'></div>
         <% end %>

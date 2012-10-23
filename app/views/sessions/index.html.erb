@@ -33,6 +33,22 @@
     
   </div>
 
+   <% if flash[:notice] != nil %>
+	    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
+	       <button type="button" class="close" data-dismiss="alert">×</button>
+	       <div id="flash_notice">
+		 <%= flash[:notice] %>
+	       </div>
+	    </div>
+	    <% elsif flash[:error] != nil %>
+	    <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
+	       <button type="button" class="close" data-dismiss="alert">×</button>
+	       <div id="flash_notice">
+		 <%= flash[:error] %>
+	       </div>
+	    </div>
+    <% end %>
+
   <div class='row'>
     <div class='span6 offset3 align-center'>
       <%= image_tag('kirpeep.png') %>
