@@ -9,6 +9,8 @@ TestApp::Application.configure do
   ThinkingSphinx.deltas_enabled = true 
   ThinkingSphinx.updates_enabled = true
 
+  $domain = 'http://test.kirpeep.com'
+
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
