@@ -37,11 +37,15 @@
     </div>
     <% end %>
       <% @profile = @user.profile %>
+      
     	<div class='span4'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
       	<ul class='profileInfo'>
           <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
+            <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>
             <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
+            <li><strong>Birth Date:</strong> <%= best_in_place @profile, :birthdate %></li>
+            <li><strong>Gender:</strong> <%= best_in_place @profile, :gender %></li>
             <li><strong>Needs / Offers</strong> </li>
             <li><strong>Completed Exchanges</strong> </li>
             <li><strong>1 Review (stars)<strong></li> 

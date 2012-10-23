@@ -1,6 +1,6 @@
 <div class="rounded-offer" onMouseOver="$(this).find('#need-actions').show();" onMouseOut="$(this).find('#need-actions').hide();"  >
   <span class="offer-span">OFFERED</span><br />
-  <span class="offer-title"><%= listing.title %></span>
+  <span class="offer-title span10"><%= listing.title %></span>
   <div id="need-actions" class="span10" style='display:none'>
       <div class="row-fluid tool">
 
@@ -55,7 +55,7 @@
     <div id="need-listing" class="span12">
       <div>
         <% if !(listing.photo.url =~ /missing.png/) %>
-          <div style='background-image: url("<%= listing.photo.url %>");width:95%;height:205px;background-size:auto;'></div>
+          <div style='background-image: url("<%= listing.photo.url %>");width:95%;height:250px;background-size:auto auto;background-repeat: no-repeat;'></div>
         <% else %>
           <div class='noListingImage'></div>
         <% end %>

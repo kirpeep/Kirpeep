@@ -51,8 +51,8 @@
 }
 
 .rounded-offer span {
-	/*border: 3px solid #3FA9F5; + */
-	background-color:#E6E6E6;
+	/*border: 3px solid #3FA9F5; + 
+	background-color:#E6E6E6;*/
 	font: Franklin Gothic Heavy;
 }
 
@@ -101,7 +101,7 @@
   background-size: 100%;
 }
 
-.userImage{
+#userImage{
  width: 100px !important;
  height: auto !important;
 }
