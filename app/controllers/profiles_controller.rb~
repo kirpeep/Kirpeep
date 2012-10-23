@@ -54,6 +54,7 @@ class ProfilesController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    debugger
     @profile = Profile.find(params[:id])
 
     respond_to do |format|

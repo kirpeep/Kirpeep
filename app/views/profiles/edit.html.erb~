@@ -47,7 +47,7 @@
   </div>
   <div class="field">
     <%= f.label :birthdate %><br />
-    <%= f.text_field :birthdate %>
+    <%= f.text_area :birthdate %>
   </div>
   <div class="field">
     <%= f.label :photo %><br />

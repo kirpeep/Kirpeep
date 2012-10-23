@@ -1,12 +1,12 @@
 <div class="rounded-need" onMouseOver="$(this).find('#need-actions').show();" onMouseOut="$(this).find('#need-actions').hide();"  >
   <span class="need-span">NEEDED</span><br />
-  <span class="need-title"><%= listing.title %></span> 
+  <span class="need-title span10"><%= listing.title %></span> 
   <div id="need-actions" class="span10" style='display:none'>
       <div class="row-fluid tool">
 
         <!-- Message-->
         <div class="span3">
-          <a href="/sendmessage/<%= listing.user.id %>&nil" class='dynamolink'>
+          <a href="sendmessage/?id=<%= listing.user.id %>&replyTo=nil" class='dynamolink'>
           <%= image_tag('Icon_Message_gray_regular.png', 
                  :class=>"messageIcon", 
                  :title=>"message", 
@@ -55,7 +55,7 @@
       <div>
          
          <% if !(listing.photo.url =~ /missing.png/) %>
-          <div style='background-image: url("<%= listing.photo.url %>");width:95%;height:205px;background-size:100%;'></div>
+          <div style='background-image: url("<%= listing.photo.url %>");width:95%;height:250px;background-size:auto auto;background-repeat: no-repeat;'></div>
         <% else %>
           <div class='noListingImage'></div>
         <% end %>

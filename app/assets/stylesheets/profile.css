@@ -51,8 +51,8 @@
 }
 
 .rounded-offer span {
-	/*border: 3px solid #3FA9F5; + */
-	background-color:#E6E6E6;
+	/*border: 3px solid #3FA9F5; + 
+	background-color:#E6E6E6;*/
 	font: Franklin Gothic Heavy;
 }
 
@@ -96,7 +96,7 @@
 .noListingImage{
   background-image: url('/assets/Stock_Pic_for_Listings.png');
   width: 95%;
-  height: 205px;
+  height: 250px;
   background-position: top left;
   background-size: 100%;
 }

@@ -19,10 +19,8 @@
 <body>
   <!-- This file lives in public/422.html -->
   <div class="dialog">
-    <img src='/assets/kirpeep_head.png' />
-    <h1>We are so sorry but something went terribly wrong!</h1>
-    <p>Be sure that we are aware of this issue and are doing everything to make it right!</p>
-    <p>Keep it real!</p>
+    <h1>The change you wanted was rejected.</h1>
+    <p>Maybe you tried to change something you didn't have access to.</p>
   </div>
 </body>
 </html>

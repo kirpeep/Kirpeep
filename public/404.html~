@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The change you wanted was rejected (422)</title>
+  <title>The page you were looking for doesn't exist (404)</title>
   <style type="text/css">
     body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
     div.dialog {
@@ -11,13 +11,14 @@
       border: 1px solid #ccc;
       border-right-color: #999;
       border-bottom-color: #999;
+      margin-top: 15px;
     }
     h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
   </style>
 </head>
 
 <body>
-  <!-- This file lives in public/422.html -->
+  <!-- This file lives in public/404.html -->
   <div class="dialog">
     <img src='/assets/kirpeep_head.png' />
     <h1>We are so sorry but something went terribly wrong!</h1>

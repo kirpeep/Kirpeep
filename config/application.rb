@@ -11,6 +11,7 @@ end
 
 module TestApp
   class Application < Rails::Application
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -32,6 +33,26 @@ module TestApp
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    config.cache_classes = true
+    ThinkingSphinx.deltas_enabled = true 
+    ThinkingSphinx.updates_enabled = true
+
+    #Full error reports are disabled and caching is turned on
+    config.consider_all_requests_local       = true
+    config.action_controller.perform_caching = true
+
+    # Disable Rails's static asset server (Apache or nginx will already do this)
+    config.serve_static_assets = true
+
+    # Compress JavaScripts and CSS
+    config.assets.compress = true
+
+    # Don't fallback to assets pipeline if a precompiled asset is missed
+    config.assets.compile = true
+
+    # Generate digests for assets URLs
+    config.assets.digest = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -67,5 +88,6 @@ module TestApp
 
  	    # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
   end
 end
