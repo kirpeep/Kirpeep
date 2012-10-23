@@ -33,9 +33,13 @@ class MessagesController < ApplicationController
     @user = current_user
     @message = Message.new
 
+<<<<<<< HEAD
     respond_to do |format|
       format.html
+      format.js
     end
+=======
+>>>>>>> 6afedab67e228c035f8e59874a3b2a5b233ca447
   end
 
   def reply
