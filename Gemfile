@@ -42,7 +42,7 @@ gem 'rmagick'
 #File uploading Gem
 gem 'paperclip'
 
-gem 'rails-erd'
+
 #gem 'css_sprite' #More efficient CSS
 
 group :test, :development, :kyle, :john do
@@ -50,6 +50,7 @@ group :test, :development, :kyle, :john do
 	gem 'guard-rspec'
 	gem 'launchy'
 	gem 'ruby-debug19'
+	gem 'rails-erd'
 
 end
 
