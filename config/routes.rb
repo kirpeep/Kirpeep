@@ -2,19 +2,22 @@ TestApp::Application.routes.draw do
   #get "sessions/new"
   match '/sessions/signin', :controller => 'sessions', :action => 'signin'
   
-  match  'destroy_session',              :to => 'sessions#destroy'
-  match  '/create_listing/',             :to => 'userlistings#create'
-  match  '/new_listing',                 :to => 'userlistings#new'
-  #match  '/quicksale/:id',               :to => 'needs#quicksale'
-  #match  '/share/:id',                   :to => 'needs#share'
-  #match  '/list_offer/:id',              :to => 'offers#new'
-  match  '/profile/:id',                 :to => 'users#profile'
-  match  '/user_exchanges/:id',          :to => 'users#exchanges'
-  match  '/messages/:id',                :to => 'users#messages'
-  match  '/view/:id',                    :to => 'users#view'
-  match  '/signup/',                     :to => 'users#new'
-  match  '/signup/:email&:pass',         :to => 'users#new'
-  match  '/users/:id/offers',            :to => 'users#offers'
+  match  'destroy_session',      :to => 'sessions#destroy'
+  match  '/create_listing/',     :to => 'userlistings#create'
+  match  '/new_listing',         :to => 'userlistings#new'
+  #match  '/quicksale/:id',       :to => 'needs#quicksale'
+  #match  '/share/:id',           :to => 'needs#share'
+  #match  '/list_offer/:id',      :to => 'offers#new'
+  match  '/profile/:id',         :to => 'users#profile'
+  match  '/user_exchanges/:id',  :to => 'users#exchanges'
+  match  '/messages/:id',        :to => 'users#messages'
+  match  '/view/:id',            :to => 'users#view'
+  match  '/signup/',             :to => 'users#new'
+  match  '/signup/:email&:pass', :to => 'users#new'
+  match  '/users/:id/offers',    :to => 'users#offers'
+  match  '/users/:id/needs/',    :to => 'users#needs'
+  match  '/users/:id/need/:listing', :to => 'users#get_need'
+  match  '/users/:id/offer/:listing', :to => 'users#get_offer'
   #match  '/users/:id', :to => 'users#show', :as => 'profile'
   match  '/search/',           :to => 'search#search'
   match  '/initiate_exchange/', :to => 'exchanges#initiate_exchange'
@@ -22,8 +25,9 @@ TestApp::Application.routes.draw do
   match  '/accept_exchange/', :to => 'exchanges#accept_exchange', :as => 'accept_exchange'
   match  '/accept_perform/' , :to => 'exchanges#accept_perform' , :as => 'accept_perform'
   match  '/rate_exchange/'  , :to => 'exchanges#rate_exchange' , :as => 'rate_exchange'
+  match  '/sendmessage?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
+
   get  '/sendmessage/?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
-  match  '/user_needs/', :to => 'users#needs'
   # Forgot password and password reset hacks
   get '/forgot/', :to => 'users#forgot'
   post '/forgot', :to => 'users#process_forgot'
@@ -32,6 +36,7 @@ TestApp::Application.routes.draw do
   get '/activate/', :to => 'users#activate'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

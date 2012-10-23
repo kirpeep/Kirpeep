@@ -24,6 +24,16 @@
   }
 });*/
 
+function get_query(){
+    var url = location.href;
+    var qs = url.substring(url.indexOf('?') + 1).split('&');
+    for(var i = 0, result = {}; i < qs.length; i++){
+        qs[i] = qs[i].split('=');
+        result[qs[i][0]] = qs[i][1];
+    }
+    return result;
+}
+
 jQuery.fn.submitWithAjax = function() {
   this.submit(function() {
     $.post($(this).attr("action"), $(this).serialize(), null, "script");
@@ -36,14 +46,18 @@ jQuery.fn.insertTemplateAjax = function(path, dataobject, insert_method){
     var source;
     var template;
 
+    if(console) {
+      console.log("Query:");
+      console.log(dataobject);
+    }
+
     $.ajax({
         url: path, //ex. /assets/templates/mytemplate.handlebars
         cache: true,
         success: function(data) {
             source    = data
             template  = Handlebars.compile(source);
-            console.log(dataobject);
-
+            
             switch(insert_method){
               case "append":
               case "behind":
