@@ -17,7 +17,7 @@
         <!-- Initiate Exchange-->
         <div class="span3 tTip" title="Exchange">
           <% if signed_in? %>
-            <a class="dynamolink" href="/initiate_exchange/<%= @user.id.to_s %>&<%= listing.id.to_s%>">    
+            <a class="dynamolink" href="/initiate_exchange?id=<%= listing.id.to_s%>">    
               <%= image_tag('Icon_Exchange_EE_gray_regular.png', 
                   :class=>"exchangeIcon",
                   :onmouseover=>"$(this).attr('src','/assets/Icon_Exchange_EE_orange_rollover.png');",

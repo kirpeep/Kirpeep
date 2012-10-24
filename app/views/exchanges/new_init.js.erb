@@ -4,5 +4,5 @@ $('#userItems .active').removeClass('active');
 $('#userExchItems .active').removeClass('active');
 $('#new_link').before("<li class='active'><a href='#listing"+time+"' data-toggle='tab'>NEW</li>");
 
-$('#userExchItems').append("<div class='tab-pane active' id='listing"+time+"'><div id='addlisting'></div></div>");
-$('#addlisting').insertTemplateAjax("assets/templates/create_exchange_need.handlebars.erb", userContext, "replace");
+$('#userExchItems').append("<div class='tab-pane active' id='listing"+time+"'><div id='addlisting' data-url='/add_need?init="+userContext.id+"&targ="+targContext.id+"'></div></div>");
+$('#addlisting').insertERBTemplateAjax();

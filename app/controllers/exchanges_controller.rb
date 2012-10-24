@@ -159,11 +159,19 @@ class ExchangesController < ApplicationController
 
   end
 
-  #creates partial for additional listing when initiating an exchange
-  def add_listing
-    @targUser = params[:targ]
-    @initUser = params[:init]
+  #creates partial for additional offer listing when initiating an exchange
+  def add_offer
+    @targUser = User.find(params[:targ])
+    @initUser = User.find(params[:init])
 
-    render 'create_offer'
+    render  :partial => 'create_offer', :locals => {:@targUser => @targUser, :@initUser => @initUser}
+  end
+
+  #creates partial for additional need listing when initiating an exchange
+  def add_need
+    @targUser = User.find(params[:targ])
+    @initUser = User.find(params[:init])
+
+    render  :partial => 'create_need', :locals => {:@targUser => @targUser, :@initUser => @initUser}
   end
 end

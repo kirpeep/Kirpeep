@@ -1,16 +1,15 @@
-<div class="rounded-need shadow">
+<div class="rounded-offer shadow">
 	<a type="button" class="close" aria-hidden="true">×</a>
     <div>
-        <span id="selectNeed">Select a Need or <a href="/new_listing?type=need" class="CreateListing">Create</a> a new one.
+        <span id="selectoffer">Select a offer or <a href="/new_listing?type=offer" class="CreateListing">Create</a> a new one.
         </span>
     </div>
     <div>
     	<span>
-        	<select class="selectListing" id="exchNeeds" style="width:150px">
-        		<option value="-1">Select a Listing</option>
-        	</select>
+        	<% userOffers = @initUser.offers.all.map { |offer| [offer.title, offer.id] } %>
+            <% targNeeds = @targUser.needs.all.map { |need| [need.title, need.id] } %> 
+            <%= select_tag :listing_id, options_for_select(userOffers+targNeeds) %>
     	</span>
-        <%# needs_array = @user.needs.all.map { |need| [need.title, need.id] } %> 
-        <%#= select_tag :listing_id, options_for_select(needs_array) %>
+        
     </div>
 </div>
