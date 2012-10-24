@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
 
-  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot, :reset_password, :process_reset_password, :new, :create, :activate]
+  before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot, :reset_password, :process_reset_password, :new, :create, :activate, :view]
   #before_filter :correct_user, :only => [:show, :edit, :update, :destroy]
   
   def index
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @title = @user.name
     
     
-    if @user.id == current_user.id
+    if @user && @user.id == current_user.id
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @user }

@@ -10,7 +10,14 @@
 		</ul>
 		<div class='tab-content'>
 			<div id='current_exchanges' class="tab-pane active">
-				<% @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', current_user.id, current_user.id).all%>
+				<% 
+                                 if current_user
+                                 @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', current_user.id, current_user.id).all  
+                                 else
+                                 @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all
+                                 end
+ 
+                                  %>
 			
 				<% for exchange in @exch %>
 				<% next if exchange.type == 'ArchivedExchange' %>
@@ -55,7 +62,14 @@
 				<%end%>
 			</div>
 			<div id='past_exchanges' class="tab-pane">
-				<% @exch = Exchange.where("type = ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', current_user.id, current_user.id).all%>
+				<% 
+                                   if current_user
+                                   @exch = Exchange.where("type = ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', current_user.id, current_user.id).all
+                                   else
+			           @exch = Exchange.where("type = ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all
+                                    end
+
+                                %>
 				<% for exchange in @exch %>
 				<div class='row-fluid p_exchange'>
 					<div class='span4'>

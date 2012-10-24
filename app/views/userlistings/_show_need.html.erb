@@ -1,6 +1,8 @@
 <div class="rounded-need" onMouseOver="$(this).find('#need-actions').show();" onMouseOut="$(this).find('#need-actions').hide();"  >
   <span class="need-span">NEEDED</span><br />
   <span class="need-title span10"><%= listing.title %></span> 
+
+  <% if signed_in? %>
   <div id="need-actions" class="span8" style='display:none'>
       <div class="row-fluid tool">
 
@@ -51,6 +53,7 @@
       </div>
         
     </div> 
+    <% end %>
  <div id="need-listing" class="span12">
       <div>
          
@@ -67,7 +70,11 @@
   
   <div class="row-fluid">
     <div class="span4 pull-left">
-      <%= link_to image_tag(listing.user.profile.photo.url), listing.user, {:id => 'userImage', 'rel' =>'popover' } %>
+      <% if signed_in? && listing.user.id == current_user.id %>
+      	<%= link_to image_tag(listing.user.profile.photo.url), listing.user, {:id => 'userImage', 'rel' =>'popover' } %>
+      <% else %>
+        <a href='/view/<%= listing.user.id %>'><%= image_tag(listing.user.profile.photo.url) %></a>
+      <% end %>
       <%= image_tag('stars.png') %>
     </div>
     
