@@ -16,42 +16,46 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :quickPitch %><br />
-    <%= f.text_field :quickPitch %>
+  <div class='span3 pull-left'>
+	  <div class="field">
+	    <%= f.label :quickPitch %>
+	    <%= f.text_field :quickPitch %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :education %>
+	    <%= f.text_field :education %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :location %>
+	    <%= f.text_field :location %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :zipcode %>
+	    <%= f.text_field :zipcode %>
+	  </div>
+          <div class="field">
+	    <%= f.label :languages %>
+	    <%= f.text_field :languages %>
+	  </div>
   </div>
-  <div class="field">
-    <%= f.label :education %><br />
-    <%= f.text_field :education %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :zipcode %><br />
-    <%= f.text_field :zipcode %>
-  </div>
-  <div class="field">
-    <%= f.label :languages %><br />
-    <%= f.text_field :languages %>
-  </div>
-  <div class="field">
-    <%= f.label :about %><br />
-    <%= f.text_area :about %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.text_field :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :birthdate %><br />
-    <%= f.text_field :birthdate %>
-  </div>
-  <div class="field">
-    <%= f.label :photo %><br />
-    <%= f.file_field :photo %>
+  <div class='span2 pull-left'>
+	  
+	  <div class="field" style='margin-bottom: 10px;'>
+	    <%= f.label :about%>
+	    <%= f.text_area :about, {:rows => '3', :style => 'width: 325px;'} %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :gender %>
+	    <%= f.text_field :gender %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :birthdate %>
+	    <%= f.text_field :birthdate %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :photo %>
+	    <%= f.file_field :photo %>
+	  </div>
   </div>
 </div>
 
