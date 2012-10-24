@@ -1,0 +1,12 @@
+<div class="rounded-need shadow">
+	<a type="button" class="close" aria-hidden="true">×</a>
+    <div>
+        <span id="selectNeed">Select a Need or <a href="/new_listing?type=need" class="CreateListing">Create</a> a new one.
+        </span>
+    </div>
+    <div>
+    	<% userNeeds = @initUser.needs.all.map { |need| [need.title, need.id] } %>
+            <% targOffers = @targUser.offers.all.map { |offer| [offer.title, offer.id] } %> 
+            <%= select_tag :listing_id, options_for_select(userNeeds+targOffers) %>
+    </div>
+</div>
