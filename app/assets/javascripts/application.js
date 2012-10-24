@@ -96,9 +96,17 @@ jQuery.fn.insertTemplateAjax = function(path, dataobject, insert_method){
 
 
   //pulls the data-url and loads that template
-  jQuery.fn.insertERBTemplateAjax = function(){
+  jQuery.fn.insertERBTemplateAjax = function(insert){
       var o = $(this[0]);
       $.get(o.data('url'), function(data) {
-       $(this).replaceWith(data);
+        switch(insert){
+          case "over":
+            o.replaceWith(data);
+            break;
+          case "in":
+          default:
+            o.html(data);
+            break;
+        }
   });   
 }

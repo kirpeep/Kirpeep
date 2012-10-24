@@ -5,4 +5,4 @@ $('#targExchItems .active').removeClass('active');
 $('#targ_new_link').before("<li class='active'><a href='#listing"+time+"' data-toggle='tab'>NEW</li>");
 
 $('#targExchItems').append("<div class='tab-pane active' id='listing"+time+"'><div id='addlisting' data-url='/add_offer?init="+userContext.id+"&targ="+targContext.id+"'></div></div>");
-$('#addlisting').insertERBTemplateAjax();
+$('#addlisting').insertERBTemplateAjax("over");
