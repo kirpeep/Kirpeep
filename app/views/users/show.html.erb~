@@ -2,11 +2,11 @@
 
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <title>Kirpeep | <%= @title %></title>
-<%#= javascript_tag do %>
-  <%#window.userID = <%= current_user.id %>
-<%#end %>
+<%= javascript_tag do %>
+  window.userID = <%= current_user.id %>
+<% end %>
 <%#= render 'needs/show' %>
-<%= javascript_include_tag "index.js" %>
+
 <%= javascript_include_tag "profile.js" %>
 
 <%= stylesheet_link_tag    "profile.css" %>
@@ -15,6 +15,7 @@
 <body>
 
 <div class='container'>
+  
   <%= render 'shared/header' %>
 
   <div><hr/></div>
@@ -37,8 +38,8 @@
     </div>
     <% end %>
       <% @profile = @user.profile %>
-      <% debugger %>
-    	<div class='span4'>
+      
+    	<div class='span3'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
       	<ul class='profileInfo'>
           <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
@@ -52,7 +53,7 @@
       	</ul>
       </div>
       
-      <div class='span8'>
+      <div class='span9'>
         <div id='profile-header'>
         	<h2 class='profile-username'>
             <%= @user.name %>
@@ -83,9 +84,12 @@
       </div> <!-- /.span8-->
     </div><!-- #main-content .row -->
 
+      
+
     <%= render 'shared/footer' %>
 
   <!-- Dynamobox Modal -->
   <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
   
 </body>
+  

@@ -1,3 +1,4 @@
+
 function LoadNeeds(data)
 {
     var source = $('#profileNeedsTemplate').html();
@@ -8,16 +9,17 @@ function LoadNeeds(data)
 
 $(document).ready(function(){
   //Get Needs
-  $.ajax({
-    url: '/user_needs.json',
-    dataType: 'JSON'
-  }).success(function(data){
-     LoadNeeds(data);
-  });
+  //$.ajax({
+  //  url: '/user_needs.json',
+  //  dataType: 'JSON'
+  //}).success(function(data){
+  //   LoadNeeds(data);
+  //});
 
- 
-  if (userID != null)
+  
+  if (userID){
     $('#messages').load('/messages/'+userID);
+}
   
   $('#loc').mouseover(function(){
     $('#loc').css('background-color','green');
