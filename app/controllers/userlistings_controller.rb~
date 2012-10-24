@@ -81,6 +81,7 @@ class UserlistingsController < ApplicationController
   end
 
   def show_listing_result
+      debugger
       listing = UserListing.find(params[:id]) 
       @user = listing.user
       if listing.type == "Offer"

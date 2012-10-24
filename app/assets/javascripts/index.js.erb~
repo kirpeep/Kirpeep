@@ -1,0 +1,19 @@
+$(document).ready(function() {
+  $('.dynamolink').click(function(event){
+    var path = $(this).attr('href');
+    $('#dynamobox').load(path);
+    $('#dynamobox').modal('show');
+    //event.preventDefault();
+  });
+
+  $('.dynamosignup').click(function(event){
+    var path = $(this).attr('href');
+    var email = $('#email').attr("value");
+    email = email.split('.').join('_')
+    email = encodeURIComponent(email);
+    var password = $('#password').attr("value");
+    $('#dynamobox').load(path+''+email+'&'+password);
+    $('#dynamobox').modal('show');
+    //event.preventDefault();
+  });
+});

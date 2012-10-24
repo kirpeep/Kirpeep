@@ -1,0 +1,88 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Kirpeep | Realize Yourself</title>
+<%= javascript_include_tag "index.js" %>
+<%= stylesheet_link_tag    "index.css" %>
+
+</head>
+<body>
+
+<!--< %= render 'shared/signin' %>-->
+
+
+  <div class='container'>
+    <div class='row'>
+      <div class="span3 sign-in pull-right">
+      <% if signed_in? %>
+        <div class="btn-group align-right">
+          <a class="btn dropdown-toggle align-right" data-toggle="dropdown" href="#">
+            <%= current_user.name %>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><%= link_to 'View Profile', current_user %></li>
+            <li><%= link_to 'Sign Out' , 'destroy_session' %></li> 
+          </ul>
+        </div>
+      <% else %>
+        <!-- Button to trigger modal -->
+        <a href="#signin" role="button" class="btn" data-toggle="modal">Sign In</a>
+    <%end%>
+    <p class='pull-right'>About | How It Works | FAQs</p>
+    </div>
+      
+    
+  </div>
+
+  <div class='row'>
+    <div class='span6 offset3 align-center'>
+      <%= image_tag('kirpeep.png') %>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='span4 offset4 align-center' id="search">
+      <p>connect with others to exchange!</p>
+      <%= form_tag search_path, :method => 'get', :class =>"form-search" do %>
+        <div class="input-append">
+          <%= hidden_field_tag :direction, params[:direction] %>
+          <%= hidden_field_tag :sort, params[:sort] %>
+          <%= text_field_tag :search, params[:search] ,{ :class => 'span2' }%>
+          <%= submit_tag "search", {:class => "btn"} %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <% if !signed_in? %>
+    <div id="signup" class='span6 offset3 align-center'>
+      <span id="signup" >Get Started by introducing yourself.</span>
+      <%= form_tag("#", :method =>"get") do %>
+      <%= text_field_tag :email, 'Email', {'data-inline' => 'true' }%>
+      <%= password_field_tag :password, 'Password',  {'data-inline' => 'true' } %>
+      <%= link_to 'Sign up', "/signup/", { 'role' => "button", :class => "dynamosignup btn", 'data-toggle' => "modal"} %>
+
+      <%end%>
+    </div>
+    <%end%>
+    <div class='align-center'>
+      <p>Contact | Terms of Use | Privacy<br />
+      2012 Kirpeeps Inc.</p>
+    </div>
+  </div>
+
+
+<!--The overlay and message box 
+  <div id="fuzz">  
+    <div id="msgbawx" class="msgbox" >  
+    
+	     
+  	</div>  
+  </div> --> 
+  
+  <!-- Sign in Modal -->
+  <%= render 'shared/signin' %>
+
+    <!-- Dynamobox Modal -->
+  <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+
+</body>
