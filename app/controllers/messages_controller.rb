@@ -73,7 +73,7 @@ class MessagesController < ApplicationController
   def markAsRead
     message = Message.find(params[:id])
 
-    case params[:user])
+    case params[:user]
       when message.initUser
         message.initUnread = false
       when message.targUser
@@ -82,13 +82,14 @@ class MessagesController < ApplicationController
         #well
     end
 
-    message.save    
+    message.save   
+    render :json => message
   end
 
   def markAsUnread
     message = Message.find(params[:id])
 
-    case params[:user])
+    case params[:user]
       when message.initUser
         message.initUnread = true
       when message.targUser
@@ -97,7 +98,8 @@ class MessagesController < ApplicationController
         #well
     end
 
-    message.save    
+    message.save
+    render :json => message  
   end
 
   # DELETE /users/1

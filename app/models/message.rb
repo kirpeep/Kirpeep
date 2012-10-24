@@ -41,16 +41,16 @@ class Message < ActiveRecord::Base
   end
 
   #see if user has read message
-  def isUnread? (user)
-    if user.id == initUser
+  def isUnread? (user_id)
+    if user_id == initUser
       initUnread
     else
       targUnread
     end
   end
 
-  def markAsRead (user)
-    if user.id == initUser
+  def markAsRead (user_id)
+    if user_id == initUser
       initUnread = false
     else
       targUnread = false

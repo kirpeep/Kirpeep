@@ -6,7 +6,7 @@
 				<% @targUser = User.find(message.targUser) %>
 				<% @initUser = User.find(message.initUser) %>
 				<% if message.isUnread?(current_user) %>
-					<div class="accordion-group unread">
+					<div class="accordion-group unread" data-message="<%= message.id%>" data-user="<%= current_user.id%>">
 				<% else %>
 					<div class="accordion-group">
 				<% end %>
@@ -70,6 +70,8 @@
 				</div>
 				<% i+=1 %>	
 			<% end %>
+		<%else%>
+			<span>You Currently Have No Messages </span>
 		<% end %>
 	</div>	
 </div>

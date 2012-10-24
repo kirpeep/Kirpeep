@@ -31,8 +31,8 @@ TestApp::Application.routes.draw do
   match  '/add_offer/',   :to => 'exchanges#add_offer'
   match  '/add_need/',   :to => 'exchanges#add_need'
   match  '/sendmessage/', :to => 'messages#new'
-  match  '/mark_unread/'. :to => 'messages#markAsUnread'
-  match  '/mark_read/'. :to => 'messages#markAsRead'
+  match  '/mark_unread/', :to => 'messages#markAsUnread'
+  match  '/mark_read/', :to => 'messages#markAsRead'
   
   get  '/sendmessage/?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
   # Forgot password and password reset hacks

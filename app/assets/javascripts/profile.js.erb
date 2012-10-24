@@ -48,10 +48,19 @@ $(document).ready(function(){
   //$('.reply_message').submitWithAjax();
 
   //Unread Messages
-/*unread').click(function(event){
+  $('.unread').live("click", function(event){
+    if(console) console.log("Marking as read");
+    var o = $(this);
+    var messageId = o.data('message');
+    var user = o.data('user');
+    path = "/mark_read?id="+messageId+"&user="+user;
     
-    $('#dynamobox').load(path);
-    $('#dynamobox').modal('show');
-    event.preventDefault();
-  });*/
+    $.ajax({
+      url: path,
+      dataType: 'JSON'
+    }).success(function(data){
+        if(console) console.log(data);
+        o.removeClass('unread');
+    });
+  });
 });
