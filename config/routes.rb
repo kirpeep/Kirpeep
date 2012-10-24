@@ -5,7 +5,9 @@ TestApp::Application.routes.draw do
   match  'destroy_session',      :to => 'sessions#destroy'
   match  '/create_listing/',     :to => 'userlistings#create'
   match  '/new_listing',         :to => 'userlistings#new'
+  match  '/edit_listing',        :to => 'userlsiting#edit'
   match  '/exchange_listing/',   :to => 'userlistings#show_listing_exchange'
+  match  'show_listing/',        :to => 'userlistings#show_listing_result'
   #match  '/quicksale/:id',       :to => 'needs#quicksale'
   #match  '/share/:id',           :to => 'needs#share'
   #match  '/list_offer/:id',      :to => 'offers#new'
@@ -29,7 +31,7 @@ TestApp::Application.routes.draw do
   match  '/add_offer/',   :to => 'exchanges#add_offer'
   match  '/add_need/',   :to => 'exchanges#add_need'
   match  '/sendmessage?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
-  match  'show_listing/', :to => 'userlistings#show_listing_result'
+  
   get  '/sendmessage/?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
   # Forgot password and password reset hacks
   get '/forgot/', :to => 'users#forgot'

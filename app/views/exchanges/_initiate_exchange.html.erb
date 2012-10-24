@@ -69,10 +69,8 @@
         });
     </script>
 </head>
-<% debugger %>
+
     <%= form_for(@initexch, :url => create_exchange_path) do |f| %>
-        <%= f.hidden_field :initUser, :value => current_user.id  %>
-        <%= f.hidden_field :targUser, :value => @targUser.id  %>
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Initiate Exchange</h3>
@@ -118,7 +116,7 @@
                             <div class="tab-pane active" id="offer">
                                 <!-- Offer Listing -->
                                 <% if @targListing.listingType == "offer" %>
-                                <div data-url="/exchange_listing?id=<%= @targListing.id %>&targ=<%= current_user.id %>" id="targlisting"></div>
+                                <div data-url="/exchange_listing?id=<%= @targListing.id %>&targ=<%= current_user.id %>&f=<%= f %>" id="targlisting"></div>
                                 <% else %>
                                 <div data-url="/add_offer?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="targlisting"></div>
                                 <%end%>
