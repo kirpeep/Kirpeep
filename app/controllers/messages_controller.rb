@@ -8,8 +8,7 @@ require 'date'
 
 class MessagesController < ApplicationController
 
-  def create
-
+  def create 
     message = Message.new params[:message]
     message.targUnread = true
     user = current_user 
@@ -71,6 +70,35 @@ class MessagesController < ApplicationController
 
   end
   
+  def markAsRead
+    message = Message.find(params[:id])
+
+    case params[:user])
+      when message.initUser
+        message.initUnread = false
+      when message.targUser
+        message.targUnread = false
+      else
+        #well
+    end
+
+    message.save    
+  end
+
+  def markAsUnread
+    message = Message.find(params[:id])
+
+    case params[:user])
+      when message.initUser
+        message.initUnread = true
+      when message.targUser
+        message.targUnread = true
+      else
+        #well
+    end
+
+    message.save    
+  end
 
   # DELETE /users/1
   # DELETE /users/1.json

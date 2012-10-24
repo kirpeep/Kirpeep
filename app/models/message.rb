@@ -26,9 +26,9 @@ class Message < ActiveRecord::Base
   def updateStartingMessage
     #update starting message
     parent_message = Message.find(id)
-    begin
+    while parent_message.responseToMsgID.to_i != 0
       parent_message = Message.find(parent_message.responseToMsgID)
-    end while parent_message.responseToMsgID.to_i != 0
+    end
     #update timestamp
       parent_message.update_attribute("updated_at", DateTime.now.to_datetime)
       
