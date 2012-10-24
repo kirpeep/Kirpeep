@@ -158,4 +158,12 @@ class ExchangesController < ApplicationController
     return ExchangeItem.where("exchange_id = ?", id).allfind { |e|  }
 
   end
+
+  #creates partial for additional listing when initiating an exchange
+  def add_listing
+    @targUser = params[:targ]
+    @initUser = params[:init]
+
+    render 'create_offer'
+  end
 end

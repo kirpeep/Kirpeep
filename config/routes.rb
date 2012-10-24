@@ -26,7 +26,7 @@ TestApp::Application.routes.draw do
   match  '/accept_perform/' , :to => 'exchanges#accept_perform' , :as => 'accept_perform'
   match  '/rate_exchange/'  , :to => 'exchanges#rate_exchange' , :as => 'rate_exchange'
   match  '/sendmessage?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
-
+  match  'show_listing/', :to => 'userlistings#show_listing_result'
   get  '/sendmessage/?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
   # Forgot password and password reset hacks
   get '/forgot/', :to => 'users#forgot'

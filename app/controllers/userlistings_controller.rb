@@ -80,13 +80,13 @@ class UserlistingsController < ApplicationController
     end
   end
 
-  def show_listing_partial_result
+  def show_listing_result
       listing = UserListing.find(params[:id]) 
-      
+      @user = listing.user
       if listing.type == "Offer"
-        render :partial => 'offers/show', :locals => {:listing => listing }
+        render :partial => 'show_offer', :locals => {:listing => listing, :@user => @user }
       else 
-        render :partial => 'needs/show', :locals => {:listing => listing }
+        render :partial => 'show_need', :locals => {:listing => listing, :@user => @user }
       end
   end
   

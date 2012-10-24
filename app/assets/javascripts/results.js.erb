@@ -87,7 +87,10 @@ $(document).ready(function() {
   });
 
   //$(".listingbox").insertTemplateAjax();
-  var listings = $("#listings").data('url');
   
-  $("#listings").insertTemplateAjax("assets/templates/show_need.handlebars", listings);
+  
+  $(".listings").each(function(){
+  	$(this).insertERBTemplateAjax();
+  });
+
 });  

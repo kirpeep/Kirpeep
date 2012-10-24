@@ -26,10 +26,12 @@
             <h1>Search Results For <%= params[:search] %></h1> 
           <%end%>
         </div>
-        <%= content_tag "div", :class => "row-fluid", :id => "listings", :data => {:url => @userlistings.all} do %>
+        <%= content_tag "div", :class => "row-fluid", :id => "listings", do %>
         
           <!-- % = will_paginate @userlistings%-->
-
+          <% for listing in @userlistings %>
+            <div class="listings" data-url="/show_listing?id=<%= listing.id %>"></div>
+          <% end %>
           <!-- %= will_paginate @userlistings%-->
         <% end %>
       </div><!-- .span4 -->

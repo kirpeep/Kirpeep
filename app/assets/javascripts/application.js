@@ -39,17 +39,12 @@ jQuery.fn.submitWithAjax = function() {
     $.post($(this).attr("action"), $(this).serialize(), null, "script");
     return false;
   })
-};
+}
 //functions 
 jQuery.fn.insertTemplateAjax = function(path, dataobject, insert_method){
     var o = $(this[0]);
     var source;
     var template;
-
-    if(console) {
-      console.log("Query:");
-      console.log(dataobject);
-    }
 
     $.ajax({
         url: path, //ex. /assets/templates/mytemplate.handlebars
@@ -96,5 +91,13 @@ jQuery.fn.insertTemplateAjax = function(path, dataobject, insert_method){
             }
               
         }               
-    });         
-};
+    });
+  };
+
+
+//pulls the data-url and loads that template
+jQuery.fn.insertERBTemplateAjax = function(){
+    var o = $(this[0]);
+    if (console) console.log(o.data('url'));
+    o.load(o.data('url'));    
+}
