@@ -15,22 +15,25 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description  %><br />
-  </div>
-    <div class="field">
-    <%= f.label :inventoryCount %><br />
-    <%= f.text_field :quantity %>
-  </div>
-  <div class="field">
-    <%= f.label :photo %><br />
-    <%= f.file_field :photo %>
+  <div class='span3 pull-left'>
+	  <div class="field">
+	    <%= f.label :title %><br />
+	    <%= f.text_field :title %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :description %><br />
+	    <%= f.text_area :description , {:rows => '5'} %><br />
+	  </div>
+  </div> 
+  <div class='span2 pull-left'>
+	   <div class="field">
+	    <%= f.label :inventoryCount %><br />
+	    <%= f.text_field :quantity %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :photo %><br />
+	    <%= f.file_field :photo %>
+	  </div>
   </div>
 </div>
 <div class="modal-footer">
