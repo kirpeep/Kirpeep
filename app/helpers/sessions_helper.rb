@@ -26,7 +26,11 @@ module SessionsHelper
   #returns true if the user passed
   #is the current user
   def is_current_user(user)
-   current_user.id == user.id
+     if current_user
+       current_user.id == user.id
+     else
+       false
+     end
   end
 
   def signed_in?
