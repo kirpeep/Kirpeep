@@ -119,6 +119,9 @@
 
 .messageIcon, .priceIcon,.exchangeIcon,.shareIcon
 {
+   height: 25px;
+   width: 40px;
+   margin:2px !important;
 }
 
 .tool{
