@@ -1,11 +1,10 @@
 TestApp::Application.routes.draw do
   #get "sessions/new"
   match '/sessions/signin', :controller => 'sessions', :action => 'signin'
-  
+
   match  'destroy_session',      :to => 'sessions#destroy'
   match  '/create_listing/',     :to => 'userlistings#create'
   match  '/new_listing',         :to => 'userlistings#new'
-  match  '/edit_listing',        :to => 'userlisiting#edit'
   match  '/exchange_listing/',   :to => 'userlistings#show_listing_exchange'
   match  '/show_listing/',        :to => 'userlistings#show_listing_result'
   #match  '/quicksale/:id',       :to => 'needs#quicksale'
@@ -34,6 +33,7 @@ TestApp::Application.routes.draw do
   match  '/mark_unread/', :to => 'messages#markAsUnread'
   match  '/mark_read/', :to => 'messages#markAsRead'
   
+  get  '/edit_listing/?id=:id&listing_type=:listing_type',  :to => 'userlistings#edit'
   get  '/sendmessage/?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
   # Forgot password and password reset hacks
   get '/forgot/', :to => 'users#forgot'
@@ -104,6 +104,8 @@ TestApp::Application.routes.draw do
   resources :exchanges
   resources :profiles
   resources :messages
+
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

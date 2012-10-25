@@ -80,14 +80,27 @@ class UserlistingsController < ApplicationController
     end
   end
 
+  #display user listing on the results page
   def show_listing_result
-      debugger
       listing = UserListing.find(params[:id]) 
       @user = listing.user
+      
       if listing.type == "Offer"
-        render :partial => 'show_offer', :locals => {:listing => listing, :@user => @user }
+        render :partial => 'show_offer', :locals => {:listing => listing, :@user => @user}
       else 
-        render :partial => 'show_need', :locals => {:listing => listing, :@user => @user }
+        render :partial => 'show_need', :locals => {:listing => listing, :@user => @user}
+      end
+  end
+
+  #display user listing on the exchange modals
+  def show_listing_exchange
+      listing = UserListing.find(params[:id]) 
+      @user = listing.user
+      targ = User.find(params[:targ])
+      if listing.type == "Offer"
+        render :partial => 'show_exchange_offer', :locals => {:listing => listing, :@user => @user, :targ => targ }
+      else 
+        render :partial => 'show_exchange_need', :locals => {:listing => listing, :@user => @user, :targ => targ }
       end
   end
   
