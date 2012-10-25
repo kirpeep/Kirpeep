@@ -128,7 +128,9 @@
 }
 
 .listings{
-  display:inline;
+  display:inline !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
 }
 
 .need-span {

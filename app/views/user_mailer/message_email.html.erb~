@@ -1,0 +1,19 @@
+<html>
+  <head>
+  </head>
+  <body >
+    <div style='border: 10px solid #7ac943;border-radius: 15px;padding:25px;' >
+    <img src='<%= $domain %>/assets/kirpeep.png' style='height:50px;width:125px;'  />
+    <hr style='color: #ff931e;' />
+    <h2>You recieved a new message!</h2>
+    <p>
+      Subject: <%= @subject %>
+    </p>
+    <p>
+      Message: <%= @text %>
+    </p>
+    <p>
+     Kirpeep.com
+   </p>
+  </body>
+</html>
