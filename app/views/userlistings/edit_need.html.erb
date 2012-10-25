@@ -4,27 +4,30 @@
   </div>
   <%= form_for @listing, :url => '/userlisting/' + @listing.id.to_s(), :method => 'put', :html => { :multipart => true } do |f| %>
   <div class="modal-body">
-	  
-	  <div class="field">
-	    <%= f.label :title %><br />
-	    <%= f.text_field :title %>
-	  </div>
-	  <div class="field">
-	    <%= f.label :description %><br />
-	    <%= f.text_area :description  %><br />
-	  </div>
-	  <div class="field">
-	    <%= f.label :quantity %><br />
-	    <%= f.text_field :quantity %>
-	  </div>
-	  <div class="field">
-	    <%= f.label :quantityUnit %><br />
-	    <%= f.text_field :quantityUnit %>
-	  </div>
-	  <div class="field">
-	    <%= f.label :photo %><br />
-	    <%= f.file_field :photo %>
-	  </div>
+	  <div class='span3 pull-left'>
+		  <div class="field">
+		    <%= f.label :title %>
+		    <%= f.text_field :title %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :description %>
+		    <%= f.text_area :description, {:rows => '5'}  %>
+		  </div>
+          </div>
+          <div class='span2 pull-left'>
+		  <div class="field">
+		    <%= f.label :quantity %>
+		    <%= f.text_field :quantity %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :quantityUnit %>
+		    <%= f.text_field :quantityUnit %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :photo %>
+		    <%= f.file_field :photo %>
+		  </div>
+          </div>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
