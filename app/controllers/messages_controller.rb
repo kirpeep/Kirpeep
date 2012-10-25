@@ -9,14 +9,16 @@ require 'date'
 class MessagesController < ApplicationController
 
   def create 
+   
     message = Message.new params[:message]
     message.targUnread = true
-    user = current_user 
+    user = current_user
+    toUser = User.find(params[:message][:targUser])
     
     if message.save  
     	flash[:notice] = 'message saved.'
-      
-      message.updateStartingMessage
+        UserMailer.message_email(toUser, user, params[:message][:subject], params[:message][:text] ).deliver
+        message.updateStartingMessage
 
     	respond_to do |format|
         format.html {redirect_to user}

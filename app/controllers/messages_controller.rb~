@@ -8,16 +8,17 @@ require 'date'
 
 class MessagesController < ApplicationController
 
-  def create
-
+  def create 
+   
     message = Message.new params[:message]
     message.targUnread = true
-    user = current_user 
+    user = current_user
+    toUser = User.find(params[:message][:targUser])
     
     if message.save  
     	flash[:notice] = 'message saved.'
-      
-      message.updateStartingMessage
+        UserMailer.message_email(toUser, user, params[:message].subject, params[:message].text ).deliver
+        message.updateStartingMessage
 
     	respond_to do |format|
         format.html {redirect_to user}
@@ -33,13 +34,10 @@ class MessagesController < ApplicationController
     @user = current_user
     @message = Message.new
 
-<<<<<<< HEAD
     respond_to do |format|
       format.html
       format.js
     end
-=======
->>>>>>> 6afedab67e228c035f8e59874a3b2a5b233ca447
   end
 
   def reply
@@ -74,6 +72,37 @@ class MessagesController < ApplicationController
 
   end
   
+  def markAsRead
+    message = Message.find(params[:id])
+
+    case params[:user]
+      when message.initUser
+        message.initUnread = false
+      when message.targUser
+        message.targUnread = false
+      else
+        #well
+    end
+
+    message.save   
+    render :json => message
+  end
+
+  def markAsUnread
+    message = Message.find(params[:id])
+
+    case params[:user]
+      when message.initUser
+        message.initUnread = true
+      when message.targUser
+        message.targUnread = true
+      else
+        #well
+    end
+
+    message.save
+    render :json => message  
+  end
 
   # DELETE /users/1
   # DELETE /users/1.json
