@@ -106,15 +106,15 @@ class UserlistingsController < ApplicationController
   
   def edit
     @listing = UserListing.find(params[:id]) 
-    
+
     if(params[:listing_type] == "offer")
       respond_to do |format|
-        format.html # edit.html.erb
+        format.html {render 'edit_offer'} # edit.html.erb
         format.json 
       end
     else
       respond_to do |format|
-        format.html # edit.html.erb
+        format.html {render 'edit_need'} # edit.html.erb
         format.json 
       end
     end
@@ -123,12 +123,13 @@ class UserlistingsController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    debugger
     @listing = UserListing.find(params[:id])
     
-    if(params[:listing_type] == "offer")
+    if(params[:type] == "Offer")
       respond_to do |format|
         if @listing.update_attributes(params[:offer])
-          format.html { redirect_to current_user, notice: 'User was successfully updated.' }
+          format.html { redirect_to current_user, notice: 'Your offer was successfully updated.' }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }
@@ -137,8 +138,8 @@ class UserlistingsController < ApplicationController
       end
     else
       respond_to do |format|
-        if @listing.update_attributes(params[:offer])
-          format.html { redirect_to current_user, notice: 'User was successfully updated.' }
+        if @listing.update_attributes(params[:need])
+          format.html { redirect_to current_user, notice: 'Your need was successfully updated.' }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }

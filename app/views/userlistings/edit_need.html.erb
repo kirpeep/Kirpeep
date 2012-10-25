@@ -2,20 +2,9 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Edit Need</h3>
   </div>
-  <%= form_for @need, :html => { :multipart => true } do |f| %>
+  <%= form_for @listing, :url => '/userlisting/' + @listing.id.to_s(), :method => 'put', :html => { :multipart => true } do |f| %>
   <div class="modal-body">
-	  <% if @user.errors.any? %>
-	    <div id="error_explanation">
-	      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-	      <ul>
-	      <% @user.errors.full_messages.each do |msg| %>
-	        <li><%= msg %></li>
-	      <% end %>
-	      </ul>
-	    </div>
-	  <% end %>
-
+	  
 	  <div class="field">
 	    <%= f.label :title %><br />
 	    <%= f.text_field :title %>

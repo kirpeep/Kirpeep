@@ -3,19 +3,9 @@
     <h3 id="myModalLabel">Edit Offer</h3>
 </div>
 
-<%= form_for @offer, :html => { :multipart => true } do |f| %>
+<%= form_for @listing, :url => '/userlisting/' + @listing.id.to_s(), :method => 'put', :html => { :multipart => true } do |f| %>
 <div class="modal-body">
-	  <% if @offer.errors.any? %>
-	    <div id="error_explanation">
-	      <h2><%= pluralize(@offer.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-	      <ul>
-	      <% @offer.errors.full_messages.each do |msg| %>
-	        <li><%= msg %></li>
-	      <% end %>
-	      </ul>
-	    </div>
-	  <% end %>
+	  
 
 	  <div class="field">
 	    <%= f.label :title %><br />
@@ -47,5 +37,5 @@
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     <%= f.submit 'Save', :class => "btn btn-primary" %> 
     <% end %>
-    <%= button_to "Delete", @offer, :method=>:delete, :class=>"destroy btn" %>
+    <%#= button_to "Delete", @offer, :method=>:delete, :class=>"destroy btn" %>
 </div>
