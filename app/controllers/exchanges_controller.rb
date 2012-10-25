@@ -12,7 +12,10 @@ class ExchangesController < ApplicationController
     @exchange.initAcpt = true
     @user = current_user 
     @message = Message.new params[:message]
-    if @exchange.save  
+    if @exchange.save
+      # have to figure out how to go about sending the user an email
+      # I see that it looks like this may create a new message.  Not
+      # sure if this means that its the same as person to person message - kyle  
       @message.exchange_id = @exchange.id
       if @message.save 
         @exch_message_link = ExchangeMessageLink.new

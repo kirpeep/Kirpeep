@@ -11,11 +11,11 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => 'Activate your Kirpeep account now!')
   end
 
-  def message_email(to_user, from_user, subject, type)
+  def message_email(to_user, from_user, subject, text)
     @to_user = to_user
     @from_user = from_user
     @subject = subject
-    @type = type
+    @text = text
 
     mail(:to => to_user.email, :subject => @from_user.name + " has just sent you an message in Kirpeep.")
   end
