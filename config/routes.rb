@@ -6,7 +6,7 @@ TestApp::Application.routes.draw do
   match  '/create_listing/',     :to => 'userlistings#create'
   match  '/new_listing',         :to => 'userlistings#new'
   match  '/exchange_listing/',   :to => 'userlistings#show_listing_exchange'
-  match  'show_listing/',        :to => 'userlistings#show_listing_result'
+  match  '/show_listing/',        :to => 'userlistings#show_listing_result'
   #match  '/quicksale/:id',       :to => 'needs#quicksale'
   #match  '/share/:id',           :to => 'needs#share'
   #match  '/list_offer/:id',      :to => 'offers#new'
