@@ -5,7 +5,7 @@
 			<% for message in messages %>
 				<% @targUser = User.find(message.targUser) %>
 				<% @initUser = User.find(message.initUser) %>
-				
+
 				<% if message.isUnread?(current_user.id) %>
 					<div class="accordion-group unread" data-message="<%= message.id%>" data-user="<%= current_user.id%>">
 				<% else %>
@@ -62,7 +62,7 @@
 						      	<% else %>
 						      		<%= f.hidden_field :targUser, :value => @initUser.id %>
 						      	<% end %>
-						      	<%= f.text_field :text %>
+						      	<%= f.text_field :text%>
 						      	
 						      	<%= f.submit :reply %>
 							<% end %>
