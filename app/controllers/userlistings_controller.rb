@@ -179,5 +179,11 @@ class UserlistingsController < ApplicationController
 
       redirect_to current_user
     end
+  end
+
+  def share
+    listing = UserListing.find(params[:id])
+    @user_photo = listing.user.profile.photo.url
+    render :partial => "share", :locals => {:@user_photo => @user_photo, :listing => listing}
   end 
 end

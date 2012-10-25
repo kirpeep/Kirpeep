@@ -62,7 +62,7 @@
 						      	<% else %>
 						      		<%= f.hidden_field :targUser, :value => @initUser.id %>
 						      	<% end %>
-						      	<%= f.text_field :text%>
+						      	<%= f.text_field :text, :id => "text"+i.to_s %>
 						      	
 						      	<%= f.submit :reply %>
 							<% end %>
