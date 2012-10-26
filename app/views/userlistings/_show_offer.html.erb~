@@ -7,7 +7,7 @@
         <% if listing.user.id == current_user.id %>
           <!-- Edit -->
           
-            <a href="/edit_listing?id=<%= listing.id %>&listing_type=need" class='dynamolink'><%= image_tag('Icon_Message_gray_regular.png', 
+            <a href="/edit_listing?id=<%= listing.id %>&listing_type=offer" class='dynamolink'><%= image_tag('Icon_Message_gray_regular.png', 
                  :class=>"messageIcon", 
                  :title=>"Edit", 
                  :onmouseover=>"$(this).attr('src','/assets/Icon_Message_blue_roll_over.png');",
