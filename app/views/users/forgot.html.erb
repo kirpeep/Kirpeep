@@ -1,4 +1,11 @@
-<h2>Reset Password</h2>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Reset Password</h3>
+</div>
+
+<div class="modal-body">
+
+
 
 <% if flash[:notice] %>
       <p class="notice"><%= flash[:notice] %></p>
@@ -9,8 +16,13 @@
 
 <%= form_tag('/forgot', :method => 'POST') do %>
    <div class='field'>
-      <%= label_tag(:email, 'Email') %><br />
+      <%= label_tag(:email, 'Your Email Please') %>
       <%= text_field_tag(:email) %>
    </div>
-   <%= submit_tag('Save') %>
+</div>
+<div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+   <%= submit_tag('Save', :class => "btn btn-primary") %>
+</div>
 <% end %>
+

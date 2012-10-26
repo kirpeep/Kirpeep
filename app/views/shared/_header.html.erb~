@@ -16,7 +16,7 @@
   </div>
   <div class="span2 offset2">
     <% if signed_in? %>
-      
+      <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
             <%= current_user.name %>
             <span class="caret"></span>
@@ -28,9 +28,12 @@
             <li><%= link_to 'Sign Out' , destroy_session_path %></li>
           
         </ul>
-      
+      </div>
     <% else %>
-      <a href="#signin" role="button" class="btn" data-toggle="modal">Sign In</a>
+      <div class='row'>
+	      <a href='/forgot' class='dynamolink'>Forgot Password</a>
+	      <a href="#signin" role="button" class="btn" data-toggle="modal" >Sign In</a>
+      </div>
     <%end%>
   </div>
 </div> 
