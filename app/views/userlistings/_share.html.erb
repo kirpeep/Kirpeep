@@ -12,8 +12,11 @@
 </div>
 <div class="modal-body">
 	<div class="row-fluid">
-	  	<span>You are sharing....</span>
-	  		<div id="listings" class="span8 offset2" data-url="/show_listing?id=<%= listing.id %>"></div>
+	  	<span>You are sharing....</span><br>
+                   <div style='width: 280px;margin-right:auto;margin-left:auto;'>
+	  		<%= listing.title %><br>
+                        <%= image_tag(listing.photo.url) %>
+                   </div>
 	  	<div>
 	</div>
 </div>
