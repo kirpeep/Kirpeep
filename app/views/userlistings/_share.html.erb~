@@ -1,0 +1,36 @@
+<html>
+<head>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#listings").insertERBTemplateAjax();
+		});
+	</script>
+</head>	
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Share With Your Peeps</h3>
+</div>
+<div class="modal-body">
+	<div class="row-fluid">
+	  	<span>You are sharing....</span><br>
+                   <div style='width: 400px;margin-right:auto;margin-left:auto;'>
+	  		<%= listing.title %><br>
+                        <%= image_tag(listing.photo.url) %>
+                   </div>
+	  	<div>
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="row-fluid">
+		<div class="span2 offset3">
+			<%= image_tag("facebook.jpg") %>
+		</div>
+		<div class="span2">
+			<%= image_tag("pinterest.png") %>
+		</div>
+		<div class="span2">
+			<%= image_tag("twitter.png") %>
+		</div>
+	</div>
+</div>
+</html>

@@ -84,13 +84,13 @@ $(document).ready(function() {
   $(".listings").each(function(){
   	$(this).insertERBTemplateAjax();
   })).done(function(){
-            setTimeout(function(){
+            
 	    var $container = $('#BrowseListings');
 	    $container.imagesLoaded(function(){
 		     $container.masonry({
 			itemSelector: '.listings'
 		      });
-	    });}, 1000);
+	    });
   });
 
 });  

@@ -128,9 +128,9 @@
 }
 
 .listings{
-  display:inline !important;
-  margin-left: 5px !important;
-  margin-right: 5px !important;
+  width: 300px !important;
+  margin: 10px;
+  float: left;
 }
 
 .need-span {
@@ -166,6 +166,12 @@
  background: rgba(255, 255, 255, 0.6);
 }
 
+.messageIcon, .priceIcon,.exchangeIcon,.shareIcon
+{
+   height: 25px;
+   width: 40px;
+   margin:-2px !important;
+}
 #userImage{
  width: 100px !important;
  height: auto !important;
