@@ -11,27 +11,48 @@
 
   <div class='container'>
     <div class='row'>
-      <div class="span3 sign-in pull-right">
+      <div class="span3 offset1 pull-right">
       <% if signed_in? %>
-        <div class="btn-group align-right">
-          <a class="btn dropdown-toggle align-right" data-toggle="dropdown" href="#">
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
             <%= current_user.name %>
             <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu pull-right">
+        </a>
+        <ul class="dropdown-menu">
             <li><%= link_to 'View Profile', current_user %></li>
-            <li><%= link_to 'Sign Out' , 'destroy_session' %></li> 
-          </ul>
-        </div>
-      <% else %>
-        <!-- Button to trigger modal -->
-        <a href="#signin" role="button" class="btn" data-toggle="modal">Sign In</a>
+            <li><%= link_to 'Edit Profile' , edit_profile_path(current_user.profile), :class => "dynamolink" %></li>
+            <li><%= link_to 'Edit Account', edit_user_path(current_user), :class => "dynamolink" %></li>
+            <li><%= link_to 'Sign Out' , destroy_session_path %></li>
+          
+        </ul>
+      </div>
+    <% else %>
+      <div class='row pull-right'>
+	      <a href='/forgot' class='dynamolink'>Forgot Password</a>
+	      <a href="#signin" role="button" class="btn" data-toggle="modal" >Sign In</a>
+      </div>
     <%end%>
     <p class='pull-right'>About | How It Works | FAQs</p>
     </div>
       
     
   </div>
+
+   <% if flash[:notice] != nil %>
+	    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
+	       <button type="button" class="close" data-dismiss="alert">×</button>
+	       <div id="flash_notice">
+		 <%= flash[:notice] %>
+	       </div>
+	    </div>
+	    <% elsif flash[:error] != nil %>
+	    <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
+	       <button type="button" class="close" data-dismiss="alert">×</button>
+	       <div id="flash_notice">
+		 <%= flash[:error] %>
+	       </div>
+	    </div>
+    <% end %>
 
   <div class='row'>
     <div class='span6 offset3 align-center'>
@@ -56,10 +77,10 @@
     <% if !signed_in? %>
     <div id="signup" class='span6 offset3 align-center'>
       <span id="signup" >Get Started by introducing yourself.</span>
-      <%= form_tag("#", :method =>"get") do %>
+      <%= form_tag("/signup/", :method =>"get") do %>
       <%= text_field_tag :email, 'Email', {'data-inline' => 'true' }%>
       <%= password_field_tag :password, 'Password',  {'data-inline' => 'true' } %>
-      <%= link_to 'Sign up', "/signup/", { 'role' => "button", :class => "dynamosignup btn", 'data-toggle' => "modal"} %>
+      <%= submit_tag 'Sign up', :class => "dynamosignup btn", 'data-toggle' => "modal", 'role' => "button" %>
 
       <%end%>
     </div>
