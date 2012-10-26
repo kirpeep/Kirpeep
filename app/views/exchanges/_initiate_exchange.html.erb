@@ -26,7 +26,7 @@
                 var listing = $(this).val();
                 var listingContainer = $(this).closest(".shadow")
                 if(listingContainer.attr("class").indexOf("offer") != -1){
-                    listingContainer.replaceWith(<%= render add_offer(f)%>)                        
+                    //listingContainer.replaceWith(<%#= render add_offer(f)%>)                        
                 }
                 else{
                     
@@ -110,7 +110,7 @@
                     <div class="tabbable tabs-left">
                         <ul class="nav nav-tabs" id="userItems">
                             <li class="active"><a href="#offer" data-toggle="tab">Listing 1</a></li>
-                            <li id="new_link"><%= add_need_link("+", :exchange_item)></li>
+                            <li id="new_link"><%= add_need_link("+", :exchange_item)%></li>
                         </ul>
                         <div class="tab-content" id="userExchItems">
                             <div class="tab-pane active" id="offer">
@@ -155,6 +155,7 @@
                     </div>
                     
                 </div>
+
                 <!--Opens Bottom Section-->
                 <div class='row-fluid'>
                     <%= fields_for Message.new do |message| %>
