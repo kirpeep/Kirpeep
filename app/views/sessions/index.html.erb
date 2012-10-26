@@ -14,7 +14,7 @@
       <div class="span3 offset1 pull-right">
       <% if signed_in? %>
       <div class="btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" onclick='$(this).dropdown()' href="#">
             <%= current_user.name %>
             <span class="caret"></span>
         </a>
