@@ -24,27 +24,32 @@
 	    </div>
 	  <% end %>
 
-
-	  <div class="field">
-	    <%= f.label :To %>
-	    <div>
-	    	<%= image_tag(@user_photo, {:width => '100px', :height => '100px'}) %>
-			<%= @targUser.name %>
-			<%= f.hidden_field :responseToMsgID, :value =>  "start" %>
-		</div>
-	  </div>
-	  <div class="field">
-	    <%= f.label :subject %><br />
-	    <%= f.text_field :subject  %><br />
-	  </div>
-	  <div class="field">
-	    <%= f.label :Message %><br />
-	    <%= f.text_area :text %>
-	  </div>
-	  <div class="field">
-	    <%= f.label :photo %><br />
-	    <%= f.file_field :photo %>
-	  </div>
+          <div class='span3'>
+		  <div class="field">
+		    <%= f.label :To %>
+		    <div>
+		    	<%= image_tag(@user_photo, {:width => '100px', :height => '100px'}) %>
+				<%= @targUser.name %>
+				<%= f.hidden_field :responseToMsgID, :value =>  "start" %>
+			</div>
+		  </div>
+		  
+          </div>
+          <div class='span3'>
+		  <div class="field">
+		    <%= f.label :subject %>
+		    <%= f.text_field :subject  %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :photo %>
+		    <%= f.file_field :photo %>
+		  </div>
+         </div>
+         <div class='clearfix'></div>
+         <div class="field" style='margin-top:15px;'>
+            <%= f.label :Message %>
+	    <%= f.text_area :text, :rows => '3', :style=>'width:600px;margin-bottom:15px;'%>
+	</div>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
