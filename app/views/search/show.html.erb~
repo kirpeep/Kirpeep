@@ -30,7 +30,7 @@
         <div id='BrowseListings'>
           <!-- % = will_paginate @userlistings%-->
           <% for listing in @userlistings %>
-            <div class="listings" style="width: 300px;" data-url="/show_listing?id=<%= listing.id %>"></div>
+            <div class="listings clearfix" style="width: 300px;" data-url="/show_listing?id=<%= listing.id %>"></div>
           <% end %>
           <!-- %= will_paginate @userlistings%-->
         </div>
