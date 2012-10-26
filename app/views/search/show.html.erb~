@@ -3,6 +3,7 @@
 
 <%= javascript_include_tag 'jqcloud-1.0.1' %>
 <%= javascript_include_tag "jquery.betterTooltip" %>
+<%= javascript_include_tag "jquery.masonry.min.js" %>
 <%= javascript_include_tag "results" %>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,7 +13,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container-fluid">
     <%= render 'shared/header' %>
 
     <div style="width: 100%"><hr/></div>

@@ -164,6 +164,7 @@
  padding: 5px;
  background-color: #FFF;
  background: rgba(255, 255, 255, 0.6);
+ width:100% !important;
 }
 
 .messageIcon, .priceIcon,.exchangeIcon,.shareIcon
