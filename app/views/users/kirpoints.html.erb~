@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Buy Kirpoints</h3>
+</div>
+<form action='/users/<%= current_user.id %>/kirpoints' method='POST'>
+<div class="modal-body">
+    <div class="field">
+       <label>How many kirpoints</label>
+       <input type='text' name='kirpoints' id='kirpoints' />
+    </div>
+</div>
+  <div class="modal-footer">
+  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  <button class='btn btn-success' type='submit'>Buy</button>
+</div>
+</form>
