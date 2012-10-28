@@ -163,8 +163,12 @@
  border-radius: 15px;
  padding: 5px;
  background-color: #FFF;
- background: rgba(255, 255, 255, 0.6);
+ background-color: transparent;
  width:100% !important;
+}
+
+#need-actions a{
+ text-decoration:none; 
 }
 
 .messageIcon, .priceIcon,.exchangeIcon,.shareIcon
@@ -173,6 +177,12 @@
    width: 40px;
    margin:-2px !important;
 }
+.editIcon{
+   height: 35px;
+   width: 35px;
+   margin:-2px !important;
+}
+
 #userImage{
  width: 100px !important;
  height: auto !important;

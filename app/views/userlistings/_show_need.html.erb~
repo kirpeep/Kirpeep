@@ -96,7 +96,7 @@
         (<%= Exchange.where("id != ?",listing.user.id).all.count %>) Exchanges<br />
         (0) Reviews 
     </div>
-    <div class="span4 pull-right" style='margin-top:15px;'>
+    <div class="span3 pull-right" style='margin-top:15px;'>
           (<%= listing.user.needs.count %>) need
           <br />
           (<%= listing.user.needs.count %>) need 
