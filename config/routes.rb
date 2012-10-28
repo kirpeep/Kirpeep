@@ -42,6 +42,9 @@ TestApp::Application.routes.draw do
   get '/resetpassword/', :to => 'users#reset_password'
   post '/resetpassword/', :to => 'users#process_reset_password'
   get '/activate/', :to => 'users#activate'
+
+  get '/kirpoints', :to => 'users#kirpoints'
+	  post '/kirpoints', :to => 'users#add_kirpoints'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
 

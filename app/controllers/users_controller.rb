@@ -186,7 +186,6 @@ class UsersController < ApplicationController
   end
 
   def process_forgot
-    debugger
     # First thing we need to do is check the user account
     if params[:email].nil?
        flash[:error] = 'We are sorry something went wrong. Please try again.'
@@ -248,6 +247,20 @@ class UsersController < ApplicationController
          redirect_to root_path
        end
     end
+
+   def add_kirpoints
+      @user = User.find(current_user.id)
+      @user.update_attribute(:kirpoints, params[:kirpoints])
+      redirect_to root_path
+   end
+
+   def kirpoints
+        respond_to do |format|
+            format.html { render "kirpoints.html" }
+        end
+   end
+
+   
   end
 
   private 
