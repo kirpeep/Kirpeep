@@ -250,7 +250,7 @@ class UsersController < ApplicationController
 
    def add_kirpoints
       @user = User.find(current_user.id)
-      @user.update_attribute(:kirpoints, params[:kirpoints])
+      @user.update_attribute(:kirpoints, params[:kirpoints].to_f())
       redirect_to root_path
    end
 
