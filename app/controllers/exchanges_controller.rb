@@ -161,4 +161,18 @@ class ExchangesController < ApplicationController
     return ExchangeItem.where("exchange_id = ?", id).allfind { |e|  }
 
   end
+
+  def add_need
+    initUser = User.find(params[:init])
+    targUser = User.find(params[:targ])
+
+    render :partial => 'create_need', :locals => {:initUser => initUser, :targUser => targUser}    
+  end
+
+  def add_offer
+    initUser = User.find(params[:init])
+    targUser = User.find(params[:targ])
+
+    render :partial => 'create_offer', :locals => {:initUser => initUser, :targUser => targUser}   
+  end
 end

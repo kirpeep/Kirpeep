@@ -1,15 +1,17 @@
-<div class="rounded-offer shadow">
-	<a type="button" class="close" aria-hidden="true">×</a>
-    <div>
-        <span id="selectoffer">Select a offer or <a href="/new_listing?type=offer" class="CreateListing">Create</a> a new one.
-        </span>
-    </div>
-    <div>
-    	<span>
-        	<% userOffers = @initUser.offers.all.map { |offer| [offer.title, offer.id] } %>
-            <% targNeeds = @targUser.needs.all.map { |need| [need.title, need.id] } %> 
-            <%= select_tag :listing_id, options_for_select(userOffers+targNeeds) %>
-    	</span>
-        
+<div class="tab-pane active" id="newTargListing">
+    <div class="rounded-offer shadow">
+    	<a type="button" class="close" aria-hidden="true">×</a>
+        <div>
+            <span id="selectoffer">Select a offer or <a href="/new_listing?type=offer" class="CreateListing">Create</a> a new one.
+            </span>
+        </div>
+        <div>
+        	<span>
+            	<% userOffers = initUser.offers.all.map { |offer| [offer.title, offer.id] } %>
+                <% targNeeds = targUser.needs.all.map { |need| [need.title, need.id] } %> 
+                <%= select_tag :listing_id, options_for_select(userOffers+targNeeds), { :class => 'selectListing' }%>
+        	</span>
+            
+        </div>
     </div>
 </div>
