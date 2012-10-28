@@ -1,9 +1,10 @@
 <!--div class="modal fade hide" id="InitiateExch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
  <html>
- <head>   
+ <head>
     <script type="text/javascript">
     var context;
         $(document).ready(function() {
+
             userContext = <%= @user.to_json.html_safe %>;
             targContext = <%= @targListing.user.to_json.html_safe %>;
             listing = <%= @targListing.to_json.html_safe %>;
@@ -24,38 +25,49 @@
 
             $(".selectListing").live("change", function(){
                 var listing = $(this).val();
-                var listingContainer = $(this).closest(".shadow")
-                if(listingContainer.attr("class").indexOf("offer") != -1){
-                    //listingContainer.replaceWith(<%#= render add_offer(f)%>)                        
-                }
-                else{
-                    
-                }
-                
-                if(console){
-                    console.log("listing class");
-                    console.log(listingContainer.attr("class"));
-                }
-                $(this).replaceWith("<div>:)</div>");
+                var listingContainer = $(this).closest(".shadow");
+                $.get("/get_listing?id="+listing, function(data) {
+                    if(console){
+                        console.log("listing class");
+                        console.log(listingContainer.attr("class"));
+                    }
+
+                    if(listingContainer.attr("class").indexOf("offer") != -1){
+                        o = $('.rounded-need shadow hide').clone();
+
+                    }
+                    else{
+                        o = $('.rounded-offer shadow hide').clone();
+                    }
+                    o.children('.listingTitle').html(data['title']);
+                    o.children('.listingDesc').html(data['description']);
+                });
             });
 
-            $('form a.add_need').click(function() {
-
+            $('form #user_new_link').click(function(e) {
+                e.preventDefault();
                 var date = new Date();
-                var time = date.getTime();
+                var listingID = 'listing'+date.getTime();                
+                $('#userItems .active').removeClass('active');
+                $('#userExchItems .active').removeClass('active');
+                $('#user_new_link').before("<li class='active'><a href='#"+listingID+"' data-toggle='tab'>NEW</li>");
+
+                $('#userExchItems').append('<div class="tab-pane active" id="'+listingID+'"><div data-url="/add_need?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="newUserCreate"></div></div>');
+                $('#newUserCreate').insertERBTemplateAjax("over");
+
+            });
+
+            $('form #targ_new_link').click(function(e) {
+                e.preventDefault();
+                var date = new Date();
+                var listingID = 'listing'+date.getTime();
                 $('#targItems .active').removeClass('active');
                 $('#targExchItems .active').removeClass('active');
-                $('#targ_new_link').before("<li class='active'><a href='#listing"+time+"' data-toggle='tab'>NEW</li>");
+                $('#targ_new_link').before("<li class='active'><a href='#"+listingID+"' data-toggle='tab'>NEW</li>");
+                $('#targExchItems').append('<div class="tab-pane active" id="'+listingID+'"><div data-url="/add_offer?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="newTargCreate"></div></div>');
+                $('#newTargCreate').insertERBTemplateAjax("over");
 
-
-                var association = $(this).attr('data-association');
-                var template = $('#' + association + '_fields_template').html();
-                var regexp = new RegExp('new_' + association, 'g');
-                var new_id = new Date().getTime();
-
-                $(this).parent().before(template.replace(regexp, new_id));
-                return false;
-              });
+            });
 
               $('form a.remove_child').live('click', function() {
                 var hidden_field = $(this).prev('input[type=hidden]')[0];
@@ -71,6 +83,45 @@
 </head>
 
     <%= form_for(@initexch, :url => create_exchange_path) do |f| %>
+    <!-- fields_for templates -->
+        <%# User Exchange Items %>
+    
+        <div class="rounded-need shadow hide">
+            <a type="button" class="close" aria-hidden="true">×</a>
+            <div class='listingImg'>
+                <%= image_tag @targListing.photo.url %>
+            </div>
+            <div class='listingInfo'>
+                <div>
+                    <span class="listingTitle"><%= @targListing.title %></span> <br>
+                    <span class="listingDesc"><%= @targListing.description %></span>
+                    <%= f.fields_for :exchange_item, ExchangeItem.new, :child_index => 'replace_this' do |fa| %>
+                        <%=fa.hidden_field :user_listing_id, :value => -1 %>
+                        <%=fa.hidden_field :targ_user_id, :value => -1 %>
+                    <% end %>
+                </div>
+            </div> 
+        </div>
+        
+        <%# Target Exchange Items %>
+        <div class="rounded-offer shadow hide">
+            <a type="button" class="close" aria-hidden="true">×</a>
+            <div style="">
+                <%= image_tag @targListing.photo.url %>
+            </div>
+            <div style="">
+                <span>
+                    <%= @targListing.title %> <br>
+                    <%= @targListing.description %>
+                    <%= f.fields_for :exchange_item, ExchangeItem.new, :child_index => 'replace_this' do |fa| %>
+                        <%=fa.hidden_field :user_listing_id, :value => -1 %>
+                        <%=fa.hidden_field :targ_user_id, :value => -1 %>
+                    <% end %>
+                </span>
+            </div> 
+        </div>
+    
+        <!-- end of fields for/begining of Modal-->
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Initiate Exchange</h3>
@@ -110,15 +161,30 @@
                     <div class="tabbable tabs-left">
                         <ul class="nav nav-tabs" id="userItems">
                             <li class="active"><a href="#offer" data-toggle="tab">Listing 1</a></li>
-                            <li id="new_link"><%= add_need_link("+", :exchange_item)%></li>
+                            <li id="user_new_link"><%= link_to '+', '#'%></li>
                         </ul>
                         <div class="tab-content" id="userExchItems">
                             <div class="tab-pane active" id="offer">
-                                <!-- Offer Listing -->
-                                <% if @targListing.listingType == "offer" %>
-                                <div data-url="/exchange_listing?id=<%= @targListing.id %>&targ=<%= current_user.id %>&f=<%= f %>" id="targlisting"></div>
+                                <!--  Listing -->
+                                <% if @targListing.listingType == "need" %>
+                                <div class="rounded-need shadow">
+                                    <a type="button" class="close" aria-hidden="true">×</a>
+                                    <div style="">
+                                        <%= image_tag @targListing.photo.url %>
+                                    </div>
+                                    <div style="">
+                                        <span>
+                                            <%= @targListing.title %> <br>
+                                            <%= @targListing.description %>
+                                            <%= f.fields_for :exchange_item do |fa| %>
+                                                <%=fa.hidden_field :user_listing_id, :value => @targListing.id %>
+                                                <%=fa.hidden_field :targ_user_id, :value => @targUser.id %>
+                                            <% end %>
+                                        </span>
+                                    </div> 
+                                </div>
                                 <% else %>
-                                <div data-url="/add_offer?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="targlisting"></div>
+                                <div data-url="/add_need?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="targlisting"></div>
                                 <%end%>
                                 <!-- End of Offer Listing --> 
                             </div>
@@ -138,16 +204,31 @@
                         <ul class="nav nav-tabs" id="targItems">
                             <li class="active"><a href="#needs" data-toggle="tab">Listing 1</a></li>
                             <li id="targ_new_link">
-                                <%= add_offer_link("+", :exchange_item) %>
+                                <%= link_to '+', '#' %>
                             </li>
                         </ul>
                         <div class="tab-content" id="targExchItems">
                             <div class="tab-pane active" id="needs">
                                 <!-- Need Listing -->
-                                <% if @targListing.listingType == "offer" %>
+                                <% if @targListing.listingType == "need" %>
                                 <div data-url="/add_offer?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="initlisting"></div>
                                 <%else%>
-                                <div data-url="/exchange_listing?id=<%= @targListing.id %>&targ=<%= @targListing.user.id %>" id="initlisting"></div>
+                                <div class="rounded-offer shadow">
+                                    <a type="button" class="close" aria-hidden="true">×</a>
+                                    <div style="">
+                                        <%= image_tag @targListing.photo.url %>
+                                    </div>
+                                    <div style="">
+                                        <span>
+                                            <%= @targListing.title %> <br>
+                                            <%= @targListing.description %>
+                                            <%= f.fields_for :exchange_item do |fa| %>
+                                                <%=fa.hidden_field :user_listing_id, :value => @targListing.id %>
+                                                <%=fa.hidden_field :targ_user_id, :value => @targUser.id %>
+                                            <% end %>
+                                        </span>
+                                    </div> 
+                                </div>
                                 <%end%>
                                 <!--End of Need Listing-->
                             </div>
@@ -175,7 +256,4 @@
     <% end %>
 
 <!--/div--> 
-<div id="jstemplates">
-  <%= yield :jstemplates %>
-</div>
 </html>

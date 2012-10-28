@@ -247,6 +247,7 @@ class UsersController < ApplicationController
          redirect_to root_path
        end
     end
+  end
 
    def add_kirpoints
       @user = User.find(current_user.id)
@@ -259,9 +260,6 @@ class UsersController < ApplicationController
             format.html { render "kirpoints.html" }
         end
    end
-
-   
-  end
 
   private 
 
