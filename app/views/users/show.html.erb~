@@ -39,10 +39,10 @@
     <% end %>
       <% @profile = @user.profile %>
       
-    	<div class='span3'>
+    	<div class='span4'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
       	<ul class='profileInfo'>
-          <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
+          <li onmouseover="$('#locationEdit').show()" onmouseout="$('#locationEdit').hide()" ><strong>Location:</strong> <%= best_in_place @profile, :location %> <i id='locationEdit' style='display:none;' class='icon-edit'></i></li>
             <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>
             <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
             <li><strong>Birth Date:</strong> <%= best_in_place @profile, :birthdate %></li>
@@ -53,7 +53,7 @@
       	</ul>
       </div>
       
-      <div class='span9'>
+      <div class='span8'>
         <div id='profile-header'>
         	<h2 class='profile-username'>
             <%= @user.name %>
@@ -75,7 +75,7 @@
                 <%= render :partial => 'profile', :locals => {:user => @user} %>
               </div>
               <div id='exchanges' class="tab-pane">
-                <%= render :partial => 'exchange', :locals => {:user => @user} %>
+                <div id="exchContainer" data-url="/user_exchanges/<%=current_user.id%>"></div>
               </div>
               <div id='messages' class="tab-pane"></div>
             </div> <!-- /.tab-content -->
