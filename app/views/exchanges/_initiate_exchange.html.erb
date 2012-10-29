@@ -27,20 +27,25 @@
                 var listing = $(this).val();
                 var listingContainer = $(this).closest(".shadow");
                 $.get("/get_listing?id="+listing, function(data) {
-                    if(console){
-                        console.log("listing class");
-                        console.log(listingContainer.attr("class"));
-                    }
-
                     if(listingContainer.attr("class").indexOf("offer") != -1){
-                        o = $('.rounded-need shadow hide').clone();
+                        o = $('#offerTemplate').clone();
 
                     }
                     else{
-                        o = $('.rounded-offer shadow hide').clone();
+                        o = $('#needTemplate').clone();
                     }
-                    o.children('.listingTitle').html(data['title']);
-                    o.children('.listingDesc').html(data['description']);
+
+                    o.find('.listingTitle').html(data['title']);
+                    o.find('.listingDesc').html(data['description']);
+                    o.find('#initiate_exchange_exchange_item_user_listing_id').attr("value", userContext.id);
+                    o.find('#initiate_exchange_exchange_item_targ_user_id').attr("value", targContext.id);
+
+                    if(console){
+                        console.log("cloned element");
+                        console.log(o.html());
+                    }
+                    listingContainer.replaceWith(o);
+                    o.fadeIn();
                 });
             });
 
@@ -86,7 +91,7 @@
     <!-- fields_for templates -->
         <%# User Exchange Items %>
     
-        <div class="rounded-need shadow hide">
+        <div id="needTemplate" class="rounded-need shadow hide">
             <a type="button" class="close" aria-hidden="true">×</a>
             <div class='listingImg'>
                 <%= image_tag @targListing.photo.url %>
@@ -104,7 +109,7 @@
         </div>
         
         <%# Target Exchange Items %>
-        <div class="rounded-offer shadow hide">
+        <div id="offerTemplate"class="rounded-offer shadow hide">
             <a type="button" class="close" aria-hidden="true">×</a>
             <div style="">
                 <%= image_tag @targListing.photo.url %>
