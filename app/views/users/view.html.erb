@@ -24,6 +24,7 @@ $(document).ready(function(){
       $('#dynamobox').modal('show');
       event.preventDefault();
     });
+  $('#exchContainer').insertERBTemplateAjax("over");
 });
 </script>
 
@@ -87,7 +88,7 @@ $(document).ready(function(){
                   <%= render :partial => 'profile', :locals => {:user => @user} %>
                 </div>
                 <div id='exchanges' class="tab-pane">
-                  <%= render :partial => 'exchange', :locals => {:user => @user} %>
+                  <div id="exchContainer" data-url="/user_exchanges/<%=current_user.id%>"></div>
                 </div>
               </div> <!-- /.tab-content -->
             </div><!-- /.tabbable -->
