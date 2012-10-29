@@ -1,0 +1,129 @@
+<html>
+<head>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".itemTemplate").each(function(){
+            $(this).insertERBTemplateAjax();
+        });
+    });
+    </script>
+</head>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-miss="modal" aria-hidden="true"></button>
+        <h3> An exchange has been initiated with you! </h3>
+    </div>
+
+    <div class="modal-body">
+        <!--user viewing -->
+        <div class='row-fluid'>
+            <div class='span4' id="userInfo">
+                <br>
+                <%= image_tag(current_user.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
+                <%= current_user.name %>
+            </div>
+        
+            <!--Kirpeep Exchage Status Logo -->
+            <div class='span4 align-center' id="exchangeStatus">
+                <p><%= image_tag('InitExchIco.png', {:width => '100px', :height => '100px'} ) %></p>
+            </div>
+            
+            <!--exchange partner -->
+            <div class='span4 align-right' id="exchangePartner" >
+                <span id="with">exchanging with</span><br>
+                <% if (current_user.id).to_s == (@initUser.id).to_s %>
+                    <%= image_tag(@targUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+                    <br>
+                    <%= @targUser.name %>
+                <%else%>
+                    <%= image_tag(@initUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+                    <br>
+                    <%= @initUser.name %>
+                <%end%>
+            </div>
+        </div> <!-- .row-fluid-->                
+    
+        <!--opens middle section-->
+        <div class="row-fluid">
+        <!-- Left Side-->
+        <%= @initItems.count%>
+        <%= @targItems.count%>
+      		<div class="span6">
+            	<div>
+                    <span id="getting">You are getting...</span>
+                </div>
+
+
+            <!-- Start of tabs for items user is receiving--> 
+            <% for item in @initItems %>
+                <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.id %>"></div>
+            <%end%>
+            <!-- End of tabs for items user is receiving--> 
+            </div><!-- .span6-->
+
+
+            <!--Right Side-->
+            <div class="span6">
+                <div>
+                    <span id="getting">You are giving...</span>
+                </div>
+
+            <!-- Start of tabs for items targ is receiving--> 
+            <% for item in @targItems %>
+                <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.id %>"></div>
+            <%end%>
+            <!-- End of tabs for items targ is receiving--> 
+
+            </div>
+        <!-- Exchange Message-->
+        <div class="row-fluid">
+            <span>Message</span>
+            <div class="rounded-map shadow" id="message" style="overflow:scroll; height: 100px;">
+                <% exch_message_link = ExchangeMessageLink.where(:exchange_id => @exch.id).first %>
+                <% current_message = Message.find(exch_message_link.message_id) %>
+                <% reply_message_id = current_message.id %>
+                <% begin %>
+                    <%= render :partial =>current_message, :locals => {:current_message => current_message} %>
+                    <% reply_message_id = current_message.id %>
+                    <% current_message = Message.where(:responseToMsgID => current_message.id).first %>
+                <% end while(current_message != nil) %>
+                <div>
+                    <%= form_for Message.new, :remote => true, :html => {:class => "reply_message"} do |f| %>
+         
+                        <%= f.hidden_field :initUser, :value => current_user.id %>
+                        <%= f.hidden_field :responseToMsgID, :value =>  reply_message_id %>
+                        <% if is_current_user(@initUser) %>
+                            <%= f.hidden_field :targUser, :value => @targUser.id %>
+                        <% else %>
+                            <%= f.hidden_field :targUser, :value => @initUser.id %>
+                        <% end %>
+                        <%= f.text_field :text %>
+                        
+                        <%= f.submit :reply, :class => "btn btn-primary" %>
+                    <% end %>
+                </div>
+            </div>
+        </div><!-- .row-fluid-->
+    </div>
+    
+    <!--Opens Bottom Section-->
+    <div class="modal-footer">
+        <div id="submitButton">
+            <% if((@exch.initUser).to_s == (current_user.id).to_s ) %>
+                <% if @exch.initAcpt %>
+                    <span>Waiting for user</span>
+                <%else%>
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <%= f.submit "Sign In", {:class => "btn btn-primary"} %>
+                <!--<%= button_to "Accept", accept_exchange_path(:exch_id => @exch.id, :user_id => @exch.initUser) %>-->
+                <%end%>
+            <%else%>
+                <% if @exch.targAcpt %>
+                    <span>Waiting for user</span>
+                <%else%>
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <%= button_to "Accept", accept_exchange_path(:exch_id => @exch.id, :user_id => @exch.targUser), {:class => "btn btn-primary"} %>
+                <%end%>
+            <%end%>    
+        </div>
+    </div>

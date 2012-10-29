@@ -1,0 +1,82 @@
+var context;
+$(document).ready(function() {
+
+    userContext = <%= @user.to_json.html_safe %>;
+    targContext = <%= @targListing.user.to_json.html_safe %>;
+    listing = <%= @targListing.to_json.html_safe %>;
+
+    $('#targlisting').insertERBTemplateAjax();
+    $('#initlisting').insertERBTemplateAjax();
+    
+    $(".tab-content").live("hover", function(){
+
+    });
+
+    $(".close").live("click", function(){
+        var e = $(this);
+        var tab = e.closest(".active").attr("id");
+        $("#"+tab).remove();
+        $("a[href='#"+tab+"']").remove();
+    });
+
+    $(".selectListing").live("change", function(){
+        var listing = $(this).val();
+        var listingContainer = $(this).closest(".shadow");
+        $.get("/get_listing?id="+listing, function(data) {
+            if(listingContainer.attr("class").indexOf("offer") != -1){
+                o = $('#offerTemplate').clone();
+
+            }
+            else{
+                o = $('#needTemplate').clone();
+            }
+
+            o.find('.listingTitle').html(data['title']);
+            o.find('.listingDesc').html(data['description']);
+            o.find('#initiate_exchange_exchange_item_user_listing_id').attr("value", userContext.id);
+            o.find('#initiate_exchange_exchange_item_targ_user_id').attr("value", targContext.id);
+
+            if(console){
+                console.log("cloned element");
+                console.log(o.html());
+            }
+            listingContainer.replaceWith(o);
+            o.fadeIn();
+        });
+    });
+
+    $('form #user_new_link').click(function(e) {
+        e.preventDefault();
+        var date = new Date();
+        var listingID = 'listing'+date.getTime();                
+        $('#userItems .active').removeClass('active');
+        $('#userExchItems .active').removeClass('active');
+        $('#user_new_link').before("<li class='active'><a href='#"+listingID+"' data-toggle='tab'>NEW</li>");
+
+        $('#userExchItems').append('<div class="tab-pane active" id="'+listingID+'"><div data-url="/add_need?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="newUserCreate"></div></div>');
+        $('#newUserCreate').insertERBTemplateAjax("over");
+
+    });
+
+    $('form #targ_new_link').click(function(e) {
+        e.preventDefault();
+        var date = new Date();
+        var listingID = 'listing'+date.getTime();
+        $('#targItems .active').removeClass('active');
+        $('#targExchItems .active').removeClass('active');
+        $('#targ_new_link').before("<li class='active'><a href='#"+listingID+"' data-toggle='tab'>NEW</li>");
+        $('#targExchItems').append('<div class="tab-pane active" id="'+listingID+'"><div data-url="/add_offer?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="newTargCreate"></div></div>');
+        $('#newTargCreate').insertERBTemplateAjax("over");
+
+    });
+
+      $('form a.remove_child').live('click', function() {
+        var hidden_field = $(this).prev('input[type=hidden]')[0];
+        if(hidden_field) {
+          hidden_field.value = '1';
+        }
+        $(this).parents('.fields').hide();
+        return false;
+    });
+
+});
