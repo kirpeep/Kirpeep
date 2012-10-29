@@ -33,7 +33,16 @@ class ExchangesController < ApplicationController
   end
 
   def show
-
+    @exch = Exchange.find(params[:id]) 
+    @targUser = User.find(@exch.targUser )
+    @initUser = User.find(@exch.initUser )
+    @exchange_items = exchanged_items
+    #not the greatest way to do this, with this code we will not be able to do \
+    #multiparty exchanges. To resolve a migration should be made to include initUsers id 
+    #so that it doesn't need to be pulled from the listing
+    #for now the items with :targ_user_id will be assinged
+    @targItems = @exchange_items.find_all_by_targ_user_id( @targUser.id)
+    @initItems = @exchange_items.find_all_by_targ_user_id(@initUser.id)
   end
 
   def new
@@ -157,9 +166,8 @@ class ExchangesController < ApplicationController
     redirect_to current_user
   end
 
-  def exchanged_items(id)
-    return ExchangeItem.where("exchange_id = ?", id).allfind { |e|  }
-
+  def exchanged_items
+    ExchangeItem.where("exchange_id = ?", params[:id])
   end
 
   def add_need

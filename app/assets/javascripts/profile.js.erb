@@ -38,7 +38,7 @@ $(document).ready(function(){
   $('.best_in_place').best_in_place();
   
   //Exchange Modal JQuery
-  $('.dynamolink').click(function(event){
+  $('.dynamolink').live("click", function(event){
     var path = $(this).attr('href');
     $('#dynamobox').load(path);
     $('#dynamobox').modal('show');

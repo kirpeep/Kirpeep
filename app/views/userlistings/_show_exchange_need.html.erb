@@ -7,10 +7,6 @@
         <span>
             <%= listing.title %> <br>
             <%= listing.description %>
-            <%= form.fields_for :exchange_item, ExchangeItem.new, :child_index => 'replace_this' do |f| %>
-                <%=fa.hidden_field :user_listing_id, :value => listing.id %>
-                <%=fa.hidden_field :targ_user_id, :value => targ.id %>
-            <% end %>
         </span>
     </div> 
 </div>

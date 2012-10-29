@@ -17,7 +17,7 @@
                 <% end %>
 			
 				<% for exchange in exch %>
-				<%= exchange.type %>
+				
 				<% next if exchange.type == 'ArchivedExchange' %>
 				<a class="dynamolink" href="/exchanges/<%= exchange.id %>" >
 					<div class='row-fluid'>

@@ -1,16 +1,12 @@
 <div class="rounded-offer shadow">
     <a type="button" class="close" aria-hidden="true">×</a>
     <div style="">
-        <%= image_tag @targListing.photo.url %>
+        <%= image_tag listing.photo.url %>
     </div>
     <div style="">
         <span>
-            <%= @targListing.title %> <br>
-            <%= @targListing.description %>
-            <%= form.fields_for :exchange_item, ExchangeItem.new, :child_index => 'replace_this' do |f| %>
-                <%=fa.hidden_field :user_listing_id, :value => @targListing.id %>
-                <%=fa.hidden_field :targ_user_id, :value => targ.id %>
-            <%= end %>
+            <%= listing.title %> <br>
+            <%= listing.description %>
         </span>
     </div> 
 </div>

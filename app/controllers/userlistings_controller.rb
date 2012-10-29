@@ -93,16 +93,16 @@ class UserlistingsController < ApplicationController
   end
 
   #display user listing on the exchange modals
-  #def show_listing_exchange
-  #    listing = UserListing.find(params[:id]) 
-  #    @user = listing.user
-  #    targ = User.find(params[:targ])
-  #    if listing.type == "Offer"
-  #      render :partial => 'show_exchange_offer', :f => f, :locals => {:listing => listing, :@user => @user, :targ => targ }
-  #    else 
-  #      render :partial => 'show_exchange_need', :f => f, :locals => {:listing => listing, :@user => @user, :targ => targ }
-  #    end
-  #end
+  def show_listing_exchange
+      listing = UserListing.find(params[:id]) 
+      @user = listing.user
+      targ = User.find(params[:targ])
+      if listing.type == "Offer"
+        render :partial => 'show_exchange_offer', :f => f, :locals => {:listing => listing, :@user => @user, :targ => targ }
+      else 
+        render :partial => 'show_exchange_need', :f => f, :locals => {:listing => listing, :@user => @user, :targ => targ }
+      end
+  end
 
   def edit
     @listing = UserListing.find(params[:id]) 

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('.dynamolink').click(function(event){
+  $('.dynamolink').live("click", function(event){
     var path = $(this).attr('href');
     $('#dynamobox').load(path);
     $('#dynamobox').modal('show');
