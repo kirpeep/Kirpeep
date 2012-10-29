@@ -9,7 +9,7 @@
         	<span>
             	<% userOffers = initUser.offers.all.map { |offer| [offer.title, offer.id] } %>
                 <% targNeeds = targUser.needs.all.map { |need| [need.title, need.id] } %> 
-                <%= select_tag :listing_id, options_for_select(userOffers+targNeeds), { :class => 'selectListing' }%>
+                <%= select_tag :listing_id, options_for_select(userOffers+targNeeds), { :class => 'selectListing'} %>
         	</span>
             
         </div>
