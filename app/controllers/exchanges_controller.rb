@@ -27,8 +27,8 @@ class ExchangesController < ApplicationController
         end
       end
     else
-    	flash[:error] = exchange.errors.full_messages.to_sentence
-      redirect_to user
+    	flash[:error] = @exchange.errors.full_messages.to_sentence
+      redirect_to current_user
     end
   end
 
@@ -166,13 +166,27 @@ class ExchangesController < ApplicationController
     initUser = User.find(params[:init])
     targUser = User.find(params[:targ])
 
-    render :partial => 'create_need', :locals => {:initUser => initUser, :targUser => targUser}    
+    userNeeds = initUser.needs.all.map { |need| [need.title, need.id] }
+    targOffers = targUser.offers.all.map { |offer| [offer.title, offer.id] } 
+    dropdownItems = [["Select an item", -9],[":Your Needs:", -9] ]  
+    dropdownItems.concat( userNeeds)
+    dropdownItems = dropdownItems + [[":Their Offers:", -9]]
+    dropdownItems.concat(targOffers)
+
+    render :partial => 'create_need', :locals => {:initUser => initUser, :targUser => targUser, :dropdownItems => dropdownItems}    
   end
 
   def add_offer
     initUser = User.find(params[:init])
     targUser = User.find(params[:targ])
 
-    render :partial => 'create_offer', :locals => {:initUser => initUser, :targUser => targUser}   
+    userOffers = initUser.offers.all.map { |offer| [offer.title, offer.id] }
+    targNeeds = targUser.needs.all.map { |need| [need.title, need.id] } 
+    dropdownItems = [["Select an item", -9],[":Your Offers:", -9] ]  
+    dropdownItems.concat( userOffers)
+    dropdownItems = dropdownItems + [[":Their Needs:", -9]]
+    dropdownItems.concat(targNeeds)
+
+    render :partial => 'create_offer', :locals => {:initUser => initUser, :targUser => targUser, :dropdownItems => dropdownItems}   
   end
 end

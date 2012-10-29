@@ -126,8 +126,10 @@ class UsersController < ApplicationController
 
   def exchanges
     @user = User.find(params[:id])
-
-    render :partial => 'exchange', :locals => {:user => @user}
+    @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all 
+    @pastExch = Exchange.where("type = ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all
+    
+    render :partial => 'exchange', :locals => {:user => @user, :exch => @exch, :pastExch => @pastExch}
   end
 
   def messages

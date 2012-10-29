@@ -10,16 +10,14 @@
 		</ul>
 		<div class='tab-content'>
 			<div id='current_exchanges' class="tab-pane active">
-				<% 
-                                 if current_user
-                                 @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', current_user.id, current_user.id).all  
-                                 else
-                                 @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all
-                                 end
- 
-                                  %>
+				<% if current_user %>
+                <% @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', current_user.id, current_user.id).all  %> 
+                <% else %>
+                <% @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all %>
+                <% end %>
 			
-				<% for exchange in @exch %>
+				<% for exchange in exch %>
+				<%= exchange.type %>
 				<% next if exchange.type == 'ArchivedExchange' %>
 				<a class="dynamolink" href="/exchanges/<%= exchange.id %>" >
 					<div class='row-fluid'>
@@ -53,8 +51,7 @@
 						</div>
 						<div class='span4'>
 							<span>
-								Offer: <%= (UserListing.find(exchange.targ_list_id)).title %>
-			            		Need: <%= UserListing.find(exchange.init_list_id).title %>
+								Exchange
 							</span>
 						</div>
 					</div>
@@ -62,15 +59,8 @@
 				<%end%>
 			</div>
 			<div id='past_exchanges' class="tab-pane">
-				<% 
-                                   if current_user
-                                   @exch = Exchange.where("type = ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', current_user.id, current_user.id).all
-                                   else
-			           @exch = Exchange.where("type = ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all
-                                    end
-
-                                %>
-				<% for exchange in @exch %>
+				
+				<% for exchange in pastExch %>
 				<div class='row-fluid p_exchange'>
 					<div class='span4'>
 						<% if (exchange.initUser).to_s == (current_user.id).to_s %>

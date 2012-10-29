@@ -14,6 +14,4 @@ class InitiateExchange < Exchange
   #has_many :profiles, :through => :user_listings
   validates :initUser, :presence => true
   validates :targUser, :presence => true
-  validates :init_list_id, :presence => true
-  validates :targ_list_id, :presence => true
 end

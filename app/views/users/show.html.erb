@@ -75,7 +75,7 @@
                 <%= render :partial => 'profile', :locals => {:user => @user} %>
               </div>
               <div id='exchanges' class="tab-pane">
-                <%= render :partial => 'exchange', :locals => {:user => @user} %>
+                <div id="exchContainer" data-url="/user_exchanges/<%=current_user.id%>"></div>
               </div>
               <div id='messages' class="tab-pane"></div>
             </div> <!-- /.tab-content -->

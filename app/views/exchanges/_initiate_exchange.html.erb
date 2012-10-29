@@ -90,7 +90,8 @@
     <%= form_for(@initexch, :url => create_exchange_path) do |f| %>
     <!-- fields_for templates -->
         <%# User Exchange Items %>
-    
+        <%= f.hidden_field :targUser, :value => @targListing.user.id %>
+        <%= f.hidden_field :initUser, :value => current_user.id %>
         <div id="needTemplate" class="rounded-need shadow hide">
             <a type="button" class="close" aria-hidden="true">×</a>
             <div class='listingImg'>

@@ -6,8 +6,6 @@
         </span>
     </div>
     <div>
-    	<% userNeeds = initUser.needs.all.map { |need| [need.title, need.id] } %>
-            <% targOffers = targUser.offers.all.map { |offer| [offer.title, offer.id] } %> 
-            <%= select_tag :listing_id, options_for_select(userNeeds+targOffers), { :class => 'selectListing'} %>
+            <%= select_tag :listing_id, options_for_select(dropdownItems), { :class => 'selectListing'} %>
     </div>
 </div>
