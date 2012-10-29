@@ -21,15 +21,20 @@
 	</div>
 </div>
 <div class="modal-footer">
+        <% @postUrl = request.protocol.to_s() + request.host_with_port.to_s() + '/view/' + current_user.id.to_s() %>
+        <% @mediaUrl = request.protocol.to_s() + request.host_with_port.to_s() + '/' + listing.photo.url.to_s() %>
+        <% @fbUrl = 'http://www.facebook.com/dialog/feed?app_id=498098446874679&link=' + @postUrl.html_safe + '&picture=' + @mediaUrl.html_safe + '&name=Kirpee Listing&caption=Share%20a%20Kirpeep%20Listing&description=Sharing%20Kirpeepe%20listings%20has%20never%20been%20easier.&redirect_uri=' + @postUrl.html_safe
+        %>
 	<div class="row-fluid">
 		<div class="span2 offset3">
-			<%= image_tag("facebook.jpg") %>
+			<a href='<%= @fbUrl %>'><%= image_tag('btn_fb_55px.gif') %></a>
 		</div>
 		<div class="span2">
-			<%= image_tag("pinterest.png") %>
+			<a href="http://pinterest.com/pin/create/button/?url=<%= @postUrl.html_safe %>&media=<%= @mediaUrl.html_safe %>&description=Listing%20on%20Kirpeep.com" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
 		</div>
 		<div class="span2">
-			<%= image_tag("twitter.png") %>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= @postUrl.html_safe %>" data-text="Check out this listing on Kirpeep.com">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
 	</div>
 </div>

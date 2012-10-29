@@ -8,17 +8,18 @@
 
 <!--< %= render 'shared/signin' %>-->
 
-
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   <div class='container'>
     <div class='row'>
       <div class="span3 offset1 pull-right">
       <% if signed_in? %>
       <div class="btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-            <%= current_user.name %>
+        <a class="btn dropdown-toggle" data-toggle="dropdown" onclick='$(this).dropdown()' href="#">
+            <%= current_user.name %> - <%= if current_user.kirpoints == nil then 0 else current_user.kirpoints end %> kps
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
+            <li><%= link_to 'Buy Kirpoints' , '/kirpoints', :class => "dynamolink" %></li>
             <li><%= link_to 'View Profile', current_user %></li>
             <li><%= link_to 'Edit Profile' , edit_profile_path(current_user.profile), :class => "dynamolink" %></li>
             <li><%= link_to 'Edit Account', edit_user_path(current_user), :class => "dynamolink" %></li>

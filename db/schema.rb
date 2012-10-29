@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028200235) do
+ActiveRecord::Schema.define(:version => 20121028222800) do
 
   create_table "assets", :force => true do |t|
     t.integer  "user_listing_id"
@@ -165,11 +165,12 @@ ActiveRecord::Schema.define(:version => 20121028200235) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
-    t.boolean  "delta",                :default => true,  :null => false
-    t.boolean  "is_modified_exchange", :default => false, :null => false
-    t.boolean  "is_deleted",           :default => false, :null => false
+    t.datetime "created_at",                                                             :null => false
+    t.datetime "updated_at",                                                             :null => false
+    t.boolean  "delta",                                               :default => true,  :null => false
+    t.boolean  "is_modified_exchange",                                :default => false, :null => false
+    t.boolean  "is_deleted",                                          :default => false, :null => false
+    t.decimal  "kirpoints",            :precision => 10, :scale => 0
   end
 
   create_table "users", :force => true do |t|
