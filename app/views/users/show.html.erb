@@ -42,12 +42,12 @@
     	<div class='span4'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
       	<ul class='profileInfo'>
-          <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
-            <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>
-            <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
-            <li><strong>Birth Date:</strong> <%= best_in_place @profile, :birthdate %></li>
-            <li><strong>Gender:</strong> <%= best_in_place @profile, :gender %></li>
-            <li><strong>Needs / Offers</strong> </li>
+          <li onmouseover="$('#locationEdit').show()" onmouseout="$('#locationEdit').hide()" ><strong>Location:</strong> <%= best_in_place @profile, :location %> <i id='locationEdit' style='display:none;' class='icon-edit'></i></li>
+            <li onmouseover="$('#zipcodeEdit').show()" onmouseout="$('#zipcodeEdit').hide()"><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %> <i id='zipcodeEdit' style='display:none;' class='icon-edit'></i></li>
+            <li onmouseover="$('#languageEdit').show()" onmouseout="$('#languageEdit').hide()"><strong>Languages:</strong> <%= best_in_place @profile, :languages %> <i id='languageEdit' style='display:none;' class='icon-edit'></i></li>
+            <li onmouseover="$('#birthdateEdit').show()" onmouseout="$('#birthdateEdit').hide()"><strong>Birth Date:</strong> <%= best_in_place @profile, :birthdate %> <i id='birthdateEdit' style='display:none;' class='icon-edit'></i></li>
+            <li onmouseover="$('#genderEdit').show()" onmouseout="$('#genderEdit').hide()"><strong>Gender:</strong> <%= best_in_place @profile, :gender %> <i id='genderEdit' style='display:none;' class='icon-edit'></i></li>
+            <li ><strong>Needs / Offers</strong> </li>
             <li><strong>Completed Exchanges</strong> </li>
             <li><strong>1 Review (stars)<strong></li> 
       	</ul>

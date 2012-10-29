@@ -27,7 +27,9 @@
 	<div class='span6'>
 		<div><span id='needLabel'>NEEDS - <%= user.needs.count %></span> 
 				<% if is_current_user(user) %>
-					<%= link_to 'Add Need', new_userlisting_path(:type => "need"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+					<%= link_to 'Add Need', 
+					new_userlisting_path(:type => "need"), 
+					{:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
 				<% end %>
 			</div>
 			<% for need in user.needs %>

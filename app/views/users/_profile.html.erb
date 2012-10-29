@@ -1,6 +1,6 @@
 <div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
         <% if is_current_user(user) %>
-		<em><%= best_in_place user.profile, :quickPitch%></em>
+		<em onmouseover="$('#quickPitchEdit').show()" onmouseout="$('#quickPitchEdit').hide()"><%= best_in_place user.profile, :quickPitch%> <i id='quickPitchEdit' style='display:none;' class='icon-edit'></i></em>
 	<% else %>
 		<em><%= user.profile.quickPitch %></em>
 	<% end %>
