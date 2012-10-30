@@ -2,15 +2,21 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Buy Kirpoints</h3>
 </div>
-<form action='/users/<%= current_user.id %>/kirpoints' method='POST'>
+<form id='frmKirpoints' action='/kirpoints' method='POST'>
 <div class="modal-body">
-    <div class="field">
+    <div class="field pull-left clearfix">
+       1 Kirpoint = $1
+    </div>
+    <br><br>
+    <div class="field pull-left">
        <label>How many kirpoints</label>
        <input type='text' name='kirpoints' id='kirpoints' />
     </div>
+    <div class='field span4 pull-right'>
+       <label>In order to buy Kirpoints you may need a paypal account.</label>
+    </div>
 </div>
   <div class="modal-footer">
-  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-  <button class='btn btn-success' type='submit'>Buy</button>
+  <a onclick='$("#frmKirpoints").submit()' style='margin-right:15px;'><%= image_tag('https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif') %></a>
 </div>
 </form>

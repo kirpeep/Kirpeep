@@ -5,9 +5,11 @@
 ####################################################
 
 class UsersController < ApplicationController
+  include ActiveMerchant::Billing
   helper_method :sort_column, :sort_direction
   # GET /users
   # GET /users.json
+
 
   before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot, :reset_password, :process_reset_password, :new, :create, :activate, :view]
   #before_filter :correct_user, :only => [:show, :edit, :update, :destroy]
@@ -191,19 +193,19 @@ class UsersController < ApplicationController
     # First thing we need to do is check the user account
     if params[:email].nil?
        flash[:error] = 'We are sorry something went wrong. Please try again.'
-       redirect_to('/forgot') 
+       redirect_to('/') 
     end
    	
     @user = User.find_by_email(params[:email])
     if @user.nil?
        flash[:error] = 'We were unable to find this email in our system.'
-       redirect_to('/forgot')
+       redirect_to('/')
     else
        @token = User.generateToken
        @user.update_attribute(:token, @token.to_s)
        UserMailer.forgot_email(@user).deliver
        flash[:notice] = 'An email was sent to your email account.'
-       redirect_to('/forgot')
+       redirect_to('/')
     end	
   end
   
@@ -252,9 +254,13 @@ class UsersController < ApplicationController
   end
 
    def add_kirpoints
-      @user = User.find(current_user.id)
-      @user.update_attribute(:kirpoints, params[:kirpoints].to_f())
-      redirect_to root_path
+      amount = params[:kirpoints].to_i() * 100
+      setup_response = gateway.setup_purchase(amount,
+	    :ip                => request.remote_ip,
+	    :return_url        => url_for(:action => 'confirm', :only_path => false),
+	    :cancel_return_url => url_for(:action => 'index', :only_path => false)
+	  )
+	  redirect_to gateway.redirect_url_for(setup_response.token)
    end
 
    def kirpoints
@@ -263,7 +269,49 @@ class UsersController < ApplicationController
         end
    end
 
+   def confirm
+	 redirect_to :action => 'index' unless params[:token]
+  
+         details_response = gateway.details_for(params[:token])
+  
+         if !details_response.success?
+           @message = details_response.message
+           render :action => 'error'
+           return
+         end
+        @token = params[:token]
+        @payer_id = params[:PayerID]
+        @total = details_response.params['order_total']
+        @address = details_response.address
+   end
+
+  def complete
+    amount = params[:total].to_i() * 100
+    purchase = gateway.purchase(amount,
+      :ip       => request.remote_ip,
+      :payer_id => params[:payer_id],
+      :token    => params[:token]
+    )
+  
+    if !purchase.success?
+      @message = purchase.message
+      render :action => 'error'
+      return
+    end
+    
+    kirpoints = current_user.kirpoints + params[:total].to_f()
+    current_user.update_attribute(:kirpoints, kirpoints)
+  end
+
   private 
+
+    def gateway
+       @gateway ||= PaypalExpressGateway.new(
+         :login => 'steven_1351543516_biz_api1.kirpeep.com',
+         :password => '1351543534',
+         :signature => 'AvKdi0LrEbeG03EMIoKHsOro2HLNAYUeGaf.kyjQwy2IVHVCok1i-fcE '
+       )
+    end
 
     def signed_in_user
       unless signed_in?
