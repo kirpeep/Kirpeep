@@ -46,7 +46,7 @@ module SessionsHelper
   		redirect_to root_path
   	else 
   	    sign_in user
-  	    flash.now[:error] = "Welcome, #{user.name}"
+  	    flash[:notice] = "Welcome, #{user.name}"
   	    redirect_to user
   	end
   end
