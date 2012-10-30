@@ -5,7 +5,7 @@
     #but never initated -->
 
     <% if(@exch.type == 'InitiateExchange' || @exch.type == 'Exchange')%> 
-        <%= render 'initiated_exchange', :locals => {:exch => @exch, :targUser => @targUser, :initUser => @initUser, :targItems => @targItems, :initItems => @initItems} %>             
+        <%= render 'initiated_exchange', :locals => {:exch => @exch, :targUser => @targUser, :initUser => @initUser, :targItems => @targItems, :initItems => @initItems, :exchange_items => @exchange_items} %>             
     <%  elsif (@exch.type == 'PerformExchange') %>
         <%= render 'perform_exchange', :locals => {:exch => @exch, :targUser => @targUser, :initUser => @initUser, :targItems => @targItems, :initItems => @initItems}  %>
     <% elsif (@exch.type == 'RateExchange') %>

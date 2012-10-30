@@ -1,12 +1,16 @@
-<div class="rounded-offer shadow">
+<div id="offerTemplate"class="rounded-offer shadow fade-in">
     <a type="button" class="close" aria-hidden="true">×</a>
     <div style="">
         <%= image_tag listing.photo.url %>
     </div>
     <div style="">
         <span>
-            <%= listing.title %> <br>
-            <%= listing.description %>
+            <div>
+            <span class="listingTitle"><%= listing.title %></span> <br>
+            <span class="listingDesc"><%= listing.description %></span>
+            <input id="initiate_exchange_exchange_item_0_user_listing_id" name="initiate_exchange[exchange_item][0][user_listing_id]" type="hidden" value="<%= listing.id %>">
+            <input id="initiate_exchange_exchange_item_0_targ_user_id" name="initiate_exchange[exchange_item][0][targ_user_id]" type="hidden" value="<%= targUser.id %>">
+        </div>
         </span>
     </div> 
 </div>

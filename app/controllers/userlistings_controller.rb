@@ -188,6 +188,14 @@ class UserlistingsController < ApplicationController
   end 
 
   def getListing
-    render :json => UserListing.find(params[:id])
+    #render :json => UserListing.find(params[:id])
+
+    listing = UserListing.find(params[:id])
+    targUser = User.find(params[:targ])
+    if params[:type] == "offer"
+      render :partial => 'show_exchange_offer', :locals => {:listing => listing, :targUser => targUser}
+    else
+      render :partial => 'show_exchange_need', :locals => {:listing => listing, :targUser => targUser}
+    end
   end
 end

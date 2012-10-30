@@ -7,27 +7,18 @@
 class ExchangesController < ApplicationController
 
   def create
-
+    debugger
     @exchange = InitiateExchange.new params[:initiate_exchange]
+    @exchange.exchange_items.build(params[:exchange_items])
+    @exchange.message.build(params[:message])
     @exchange.initAcpt = true
     @user = current_user 
-    @message = Message.new params[:message]
+    
     if @exchange.save
-      # have to figure out how to go about sending the user an email
-      # I see that it looks like this may create a new message.  Not
-      # sure if this means that its the same as person to person message - kyle  
-      @message.exchange_id = @exchange.id
-      if @message.save 
-        @exch_message_link = ExchangeMessageLink.new
-        @exch_message_link.exchange_id = @exchange.id
-        @exch_message_link.message_id = @message.id
-        if @exch_message_link.save
-          flash[:notice] = 'exchange saved.'
-          redirect_to current_user
-        end
-      end
+        flash[:notice] = 'exchange saved.'
+        redirect_to current_user
     else
-    	flash[:error] = @exchange.errors.full_messages.to_sentence
+  	  flash[:error] = @exchange.errors.full_messages.to_sentence
       redirect_to current_user
     end
   end
