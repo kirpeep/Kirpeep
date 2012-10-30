@@ -3,41 +3,6 @@
     
     <%= f.hidden_field :targUser, :value => @targListing.user.id %>
     <%= f.hidden_field :initUser, :value => current_user.id %>
-    <%# User Exchange Items %>
-    <div id="needTemplate" class="rounded-need shadow hide">
-        <a type="button" class="close" aria-hidden="true">×</a>
-        <div class='listingImg'>
-            <%= image_tag @targListing.photo.url %>
-        </div>
-        <div class='listingInfo'>
-            <div>
-                <span class="listingTitle"><%= @targListing.title %></span> <br>
-                <span class="listingDesc"><%= @targListing.description %></span>
-                <%= f.fields_for :exchange_item, ExchangeItem.new, :child_index => 'replace_this' do |fa| %>
-                    <%=fa.hidden_field :user_listing_id, :value => -1 %>
-                    <%=fa.hidden_field :targ_user_id, :value => -1 %>
-                <% end %>
-            </div>
-        </div> 
-    </div>
-    
-    <%# Target Exchange Items %>
-    <div id="offerTemplate"class="rounded-offer shadow hide">
-        <a type="button" class="close" aria-hidden="true">×</a>
-        <div style="">
-            <%= image_tag @targListing.photo.url %>
-        </div>
-        <div style="">
-            <span>
-                <%= @targListing.title %> <br>
-                <%= @targListing.description %>
-                <%= f.fields_for :exchange_item, ExchangeItem.new, :child_index => 'replace_this' do |fa| %>
-                    <%=fa.hidden_field :user_listing_id, :value => -1 %>
-                    <%=fa.hidden_field :targ_user_id, :value => -1 %>
-                <% end %>
-            </span>
-        </div> 
-    </div>
 
     <!-- end of fields for/begining of Modal-->
     <div class="modal-header">
@@ -85,22 +50,7 @@
                         <div class="tab-pane active" id="offer">
                             <!--  Listing -->
                             <% if @targListing.listingType == "need" %>
-                            <div class="rounded-need shadow">
-                                <a type="button" class="close" aria-hidden="true">×</a>
-                                <div style="">
-                                    <%= image_tag @targListing.photo.url %>
-                                </div>
-                                <div style="">
-                                    <span>
-                                        <%= @targListing.title %> <br>
-                                        <%= @targListing.description %>
-                                        <%= f.fields_for :exchange_item do |fa| %>
-                                            <%=fa.hidden_field :user_listing_id, :value => @targListing.id %>
-                                            <%=fa.hidden_field :targ_user_id, :value => @targUser.id %>
-                                        <% end %>
-                                    </span>
-                                </div> 
-                            </div>
+                            <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @targListing.user.id %>" id="targlisting"></div>
                             <% else %>
                             <div data-url="/add_need?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="targlisting"></div>
                             <%end%>
@@ -131,22 +81,7 @@
                             <% if @targListing.listingType == "need" %>
                             <div data-url="/add_offer?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="initlisting"></div>
                             <%else%>
-                            <div class="rounded-offer shadow">
-                                <a type="button" class="close" aria-hidden="true">×</a>
-                                <div style="">
-                                    <%= image_tag @targListing.photo.url %>
-                                </div>
-                                <div style="">
-                                    <span>
-                                        <%= @targListing.title %> <br>
-                                        <%= @targListing.description %>
-                                        <%= f.fields_for :exchange_item do |fa| %>
-                                            <%=fa.hidden_field :user_listing_id, :value => @targListing.id %>
-                                            <%=fa.hidden_field :targ_user_id, :value => @targUser.id %>
-                                        <% end %>
-                                    </span>
-                                </div> 
-                            </div>
+                                <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @targListing.user.id %>" id="initlisting"></div>
                             <%end%>
                             <!--End of Need Listing-->
                         </div>
@@ -157,12 +92,12 @@
 
             <!--Opens Bottom Section-->
             <div class='row-fluid'>
-                <%= fields_for Message.new do |message| %>
+                <%= f.fields_for Message.new do |message| %>
                 <span>Message</span>
                 <%= message.text_area :text, :class => 'rounded-map', :rows => '4', :style => "width:95%" %>
                 <%= message.hidden_field :targUser, :value => @targListing.user.id %>
                 <%= message.hidden_field :initUser, :value => current_user.id %>
-                <%= f.hidden_field(:responseToMsgID, :value => 'exchange' ) %>
+                <%= message.hidden_field(:responseToMsgID, :value => 'exchange' ) %>
                 <%end%>
             </div>
         </div>

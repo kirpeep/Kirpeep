@@ -42,7 +42,6 @@ class Message < ActiveRecord::Base
 
   #see if user has read message
   def isUnread? (user_id)
-    debugger
     if user_id.to_s == initUser
       initUnread
     else
