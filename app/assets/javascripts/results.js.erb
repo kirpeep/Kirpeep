@@ -86,12 +86,12 @@ $(document).ready(function() {
   })).done(function(){
             setTimeout(function(){
 	    var $container = $('#BrowseListings');
-	    if(console) console.log($container);
+	   
 	    $container.imagesLoaded(function(){
 		     $container.masonry({
 			itemSelector: '.listings'
 		      });
-	    });}, 1000);
+	    });}, 2000);
   });
 
 });  

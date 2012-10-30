@@ -60,6 +60,7 @@ $(document).ready(function() {
 	  	$('#dynamobox').modal('show');
 
 	 });
+ye
 
 	$("#OfferForm").live("submit", function(event){
 		event.preventDefault();
@@ -84,13 +85,14 @@ $(document).ready(function() {
   $(".listings").each(function(){
   	$(this).insertERBTemplateAjax();
   })).done(function(){
-            
+            setTimeout(function(){
 	    var $container = $('#BrowseListings');
+
 	    $container.imagesLoaded(function(){
 		     $container.masonry({
 			itemSelector: '.listings'
 		      });
-	    });
+	    });}, 2000);
   });
 
 });  
