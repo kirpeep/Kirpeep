@@ -44,7 +44,10 @@ TestApp::Application.routes.draw do
   get '/activate/', :to => 'users#activate'
 
   get '/kirpoints', :to => 'users#kirpoints'
-	  post '/kirpoints', :to => 'users#add_kirpoints'
+  post '/kirpoints', :to => 'users#add_kirpoints'
+  match '/kirpoints/confirm', :to=> 'users#confirm'
+  match '/kirpoints/complete', :to=> 'users#complete'
+
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
 

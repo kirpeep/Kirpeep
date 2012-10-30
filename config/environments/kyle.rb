@@ -24,6 +24,10 @@ TestApp::Application.configure do
 
   $domain = 'http://localhost:3000'
 
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+  end
+
   # SMTP settings
   #config.action_mailer.delivery_method = :smtp
   #config.action_mailer.smtp_settings = {

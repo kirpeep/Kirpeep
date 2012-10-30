@@ -51,7 +51,6 @@ group :test, :development, :kyle, :john do
 	gem 'launchy'
 	gem 'ruby-debug19'
 	gem 'rails-erd'
-
 end
 
 #Run the following the following(each is a line)
