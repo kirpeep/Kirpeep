@@ -1,7 +1,6 @@
 module SessionsHelper 
 
   def sign_in(user)
-     #debugger
      if user.Active == true
 	cookies.permanent.signed[:remember_token] = [user.id, user.salt]
 	self.current_user = user
@@ -42,7 +41,7 @@ module SessionsHelper
                 params[:session][:password])
 
   	if user.nil?
-  		flash.now[:error] = "Invalid email/password combination."
+  		flash[:error] = "Invalid email/password combination."
   		@title = "Sign In"
   		redirect_to root_path
   	else 

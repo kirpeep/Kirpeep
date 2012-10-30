@@ -301,7 +301,7 @@ class UsersController < ApplicationController
     
     kirpoints = current_user.kirpoints + params[:total].to_f()
     current_user.update_attribute(:kirpoints, kirpoints)
-end
+  end
 
   private 
 
