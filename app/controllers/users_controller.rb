@@ -193,19 +193,19 @@ class UsersController < ApplicationController
     # First thing we need to do is check the user account
     if params[:email].nil?
        flash[:error] = 'We are sorry something went wrong. Please try again.'
-       redirect_to('/forgot') 
+       redirect_to('/') 
     end
    	
     @user = User.find_by_email(params[:email])
     if @user.nil?
        flash[:error] = 'We were unable to find this email in our system.'
-       redirect_to('/forgot')
+       redirect_to('/')
     else
        @token = User.generateToken
        @user.update_attribute(:token, @token.to_s)
        UserMailer.forgot_email(@user).deliver
        flash[:notice] = 'An email was sent to your email account.'
-       redirect_to('/forgot')
+       redirect_to('/')
     end	
   end
   

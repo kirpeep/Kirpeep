@@ -19,9 +19,10 @@
       <%= label_tag(:email, 'Your Email Please') %>
       <%= text_field_tag(:email) %>
    </div>
+</div>
 <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-   <%= submit_tag('Save', :class => "btn btn-primary") %>
+   <%= submit_tag('Reset Password', :class => "btn btn-primary") %>
 </div>
 <% end %>
-</div>
+

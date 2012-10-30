@@ -14,7 +14,7 @@
       <p class="error"><%= flash[:error] %></p>
 <% end %>
 
-<%= form_tag('/forgot', :method => 'POST') do %>
+<%= form_tag('/forgot', :method => 'POST', :id => 'frmForgot') do %>
    <div class='field'>
       <%= label_tag(:email, 'Your Email Please') %>
       <%= text_field_tag(:email) %>
@@ -22,7 +22,7 @@
 </div>
 <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-   <%= submit_tag('Save', :class => "btn btn-primary") %>
+   <%= submit_tag('Reset Password', :class => "btn btn-primary", :onclick => "$('#frmForgot').submit()") %>
 </div>
 <% end %>
 
