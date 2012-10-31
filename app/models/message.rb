@@ -13,7 +13,7 @@ class Message < ActiveRecord::Base
   #has_many :assets  <= enable to allow multiple images
 
   #paperclip
-  has_attached_file :photo,
+  has_attached_file :photo, :default_url => "missing.pict",
      :styles => {
        :thumb => "100x100#",
        :small  => "40x40" }
