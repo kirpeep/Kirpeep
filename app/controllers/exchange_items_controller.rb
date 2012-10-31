@@ -18,6 +18,10 @@ class ExchangeItemsController < ApplicationController
 	    end
 	end
 
+	def new
+		@exchange_item = ExchangeItem.new
+	end
+	
 	def show
 
 	end

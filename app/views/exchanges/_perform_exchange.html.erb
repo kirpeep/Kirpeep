@@ -1,6 +1,13 @@
-<!-- MODAL -->
-    <% @targ_listing = UserListing.find(@exch.targ_list_id)%>
-    <% @init_listing = UserListing.find(@exch.init_list_id)%>    
+<html>
+<head>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".itemTemplate").each(function(){
+            $(this).insertERBTemplateAjax();
+        });
+    });
+    </script>
+</head>
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Perform Exchange</h3>
@@ -23,77 +30,53 @@
             <!--exchange partner -->
             <div class='span4 align-right' id="exchangePartner">
                 <span id="with">exchanging with</span>
-                <% if (current_user.id).to_s == (@init_listing.user.id).to_s %>
-                    <%= image_tag(@targ_listing.user.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+                <% if (current_user.id).to_s == (@initUser.id).to_s %>
+                    <%= image_tag(@targUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
                     <br>
-                    <%= @targ_listing.user.name %>
+                    <%= @targUser.name %>
                 <%else%>
-                    <%= image_tag(@init_listing.user.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+                    <%= image_tag(@initUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
                     <br>
-                    <%= @init_listing.user.name %>
+                    <%= @initUser.name %>
                 <%end%>
             </div>
         </div><!-- .row-fluid -->
     
         <!--opens middle section-->
         <div class='row-fluid'>
-        <!--left side-->
-            <div class='span6'>
+        <!-- Left Side-->
+            <div class="span6">
                 <div>
                     <span id="getting">You are getting...</span>
                 </div>
 
-                <% if @targ_listing.user.id == current_user.id %>
-                    <% @offer_listing = @init_listing %>
-                    <% @need_listing =  @targ_listing%>
-                <%else%>
-                    <% @offer_listing = @targ_listing %>
-                    <% @need_listing =  @init_listing %>
-                <%end%>
 
-                <div class='rounded-offer shadow'>
-                    <div>
-                        <%= image_tag(@offer_listing.photo.url, {:width => "50px", :height => '50px'}) %>
-                    </div>
-                    <div>
-                        <span>OFFERED</span> 
-                    </div>
-                    <div>
-                        <%= @offer_listing.title %>
-                        <%= @offer_listing.inventoryCount %>
-                        <%= @offer_listing.description %>
-                    </div> 
-                </div>
+            <!-- Start of tabs for items user is receiving--> 
+            <% for item in @targItems %>
+                <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.id %>&targ=<%= @initUser.id %>"></div>
+            <%end%>
+            <!-- End of tabs for items user is receiving--> 
             </div><!-- .span6-->
-            
+
+
             <!--Right Side-->
-            <div class='span6'>
+            <div class="span6">
                 <div>
                     <span id="getting">You are giving...</span>
                 </div>
-                <div class='rounded-need shadow'>
-                    <div>
-                        <%= image_tag(@need_listing.photo.url, {:width => "50px", :height => '50px'} )%>
-                    </div>
-                    <div>
-                        <span>NEEDED</span> 
-                    </div>
-                    <div>
-                        <%= @need_listing.title %>
-                        <%= @need_listing.quantity %> 
-                        <%= @targ_listing.quantityUnit %>
-                        Description: <%= @targ_listing.description %>
-                    </div>
-                </div>
-            </div><!-- .span6 -->
-        </div><!-- .row-fluid-->
 
+            <!-- Start of tabs for items targ is receiving--> 
+            <% for item in @initItems %>
+                <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.id %>&targ=<%= @targUser.id %>"></div>
+            <%end%>
+            <!-- End of tabs for items targ is receiving--> 
+
+            </div>
         <!-- Exchange Message-->
         <div class="row-fluid">
             <span>Message</span>
             <div class="rounded-map shadow" id="message" style="overflow:scroll; height: 100px;">
-                <% exch_message_link = ExchangeMessageLink.where(:exchange_id => @exch.id).first %>
-                <% current_message = Message.find(exch_message_link.message_id) %>
+                <% current_message = @exch.message%>
                 <% reply_message_id = current_message.id %>
                 <% begin %>
                     <%= render :partial =>current_message, :locals => {:current_message => current_message} %>
@@ -105,10 +88,10 @@
          
                         <%= f.hidden_field :initUser, :value => current_user.id %>
                         <%= f.hidden_field :responseToMsgID, :value =>  reply_message_id %>
-                        <% if is_current_user(@init_listing.user) %>
-                            <%= f.hidden_field :targUser, :value => @targ_listing.user.id %>
+                        <% if is_current_user(@initUser) %>
+                            <%= f.hidden_field :targUser, :value => @targUser.id %>
                         <% else %>
-                            <%= f.hidden_field :targUser, :value => @init_listing.user.id %>
+                            <%= f.hidden_field :targUser, :value => @initUser.id %>
                         <% end %>
                         <%= f.text_field :text %>
                         
@@ -116,7 +99,7 @@
                     <% end %>
                 </div>
             </div>
-        </div>
+        </div><!-- .row-fluid-->
     </div><!--modal-body -->
 
     <!--Opens Bottom Section-->
@@ -137,3 +120,4 @@
             <%end%>
         <%end%>
     </div>
+</html>

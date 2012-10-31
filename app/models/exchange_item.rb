@@ -14,5 +14,6 @@ class ExchangeItem < ActiveRecord::Base
   belongs_to :rate_exchange
   belongs_to :archived_exchange
 
-
+  validates :targ_user_id, :presence => true
+  validates :user_listing_id, :presence => true
 end

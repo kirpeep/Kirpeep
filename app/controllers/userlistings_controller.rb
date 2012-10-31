@@ -98,9 +98,9 @@ class UserlistingsController < ApplicationController
       @user = listing.user
       targ = User.find(params[:targ])
       if listing.type == "Offer"
-        render :partial => 'show_exchange_offer', :f => f, :locals => {:listing => listing, :@user => @user, :targ => targ }
+        render :partial => 'show_exchange_offer', :locals => {:listing => listing, :@user => @user, :targ => targ }
       else 
-        render :partial => 'show_exchange_need', :f => f, :locals => {:listing => listing, :@user => @user, :targ => targ }
+        render :partial => 'show_exchange_need', :locals => {:listing => listing, :@user => @user, :targ => targ }
       end
   end
 

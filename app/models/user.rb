@@ -42,7 +42,6 @@ class User < ActiveRecord::Base
 
 
   def has_password?(submitted_password)
-     debugger
   	self.encrypted_password == encrypt(submitted_password)
   end
 

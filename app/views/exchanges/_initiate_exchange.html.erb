@@ -37,21 +37,21 @@
                     var date = new Date();
                     var listingID = date.getTime();   
                     var o = $(data);
-                    o.find('#initiate_exchange_exchange_item_0_user_listing_id').attr("value", userContext.id);
+                    o.find('#initiate_exchange_exchange_items_0_user_listing_id').attr("value", userContext.id);
                     
                     //manually assign child_index to fields_for
-                    o.find('#initiate_exchange_exchange_item_0_user_listing_id').attr('name',
-                        'initiate_exchange[exchange_item]['+listingID+'][user_listing_id]');
-                    o.find('#initiate_exchange_exchange_item_0_user_listing_id').attr('id',
-                        'initiate_exchange_exchange_item_'+listingID+'_user_listing_id');
+                    o.find('#initiate_exchange_exchange_items_0_user_listing_id').attr('name',
+                        'initiate_exchange[exchange_items]['+listingID+'][user_listing_id]');
+                    o.find('#initiate_exchange_exchange_items_0_user_listing_id').attr('id',
+                        'initiate_exchange_exchange_items_'+listingID+'_user_listing_id');
                     
                     //manually assign targ_user_id
-                    o.find('#initiate_exchange_exchange_item_0_targ_user_id').attr("value", targContext.id);
+                    o.find('#initiate_exchange_exchange_items_0_targ_user_id').attr("value", targContext.id);
                     //manually assign child_index to fields_for
-                    o.find('#initiate_exchange_exchange_item_0_targ_user_id').attr('name',
-                        'initiate_exchange[exchange_item]['+listingID+'][targ_user_id]');
-                    o.find('#initiate_exchange_exchange_item_0_targ_user_id').attr('id',
-                        'initiate_exchange_exchange_item_'+listingID+'_targ_user_id');
+                    o.find('#initiate_exchange_exchange_items_0_targ_user_id').attr('name',
+                        'initiate_exchange[exchange_items]['+listingID+'][targ_user_id]');
+                    o.find('#initiate_exchange_exchange_items_0_targ_user_id').attr('id',
+                        'initiate_exchange_exchange_items_'+listingID+'_targ_user_id');
                     
                     
                     listingContainer.html(o.html());

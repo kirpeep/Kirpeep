@@ -8,8 +8,10 @@
             <div>
             <span class="listingTitle"><%= listing.title %></span> <br>
             <span class="listingDesc"><%= listing.description %></span>
-            <input id="initiate_exchange_exchange_item_0_user_listing_id" name="initiate_exchange[exchange_item][0][user_listing_id]" type="hidden" value="<%= listing.id %>">
-            <input id="initiate_exchange_exchange_item_0_targ_user_id" name="initiate_exchange[exchange_item][0][targ_user_id]" type="hidden" value="<%= targUser.id %>">
+            <%= fields_for 'initiate_exchange[exchange_items_attributes][]', Time.now.to_i  do |fa| %>
+                <%=fa.hidden_field :user_listing_id, :value => listing.id %>
+                <%=fa.hidden_field :targ_user_id, :value => targ.id %>
+            <% end %>
         </div>
         </span>
     </div> 

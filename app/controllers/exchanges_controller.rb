@@ -7,12 +7,12 @@
 class ExchangesController < ApplicationController
 
   def create
-    debugger
+    @user = current_user
     @exchange = InitiateExchange.new params[:initiate_exchange]
-    @exchange.exchange_items.build(params[:exchange_items])
-    @exchange.messages.build(params[:message])
+    #@exchange.exchange_items.each.build
+    #@exchange.build_message(params[:initiate_exchange][:message])
     @exchange.initAcpt = true
-    @user = current_user 
+     
     
     if @exchange.save
         flash[:notice] = 'exchange saved.'
@@ -37,16 +37,7 @@ class ExchangesController < ApplicationController
   end
 
   def new
-    respond_to do |format|
-      format.html
-      if params[:type] == "init"
-        render "new_init.js"
-        return
-      else
-        render "new_targ.js"
-        return
-      end
-    end
+    @exchange = InitiateExchange.new
   end
 
   def initiate_exchange
@@ -54,6 +45,7 @@ class ExchangesController < ApplicationController
     @user = current_user
     @targListing = UserListing.find params[:id]
     @targUser = @targListing.user
+
     render :partial  => 'initiate_exchange'
   end
 

@@ -50,9 +50,9 @@
                         <div class="tab-pane active" id="offer">
                             <!--  Listing -->
                             <% if @targListing.listingType == "need" %>
-                            <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @targListing.user.id %>" id="targlisting"></div>
+                            <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @user.id %>" id="targlisting"></div>
                             <% else %>
-                            <div data-url="/add_need?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="targlisting"></div>
+                            <div data-url="/add_need?init=<%= @targUser.id %>&targ=<%= @user.id %>" id="targlisting"></div>
                             <%end%>
                             <!-- End of Offer Listing --> 
                         </div>
@@ -79,9 +79,9 @@
                         <div class="tab-pane active" id="needs">
                             <!-- Need Listing -->
                             <% if @targListing.listingType == "need" %>
-                            <div data-url="/add_offer?init=<%= current_user.id %>&targ=<%= @targListing.user.id %>" id="initlisting"></div>
+                            <div data-url="/add_offer?init=<%= @user.id %>&targ=<%= @targUser.id %>" id="initlisting"></div>
                             <%else%>
-                                <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @targListing.user.id %>" id="initlisting"></div>
+                                <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @targUser.id %>" id="initlisting"></div>
                             <%end%>
                             <!--End of Need Listing-->
                         </div>
@@ -92,12 +92,12 @@
 
             <!--Opens Bottom Section-->
             <div class='row-fluid'>
-                <%= f.fields_for Message.new do |message| %>
+                <%= fields_for 'initiate_exchange[message_attributes]' do |message| %>
                 <span>Message</span>
-                <%= message.text_area :text, :class => 'rounded-map', :rows => '4', :style => "width:95%" %>
-                <%= message.hidden_field :targUser, :value => @targListing.user.id %>
-                <%= message.hidden_field :initUser, :value => current_user.id %>
-                <%= message.hidden_field(:responseToMsgID, :value => 'exchange' ) %>
+                    <%= message.text_area :text, :class => 'rounded-map', :rows => '4', :style => "width:95%" %>
+                    <%= message.hidden_field :targUser, :value => @targListing.user.id %>
+                    <%= message.hidden_field :initUser, :value => current_user.id %>
+                    <%= message.hidden_field :responseToMsgID, :value => 'exchange' %>
                 <%end%>
             </div>
         </div>
