@@ -205,7 +205,7 @@ class UsersController < ApplicationController
        @user.update_attribute(:token, @token.to_s)
        UserMailer.forgot_email(@user).deliver
        flash[:notice] = 'An email was sent to your email account.'
-       redirect_to('/forgot')
+       redirect_to('/')
     end	
   end
   
@@ -257,6 +257,7 @@ class UsersController < ApplicationController
       amount = params[:kirpoints].to_i() * 100
       setup_response = gateway.setup_purchase(amount,
 	    :ip                => request.remote_ip,
+            :description => 'Yor are buying ' + params[:kirpoints] + ' Kirpoints',
 	    :return_url        => url_for(:action => 'confirm', :only_path => false),
 	    :cancel_return_url => url_for(:action => 'index', :only_path => false)
 	  )
