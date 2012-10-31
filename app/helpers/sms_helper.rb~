@@ -1,0 +1,7 @@
+module SmsHeler
+
+ def send_txt(phone_number, text)
+
+ end
+
+end
