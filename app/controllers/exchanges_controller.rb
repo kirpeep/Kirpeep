@@ -160,7 +160,7 @@ class ExchangesController < ApplicationController
     userNeeds = initUser.needs.all.map { |need| [need.title, need.id] }
     targOffers = targUser.offers.all.map { |offer| [offer.title, offer.id] } 
     dropdownItems = [["Select an item", -9],[":Your Needs:", -9] ]  
-    dropdownItems.concat( userNeeds)
+    dropdownItems.concat(userNeeds)
     dropdownItems = dropdownItems + [[":Their Offers:", -9]]
     dropdownItems.concat(targOffers)
 

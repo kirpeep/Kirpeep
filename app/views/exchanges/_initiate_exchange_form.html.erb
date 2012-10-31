@@ -52,7 +52,7 @@
                             <% if @targListing.listingType == "offer" %>
                             <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @user.id %>" id="targlisting"></div>
                             <% else %>
-                            <div data-url="/add_need?init=<%= @targUser.id %>&targ=<%= @user.id %>" id="targlisting"></div>
+                            <div data-url="/add_need?init=<%= @user.id %>&targ=<%= @targUser.id %>" id="targlisting"></div>
                             <%end%>
                             <!-- End of Offer Listing --> 
                         </div>
