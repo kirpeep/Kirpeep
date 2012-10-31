@@ -49,7 +49,7 @@
                     <div class="tab-content" id="userExchItems">
                         <div class="tab-pane active" id="offer">
                             <!--  Listing -->
-                            <% if @targListing.listingType == "need" %>
+                            <% if @targListing.listingType == "offer" %>
                             <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @user.id %>" id="targlisting"></div>
                             <% else %>
                             <div data-url="/add_need?init=<%= @targUser.id %>&targ=<%= @user.id %>" id="targlisting"></div>
@@ -78,7 +78,7 @@
                     <div class="tab-content" id="targExchItems">
                         <div class="tab-pane active" id="needs">
                             <!-- Need Listing -->
-                            <% if @targListing.listingType == "need" %>
+                            <% if @targListing.listingType == "offer" %>
                             <div data-url="/add_offer?init=<%= @user.id %>&targ=<%= @targUser.id %>" id="initlisting"></div>
                             <%else%>
                                 <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @targUser.id %>" id="initlisting"></div>
