@@ -10,7 +10,7 @@ class ExchangesController < ApplicationController
     debugger
     @exchange = InitiateExchange.new params[:initiate_exchange]
     @exchange.exchange_items.build(params[:exchange_items])
-    @exchange.message.build(params[:message])
+    @exchange.messages.build(params[:message])
     @exchange.initAcpt = true
     @user = current_user 
     
