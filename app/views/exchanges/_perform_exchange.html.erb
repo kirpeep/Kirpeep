@@ -52,8 +52,8 @@
 
 
             <!-- Start of tabs for items user is receiving--> 
-            <% for item in @targItems %>
-                <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.id %>&targ=<%= @initUser.id %>"></div>
+            <% for item in @initItems %>
+                <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.user_listing_id %>&targ=<%= @targUser.id %>"></div>
             <%end%>
             <!-- End of tabs for items user is receiving--> 
             </div><!-- .span6-->
@@ -66,8 +66,8 @@
                 </div>
 
             <!-- Start of tabs for items targ is receiving--> 
-            <% for item in @initItems %>
-                <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.id %>&targ=<%= @targUser.id %>"></div>
+            <% for item in @targItems %>
+                <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.user_listing_id %>&targ=<%= @initUser.id %>"></div>
             <%end%>
             <!-- End of tabs for items targ is receiving--> 
 
