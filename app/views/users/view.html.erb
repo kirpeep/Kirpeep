@@ -88,7 +88,7 @@ $(document).ready(function(){
                   <%= render :partial => 'profile', :locals => {:user => @user} %>
                 </div>
                 <div id='exchanges' class="tab-pane">
-                  <div id="exchContainer" data-url="/user_exchanges/<%=current_user.id%>"></div>
+                  <div id="exchContainer" data-url="/user_exchanges/<%=params[:id]%>"></div>
                 </div>
               </div> <!-- /.tab-content -->
             </div><!-- /.tabbable -->
