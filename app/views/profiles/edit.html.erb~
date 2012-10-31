@@ -40,7 +40,7 @@
   </div>
   <div class='span2 pull-left'>
 	  
-	  <div class="field" style='margin-bottom: 5px;'>
+	  <div class="field" style='margin-bottom: 10px;'>
 	    <%= f.label :about%>
 	    <%= f.text_area :about, {:rows => '3', :style => 'width: 325px;'} %>
 	  </div>

@@ -5,7 +5,8 @@
 ####################################################
 
 class Profile < ActiveRecord::Base
-  attr_accessible :photo, :interests, :quickPitch, :about, :education, :location, :languages, :gender, :birthdate, :zipcode
+  attr_accessible :photo, :interests, :quickPitch, :about, :education, 
+              :location, :languages, :gender, :birthdate, :zipcode, :phone_number
   after_commit :set_product_delta_flag
 
   belongs_to :user
