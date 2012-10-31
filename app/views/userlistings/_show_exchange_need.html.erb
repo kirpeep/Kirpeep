@@ -10,7 +10,7 @@
 
             <%= fields_for 'initiate_exchange[exchange_items_attributes][]', Time.now.to_i do |fa| %>
                 <%=fa.hidden_field :user_listing_id, :value => listing.id %>
-                <%=fa.hidden_field :targ_user_id, :value => targ.id %>
+                <%=fa.hidden_field :targ_user_id, :value => targUser.id %>
             <% end %>
         </div>
     </div> 
