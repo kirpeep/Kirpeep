@@ -1,5 +1,4 @@
 <% current_init_user = User.find(current_message.initUser) %>
-<%= debugger%>
 <% if is_current_user(current_init_user) %>
 	<h4>ME:</h4> <%= current_message.text %>
 <% else %>
