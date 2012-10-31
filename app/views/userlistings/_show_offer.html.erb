@@ -65,7 +65,7 @@
     <div id="need-listing" class="span12">
       <div>
         <% if !(listing.photo.url =~ /missing.png/) %>
-          <div style='background-image: url("<%= listing.photo.url %>");width:95%;height:250px;background-size:auto  100%;background-repeat: no-repeat;background-position:center;'></div>
+          <%= image_tag(listing.photo.url, :style=>'width:95%;') %>
         <% else %>
           <div class='noListingImage'></div>
         <% end %>
@@ -75,7 +75,7 @@
       <p class="need-desc"><%= listing.description %></p>
     </div>
    <div class="span12">
-    <%= if listing.kirpoints == nil then 0 else listing.kirpoints end %> kirpoint(s) for this item
+    <strong><%= if listing.kirpoints == nil then 0 else listing.kirpoints end %> kirpoint(s) for this item</strong>
     </div>
    
   <div style= "display:none;">

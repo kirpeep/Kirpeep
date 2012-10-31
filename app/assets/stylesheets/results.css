@@ -122,9 +122,9 @@
 .noListingImage{
   background-image: url('/assets/Stock_Pic_for_Listings.png');
   width: 95%;
-  height: 250px;
+  height: 200px;
   background-position: top left;
-  background-size: 100% 100%;
+  background-size: 100% auto;
 }
 
 .listings{
@@ -173,13 +173,13 @@
 
 .messageIcon, .priceIcon,.exchangeIcon,.shareIcon
 {
-   height: 25px;
-   width: 40px;
+   height: 23px;
+   width: 37px;
    margin:-2px !important;
 }
 .editIcon{
-   height: 35px;
-   width: 35px;
+   height: 30px;
+   width: 30px;
    margin:-2px !important;
 }
 

@@ -167,15 +167,19 @@
  width:100% !important;
 }
 
+#need-actions a{
+ text-decoration:none; 
+}
+
 .messageIcon, .priceIcon,.exchangeIcon,.shareIcon
 {
-   height: 25px;
-   width: 40px;
+   height: 23px;
+   width: 37px;
    margin:-2px !important;
 }
 .editIcon{
-   height: 35px;
-   width: 35px;
+   height: 30px;
+   width: 30px;
    margin:-2px !important;
 }
 

@@ -17,6 +17,6 @@
     </div>
 </div>
   <div class="modal-footer">
-  <a onclick='$("#frmKirpoints").submit()' style='margin-right:15px;'><%= image_tag('https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif') %></a>
+  <a onclick='$("#frmKirpoints").submit()' style='margin-right:15px;cursor:pointer;'><%= image_tag('https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif') %></a>
 </div>
 </form>
