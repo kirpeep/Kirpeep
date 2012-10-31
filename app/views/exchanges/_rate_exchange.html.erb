@@ -45,62 +45,63 @@
         
             <!--opens middle section-->
             <div class='row-fluid'>
-        <!-- Left Side-->
-            <div class="span6">
-                <div>
-                    <span id="getting">You are getting...</span>
+            <!-- Left Side-->
+                <div class="span6">
+                    <div>
+                        <span id="getting">You are getting...</span>
+                    </div>
+
+
+                    <!-- Start of tabs for items user is receiving--> 
+                    <% for item in @initItems %>
+                        <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.user_listing_id %>&targ=<%= @targUser.id %>"></div>
+                    <%end%>
+                    <!-- End of tabs for items user is receiving--> 
+                </div><!-- .span6-->
+
+
+                <!--Right Side-->
+                <div class="span6">
+                    <div>
+                        <span id="getting">You are giving...</span>
+                    </div>
+
+                    <!-- Start of tabs for items targ is receiving--> 
+                    <% for item in @targItems %>
+                        <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.user_listing_id %>&targ=<%= @initUser.id %>"></div>
+                    <%end%>
+                    <!-- End of tabs for items targ is receiving--> 
+
                 </div>
-
-
-            <!-- Start of tabs for items user is receiving--> 
-            <% for item in @initItems %>
-                <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.user_listing_id %>&targ=<%= @targUser.id %>"></div>
-            <%end%>
-            <!-- End of tabs for items user is receiving--> 
-            </div><!-- .span6-->
-
-
-            <!--Right Side-->
-            <div class="span6">
-                <div>
-                    <span id="getting">You are giving...</span>
-                </div>
-
-            <!-- Start of tabs for items targ is receiving--> 
-            <% for item in @targItems %>
-                <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.user_listing_id %>&targ=<%= @initUser.id %>"></div>
-            <%end%>
-            <!-- End of tabs for items targ is receiving--> 
-
             </div>            
             <!-- Exchange Message-->
-        <div class="row-fluid">
-            <span>Message</span>
-            <div class="rounded-map shadow" id="message" style="overflow:scroll; height: 100px;">
-                <% current_message = @exch.message%>
-                <% reply_message_id = current_message.id %>
-                <% begin %>
-                    <%= render :partial =>current_message, :locals => {:current_message => current_message} %>
+            <div class="row-fluid">
+                <span>Message</span>
+                <div class="rounded-map shadow" id="message" style="overflow:scroll; height: 100px;">
+                    <% current_message = @exch.message%>
                     <% reply_message_id = current_message.id %>
-                    <% current_message = Message.where(:responseToMsgID => current_message.id).first %>
-                <% end while(current_message != nil) %>
-                <div>
-                    <%= form_for Message.new, :remote => true, :html => {:class => "reply_message"} do |f| %>
-         
-                        <%= f.hidden_field :initUser, :value => current_user.id %>
-                        <%= f.hidden_field :responseToMsgID, :value =>  reply_message_id %>
-                        <% if is_current_user(@initUser) %>
-                            <%= f.hidden_field :targUser, :value => @targUser.id %>
-                        <% else %>
-                            <%= f.hidden_field :targUser, :value => @initUser.id %>
+                    <% begin %>
+                        <%= render :partial =>current_message, :locals => {:current_message => current_message} %>
+                        <% reply_message_id = current_message.id %>
+                        <% current_message = Message.where(:responseToMsgID => current_message.id).first %>
+                    <% end while(current_message != nil) %>
+                    <div>
+                        <%= form_for Message.new, :remote => true, :html => {:class => "reply_message"} do |f| %>
+             
+                            <%= f.hidden_field :initUser, :value => current_user.id %>
+                            <%= f.hidden_field :responseToMsgID, :value =>  reply_message_id %>
+                            <% if is_current_user(@initUser) %>
+                                <%= f.hidden_field :targUser, :value => @targUser.id %>
+                            <% else %>
+                                <%= f.hidden_field :targUser, :value => @initUser.id %>
+                            <% end %>
+                            <%= f.text_field :text %>
+                            
+                            <%= f.submit :reply, :class => "btn btn-primary" %>
                         <% end %>
-                        <%= f.text_field :text %>
-                        
-                        <%= f.submit :reply, :class => "btn btn-primary" %>
-                    <% end %>
+                    </div>
                 </div>
-            </div>
-        </div><!-- .row-fluid-->
+            </div><!-- .row-fluid-->
             
             <div class='row-fluid'>
                 
