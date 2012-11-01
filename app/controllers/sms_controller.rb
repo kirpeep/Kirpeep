@@ -17,9 +17,8 @@ class SmsController < ApplicationController
 
   def recieve
    response = Twilio::TwiML::Response.new do |r|
-     flash[:notice] = r.to + ' ' + r.from
+     #flash[:notice] = r.to + ' ' + r.from
    end
-   redirect_to root_path
   end
 
 private

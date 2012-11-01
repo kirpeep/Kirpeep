@@ -103,7 +103,7 @@ TestApp::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'sessions#index'
   resources :userlistings
-  resources :sms
+
   resources :search
   resources :users do |user|
     resources :userlistings
@@ -113,7 +113,7 @@ TestApp::Application.routes.draw do
   resources :exchanges
   resources :profiles
   resources :messages
-
+  resources :sms
 
   # See how all your routes lay out with "rake routes"
 

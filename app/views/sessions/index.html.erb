@@ -11,9 +11,9 @@
 
   <div class='container'>
     <div class='row'>
-      <div class="span3 offset1 pull-right">
+      <div class="span6 offset1 pull-right">
       <% if signed_in? %>
-      <div class="btn-group">
+      <div class="btn-group pull-right">
         <a class="btn dropdown-toggle" data-toggle="dropdown" onclick='$(this).dropdown()' href="#">
             <%= current_user.name %> - <%= if current_user.kirpoints == nil then 0 else current_user.kirpoints end %> kps
             <span class="caret"></span>
@@ -27,6 +27,14 @@
           
         </ul>
       </div>
+
+      <%= link_to raw('<i class="icon-plus-sign"></i> Need'), 
+	   new_userlisting_path(:type => "need"), 
+	   {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
+
+      
+      <%= link_to raw('<i class="icon-plus-sign"></i> Offer'), new_userlisting_path(:type => "offer"), 
+           {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
     <% else %>
       <div class='row pull-right'>
 	      <a href='/forgot' class='dynamolink'>Forgot Password</a>
