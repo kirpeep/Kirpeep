@@ -42,6 +42,8 @@ gem 'rmagick'
 #File uploading Gem
 gem 'paperclip'
 
+#Active Merchant gem for CC processing
+gem 'activemerchant'
 
 #gem 'css_sprite' #More efficient CSS
 
