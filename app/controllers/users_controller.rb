@@ -304,6 +304,17 @@ class UsersController < ApplicationController
     current_user.update_attribute(:kirpoints, kirpoints)
   end
 
+  def hasExchangeWithUser(user)
+    @exchanges = Exchange.where("exchange_id = ? || exchange_id=?", current_user.id, current_user.id)
+    for exch in @exchanges
+      if user.id = exch.initUser || user.id = exch.targUser
+        return true
+      end
+    end
+    #user does not have exchange with 'user' if reached
+   return false 
+  end
+
   private 
 
     def gateway
