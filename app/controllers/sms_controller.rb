@@ -16,8 +16,8 @@ class SmsController < ApplicationController
   end
 
   def recieve
-   logger.info "Twillio Params ==> " + params    
-   @user = Users.where(:phone_number => params[:from])
+       
+   @user = Users.where("phone_number = ?", params[:From])
 
    if @user
      @user.update_attribute(:number_verified, true)
