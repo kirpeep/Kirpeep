@@ -16,7 +16,7 @@ class SmsController < ApplicationController
   end
 
   def recieve
-       
+   logger.info "Twillio Params ==> " + params    
    @user = Users.where(:phone_number => params[:from])
 
    if @user
