@@ -5,6 +5,7 @@ class SmsController < ApplicationController
   $ourNumber = '617-431-2087'
 
   def verify
+    logger.debug 'Testing out the logging'
     if params[:to] and params[:body]
        sendTxt(params[:to], params[:body])
        flash[:notice] = 'Message Sent'
@@ -17,9 +18,8 @@ class SmsController < ApplicationController
 
   def recieve
    response = Twilio::TwiML::Response.new do |r|
-     flash[:notice] = r.to + ' ' + r.from
+     #flash[:notice] = r.to + ' ' + r.from
    end
-   redirect_to root_path
   end
 
 private
