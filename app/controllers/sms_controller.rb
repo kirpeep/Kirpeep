@@ -21,7 +21,9 @@ class SmsController < ApplicationController
      logger.debug response
      #flash[:notice] = r.to + ' ' + r.from
    end
-   render :nothing => true
+   respond_to do |format|
+     format.xml {render :xml => response.text}
+   end
   end
 
 private
