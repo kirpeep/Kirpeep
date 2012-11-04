@@ -19,7 +19,7 @@ class SmsController < ApplicationController
        
    @profile = Profile.where(:phone_number => params[:From]).first!
 
-   if @usprofileer
+   if @profile
      @profile.update_attribute(:number_verified, true)
    end
    
