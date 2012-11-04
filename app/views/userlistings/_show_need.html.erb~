@@ -1,73 +1,91 @@
-<div class="rounded-need" onMouseOver="$(this).find('#need-actions').show();" onMouseOut="$(this).find('#need-actions').hide();"  >
+<div class="rounded-need"   >
   <span class="need-span">NEEDED</span><br />
   <span class="need-title span10"><%= listing.title %></span> 
 
   <% if signed_in? %>
-  <div id="need-actions" class="span9" style='display:none'>
+  <div id="need-actions" class="span9" >
       <div class="row tool pull-right">
+        <div class="btn-group">
+         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class='icon-align-justify'></i> <span class="caret"></span>
+         </a>
+        <ul class="dropdown-menu">    
         <% if listing.user.id == current_user.id %>
           <!-- Edit -->
-          
-            <a href="/edit_listing?id=<%= listing.id %>&listing_type=offer" class='dynamolink'><%= image_tag('Icon_Edit_nocolor.png', 
+          <li>
+            <a href="/edit_listing?id=<%= listing.id %>&listing_type=offer" class='dynamolink'>Edit
+            <%#= image_tag('Icon_Edit_nocolor.png', 
                  :class=>"editIcon", 
                  :title=>"Edit", 
                  :onmouseover=>"$(this).attr('src','/assets/Icon_Edit_color.png');",
                  :onmouseout=>"$(this).attr('src','/assets/Icon_Edit_nocolor.png');") %>
             </a>
-          
-        <% end %>
-        <!-- Message-->
-        
-          <a href="/sendmessage?id=<%= listing.user.id %>&replyTo=nil" class='dynamolink'><%= image_tag('Icon_Message_gray_regular.png', 
+          </li>
+          <li>
+          <a class="dynamolink" href="/share/<%= listing.id.to_s%>">Share
+            <%#= image_tag('Icon_Share_gray_regular.png', 
+                 :class=>"shareIcon",
+                 :title=>"Share", 
+                 :onmouseover=>"$(this).attr('src','/assets/Icon_Share_green_rollover.png');",
+                 :onmouseout=>"$(this).attr('src','/assets/Icon_Share_gray_regular.png');" ) %>
+          </a>
+          </li>
+        <% else %>
+          <!-- Message-->
+          <li>
+          <a href="/sendmessage?id=<%= listing.user.id %>&replyTo=nil" class='dynamolink'>Message
+            <%#= image_tag('Icon_Message_gray_regular.png', 
                  :class=>"messageIcon", 
                  :title=>"Message", 
                  :onmouseover=>"$(this).attr('src','/assets/Icon_Message_blue_roll_over.png');",
                  :onmouseout=>"$(this).attr('src','/assets/Icon_Message_gray_regular.png');") %>
           </a>
+          </li>
         
         <!-- Initiate Exchange-->
         
-         
-          <% if signed_in? %>
-             <a class="dynamolink" href="/initiate_exchange?id=<%= listing.id.to_s%>">
-              <%= image_tag('Icon_Exchange_EE_gray_regular.png', 
+         <li>
+             <a class="dynamolink" href="/initiate_exchange?id=<%= listing.id.to_s%>">Exchange it
+              <%#= image_tag('Icon_Exchange_EE_gray_regular.png', 
                   :class=>"exchangeIcon",
                   :title=>"Exchange", 
                   :onmouseover=>"$(this).attr('src','/assets/Icon_Exchange_EE_orange_rollover.png');",
                   :onmouseout=>"$(this).attr('src','/assets/Icon_Exchange_EE_gray_regular.png');") %>
             
               </a>
-          <%else%>
-             <%= image_tag('Icon_Exchange_EE_gray_regular.png', 
-                  :class=>"exchangeIcon" , 
-                  :title=>"exchange",
-		  :title=>"Exchange", 
-                  :onmouseover=>"$(this).attr('src','/assets/Icon_Exchange_EE_orange_rollover.png');",
-                  :onmouseout=>"$(this).attr('src','/assets/Icon_Exchange_EE_gray_regular.png');")%>
-          <%end%> 
-          <a class="dynamolink" href="/quicksale/<%= listing.id.to_s%>">  
-            <%= image_tag('Icon_Coin_gray_regular.png', 
+          </li>
+          <li> 
+          <a class="dynamolink" href="/quicksale/<%= listing.id.to_s%>">Spend Kirpoints
+            <%#= image_tag('Icon_Coin_gray_regular.png', 
                   :class=>"priceIcon",
                   :title=>"Spend Kirpoints", 
                   :onmouseover=>"$(this).attr('src','/assets/Icon_Coin_orange_rollover.png');",
                   :onmouseout=>"$(this).attr('src','/assets/Icon_Coin_gray_regular.png');" ) %>
           </a>
-          <a class="dynamolink" href="/share/<%= listing.id.to_s%>">  
-            <%= image_tag('Icon_Share_gray_regular.png', 
+          </li>
+          <li>
+          <a class="dynamolink" href="/share/<%= listing.id.to_s%>">Share
+            <%#= image_tag('Icon_Share_gray_regular.png', 
                  :class=>"shareIcon",
                  :title=>"Share", 
                  :onmouseover=>"$(this).attr('src','/assets/Icon_Share_green_rollover.png');",
                  :onmouseout=>"$(this).attr('src','/assets/Icon_Share_gray_regular.png');" ) %>
           </a>
+          </li>
+         <!-- dropdown menu links -->
+          <% end %>
+        </ul>
+       </div>
       </div>
         
     </div> 
+       
+        
     <% end %>
  <div id="need-listing" class="span12">
       <div>
          
          <% if !(listing.photo.url =~ /missing.png/) %>
-          <%= image_tag(listing.photo.url, :style=>'width:98%;') %>
+          <%= image_tag(listing.photo.url, :style=>'width:95%;') %>
           
         <% else %>
           <div class='noListingImage'></div>
