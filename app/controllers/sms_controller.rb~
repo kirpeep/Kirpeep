@@ -17,8 +17,8 @@ class SmsController < ApplicationController
 
   def recieve
    #response = Twilio::TwiML::Response.new do |r|
-   #  logger.debug "Twillio Recieve ==============="
-   #  logger.debug params
+    logger.debug "Twillio Recieve ==============="
+    logger.debug params
      #flash[:notice] = r.to + ' ' + r.from
    #end
    render 'recieve.xml.erb', :content_type => 'text/xml'
