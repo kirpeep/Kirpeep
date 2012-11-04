@@ -5,9 +5,9 @@
     <div id="need-actions" class="span9" >
       <div class="row tool pull-right">
         <div class="btn-group">
-         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class='icon-align-justify'></i> <span class="caret"></span>
+         <a class="btn dropdown-toggle" data-toggle="dropdown" onclick='$(this).dropdown()' href="#"><i class='icon-align-justify'></i> <span class="caret"></span>
          </a>
-        <ul class="dropdown-menu">    
+        <ul class="dropdown-menu" style='margin-left:-50px;'>    
         <% if listing.user.id == current_user.id %>
           <!-- Edit -->
           <li>
