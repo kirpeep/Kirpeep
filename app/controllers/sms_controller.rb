@@ -1,9 +1,6 @@
 
 class SmsController < ApplicationController
-  $account_sid = 'AC0c0a7ba5f860c03bbe3e787840311779'
-  $auth_token = '373cfa0549ab3a994ffb5bf0c9d6f2c9'
-  $ourNumber = '617-431-2087'
-
+ 
   def verify
     if params[:to] and params[:body]
        sendTxt(params[:to], params[:body])
@@ -16,19 +13,43 @@ class SmsController < ApplicationController
   end
 
   def recieve
-   response = Twilio::TwiML::Response.new do |r|
-     #flash[:notice] = r.to + ' ' + r.from
-   end
-  end
+    
+   if params[:Body]
+     if params[:Body].downcase == "verify"
+        @profile = Profile.where("phone_number = ?", params[:From].gsub('+1','')).first!
 
-private
-  def sendTxt(to, body)
-    $client = Twilio::REST::Client.new $account_sid, $auth_token
-    $client.account.sms.messages.create(
-       :from => $ourNumber,
-       :to => to,
-       :body => body
-    )
-  end
+	if @profile
+	  @profile.update_attribute(:number_verified, true)
+          render 'recieve.xml.erb', :content_type => 'text/xml'
+        else
+          #send error text
+          render 'error.xml.erb', :content_type => 'text/xml'
+	end
+        
+     elsif params[:Body].starts_with?('c-')
+        #Get the User id of this phone number
+        @profile = Profile.where("phone_number = ?", params[:From].gsub('+1','')).first!
+        #Get the exchange for this id and this conf code
+        @exch = Exchange.where("(initUser = #{@profile.user_id} and initCode = #{params[:Body]}) or (targUser = #{@profile.user_id} and targCode = #{params[:Body]})").first!
+        if @exch
+           #determine if the what thise user is init or targ?
+           if @exch.initUser = @profile.user_id
+             # it is the init user
+             #update the complete flag for the user on the exchange entity
+             @exch.update_attribute(:initComp, true)
+           else
+             # it is the targ user
+	     #update the complete flag for the user on the exchange entity
+             @exch.update_attribute(:targComp, true)
+           end
+           # Send the ok text
+           render 'recieve.xml.erb', :content_type => 'text/xml'
+        else
+           # Need to send an error text back to the user.
+           render 'error.xml.erb', :content_type => 'text/xml'
+        end
+     end
+   end 
+  end  
 
 end

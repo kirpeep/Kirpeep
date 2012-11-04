@@ -67,7 +67,7 @@
 <div class="modal-footer">
     <%= form_tag("/sms/verify", :method => "POST", :class=>"pull-left") do %>
       <%= hidden_field_tag(:to, current_user.profile.phone_number.to_s()) %>
-      <%= hidden_field_tag(:body, "To verify please text back to this number. -Kirpeep") %>
+      <%= hidden_field_tag(:body, "To verify please text back to this number the word verify. -Kirpeep") %>
       <button type='submit' id='btnVerifyNumber' class="btn">Verify Phone Number</button>
     <% end %>
     <button class="btn pull right" data-dismiss="modal" aria-hidden="true">Cancel</button>

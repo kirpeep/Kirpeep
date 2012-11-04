@@ -29,7 +29,14 @@ module ApplicationHelper
 	  link_to(name, "javascript:void(0)", :class => "add_child", :"data-association" => association)
 	end
 
-        
+        def sendTxt(to, body)
+	    $client = Twilio::REST::Client.new $account_sid, $auth_token
+	    $client.account.sms.messages.create(
+	       :from => $ourNumber,
+	       :to => to,
+	       :body => body
+	    )
+	 end
 
 
 end

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,11 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20121101030050) do
-=======
+
 ActiveRecord::Schema.define(:version => 20121101051116) do
->>>>>>> 5194a9c94be715b44b686671b0b1489e315d3e7d
+
+ActiveRecord::Schema.define(:version => 20121104032301) do
+
 
   create_table "assets", :force => true do |t|
     t.integer  "user_listing_id"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20121101051116) do
     t.integer  "zipcode"
     t.integer  "phone_number"
     t.boolean  "phone_verified"
+    t.boolean  "number_verified"
   end
 
   create_table "reviews", :force => true do |t|
