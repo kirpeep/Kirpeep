@@ -17,10 +17,10 @@ class SmsController < ApplicationController
 
   def recieve
        
-   @user = User.where(:phone_number => params[:From]).first!
+   @profile = Profile.where(:phone_number => params[:From]).first!
 
-   if @user
-     @user.update_attribute(:number_verified, true)
+   if @profile
+     @profile.update_attribute(:number_verified, true)
    end
    
    render 'recieve.xml.erb', :content_type => 'text/xml'
