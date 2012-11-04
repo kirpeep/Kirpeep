@@ -24,6 +24,7 @@ class SmsController < ApplicationController
    #respond_to do |format|
    #  format.xml {render :xml => response.text}
    #end
+   render :nothing => true
   end
 
 private
