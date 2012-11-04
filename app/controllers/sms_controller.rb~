@@ -17,13 +17,13 @@ class SmsController < ApplicationController
 
   def recieve
    #response = Twilio::TwiML::Response.new do |r|
-     logger.debug "Twillio Recieve ==============="
-     logger.debug params
+   #  logger.debug "Twillio Recieve ==============="
+   #  logger.debug params
      #flash[:notice] = r.to + ' ' + r.from
    #end
-   respond_to do |format|
-     format.xml {render :xml => response.text}
-   end
+   #respond_to do |format|
+   #  format.xml {render :xml => response.text}
+   #end
    
   end
 
