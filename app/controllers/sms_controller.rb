@@ -17,8 +17,8 @@ class SmsController < ApplicationController
 
   def recieve
    response = Twilio::TwiML::Response.new do |r|
-     logger.debug "Twillio Recieve ==============="
-     logger.debug response
+     #logger.debug "Twillio Recieve ==============="
+     #logger.debug response
      #flash[:notice] = r.to + ' ' + r.from
    end
    respond_to do |format|
