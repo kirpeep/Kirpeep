@@ -49,7 +49,7 @@ TestApp::Application.routes.draw do
   match '/kirpoints/complete', :to=> 'users#complete'
 
   post '/sms/verify', :to => 'sms#verify'
-  get '/sms/recieve', :to => 'sms#recieve'
+  post '/sms/recieve', :to => 'sms#recieve'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
 
