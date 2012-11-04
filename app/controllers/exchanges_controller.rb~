@@ -7,43 +7,37 @@
 class ExchangesController < ApplicationController
 
   def create
-
+    @user = current_user
     @exchange = InitiateExchange.new params[:initiate_exchange]
+    #@exchange.exchange_items.each.build
+    #@exchange.build_message(params[:initiate_exchange][:message])
     @exchange.initAcpt = true
-    @user = current_user 
-    @message = Message.new params[:message]
-    if @exchange.save  
-      @message.exchange_id = @exchange.id
-      if @message.save 
-        @exch_message_link = ExchangeMessageLink.new
-        @exch_message_link.exchange_id = @exchange.id
-        @exch_message_link.message_id = @message.id
-        if @exch_message_link.save
-          flash[:notice] = 'exchange saved.'
-          redirect_to current_user
-        end
-      end
+     
+    
+    if @exchange.save
+        flash[:notice] = 'exchange saved.'
+        redirect_to current_user
     else
-    	flash[:error] = exchange.errors.full_messages.to_sentence
-      redirect_to user
+  	  flash[:error] = @exchange.errors.full_messages.to_sentence
+      redirect_to current_user
     end
   end
 
   def show
-
+    @exch = Exchange.find(params[:id]) 
+    @targUser = User.find(@exch.targUser )
+    @initUser = User.find(@exch.initUser )
+    @exchange_items = exchanged_items
+    #not the greatest way to do this, with this code we will not be able to do \
+    #multiparty exchanges. To resolve a migration should be made to include initUsers id 
+    #so that it doesn't need to be pulled from the listing
+    #for now the items with :targ_user_id will be assinged
+    @targItems = @exchange_items.find_all_by_targ_user_id( @targUser.id)
+    @initItems = @exchange_items.find_all_by_targ_user_id(@initUser.id)
   end
 
   def new
-    respond_to do |format|
-      format.html
-      if params[:type] == "init"
-        render "new_init.js"
-        return
-      else
-        render "new_targ.js"
-        return
-      end
-    end
+    @exchange = InitiateExchange.new
   end
 
   def initiate_exchange
@@ -51,6 +45,7 @@ class ExchangesController < ApplicationController
     @user = current_user
     @targListing = UserListing.find params[:id]
     @targUser = @targListing.user
+
     render :partial  => 'initiate_exchange'
   end
 
@@ -69,8 +64,25 @@ class ExchangesController < ApplicationController
       exch.save
 
       exch = exch.becomes(PerformExchange)
-      
+
+      #create codes and save
+      exch.initCode = 'c-' + User.generateToken()[0..5] 
+      exch.targCode = 'c-' + User.generateToken()[0..5] 
+
       if exch.save
+        # send SMS Messages Here
+        @targUser = User.find(exch.targUser)
+        @initUser = User.find(exch.initUser)
+
+        # only send if we have verified phone numbers for both parties. 
+        if (@targUser.profile.phone_number && @targUser.profile.number_verified == true) &&
+            (@initUser.profile.phone_number && @initUser.profile.number_verified == true)
+         
+           #Then send SMS conf codes
+           sendTxt(@targUser.profile.phone_number, "Thanks for using Kirpeep to exchange. Your code is . Text the other person's code when your are finished exchanging to let us it's complete. Thanks, Kirpeep!")
+           sendTxt(@initUser.profile.phone_number, "Thanks for using Kirpeep to exchange. Your code is . Text the other person's code when your are finished exchanging to let us it's complete. Thanks, Kirpeep!")
+        end
+
         flash[:notice] = 'exchange moved to .'  + (exch.type).to_s
         redirect_to current_user
         return
@@ -154,8 +166,35 @@ class ExchangesController < ApplicationController
     redirect_to current_user
   end
 
-  def exchanged_items(id)
-    return ExchangeItem.where("exchange_id = ?", id).allfind { |e|  }
+  def exchanged_items
+    ExchangeItem.where("exchange_id = ?", params[:id])
+  end
 
+  def add_need
+    initUser = User.find(params[:init])
+    targUser = User.find(params[:targ])
+
+    userNeeds = initUser.needs.all.map { |need| [need.title, need.id] }
+    targOffers = targUser.offers.all.map { |offer| [offer.title, offer.id] } 
+    dropdownItems = [["Select an item", -9],[":Your Needs:", -9] ]  
+    dropdownItems.concat(userNeeds)
+    dropdownItems = dropdownItems + [[":Their Offers:", -9]]
+    dropdownItems.concat(targOffers)
+
+    render :partial => 'create_need', :locals => {:initUser => initUser, :targUser => targUser, :dropdownItems => dropdownItems}    
+  end
+
+  def add_offer
+    initUser = User.find(params[:init])
+    targUser = User.find(params[:targ])
+
+    userOffers = initUser.offers.all.map { |offer| [offer.title, offer.id] }
+    targNeeds = targUser.needs.all.map { |need| [need.title, need.id] } 
+    dropdownItems = [["Select an item", -9],[":Your Offers:", -9] ]  
+    dropdownItems.concat( userOffers)
+    dropdownItems = dropdownItems + [[":Their Needs:", -9]]
+    dropdownItems.concat(targNeeds)
+
+    render :partial => 'create_offer', :locals => {:initUser => initUser, :targUser => targUser, :dropdownItems => dropdownItems}   
   end
 end
