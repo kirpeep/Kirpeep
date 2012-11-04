@@ -17,7 +17,7 @@ class SmsController < ApplicationController
 
   def recieve
        
-   @profile = Profile.where("phone_number = ?", params[:From].gsub('+1','').first!
+   @profile = Profile.where("phone_number = ?", params[:From].gsub('+1','')).first!
 
    if @profile
      @profile.update_attribute(:number_verified, true)
