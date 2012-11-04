@@ -16,11 +16,13 @@ class SmsController < ApplicationController
   end
 
   def recieve
-   #response = Twilio::TwiML::Response.new do |r|
-    logger.debug "Twillio Recieve ==============="
-    logger.debug params
-     #flash[:notice] = r.to + ' ' + r.from
-   #end
+       
+   @user = Users.where(:phone_number => params[:from])
+
+   if @user
+
+   end
+   
    render 'recieve.xml.erb', :content_type => 'text/xml'
    
   end
