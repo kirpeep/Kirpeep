@@ -69,9 +69,10 @@ $(document).ready(function(){
       	</ul>
 
         <h1>Reviews</h1>
-        <% for review in @user.reviews%>
+        <% @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id) %>
+        <% for review in @exch.reviews%>
           <div>
-            <span>Reviewed by: </span> <%= User.find(review.id).name %>
+            <span>Reviewed by: </span> <%= @user.name %>
             <span>review.review</span>
           </div>
         <% end %>

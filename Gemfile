@@ -45,6 +45,9 @@ gem 'paperclip'
 #Active Merchant gem for CC processing
 gem 'activemerchant'
 
+#Twillio
+gem 'twilio-ruby'
+
 #gem 'css_sprite' #More efficient CSS
 
 group :test, :development, :kyle, :john do

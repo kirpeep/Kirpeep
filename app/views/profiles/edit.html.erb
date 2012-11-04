@@ -3,7 +3,7 @@
     <h3 id="myModalLabel">Edit Profile</h3>
 </div>
 
-<%= form_for @profile, :html => { :multipart => true } do |f| %>
+<%= form_for @profile, :html => { :multipart => true, :id => 'frmEditProfile' } do |f| %>
 <div class="modal-body">
   <% if @profile.errors.any? %>
     <div id="error_explanation">
@@ -62,12 +62,18 @@
 	  </div>
   </div>
 </div>
+<% end %>
 
 <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <%= form_tag("/sms/verify", :method => "POST", :class=>"pull-left") do %>
+      <%= hidden_field_tag(:to, current_user.profile.phone_number.to_s()) %>
+      <%= hidden_field_tag(:body, "To verify please text back to this number. -Kirpeep") %>
+      <button type='submit' id='btnVerifyNumber' class="btn">Verify Phone Number</button>
+    <% end %>
+    <button class="btn pull right" data-dismiss="modal" aria-hidden="true">Cancel</button>
 	<% if(current_user.id == 1 ||current_user.id == 2 ) %> 	
 		<%= link_to 'Admin Panel', users_path, :class => "btn" %>
 	<%end%>
-	<%= f.submit 'Save', :class => "btn btn-primary" %>
+    <button class='btn btn-primary pull-right' onclick='$("#frmEditProfile").submit()'>Save</button>
 </div>
-<% end %>
+

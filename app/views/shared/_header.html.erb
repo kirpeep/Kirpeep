@@ -31,11 +31,14 @@
           
         </ul>
       </div>
-      <%= link_to 'Add Need', 
+      
+      <%= link_to raw('<i class="icon-plus-sign"></i> Need'), 
 	   new_userlisting_path(:type => "need"), 
-	   {:class => 'dynamolink btn pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
-      <%= link_to 'Add Offer', new_userlisting_path(:type => "offer"), 
-           {:class => 'dynamolink btn pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
+	   {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
+
+      
+      <%= link_to raw('<i class="icon-plus-sign"></i> Offer'), new_userlisting_path(:type => "offer"), 
+           {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
     <% else %>
       <div class='row'>
 	      <a href='/forgot' class='dynamolink'>Forgot Password</a>

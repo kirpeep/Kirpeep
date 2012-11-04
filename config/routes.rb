@@ -48,6 +48,8 @@ TestApp::Application.routes.draw do
   match '/kirpoints/confirm', :to=> 'users#confirm'
   match '/kirpoints/complete', :to=> 'users#complete'
 
+  post '/sms/verify', :to => 'sms#verify'
+  post '/sms/recieve', :to => 'sms#recieve'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
 
@@ -102,6 +104,7 @@ TestApp::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'sessions#index'
   resources :userlistings
+
   resources :search
   resources :users do |user|
     resources :userlistings
@@ -111,7 +114,7 @@ TestApp::Application.routes.draw do
   resources :exchanges
   resources :profiles
   resources :messages
-
+  resources :sms
 
   # See how all your routes lay out with "rake routes"
 

@@ -12,7 +12,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Rate Exchange</h3>
         </div>
-        <%= form_tag @exch, :url => url_for(:controller => 'exchanges', :action => 'rate_exchange') do %>
+        <%= form_for @exch, :url => url_for(:controller => 'exchanges', :action => 'rate_exchange') do |f|%>
         <div class="modal-body">
         
             <div class='row-fluid'>
@@ -86,18 +86,18 @@
                         <% current_message = Message.where(:responseToMsgID => current_message.id).first %>
                     <% end while(current_message != nil) %>
                     <div>
-                        <%= form_for Message.new, :remote => true, :html => {:class => "reply_message"} do |f| %>
+                        <%= fields_for Message.new, :remote => true, :html => {:class => "reply_message"} do |fa| %>
              
-                            <%= f.hidden_field :initUser, :value => current_user.id %>
-                            <%= f.hidden_field :responseToMsgID, :value =>  reply_message_id %>
+                            <%= fa.hidden_field :initUser, :value => current_user.id %>
+                            <%= fa.hidden_field :responseToMsgID, :value =>  reply_message_id %>
                             <% if is_current_user(@initUser) %>
-                                <%= f.hidden_field :targUser, :value => @targUser.id %>
+                                <%= fa.hidden_field :targUser, :value => @targUser.id %>
                             <% else %>
-                                <%= f.hidden_field :targUser, :value => @initUser.id %>
+                                <%= fa.hidden_field :targUser, :value => @initUser.id %>
                             <% end %>
-                            <%= f.text_field :text %>
+                            <%= fa.text_field :text %>
                             
-                            <%= f.submit :reply, :class => "btn btn-primary" %>
+                            <%= fa.submit :reply, :class => "btn btn-primary" %>
                         <% end %>
                     </div>
                 </div>
@@ -105,10 +105,10 @@
             
             <div class='row-fluid'>
                 
-                Time: <%= range_field_tag :time, {:min => 0, :max => 5, :step => 1} %><br>
-                Cost: <%= range_field_tag :cost, {:min => 0, :max => 5, :step => 1} %><br>
-                Ease: <%= range_field_tag :ease, {:min => 0, :max => 5, :step => 1} %><br>
-                Overall: <%= range_field_tag :overall, {:min => 0, :max => 5, :step => 1} %><br>
+                Time: <%= range_field_tag "time", :in => 1...5 %><br>
+                Cost: <%= range_field_tag "cost", :in => 1...5 %><br>
+                Ease: <%= range_field_tag "ease", :in => 1...5 %><br>
+                Overall: <%= range_field_tag "overall", :in => 1...5%><br>
                 Comments:<br><%= text_area_tag :comments %><br>
 
                 <%= hidden_field_tag :exch_id, @exch.id %>
@@ -122,14 +122,14 @@
                     Waiting for user
                 <%else%>
                     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <%= submit_tag 'Rate', :class => "btn btn-primary" %>
+                    <%= f.submit 'Rate', :class => "btn btn-primary" %>
                 <%end%>
             <%else%>
                 <% if @exch.targ_rating_overall != nil %>
                     Waiting for user
                 <%else%>
                     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <%= submit_tag 'Rate', :class => "btn btn-primary" %>
+                    <%= f.submit 'Rate', :class => "btn btn-primary" %>
                 <%end%>
             <%end%>
         </div>
