@@ -114,7 +114,7 @@ TestApp::Application.routes.draw do
   resources :exchanges
   resources :profiles
   resources :messages
-  resources :sms
+  resources :sms, :only => [:verify, :recieve]
 
   # See how all your routes lay out with "rake routes"
 
