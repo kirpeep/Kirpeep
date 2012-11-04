@@ -17,7 +17,7 @@ class SmsController < ApplicationController
 
   def recieve
        
-   @user = Users.where(:phone_number => params[:From]).first!
+   @user = User.where(:phone_number => params[:From]).first!
 
    if @user
      @user.update_attribute(:number_verified, true)
