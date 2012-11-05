@@ -67,6 +67,17 @@ $(document).ready(function(){
             <li><strong>Completed Exchanges</strong> </li>
             <li><strong>1 Review (stars)<strong></li> 
       	</ul>
+
+        <h1>Reviews</h1>
+        <% @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id) %>
+        <% for review in @exch.reviews%>
+          <div>
+            <span>Reviewed by: </span> <%= @user.name %>
+            <span>review.review</span>
+          </div>
+        <% end %>
+
+        <a href="#" class="dynamolink">Add Review</a>
       </div>
         
         <div class='span8'>
