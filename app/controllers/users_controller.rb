@@ -305,7 +305,7 @@ class UsersController < ApplicationController
   end
 
   def hasExchangeWithUser(user)
-    @exchanges = Exchange.where("exchange_id = ? || exchange_id=?", current_user.id, current_user.id)
+    @exchanges = exchange_list(user.id)
     for exch in @exchanges
       if user.id = exch.initUser || user.id = exch.targUser
         return true
@@ -315,6 +315,21 @@ class UsersController < ApplicationController
    return false 
   end
 
+  def review_list(user)
+    @exchanges = exchange_list(user.id)
+
+    @reviews
+    for exch in @exchanges
+      @reviews_from_exchange = Review.find_by_exchange_id(exch.id)
+      if !@reviews_from_exchange.nil? 
+        @review = @review + @reviews_from_exchange 
+      end
+    end
+  end
+
+  def exchange_list(id)
+    @exchanges = Exchange.where("initUser = ? || targUser=?", id, id)
+  end
   private 
 
     def gateway
