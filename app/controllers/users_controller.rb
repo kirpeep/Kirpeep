@@ -318,13 +318,15 @@ class UsersController < ApplicationController
   def review_list(user)
     @exchanges = exchange_list(user.id)
 
-    @reviews
+    @reviews = nil
     for exch in @exchanges
       @reviews_from_exchange = Review.find_by_exchange_id(exch.id)
       if !@reviews_from_exchange.nil? 
         @review = @review + @reviews_from_exchange 
       end
     end
+
+    return @reviews
   end
 
   def exchange_list(id)
