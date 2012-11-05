@@ -79,8 +79,8 @@ class ExchangesController < ApplicationController
             (@initUser.profile.phone_number && @initUser.profile.number_verified == true)
 
            #Then send SMS conf codes
-           sendTxt(@targUser.profile.phone_number, "Thanks for using Kirpeep to exchange. Your code is #{exch.targCode}. Text the other person's code when your are finished exchanging to let us it's complete. Thanks, Kirpeep!")
-           sendTxt(@initUser.profile.phone_number, "Thanks for using Kirpeep to exchange. Your code is #{exch.initCode}. Text the other person's code when your are finished exchanging to let us it's complete. Thanks, Kirpeep!")
+           sendTxt(@targUser.profile.phone_number, "Your code is #{exch.targCode}. Text the other person's code when your are finished exchanging to let us it's complete. Thanks, Kirpeep!")
+           sendTxt(@initUser.profile.phone_number, "Your code is #{exch.initCode}. Text the other person's code when your are finished exchanging to let us it's complete. Thanks, Kirpeep!")
         end
 
         flash[:notice] = 'exchange moved to .'  + (exch.type).to_s
