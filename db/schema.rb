@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105181823) do
+ActiveRecord::Schema.define(:version => 20121105235409) do
 
   create_table "assets", :force => true do |t|
     t.integer  "user_listing_id"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(:version => 20121105181823) do
     t.text    "init_comments"
     t.text    "targ_comments"
     t.string  "type_when_term"
+    t.string  "initConfCode"
+    t.string  "targConfCode"
   end
 
   create_table "messages", :force => true do |t|
@@ -137,7 +139,6 @@ ActiveRecord::Schema.define(:version => 20121105181823) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "reviewerID"
-    t.integer  "exchange_it"
     t.integer  "exchange_id"
   end
 
