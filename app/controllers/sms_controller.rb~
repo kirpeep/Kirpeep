@@ -34,7 +34,7 @@ class SmsController < ApplicationController
         @exch = Exchange.where("(initUser = #{@profile.user_id} and targConfCode = '#{params[:Body]}') or (targUser = #{@profile.user_id} and initConfCode = '#{params[:Body]}')").first!
         if @exch
            #determine if the what thise user is init or targ?
-           if @exch.initUser = @profile.user_id
+           if @exch.initUser == @profile.user_id
              # it is the init user
              #update the complete flag for the user on the exchange entity
              @exch.update_attribute(:initComp, true)

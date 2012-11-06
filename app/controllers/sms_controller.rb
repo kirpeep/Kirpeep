@@ -46,7 +46,7 @@ class SmsController < ApplicationController
            
            if @exch.targComp and @exch.initComp
              @exch.type = 'RateExchange'
-             
+             @exch.save
              @exch = exch.becomes(RateExchange)
              @exch.save
            end
