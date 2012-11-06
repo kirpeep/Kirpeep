@@ -49,10 +49,7 @@ class SmsController < ApplicationController
            render 'error.xml.erb', :content_type => 'text/xml'
         end
      end
-   end
-   
-   
-   
+   end 
   end  
 
 end

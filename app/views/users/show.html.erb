@@ -40,7 +40,8 @@
       <% @profile = @user.profile %>
       
     	<div class='span4'>
-        <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
+        <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
+        <br><br>
       	<ul class='profileInfo'>
           <li onmouseover="$('#locationEdit').show()" onmouseout="$('#locationEdit').hide()" ><strong>Location:</strong> <%= best_in_place @profile, :location %> <i id='locationEdit' style='display:none;' class='icon-edit'></i></li>
             <li onmouseover="$('#zipcodeEdit').show()" onmouseout="$('#zipcodeEdit').hide()"><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %> <i id='zipcodeEdit' style='display:none;' class='icon-edit'></i></li>

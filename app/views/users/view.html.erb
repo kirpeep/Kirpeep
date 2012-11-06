@@ -56,7 +56,8 @@ $(document).ready(function(){
       <% @profile = @user.profile %>
       
     	<div class='span4'>
-        <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px'} %>
+        <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
+        <br><br>
       	<ul class='profileInfo'>
           <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
             <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>

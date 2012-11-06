@@ -66,8 +66,8 @@ class ExchangesController < ApplicationController
       exch = exch.becomes(PerformExchange)
 
       #create codes and save
-      exch.initCode = 'c-' + User.generateToken()[0..5] 
-      exch.targCode = 'c-' + User.generateToken()[0..5] 
+      exch.initConfCode = 'c-' + User.generateToken()[0..5] 
+      exch.targConfCode = 'c-' + User.generateToken()[0..5] 
 
       if exch.save
         # send SMS Messages Here
@@ -79,8 +79,8 @@ class ExchangesController < ApplicationController
             (@initUser.profile.phone_number && @initUser.profile.number_verified == true)
 
            #Then send SMS conf codes
-           sendTxt(@targUser.profile.phone_number, "Your code is #{exch.targCode}. Text the other person's code when your are finished exchanging to let us it's complete. Thanks, Kirpeep!")
-           sendTxt(@initUser.profile.phone_number, "Your code is #{exch.initCode}. Text the other person's code when your are finished exchanging to let us it's complete. Thanks, Kirpeep!")
+           sendTxt(@targUser.profile.phone_number, "Your code is #{exch.targConfCode}. Text the other person's code when your are finished exchanging to let us it's complete. -Kirpeep")
+           sendTxt(@initUser.profile.phone_number, "Your code is #{exch.initConfCode}. Text the other person's code when your are finished exchanging to let us it's complete. -Kirpeep")
         end
 
         flash[:notice] = 'exchange moved to .'  + (exch.type).to_s

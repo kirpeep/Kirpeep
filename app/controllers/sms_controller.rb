@@ -42,6 +42,11 @@ class SmsController < ApplicationController
 	     #update the complete flag for the user on the exchange entity
              @exch.update_attribute(:targComp, true)
            end
+           
+           exch.type = 'PerformExchange'
+           
+           exch = exch.becomes(PerformExchange)
+	   exch.save
            # Send the ok text
            render 'recieve.xml.erb', :content_type => 'text/xml'
         else
