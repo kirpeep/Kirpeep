@@ -85,7 +85,7 @@ class UserlistingsController < ApplicationController
 
   #add kirpoints to the exchange on the fly
   def add_kirpoints_listing
-      
+      render :nothing => true
   end
 
   #display user listing on the results page

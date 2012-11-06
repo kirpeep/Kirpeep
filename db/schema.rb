@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105235409) do
+ActiveRecord::Schema.define(:version => 20121106023505) do
 
   create_table "assets", :force => true do |t|
     t.integer  "user_listing_id"
@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(:version => 20121105235409) do
     t.string   "exchange_id"
     t.string   "user_listing_id"
     t.string   "targ_user_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "init_user_id"
+    t.integer  "kirpoints_amounts"
   end
 
   create_table "exchange_message_links", :force => true do |t|
@@ -133,8 +135,6 @@ ActiveRecord::Schema.define(:version => 20121105235409) do
   end
 
   create_table "reviews", :force => true do |t|
-    t.string   "reviewID"
-    t.string   "profileID"
     t.text     "review"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
