@@ -13,7 +13,7 @@
     <div class='row'>
       <div class="span6 offset1 pull-right">
       <% if signed_in? %>
-      <div class="btn-group">
+      <div class="btn-group pull-right">
         <a class="btn dropdown-toggle" data-toggle="dropdown" onclick='$(this).dropdown()' href="#">
             <%= current_user.name %> - <%= if current_user.kirpoints == nil then 0 else current_user.kirpoints end %> kps
             <span class="caret"></span>

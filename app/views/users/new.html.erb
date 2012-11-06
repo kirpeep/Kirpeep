@@ -7,8 +7,9 @@
     <h3 id="myModalLabel">Sign Up</h3>
   </div>
 
-  <%= form_for(@user, :html => { :multipart => true }) do |f| %>
+  <%= form_for(@user, :html => { :multipart => true }, :validate => :user_validators) do |f| %>
   <div class="modal-body">
+    <%= yield(:user_validators) %>
     <!-- 
 	  <%# if @user.errors.any? %>
 	    <div id="error_explanation">
