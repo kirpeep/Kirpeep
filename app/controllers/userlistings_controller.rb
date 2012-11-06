@@ -85,9 +85,9 @@ class UserlistingsController < ApplicationController
 
   #add kirpoints to the exchange on the fly
   def add_kirpoints_listing
-    
+      
   end
-  
+
   #display user listing on the results page
   def show_listing_result
       listing = UserListing.find(params[:id]) 

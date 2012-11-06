@@ -4,7 +4,7 @@ TestApp::Application.routes.draw do
 
   match  'destroy_session',      :to => 'sessions#destroy'
   match  '/create_listing/',     :to => 'userlistings#create'
-  match  /exch_add_kirpints/, :to => 'userlistings#add_kirpoints_listing'
+  match  /exch_add_kirpints/,    :to => 'userlistings#add_kirpoints_listing'
   match  '/new_listing',         :to => 'userlistings#new'
   match  '/exchange_listing/',   :to => 'userlistings#show_listing_exchange'
   match  '/show_listing/',       :to => 'userlistings#show_listing_result'
