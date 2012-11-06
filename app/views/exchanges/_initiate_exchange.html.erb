@@ -31,9 +31,18 @@
                 var listing = $(this).val();
                 var listingContainer = $(this).closest(".shadow");
 
-                if(listing == -9){
-                    $.get("/exch_add_kirpints?init="+userContext["id"]+"&targ="+targContext["id"], function(data) {
-
+                if(listing == -1){
+                    $.get("/exch_add_kirpints?init="+userContext["id"]+"&targ="+targContext["id"]+"type=offer", function(data) {
+                        var o = $(data);
+                        listingContainer.replaceWith(o);
+                        o.fadeIn();
+                    });
+                }
+                else if(listing == -2){
+                    $.get("/exch_add_kirpints?init="+userContext["id"]+"&targ="+targContext["id"]+"type=need", function(data) {
+                        var o = $(data);
+                        listingContainer.replaceWith(o);
+                        o.fadeIn();
                     });
                 }
                 else{
@@ -90,7 +99,7 @@
 
             });
 
-              $('form a.remove_child').live('click', function() {
+            $('form a.remove_child').live('click', function() {
                 var hidden_field = $(this).prev('input[type=hidden]')[0];
                 if(hidden_field) {
                   hidden_field.value = '1';

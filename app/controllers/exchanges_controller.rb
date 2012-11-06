@@ -190,11 +190,22 @@ class ExchangesController < ApplicationController
 
     userOffers = initUser.offers.all.map { |offer| [offer.title, offer.id] }
     targNeeds = targUser.needs.all.map { |need| [need.title, need.id] } 
-    dropdownItems = [["Select an item", -9],["Kirpoints", -1],[":Your Offers:", -9] ]  
+    dropdownItems = [["Select an item", -9],["Kirpoints", -2],[":Your Offers:", -9] ]  
     dropdownItems.concat( userOffers)
     dropdownItems = dropdownItems + [[":Their Needs:", -9]]
     dropdownItems.concat(targNeeds)
 
     render :partial => 'create_offer', :locals => {:initUser => initUser, :targUser => targUser, :dropdownItems => dropdownItems}   
+  end
+
+
+  #add kirpoints to the exchange on the fly
+  def add_kirpoints_listing
+      initUser = User.find(params[:init])
+      targUser = User.find(params[:targ])
+      type = params[:type]
+      
+      render :partial => 'create_kirpoints', :locals => {:initUser => initUser, :targUser => targUser, :type => type}   
+      
   end
 end
