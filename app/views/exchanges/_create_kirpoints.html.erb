@@ -1,0 +1,23 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#add-kirpoints').live('click', function(e) {
+            e.preventDefault();
+            $(this).prev('#amount').before('<span>'+$(this).prev('#amount').val()+' Kirpoints</span>');
+            if(console) console.log($(this).closest('#amount'));
+            $(this).prev('#amount').hide();
+            $(this).hide();
+        });
+    });
+</script>
+
+<div class="rounded-map shadow">
+    <a type="button" class="close" aria-hidden="true">×</a>
+    <div>
+        <span>Throw in some Kirpoints:</span>
+    </div>
+    <div>
+        <%= text_field_tag "amount", '$$$', :id => 'amount' %>
+        <%= submit_tag "Add", :id => "add-kirpoints" %>
+
+    </div>
+</div>

@@ -32,14 +32,14 @@
                 var listingContainer = $(this).closest(".shadow");
 
                 if(listing == -1){
-                    $.get("/exch_add_kirpints?init="+userContext["id"]+"&targ="+targContext["id"]+"type=offer", function(data) {
+                    $.get("/exch_add_kirpoints?init="+userContext["id"]+"&targ="+targContext["id"]+"type=offer", function(data) {
                         var o = $(data);
                         listingContainer.replaceWith(o);
                         o.fadeIn();
                     });
                 }
                 else if(listing == -2){
-                    $.get("/exch_add_kirpints?init="+userContext["id"]+"&targ="+targContext["id"]+"type=need", function(data) {
+                    $.get("/exch_add_kirpoints?init="+userContext["id"]+"&targ="+targContext["id"]+"type=need", function(data) {
                         var o = $(data);
                         listingContainer.replaceWith(o);
                         o.fadeIn();
