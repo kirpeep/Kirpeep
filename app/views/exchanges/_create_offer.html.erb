@@ -1,3 +1,10 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#listing_id option[value = -9]').each(function(){
+            $(this).attr('disabled', 'disabled');
+        });
+    });
+</script>
 <div class="tab-pane active" id="newTargListing">
     <div class="rounded-offer shadow">
     	<a type="button" class="close" aria-hidden="true">×</a>
