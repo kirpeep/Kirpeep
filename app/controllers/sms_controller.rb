@@ -30,6 +30,7 @@ class SmsController < ApplicationController
         #Get the User id of this phone number
         @profile = Profile.where("phone_number = ?", params[:From].gsub('+1','')).first!
         #Get the exchange for this id and this conf code
+        logger.info "(initUser = #{@profile.user_id} and targCode = '#{params[:Body]}') or (targUser = #{@profile.user_id} and initCode = '#{params[:Body]}')"
         @exch = Exchange.where("(initUser = #{@profile.user_id} and targCode = '#{params[:Body]}') or (targUser = #{@profile.user_id} and initCode = '#{params[:Body]}')").first!
         if @exch
            #determine if the what thise user is init or targ?
