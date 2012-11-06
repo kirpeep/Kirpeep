@@ -48,6 +48,9 @@ gem 'activemerchant'
 #Twillio
 gem 'twilio-ruby'
 
+#Client-side vals
+gem 'client_side_validations'
+
 #gem 'css_sprite' #More efficient CSS
 
 group :test, :development, :kyle, :john do

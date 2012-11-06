@@ -16,7 +16,6 @@
 //= require bootstrap.min
 //= require jquery.purr
 //= require best_in_place
-//= require jquery.masonry.min.js
 
 
 /*jQuery.ajaxSetup({ 
