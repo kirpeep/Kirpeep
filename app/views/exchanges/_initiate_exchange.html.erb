@@ -31,15 +31,18 @@
                 var listing = $(this).val();
                 var listingContainer = $(this).closest(".shadow");
 
+                //Type: -1 == offer
                 if(listing == -1){
-                    $.get("/exch_add_kirpoints?init="+userContext["id"]+"&targ="+targContext["id"]+"type=offer", function(data) {
+                    $.get("/exch_add_kirpoints?init="+userContext["id"]+"&targ="+targContext["id"]+"&type=-1", function(data) {
                         var o = $(data);
                         listingContainer.replaceWith(o);
                         o.fadeIn();
+
                     });
                 }
+                //Type: -1 == need
                 else if(listing == -2){
-                    $.get("/exch_add_kirpoints?init="+userContext["id"]+"&targ="+targContext["id"]+"type=need", function(data) {
+                    $.get("/exch_add_kirpoints?init="+userContext["id"]+"&targ="+targContext["id"]+"&type=-2", function(data) {
                         var o = $(data);
                         listingContainer.replaceWith(o);
                         o.fadeIn();

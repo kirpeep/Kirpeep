@@ -97,6 +97,10 @@ class UserlistingsController < ApplicationController
 
   #display user listing on the exchange modals
   def show_listing_exchange
+    if params[:id] == -1 || params[:id] == -2
+      #item = ExchangeItem.find()
+      render :partial => 'show_exchange_kirpoint'
+    else
       listing = UserListing.find(params[:id]) 
       @user = listing.user
       targ = User.find(params[:targ])
@@ -105,6 +109,7 @@ class UserlistingsController < ApplicationController
       else 
         render :partial => 'show_exchange_need', :locals => {:listing => listing, :@user => @user, :targUser => targ }
       end
+    end
   end
 
   def edit

@@ -207,7 +207,7 @@ class ExchangesController < ApplicationController
       targUser = User.find(params[:targ])
       type = params[:type]
       
-      render :partial => 'create_kirpoints', :locals => {:initUser => initUser, :targUser => targUser, :type => type}   
+      render :partial => 'create_kirpoints', :locals => {:initUser => initUser, :targUser => targUser, :listingType => type}   
       
   end
 end
