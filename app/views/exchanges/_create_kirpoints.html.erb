@@ -2,9 +2,9 @@
     $(document).ready(function() {
         $('#add-kirpoints').live('click', function(e) {
             e.preventDefault();
-            $(this).prev('#amount').before('<span>'+$(this).prev('#amount').val()+' Kirpoints</span>');
-            if(console) console.log($(this).closest('#amount'));
-            $(this).prev('#amount').hide();
+            $(this).prev('.amount').before('<span>'+$(this).prev('.amount').val()+' Kirpoints</span>');
+            if(console) console.log($(this).closest('.amount'));
+            $(this).prev('.amount').remove();
             $(this).hide();
         });
     });
@@ -16,7 +16,7 @@
         <span>Throw in some Kirpoints:</span>
     </div>
     <div>
-        <%= text_field_tag "amount", '$$$', :id => 'amount' %>
+        <%= text_field_tag "amount", '$$$', :class => 'amount' %>
         <%= submit_tag "Add", :id => "add-kirpoints" %>
 
     </div>
