@@ -66,8 +66,10 @@ class ExchangesController < ApplicationController
       exch = exch.becomes(PerformExchange)
 
       #create codes and save
-      exch.initConfCode = 'c-' + User.generateToken()[0..5] 
-      exch.targConfCode = 'c-' + User.generateToken()[0..5] 
+      initConfCode = 'c-' + User.generateToken()[0..5]
+      targConfCode = 'c-' + User.generateToken()[0..5]
+      exch.initConfCode = initConfCode.downcase
+      exch.targConfCode = targConfCode.downcase
 
       if exch.save
         # send SMS Messages Here

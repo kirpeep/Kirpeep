@@ -79,8 +79,8 @@ class ExchangesController < ApplicationController
             (@initUser.profile.phone_number && @initUser.profile.number_verified == true)
 
            #Then send SMS conf codes
-           sendTxt(@targUser.profile.phone_number, "Your code is #{exch.targConfCode}. Text the other person's code when your are finished exchanging to let us it's complete. Thanks, Kirpeep!")
-           sendTxt(@initUser.profile.phone_number, "Your code is #{exch.initConfCode}. Text the other person's code when your are finished exchanging to let us it's complete. Thanks, Kirpeep!")
+           sendTxt(@targUser.profile.phone_number, "Your code is #{exch.targConfCode.downcase}. Text the other person's code when your are finished exchanging to let us it's complete. -Kirpeep")
+           sendTxt(@initUser.profile.phone_number, "Your code is #{exch.initConfCode.downcase}. Text the other person's code when your are finished exchanging to let us it's complete. -Kirpeep")
         end
 
         flash[:notice] = 'exchange moved to .'  + (exch.type).to_s
@@ -176,7 +176,7 @@ class ExchangesController < ApplicationController
 
     userNeeds = initUser.needs.all.map { |need| [need.title, need.id] }
     targOffers = targUser.offers.all.map { |offer| [offer.title, offer.id] } 
-    dropdownItems = [["Select an item", -9],[":Your Needs:", -9] ]  
+    dropdownItems = [["Select an item", -9],["Kirpoints", -1],[":Your Needs:", -9] ]  
     dropdownItems.concat(userNeeds)
     dropdownItems = dropdownItems + [[":Their Offers:", -9]]
     dropdownItems.concat(targOffers)
@@ -190,7 +190,7 @@ class ExchangesController < ApplicationController
 
     userOffers = initUser.offers.all.map { |offer| [offer.title, offer.id] }
     targNeeds = targUser.needs.all.map { |need| [need.title, need.id] } 
-    dropdownItems = [["Select an item", -9],[":Your Offers:", -9] ]  
+    dropdownItems = [["Select an item", -9],["Kirpoints", -1],[":Your Offers:", -9] ]  
     dropdownItems.concat( userOffers)
     dropdownItems = dropdownItems + [[":Their Needs:", -9]]
     dropdownItems.concat(targNeeds)
