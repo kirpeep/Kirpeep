@@ -43,10 +43,12 @@ class SmsController < ApplicationController
              @exch.update_attribute(:targComp, true)
            end
            
-           exch.type = 'PerformExchange'
-           
-           exch = exch.becomes(PerformExchange)
-	   exch.save
+           if @exch.targComp and @exch.initComp
+             @exch.type = 'RateExchange'
+             
+             @exch = exch.becomes(RateExchange)
+             @exch.save
+           end
            # Send the ok text
            render 'recieve.xml.erb', :content_type => 'text/xml'
         else
