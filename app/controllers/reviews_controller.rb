@@ -2,6 +2,9 @@ class ReviewsController < ApplicationController
 
 	def new
 		@review = Review.new
+		@targUserId = params[:id]
+
+		@exchanges = exchangesWithCurrentUser(@targUserId)
 	end
 
 	def create

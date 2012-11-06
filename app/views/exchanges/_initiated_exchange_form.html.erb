@@ -50,7 +50,7 @@
         <div class='row-fluid'>
             <div class='span4' id="userInfo">
                 <br>
-                <%= image_tag(current_user.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
+                <%= image_tag(current_user.profile.photo.url(:small), {:width => '100px', :height => '100px'}) %><br>
                 <%= current_user.name %>
             </div>
 
@@ -62,16 +62,14 @@
             <!--exchange partner -->
             <div class='span4 align-right' id="exchangePartner" >
                 <span id="with">exchanging with</span><br>
-                <%= image_tag(@targUser.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
+                <%= image_tag(@targUser.profile.photo.url(:small)) %><br>
                 <%= @targUser.name %>
             </div>
         </div><!--closes top section-->
 
         <!--opens middle section-->
         <div class='row-fluid'>
-
-
-        <!--left side-->
+            <!--left side-->
             <div class='span6'>
                 <div><span id="getting">You are getting...</span></div>
 
@@ -114,7 +112,7 @@
 
 
             <!--Right Side-->
-            <div class='span6'>
+            <div` class='span6'>
                 <div><span id="giving">You are giving this...</span></div>
 
                 <!-- Needs-->
@@ -152,7 +150,6 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
 
             <!--Opens Bottom Section-->

@@ -31,28 +31,32 @@
                 var listing = $(this).val();
                 var listingContainer = $(this).closest(".shadow");
 
-                if(console) console.log(listingContainer.attr('class'));
+                if(listing == -9){
+                    $.get("/exch_add_kirpints?init="+userContext["id"]+"&targ="+targContext["id"], function(data) {
 
-                $.get("/get_listing?id="+listing+"&targ="+targContext["id"], function(data) {
-                    var date = new Date();
-                    var listingID = date.getTime();   
-                    var o = $(data);
-                    o.find('#initiate_exchange_exchange_items_0_user_listing_id').attr("value", userContext.id);
-                    
-                    //manually assign child_index to fields_for
-                    o.find('#initiate_exchange_exchange_items_0_user_listing_id').attr('name',
-                        'initiate_exchange[exchange_items]['+listingID+'][user_listing_id]');
-                    o.find('#initiate_exchange_exchange_items_0_user_listing_id').attr('id',
-                        'initiate_exchange_exchange_items_'+listingID+'_user_listing_id');
-                    
-                    //manually assign targ_user_id
-                    o.find('#initiate_exchange_exchange_items_0_targ_user_id').attr("value", targContext.id);
-                    //manually assign child_index to fields_for
-                    o.find('#initiate_exchange_exchange_items_0_targ_user_id').attr('name',
-                        'initiate_exchange[exchange_items]['+listingID+'][targ_user_id]');
-                    o.find('#initiate_exchange_exchange_items_0_targ_user_id').attr('id',
-                        'initiate_exchange_exchange_items_'+listingID+'_targ_user_id');
-                    
+                    }
+                }
+                else{
+                    $.get("/get_listing?id="+listing+"&targ="+targContext["id"], function(data) {
+                        var date = new Date();
+                        var listingID = date.getTime();   
+                        var o = $(data);
+                        o.find('#initiate_exchange_exchange_items_0_user_listing_id').attr("value", userContext.id);
+                        
+                        //manually assign child_index to fields_for
+                        o.find('#initiate_exchange_exchange_items_0_user_listing_id').attr('name',
+                            'initiate_exchange[exchange_items]['+listingID+'][user_listing_id]');
+                        o.find('#initiate_exchange_exchange_items_0_user_listing_id').attr('id',
+                            'initiate_exchange_exchange_items_'+listingID+'_user_listing_id');
+                        
+                        //manually assign targ_user_id
+                        o.find('#initiate_exchange_exchange_items_0_targ_user_id').attr("value", targContext.id);
+                        //manually assign child_index to fields_for
+                        o.find('#initiate_exchange_exchange_items_0_targ_user_id').attr('name',
+                            'initiate_exchange[exchange_items]['+listingID+'][targ_user_id]');
+                        o.find('#initiate_exchange_exchange_items_0_targ_user_id').attr('id',
+                            'initiate_exchange_exchange_items_'+listingID+'_targ_user_id');
+                    }    
                     
                     listingContainer.html(o.html());
                     o.fadeIn();

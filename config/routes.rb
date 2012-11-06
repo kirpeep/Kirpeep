@@ -4,6 +4,7 @@ TestApp::Application.routes.draw do
 
   match  'destroy_session',      :to => 'sessions#destroy'
   match  '/create_listing/',     :to => 'userlistings#create'
+  match  /exch_add_kirpints/, :to => 'userlistings#add_kirpoints_listing'
   match  '/new_listing',         :to => 'userlistings#new'
   match  '/exchange_listing/',   :to => 'userlistings#show_listing_exchange'
   match  '/show_listing/',       :to => 'userlistings#show_listing_result'
@@ -36,6 +37,7 @@ TestApp::Application.routes.draw do
   get  '/edit_listing/',  :to => 'userlistings#edit'
   match  '/get_listing/', :to => 'userlistings#getListing'
   get  '/sendmessage/?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
+  match '/add_review/', :to => 'reviews#new'
   # Forgot password and password reset hacks
   get '/forgot/', :to => 'users#forgot'
   post '/forgot', :to => 'users#process_forgot'

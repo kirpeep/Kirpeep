@@ -31,9 +31,12 @@ class UserlistingsController < ApplicationController
     if(listingType == "offer")
       listing = user.profile.offers.new params[:offer] 
       listing.listingType = 'offer'
-    else
+    elsif (listingType == "need")
       listing = user.profile.needs.new params[:need]
       listing.listingType = 'need' 
+    else
+      listing = user.profile.needs.new params[:kirpoint]
+      listing.listingType = 'kirpoint' 
     end
 
     if listing.save
@@ -80,6 +83,11 @@ class UserlistingsController < ApplicationController
     end
   end
 
+  #add kirpoints to the exchange on the fly
+  def add_kirpoints_listing
+    
+  end
+  
   #display user listing on the results page
   def show_listing_result
       listing = UserListing.find(params[:id]) 

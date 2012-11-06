@@ -304,16 +304,31 @@ class UsersController < ApplicationController
     current_user.update_attribute(:kirpoints, kirpoints)
   end
 
+  #Returns true if user has an exchange with the current user
   def hasExchangeWithUser(user)
     @exchanges = exchange_list(user.id)
     for exch in @exchanges
-      if user.id = exch.initUser || user.id = exch.targUser
+      if current_user.id = exch.initUser || current_user.id = exch.targUser
         return true
       end
     end
     #user does not have exchange with 'user' if reached
    return false 
   end
+
+  #Returns array of exchanges with user
+  def exchangesWithUser(user)
+    @exchanges = exchange_list(user.id)
+    @exchangesWithCurrentUser 
+    for exch in @exchanges
+      if current_user.id = exch.initUser || current_user.id = exch.targUser
+        @exchangesWithCurrentUser = @exchangesWithCurrentUser + exch
+      end
+    end
+    #user does not have exchange with 'user' if reached
+   return @exchangesWithCurrentUser 
+  end
+
 
   def review_list(user)
     @exchanges = exchange_list(user.id)
