@@ -85,7 +85,7 @@ class ExchangesController < ApplicationController
            sendTxt(@initUser.profile.phone_number, "Your code is #{exch.initConfCode}. Text the other person's code when your are finished exchanging to let us it's complete. -Kirpeep")
         end
 
-        flash[:notice] = 'exchange moved to .'  + (exch.type).to_s
+        flash[:notice] = 'exchange moved to '  + (exch.type).to_s
         redirect_to current_user
         return
       else
@@ -95,7 +95,7 @@ class ExchangesController < ApplicationController
       end
     end
 
-    flash[:notice] = 'exchange updated. user: ' + params[:user_id].to_s
+    flash[:notice] = 'exchange updated.'
     redirect_to current_user
   end
 
@@ -105,10 +105,10 @@ class ExchangesController < ApplicationController
 
     if(exch.initUser == params[:user_id])
       exch.initComp = true
-      flash[:notice] = 'exchange ' + (exch.id).to_s + ' updated. InitComp: ' + (exch.initComp).to_s
+      flash[:notice] = 'exchange updated.'
     else 
       exch.targComp = true
-      flash[:notice] = 'exchange updated. TargAcptComp: ' + (exch.targComp).to_s
+      flash[:notice] = 'exchange updated.'
     end
       exch.save
     if(exch.initComp == true && exch.targComp == true)
@@ -117,7 +117,7 @@ class ExchangesController < ApplicationController
 
       exch = exch.becomes(RateExchange)
       if exch.save
-          flash[:notice] = 'exchange moved to .'  + (exch.type).to_s
+          flash[:notice] = 'exchange moved to '  + (exch.type).to_s
           redirect_to current_user
           return
       else
@@ -126,7 +126,7 @@ class ExchangesController < ApplicationController
           return
       end
     end
-    flash[:notice] = 'exchange ' + (exch.id).to_s + ' updated. InitComp: ' + (exch.initComp).to_s + ' TargComp: ' + (exch.targComp).to_s
+    flash[:notice] = 'exchange updated.'
     redirect_to current_user
   end
 
@@ -155,7 +155,7 @@ class ExchangesController < ApplicationController
       exch = exch.becomes(ArchivedExchange)
       exch.type_when_term = ex_type
       if exch.save
-          flash[:notice] = 'exchange moved to .' + (exch.type).to_s
+          flash[:notice] = 'exchange moved to ' + (exch.type).to_s
           redirect_to current_user
           return
       else
@@ -164,7 +164,7 @@ class ExchangesController < ApplicationController
           return
       end
     end
-    flash[:notice] = 'Rated exchange #' + (exch.id).to_s + "  " + (exch.initUser).to_s + ' == ' + (params[:user_id]).to_s + 'InitUserRate: ' + (exch.init_rating_overall != nil).to_s + ' TargUserRate: ' + (exch.targ_rating_overall != nil).to_s + (exch.init_rating_overall != nil && exch.targ_rating_overall != nil).to_s
+    flash[:notice] = 'Rated exchange '
     redirect_to current_user
   end
 
@@ -178,7 +178,7 @@ class ExchangesController < ApplicationController
 
     userNeeds = initUser.needs.all.map { |need| [need.title, need.id] }
     targOffers = targUser.offers.all.map { |offer| [offer.title, offer.id] } 
-    dropdownItems = [["Select an item", -9],["Kirpoints", -1],[":Your Needs:", -9] ]  
+    dropdownItems = [["Select an item", -9],["Kirpoints", -9],[":Your Needs:", -9] ]  
     dropdownItems.concat(userNeeds)
     dropdownItems = dropdownItems + [[":Their Offers:", -9]]
     dropdownItems.concat(targOffers)
@@ -192,7 +192,7 @@ class ExchangesController < ApplicationController
 
     userOffers = initUser.offers.all.map { |offer| [offer.title, offer.id] }
     targNeeds = targUser.needs.all.map { |need| [need.title, need.id] } 
-    dropdownItems = [["Select an item", -9],["Kirpoints", -2],[":Your Offers:", -9] ]  
+    dropdownItems = [["Select an item", -9],["Kirpoints", -9],[":Your Offers:", -9] ]  
     dropdownItems.concat( userOffers)
     dropdownItems = dropdownItems + [[":Their Needs:", -9]]
     dropdownItems.concat(targNeeds)

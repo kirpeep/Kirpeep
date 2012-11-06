@@ -1,4 +1,4 @@
-class ExchangeItemKirpoint < ActiveRecord::Base
+class ExchangeItemKirpoint < ExchangeItem
   attr_accessible :exchange_id, :targ_user_id, :user_listing_id, :init_user_id, :kirpoints_amount
 
   validates :init_user_id, :presence => true

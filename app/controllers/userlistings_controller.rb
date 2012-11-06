@@ -97,7 +97,7 @@ class UserlistingsController < ApplicationController
 
   #display user listing on the exchange modals
   def show_listing_exchange
-    if params[:id] == -1 || params[:id] == -2
+    if params[:id].to_i == -1 || params[:id].to_i == -2
       #item = ExchangeItem.find()
       render :partial => 'show_exchange_kirpoint'
     else
