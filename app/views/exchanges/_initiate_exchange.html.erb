@@ -56,9 +56,11 @@
                             'initiate_exchange[exchange_items]['+listingID+'][targ_user_id]');
                         o.find('#initiate_exchange_exchange_items_0_targ_user_id').attr('id',
                             'initiate_exchange_exchange_items_'+listingID+'_targ_user_id');
+
+                        listingContainer.html(o.html());
+                        o.fadeIn();
                     });
-                    listingContainer.html(o.html());
-                    o.fadeIn();
+                    
                 }
                 
             });
