@@ -34,7 +34,7 @@
                 if(listing == -9){
                     $.get("/exch_add_kirpints?init="+userContext["id"]+"&targ="+targContext["id"], function(data) {
 
-                    }
+                    });
                 }
                 else{
                     $.get("/get_listing?id="+listing+"&targ="+targContext["id"], function(data) {
