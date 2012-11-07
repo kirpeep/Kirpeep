@@ -19,4 +19,5 @@ class UserMailer < ActionMailer::Base
 
     mail(:to => to_user.email, :subject => @from_user.name + " has just sent you an message in Kirpeep.")
   end
+
 end

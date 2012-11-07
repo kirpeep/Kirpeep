@@ -17,22 +17,7 @@ class UserMailer < ActionMailer::Base
     @subject = subject
     @text = text
 
-    mail(:to => to_user.email, :subject => @from_user.name + " has just sent you an message in Kirpeep.")
+    mail(:to => to_user.email, :subject => subject)
   end
 
-  def init_exchange_email()
-
-  end
-
-  def decline_exchange_email()
-
-  end
-
-  def accept_exchange_email()
-
-  end
-
-  def cancel_exchange_email()
-
-  end
 end
