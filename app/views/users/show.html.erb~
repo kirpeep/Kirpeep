@@ -41,14 +41,14 @@
       
     	<div class='span4'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
-        <br>
+        <br><br>
       	<ul class='profileInfo'>
           <li onmouseover="$('#locationEdit').show()" onmouseout="$('#locationEdit').hide()" ><strong>Location:</strong> <%= best_in_place @profile, :location %> <i id='locationEdit' style='display:none;' class='icon-edit'></i></li>
             <li onmouseover="$('#zipcodeEdit').show()" onmouseout="$('#zipcodeEdit').hide()"><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %> <i id='zipcodeEdit' style='display:none;' class='icon-edit'></i></li>
             <li onmouseover="$('#languageEdit').show()" onmouseout="$('#languageEdit').hide()"><strong>Languages:</strong> <%= best_in_place @profile, :languages %> <i id='languageEdit' style='display:none;' class='icon-edit'></i></li>
             <li onmouseover="$('#birthdateEdit').show()" onmouseout="$('#birthdateEdit').hide()"><strong>Birth Date:</strong> <%= best_in_place @profile, :birthdate %> <i id='birthdateEdit' style='display:none;' class='icon-edit'></i></li>
             <li onmouseover="$('#genderEdit').show()" onmouseout="$('#genderEdit').hide()"><strong>Gender:</strong> <%= best_in_place @profile, :gender %> <i id='genderEdit' style='display:none;' class='icon-edit'></i></li>
-            <li ><strong>Needs / Offers</strong> </li>
+            <li ><strong><%= @user.needs.count %> Needs / <%= @user.offers.count %> Offers</strong> </li>
             <li><strong>Completed Exchanges</strong> </li>
             <li><strong>1 Review (stars)<strong></li>
             <li><strong><%= if @profile.number_verified then "Number Verified" end %></strong></li>
