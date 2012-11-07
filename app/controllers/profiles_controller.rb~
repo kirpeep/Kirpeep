@@ -54,9 +54,8 @@ class ProfilesController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    debugger
     @profile = Profile.find(params[:id])
-
+    @profile.phone_number = @profile.phone_number.gsub(/[^0-9]/, '')
     respond_to do |format|
       if @profile.update_attributes(params[:profile])
         format.html { redirect_to current_user, notice: 'User was successfully updated.' }
