@@ -116,7 +116,7 @@ class ExchangesController < ApplicationController
       exch.initComp = true
       flash[:notice] = 'exchange updated.'
     else
-      UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver  
+      UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to be rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver  
       exch.targComp = true
       flash[:notice] = 'exchange updated.'
     end
