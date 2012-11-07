@@ -53,15 +53,7 @@
             
               </a>
           </li>
-          <li> 
-          <a class="dynamolink" href="/quicksale/<%= listing.id.to_s%>">Spend Kirpoints
-            <%#= image_tag('Icon_Coin_gray_regular.png', 
-                  :class=>"priceIcon",
-                  :title=>"Spend Kirpoints", 
-                  :onmouseover=>"$(this).attr('src','/assets/Icon_Coin_orange_rollover.png');",
-                  :onmouseout=>"$(this).attr('src','/assets/Icon_Coin_gray_regular.png');" ) %>
-          </a>
-          </li>
+          
           <li>
           <a class="dynamolink" href="/share/<%= listing.id.to_s%>">Share
             <%#= image_tag('Icon_Share_gray_regular.png', 
@@ -111,14 +103,14 @@
     </div>
 
     <div style='font-weight:normal; '>
-    <div class="span5 pull-left" style='margin-top:15px;'>
+    <div class="span4 pull-left" style='margin-top:15px;font-size:12px;'>
         (<%= Exchange.where("id != ?",listing.user.id).all.count %>) Exchanges<br />
         (0) Reviews 
     </div>
     <div class="span3 pull-right" style='margin-top:15px;'>
-          (<%= listing.user.needs.count %>) need
+          (<%= listing.user.needs.count %>) need(s)
           <br />
-          (<%= listing.user.needs.count %>) need 
+          (<%= listing.user.offers.count %>) offer(s) 
     </div>
   </div>
   </div>

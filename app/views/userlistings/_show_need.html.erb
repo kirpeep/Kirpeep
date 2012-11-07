@@ -103,14 +103,14 @@
     </div>
 
     <div style='font-weight:normal; '>
-    <div class="span5 pull-left" style='margin-top:15px;'>
+    <div class="span4 pull-left" style='margin-top:15px;font-size:12px;'>
         (<%= Exchange.where("id != ?",listing.user.id).all.count %>) Exchanges<br />
         (0) Reviews 
     </div>
-    <div class="span3 pull-right" style='margin-top:15px;'>
-          (<%= listing.user.needs.count %>) need
+    <div class="span3 pull-right" style='margin-top:15px;font-size:12px;'>
+          (<%= listing.user.needs.count %>) need(s)
           <br />
-          (<%= listing.user.needs.count %>) need 
+          (<%= listing.user.offers.count %>) offer(s) 
     </div>
   </div>
   </div>
