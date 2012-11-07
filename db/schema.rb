@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121106023505) do
+ActiveRecord::Schema.define(:version => 20121107020453) do
 
   create_table "assets", :force => true do |t|
     t.integer  "user_listing_id"
@@ -129,12 +129,14 @@ ActiveRecord::Schema.define(:version => 20121106023505) do
     t.string   "gender"
     t.string   "birthdate"
     t.integer  "zipcode"
-    t.integer  "phone_number"
+    t.string   "phone_number"
     t.boolean  "phone_verified"
     t.boolean  "number_verified"
   end
 
   create_table "reviews", :force => true do |t|
+    t.string   "reviewID"
+    t.string   "profileID"
     t.text     "review"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false

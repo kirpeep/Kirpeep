@@ -64,7 +64,7 @@ $(document).ready(function(){
             <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
             <li><strong>Birth Date:</strong> <%= best_in_place @profile, :birthdate %></li>
             <li><strong>Gender:</strong> <%= best_in_place @profile, :gender %></li>
-            <li><strong>Needs / Offers</strong> </li>
+            <li><strong><%= @user.needs.count %> Needs / <%= @user.offers.count %> Offers</strong> </li>
             <li><strong>Completed Exchanges</strong> </li>
             <li><strong>1 Review (stars)<strong></li> 
       	</ul>
@@ -95,17 +95,14 @@ $(document).ready(function(){
                 <li class='active'>
                   <%= link_to 'Profile', '#profile' , {:id => 'profile_link', 'data-toggle' => 'tab'} %>
                 </li>
-                <li>
-                  <%= link_to 'Exchanges', '#exchanges' , {:id => 'exch_link', 'data-toggle' => 'tab'} %></li>
+                
               </ul>
       	    
               <div class="tab-content" >
                 <div id='profile' class="tab-pane active">
                   <%= render :partial => 'profile', :locals => {:user => @user} %>
                 </div>
-                <div id='exchanges' class="tab-pane">
-                  <div id="exchContainer" data-url="/user_exchanges/<%=params[:id]%>"></div>
-                </div>
+               
               </div> <!-- /.tab-content -->
             </div><!-- /.tabbable -->
           </div><!-- /#profile-header -->

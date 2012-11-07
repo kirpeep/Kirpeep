@@ -101,9 +101,9 @@
   <div class="row-fluid">
     <div class="span4 pull-left">
       <% if signed_in? && listing.user.id == current_user.id %>
-      	<%= link_to image_tag(listing.user.profile.photo.url), listing.user, {:id => 'userImage', 'rel' =>'popover' } %>
+      	<%= link_to image_tag(listing.user.profile.photo.url, {:style=>'width:70px;', :class => 'img-polaroid'}), listing.user, {:id => 'userImage', 'rel' =>'popover' } %>
       <% else %>
-        <a href='/view/<%= listing.user.id %>'><%= image_tag(listing.user.profile.photo.url) %></a>
+        <a href='/view/<%= listing.user.id %>'><%= image_tag(listing.user.profile.photo.url, {:style=>'width:70px;', :class => 'img-polaroid'}) %></a>
       <% end %>
       <%= image_tag('stars.png') %>
     </div>
@@ -118,9 +118,9 @@
         (0) Reviews 
     </div>
     <div class="span3 pull-right" style='margin-top:15px;'>
-          (<%= listing.user.needs.count %>) need
+          (<%= listing.user.needs.count %>) need(s)
           <br />
-          (<%= listing.user.needs.count %>) need 
+          (<%= listing.user.offers.count %>) offer(s) 
     </div>
     
   </div>
