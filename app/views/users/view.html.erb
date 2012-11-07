@@ -95,17 +95,14 @@ $(document).ready(function(){
                 <li class='active'>
                   <%= link_to 'Profile', '#profile' , {:id => 'profile_link', 'data-toggle' => 'tab'} %>
                 </li>
-                <li>
-                  <%= link_to 'Exchanges', '#exchanges' , {:id => 'exch_link', 'data-toggle' => 'tab'} %></li>
+                
               </ul>
       	    
               <div class="tab-content" >
                 <div id='profile' class="tab-pane active">
                   <%= render :partial => 'profile', :locals => {:user => @user} %>
                 </div>
-                <div id='exchanges' class="tab-pane">
-                  <div id="exchContainer" data-url="/user_exchanges/<%=params[:id]%>"></div>
-                </div>
+               
               </div> <!-- /.tab-content -->
             </div><!-- /.tabbable -->
           </div><!-- /#profile-header -->
