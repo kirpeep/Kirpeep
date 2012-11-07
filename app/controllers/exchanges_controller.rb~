@@ -60,6 +60,8 @@ class ExchangesController < ApplicationController
     end
 
     if(exch.initAcpt == true && exch.targAcpt == true)
+    
+      
       exch.type = 'PerformExchange'
       exch.save
 
@@ -75,6 +77,9 @@ class ExchangesController < ApplicationController
         # send SMS Messages Here
         @targUser = User.find(exch.targUser)
         @initUser = User.find(exch.initUser)
+        
+        UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade." ).deliver
+        UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade." ).deliver
 
         # only send if we have verified phone numbers for both parties. 
         if (@targUser.profile.phone_number && @targUser.profile.number_verified == true) &&
@@ -102,11 +107,16 @@ class ExchangesController < ApplicationController
   #Acceptance of Performed Exchange
   def accept_perform
     exch = PerformExchange.find(params[:exch_id])
-
+    
+    @targUser = User.find(exch.targUser)
+    @initUser = User.find(exch.initUser)
+        
     if(exch.initUser == params[:user_id])
+      UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to be rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver
       exch.initComp = true
       flash[:notice] = 'exchange updated.'
-    else 
+    else
+      UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver  
       exch.targComp = true
       flash[:notice] = 'exchange updated.'
     end
