@@ -4,7 +4,6 @@ TestApp::Application.routes.draw do
 
   match  'destroy_session',      :to => 'sessions#destroy'
   match  '/create_listing/',     :to => 'userlistings#create'
-  match  '/exch_add_kirpints/',    :to => 'userlistings#add_kirpoints_listing'
   match  '/new_listing',         :to => 'userlistings#new'
   match  '/exchange_listing/',   :to => 'userlistings#show_listing_exchange'
   match  '/show_listing/',       :to => 'userlistings#show_listing_result'
@@ -30,6 +29,7 @@ TestApp::Application.routes.draw do
   match  '/rate_exchange/'  , :to => 'exchanges#rate_exchange' , :as => 'rate_exchange'
   match  '/add_offer/',   :to => 'exchanges#add_offer'
   match  '/add_need/',   :to => 'exchanges#add_need'
+  match  '/exch_add_kirpoints/',    :to => 'exchanges#add_kirpoints_listing'
   match  '/sendmessage/', :to => 'messages#new'
   match  '/mark_unread/', :to => 'messages#markAsUnread'
   match  '/mark_read/', :to => 'messages#markAsRead'

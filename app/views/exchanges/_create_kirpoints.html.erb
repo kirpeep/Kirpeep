@@ -1,0 +1,33 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#add-kirpoints').live('click', function(e) {
+            e.preventDefault();
+            $(this).prev('.amount').before('<span>'+$(this).prev('.amount').val()+' Kirpoints</span>');
+            if(console) console.log($(this).closest('.amount'));
+            $('.points').val($(this).prev('.amount').val());
+            $('.points').removeClass('points');
+
+            $(this).prev('.amount').remove();
+            $(this).hide();
+
+
+        });
+    });
+</script>
+
+<div class="rounded-map shadow">
+    <a type="button" class="close" aria-hidden="true">×</a>
+    <div>
+        <span>Throw in some Kirpoints:</span>
+    </div>
+    <div>
+        <%= text_field_tag "amount", '$$$', :class => 'amount' %>
+        <%= submit_tag "Add", :id => "add-kirpoints" %>
+        <%= fields_for 'initiate_exchange[exchange_items_attributes][]', Time.now.to_i  do |fa| %>
+            <%=fa.hidden_field :user_listing_id, :value => listingType %>
+            <%=fa.hidden_field :targ_user_id, :value => targUser.id %>
+            <%=fa.hidden_field :init_user_id, :value => initUser.id %>
+            <%=fa.hidden_field :kirpoints, :value => -8, :class => "points" %>
+        <% end %>
+    </div>
+</div>

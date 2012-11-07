@@ -83,11 +83,6 @@ class UserlistingsController < ApplicationController
     end
   end
 
-  #add kirpoints to the exchange on the fly
-  def add_kirpoints_listing
-      render :nothing => true
-  end
-
   #display user listing on the results page
   def show_listing_result
       listing = UserListing.find(params[:id]) 
@@ -102,6 +97,10 @@ class UserlistingsController < ApplicationController
 
   #display user listing on the exchange modals
   def show_listing_exchange
+    if params[:id].to_i == -1 || params[:id].to_i == -2
+      #item = ExchangeItem.find()
+      render :partial => 'show_exchange_kirpoint'
+    else
       listing = UserListing.find(params[:id]) 
       @user = listing.user
       targ = User.find(params[:targ])
@@ -110,6 +109,7 @@ class UserlistingsController < ApplicationController
       else 
         render :partial => 'show_exchange_need', :locals => {:listing => listing, :@user => @user, :targUser => targ }
       end
+    end
   end
 
   def edit
@@ -200,10 +200,11 @@ class UserlistingsController < ApplicationController
 
     listing = UserListing.find(params[:id])
     targUser = User.find(params[:targ])
+    initUser = User.find(params[:init])
     if params[:type] == "offer"
-      render :partial => 'show_exchange_offer', :locals => {:listing => listing, :targUser => targUser}
+      render :partial => 'show_exchange_offer', :locals => {:listing => listing, :targUser => targUser, :initUser => initUser}
     else
-      render :partial => 'show_exchange_need', :locals => {:listing => listing, :targUser => targUser}
+      render :partial => 'show_exchange_need', :locals => {:listing => listing, :targUser => targUser, :initUser => initUser}
     end
   end
 end

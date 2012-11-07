@@ -11,6 +11,7 @@
             <%= fields_for 'initiate_exchange[exchange_items_attributes][]', Time.now.to_i  do |fa| %>
                 <%=fa.hidden_field :user_listing_id, :value => listing.id %>
                 <%=fa.hidden_field :targ_user_id, :value => targUser.id %>
+                <%=fa.hidden_field :init_user_id, :value => initUser.id %>
             <% end %>
         </div>
         </span>

@@ -29,8 +29,10 @@
 
                     <!--exchange partner -->
                     <div class='span4 align-right' id="exchangePartner" >
-                        <%= image_tag(@targUser.profile.photo.url, {:width => '50px', :height => '50px'}) %><br>
-                        <%= @targUser.name %>
+                    
+                            <%= image_tag(@targUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+                            <br>
+                            <%= @targUser.name %>
                     </div>
                 </div>
             </div>
@@ -59,9 +61,9 @@
                         <div class="tab-pane active" id="offer">
                             <!--  Listing -->
                             <% if @targListing.listingType == "offer" %>
-                            <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @user.id %>" id="targlisting"></div>
+                            <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= current_user.id %>&init=<%= @targUser.id %>&type=offer" id="targlisting"></div>
                             <% else %>
-                            <div data-url="/add_need?init=<%= @user.id %>&targ=<%= @targUser.id %>" id="targlisting"></div>
+                            <div data-url="/add_need?init=<%= current_user.id %>&targ=<%= @targUser.id %>" id="targlisting"></div>
                             <%end%>
                             <!-- End of Offer Listing --> 
                         </div>
@@ -90,7 +92,7 @@
                             <% if @targListing.listingType == "offer" %>
                             <div data-url="/add_offer?init=<%= @user.id %>&targ=<%= @targUser.id %>" id="initlisting"></div>
                             <%else%>
-                                <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @targUser.id %>" id="initlisting"></div>
+                                <div data-url="/get_listing?id=<%= @targListing.id %>&targ=<%= @targUser.id %>&init=<%= current_user.id %>&type=need" id="initlisting"></div>
                             <%end%>
                             <!--End of Need Listing-->
                         </div>

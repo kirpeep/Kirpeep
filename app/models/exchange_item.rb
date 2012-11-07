@@ -5,7 +5,7 @@
 #################################################
 
 class ExchangeItem < ActiveRecord::Base
-  attr_accessible :exchange_id, :targ_user_id, :user_listing_id
+  attr_accessible :exchange_id, :targ_user_id, :user_listing_id, :init_user_id, :kirpoints_amount
 
   belongs_to :exchange
   belongs_to :initiate_exchange

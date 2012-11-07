@@ -9,39 +9,46 @@
     </script>
 </head>
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Perform Exchange</h3>
+        <div class="row-fluid">
+            <div class="span6">
+                <h3 id="myModalLabel">Perform Exchange</h3>
+                <div class='align-center' id="exchangeStatus">
+                        <div class="progress progress-striped">
+                            <div class="bar" style="width: 50%;"></div>
+                        </div>
+                    </div>
+            </div>
+            <div class="span6">
+                <div class='row-fluid'>
+                    <div class='span4' id="userInfo">
+                        <%= image_tag(current_user.profile.photo.url, {:width => '50px', :height => '50px'}) %><br>
+                        <%= current_user.name %>
+                    </div>
+
+                    <!--Kirpeep Exchage Status Logo -->
+                    <div class='span4 align-center' id="exchangeStatus">
+                        <span id="with">exchanging with</span>
+                    </div>
+
+                    <!--exchange partner -->
+                    <div class='span4 align-right' id="exchangePartner" >
+                        <% if (current_user.id).to_s == (@initUser.id).to_s %>
+                            <%= image_tag(@targUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+                            <br>
+                            <%= @targUser.name %>
+                        <%else%>
+                            <%= image_tag(@initUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+                            <br>
+                            <%= @initUser.name %>
+                        <%end%>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="modal-body">
-        <!--user viewing -->
-        <div class='row-fluid'>
-            <div class='span4' id="userInfo">
-                    <br>
-                    <%= image_tag(current_user.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
-                    <%= current_user.name %>
-            </div>
-        
-            <!--Kirpeep Exchage Status Logo -->
-            <div class='span4 align-center' id="exchangeStatus">
-                <p><%= image_tag('PerfExchIco.png', {:width => '100px', :height => '100px'} ) %></p>
-            </div>
             
-            <!--exchange partner -->
-            <div class='span4 align-right' id="exchangePartner">
-                <span id="with">exchanging with</span>
-                <% if (current_user.id).to_s == (@initUser.id).to_s %>
-                    <%= image_tag(@targUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
-                    <br>
-                    <%= @targUser.name %>
-                <%else%>
-                    <%= image_tag(@initUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
-                    <br>
-                    <%= @initUser.name %>
-                <%end%>
-            </div>
-        </div><!-- .row-fluid -->
-    
         <!--opens middle section-->
             <div class='row-fluid'>
             <!-- Left Side-->
@@ -53,7 +60,7 @@
 
                 <!-- Start of tabs for items user is receiving--> 
                 <% for item in @initItems %>
-                    <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.user_listing_id %>&targ=<%= @targUser.id %>"></div>
+                    <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=need"></div>
                 <%end%>
                 <!-- End of tabs for items user is receiving--> 
             </div><!-- .span6-->
@@ -67,7 +74,7 @@
 
                 <!-- Start of tabs for items targ is receiving--> 
                 <% for item in @targItems %>
-                    <div class="itemTemplate" data-url="/exchange_listing?id=<%= item.user_listing_id %>&targ=<%= @initUser.id %>"></div>
+                    <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=offer"></div>
                 <%end%>
                 <!-- End of tabs for items targ is receiving--> 
 
