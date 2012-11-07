@@ -13,7 +13,7 @@ gem 'will_paginate', '3.0.3'
 gem 'riddle'
 
 #Search Gems
-gem 'thinking-sphinx'
+gem 'thinking-sphinx', '1.22'
 gem 'ts-delayed-delta'
 gem 'delayed_job_active_record'
 
