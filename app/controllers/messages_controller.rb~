@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
     
     if message.save  
     	flash[:notice] = 'message saved.'
-        UserMailer.message_email(toUser, user, params[:message].subject, params[:message].text ).deliver
+        UserMailer.message_email(toUser, user, params[:message][:subject], params[:message][:text] ).deliver
         message.updateStartingMessage
 
     	respond_to do |format|
