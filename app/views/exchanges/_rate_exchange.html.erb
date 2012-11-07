@@ -58,7 +58,7 @@
                 <!--exchange partner -->
                 <div class='span4 align-right' id="exchangePartner">
                     <span id="with">exchanging with</span>
-                    <% if (current_user.id).to_s == (@initUser.id).to_s %>
+                    
                         <%= image_tag(@targUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
                         <br>
                         <%= @targUser.name %>
