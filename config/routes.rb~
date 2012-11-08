@@ -29,6 +29,7 @@ TestApp::Application.routes.draw do
   match  '/rate_exchange/'  , :to => 'exchanges#rate_exchange' , :as => 'rate_exchange'
   match  '/add_offer/',   :to => 'exchanges#add_offer'
   match  '/add_need/',   :to => 'exchanges#add_need'
+  match  '/exch_add_kirpoints/',    :to => 'exchanges#add_kirpoints_listing'
   match  '/sendmessage/', :to => 'messages#new'
   match  '/mark_unread/', :to => 'messages#markAsUnread'
   match  '/mark_read/', :to => 'messages#markAsRead'
@@ -36,6 +37,7 @@ TestApp::Application.routes.draw do
   get  '/edit_listing/',  :to => 'userlistings#edit'
   match  '/get_listing/', :to => 'userlistings#getListing'
   get  '/sendmessage/?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
+  match '/add_review/', :to => 'reviews#new'
   # Forgot password and password reset hacks
   get '/forgot/', :to => 'users#forgot'
   post '/forgot', :to => 'users#process_forgot'
@@ -49,7 +51,7 @@ TestApp::Application.routes.draw do
   match '/kirpoints/complete', :to=> 'users#complete'
 
   post '/sms/verify', :to => 'sms#verify'
-  get '/sms/recieve', :to => 'sms#recieve'
+  post '/sms/recieve', :to => 'sms#recieve'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
 

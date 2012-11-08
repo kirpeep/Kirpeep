@@ -69,18 +69,7 @@ class UserlistingsController < ApplicationController
 
   def show
     @listing = UserListing.find(params[:id]) 
-    
-    if(params[:listing_type] == "offer")
-      respond_to do |format|
-        format.html { show_offer.html }# show.html.erb
-        format.json 
-      end
-    else
-      respond_to do |format|
-        format.html {show_need.html}
-        format.json 
-      end
-    end
+    render 'show'
   end
 
   #display user listing on the results page

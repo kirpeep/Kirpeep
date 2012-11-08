@@ -31,9 +31,12 @@ class UserlistingsController < ApplicationController
     if(listingType == "offer")
       listing = user.profile.offers.new params[:offer] 
       listing.listingType = 'offer'
-    else
+    elsif (listingType == "need")
       listing = user.profile.needs.new params[:need]
       listing.listingType = 'need' 
+    else
+      listing = user.profile.needs.new params[:kirpoint]
+      listing.listingType = 'kirpoint' 
     end
 
     if listing.save
@@ -66,18 +69,7 @@ class UserlistingsController < ApplicationController
 
   def show
     @listing = UserListing.find(params[:id]) 
-    
-    if(params[:listing_type] == "offer")
-      respond_to do |format|
-        format.html { show_offer.html }# show.html.erb
-        format.json 
-      end
-    else
-      respond_to do |format|
-        format.html {show_need.html}
-        format.json 
-      end
-    end
+    render 'show', :locals => {:listing => @listing}
   end
 
   #display user listing on the results page
@@ -94,16 +86,21 @@ class UserlistingsController < ApplicationController
 
   #display user listing on the exchange modals
   def show_listing_exchange
+    if params[:id].to_i == -1 || params[:id].to_i == -2
+      #item = ExchangeItem.find()
+      render :partial => 'show_exchange_kirpoint'
+    else
       listing = UserListing.find(params[:id]) 
       @user = listing.user
       targ = User.find(params[:targ])
       if listing.type == "Offer"
-        render :partial => 'show_exchange_offer', :locals => {:listing => listing, :@user => @user, :targ => targ }
+        render :partial => 'show_exchange_offer', :locals => {:listing => listing, :@user => @user, :targUser => targ }
       else 
-        render :partial => 'show_exchange_need', :locals => {:listing => listing, :@user => @user, :targ => targ }
+        render :partial => 'show_exchange_need', :locals => {:listing => listing, :@user => @user, :targUser => targ }
       end
+    end
   end
-  
+
   def edit
     @listing = UserListing.find(params[:id]) 
 
@@ -123,10 +120,10 @@ class UserlistingsController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    debugger
+    
     @listing = UserListing.find(params[:id])
     
-    if(params[:type] == "Offer")
+    if(@listing.type == "Offer")
       respond_to do |format|
         if @listing.update_attributes(params[:offer])
           format.html { redirect_to current_user, notice: 'Your offer was successfully updated.' }
@@ -179,5 +176,24 @@ class UserlistingsController < ApplicationController
 
       redirect_to current_user
     end
+  end
+
+  def share
+    listing = UserListing.find(params[:id])
+    @user_photo = listing.user.profile.photo.url
+    render :partial => "share", :locals => {:@user_photo => @user_photo, :listing => listing}
   end 
+
+  def getListing
+    #render :json => UserListing.find(params[:id])
+
+    listing = UserListing.find(params[:id])
+    targUser = User.find(params[:targ])
+    initUser = User.find(params[:init])
+    if params[:type] == "offer"
+      render :partial => 'show_exchange_offer', :locals => {:listing => listing, :targUser => targUser, :initUser => initUser}
+    else
+      render :partial => 'show_exchange_need', :locals => {:listing => listing, :targUser => targUser, :initUser => initUser}
+    end
+  end
 end

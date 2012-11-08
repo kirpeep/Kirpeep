@@ -43,7 +43,7 @@ $(document).ready(function() {
 	  $('#dynamobox').load(path);
 	  $('#dynamobox').modal('show');
 	  event.preventDefault();
-	});
+        });
 
 	var userimg = 'Please work';
 	$('#userImage').popover({  //I tried targeting it as an id instead of class
@@ -60,7 +60,6 @@ $(document).ready(function() {
 	  	$('#dynamobox').modal('show');
 
 	 });
-ye
 
 	$("#OfferForm").live("submit", function(event){
 		event.preventDefault();
@@ -79,7 +78,6 @@ ye
     return false;
   });
 
-  //$(".listingbox").insertTemplateAjax();
   
   $.when(
   $(".listings").each(function(){
@@ -87,7 +85,7 @@ ye
   })).done(function(){
             setTimeout(function(){
 	    var $container = $('#BrowseListings');
-
+	   
 	    $container.imagesLoaded(function(){
 		     $container.masonry({
 			itemSelector: '.listings'

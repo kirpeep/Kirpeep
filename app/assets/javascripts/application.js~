@@ -16,13 +16,15 @@
 //= require bootstrap.min
 //= require jquery.purr
 //= require best_in_place
-
+//= require rails.validations
 
 /*jQuery.ajaxSetup({ 
   beforeSend: function(xhr) {
   	xhr.setRequestHeader("Accept", "text/javascript")
   }
 });*/
+
+
 
 function get_query(){
     var url = location.href;
@@ -110,3 +112,13 @@ jQuery.fn.insertTemplateAjax = function(path, dataobject, insert_method){
         }
   });   
 }
+
+$(document).ready(function(){
+$('.dynamolink').live("click",function(event){
+	  var path = $(this).attr('href');
+	  $('#dynamobox').load(path);
+	  $('#dynamobox').modal('show');
+	  event.preventDefault();
+});
+});
+

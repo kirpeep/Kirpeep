@@ -24,6 +24,8 @@
   }
 });*/
 
+
+
 function get_query(){
     var url = location.href;
     var qs = url.substring(url.indexOf('?') + 1).split('&');
@@ -110,3 +112,13 @@ jQuery.fn.insertTemplateAjax = function(path, dataobject, insert_method){
         }
   });   
 }
+
+$(document).ready(function(){
+	$('.dynamolink').live("click",function(event){
+		  var path = $(this).attr('href');
+		  $('#dynamobox').load(path);
+		  $('#dynamobox').modal('show');
+		  event.preventDefault();
+	});
+});
+

@@ -32,15 +32,15 @@
         </ul>
       </div>
       
-      <%= link_to raw('<i class="icon-plus-sign"></i>Need'), 
+      <%= link_to raw('<i class="icon-plus-sign"></i> Need'), 
 	   new_userlisting_path(:type => "need"), 
 	   {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
 
       
-      <%= link_to raw('<i class="icon-plus-sign"></i>Offer'), new_userlisting_path(:type => "offer"), 
+      <%= link_to raw('<i class="icon-plus-sign"></i> Offer'), new_userlisting_path(:type => "offer"), 
            {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
     <% else %>
-      <div class='row'>
+      <div class='row pull-right'>
 	      <a href='/forgot' class='dynamolink'>Forgot Password</a>
 	      <a href="#signin" role="button" class="btn" data-toggle="modal" >Sign In</a>
       </div>
