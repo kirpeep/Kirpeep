@@ -69,7 +69,7 @@ class UserlistingsController < ApplicationController
 
   def show
     @listing = UserListing.find(params[:id]) 
-    render 'show', :locals => {:listing => @listing}
+    render 'show'
   end
 
   #display user listing on the results page

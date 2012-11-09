@@ -1,14 +1,24 @@
 <div class="rounded-offer"  >
   <span class="offer-span">OFFERED</span><br />
   <span class="offer-title span10"><%= listing.title %></span>
-  <% if signed_in? %>
+  
     <div id="need-actions" class="span9" >
       <div class="row tool pull-right">
         <div class="btn-group">
          <a class="btn dropdown-toggle" data-toggle="dropdown" onclick='$(this).dropdown()' href="#"><i class='icon-align-justify'></i> <span class="caret"></span>
          </a>
-        <ul class="dropdown-menu" style='margin-left:-100px;'>    
-        <% if listing.user.id == current_user.id %>
+        <ul class="dropdown-menu" style='margin-left:-100px;'>  
+          
+        <% if current_user && listing.user.id == current_user.id %>
+          <li>
+            <a href="/listing/<%= listing.id %>" >View Details
+            <%#= image_tag('Icon_Edit_nocolor.png', 
+                 :class=>"editIcon", 
+                 :title=>"Edit", 
+                 :onmouseover=>"$(this).attr('src','/assets/Icon_Edit_color.png');",
+                 :onmouseout=>"$(this).attr('src','/assets/Icon_Edit_nocolor.png');") %>
+            </a>
+          </li>  
           <!-- Edit -->
           <li>
             <a href="/edit_listing?id=<%= listing.id %>&listing_type=offer" class='dynamolink'>Edit
@@ -28,56 +38,71 @@
                  :onmouseout=>"$(this).attr('src','/assets/Icon_Share_gray_regular.png');" ) %>
           </a>
           </li>
-        <% else %>
+        <% elsif current_user %>
+          <li>
+            <a href="/listing/<%= listing.id %>" >View Details
+            <%#= image_tag('Icon_Edit_nocolor.png', 
+                 :class=>"editIcon", 
+                 :title=>"Edit", 
+                 :onmouseover=>"$(this).attr('src','/assets/Icon_Edit_color.png');",
+                 :onmouseout=>"$(this).attr('src','/assets/Icon_Edit_nocolor.png');") %>
+            </a>
+          </li>  
           <!-- Message-->
           <li>
           <a href="/sendmessage?id=<%= listing.user.id %>&replyTo=nil" class='dynamolink'>Message
-            <%#= image_tag('Icon_Message_gray_regular.png', 
-                 :class=>"messageIcon", 
-                 :title=>"Message", 
-                 :onmouseover=>"$(this).attr('src','/assets/Icon_Message_blue_roll_over.png');",
-                 :onmouseout=>"$(this).attr('src','/assets/Icon_Message_gray_regular.png');") %>
           </a>
           </li>
         
         <!-- Initiate Exchange-->
         
          <li>
-             <a class="dynamolink" href="/initiate_exchange?id=<%= listing.id.to_s%>">Exchange it
-              <%#= image_tag('Icon_Exchange_EE_gray_regular.png', 
-                  :class=>"exchangeIcon",
-                  :title=>"Exchange", 
-                  :onmouseover=>"$(this).attr('src','/assets/Icon_Exchange_EE_orange_rollover.png');",
-                  :onmouseout=>"$(this).attr('src','/assets/Icon_Exchange_EE_gray_regular.png');") %>
-            
+             <a class="dynamolink" href="/initiate_exchange?id=<%= listing.id.to_s%>">Start Exchange
+              
               </a>
           </li>
           <li> 
           <a class="dynamolink" href="/quicksale/<%= listing.id.to_s%>">Spend Kirpoints
-            <%#= image_tag('Icon_Coin_gray_regular.png', 
-                  :class=>"priceIcon",
-                  :title=>"Spend Kirpoints", 
-                  :onmouseover=>"$(this).attr('src','/assets/Icon_Coin_orange_rollover.png');",
-                  :onmouseout=>"$(this).attr('src','/assets/Icon_Coin_gray_regular.png');" ) %>
+            
           </a>
           </li>
           <li>
           <a class="dynamolink" href="/share/<%= listing.id.to_s%>">Share
-            <%#= image_tag('Icon_Share_gray_regular.png', 
-                 :class=>"shareIcon",
-                 :title=>"Share", 
-                 :onmouseover=>"$(this).attr('src','/assets/Icon_Share_green_rollover.png');",
-                 :onmouseout=>"$(this).attr('src','/assets/Icon_Share_gray_regular.png');" ) %>
+          
           </a>
           </li>
          <!-- dropdown menu links -->
+          <% else %>
+             <li>
+              <a class="dynamolink" href="/sessions/signin" >View Details
+              </a>
+            </li>
+             <!-- Message-->
+		<li>
+		  <a class="dynamolink" href="/sessions/signin" >Message
+		  </a>
+		</li>
+		
+		<!-- Initiate Exchange-->
+		 <li>
+		    <a class="dynamolink" href="/sessions/signin" >Start Exchange  
+		    </a>
+		  </li>
+		  <li> 
+		    <a class="dynamolink" href="/sessions/signin" >Spend Kirpoints
+		    </a>
+		  </li>
+		  <li>
+		    <a class="dynamolink" href="/sessions/signin" >Share
+		    </a>
+		  </li>
           <% end %>
         </ul>
        </div>
       </div>
         
     </div> 
-    <% end %>
+  
     <div id="need-listing" class="span12">
       <div>
         <% if !(listing.photo.url =~ /missing.png/) %>
@@ -113,11 +138,11 @@
     </div>
 
     <div style='font-weight:normal;'>
-    <div class="span5 pull-left" style='margin-top:15px;'>
+    <div class="span5 pull-left" style='margin-top:15px;font-size:12px;'>
         (<%= Exchange.where("id != ?",listing.user.id).all.count %>) Exchanges<br />
         (0) Reviews 
     </div>
-    <div class="span3 pull-right" style='margin-top:15px;'>
+    <div class="span3 pull-right" style='margin-top:15px;font-size:12px;'>
           (<%= listing.user.needs.count %>) need(s)
           <br />
           (<%= listing.user.offers.count %>) offer(s) 

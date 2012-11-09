@@ -38,13 +38,6 @@ $(document).ready(function() {
 
 	$('.tTip').betterTooltip(); 
 
-	$('.dynamolink').live("click",function(event){
-	  var path = $(this).attr('href');
-	  $('#dynamobox').load(path);
-	  $('#dynamobox').modal('show');
-	  event.preventDefault();
-        });
-
 	var userimg = 'Please work';
 	$('#userImage').popover({  //I tried targeting it as an id instead of class
 		title: 'User',
@@ -80,17 +73,19 @@ $(document).ready(function() {
 
   
   $.when(
-  $(".listings").each(function(){
+    $(".listings").each(function(){
   	$(this).insertERBTemplateAjax();
-  })).done(function(){
-            setTimeout(function(){
+    });
+   ).done(function(){
+          setTimeout(function(){
 	    var $container = $('#BrowseListings');
 	   
 	    $container.imagesLoaded(function(){
 		     $container.masonry({
 			itemSelector: '.listings'
 		      });
-	    });}, 2000);
+	    });
+          }, 2000);
   });
 
 });  

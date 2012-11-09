@@ -2,14 +2,18 @@
   <span class="need-span">NEEDED</span><br />
   <span class="need-title span10"><%= listing.title %></span> 
 
-  <% if signed_in? %>
   <div id="need-actions" class="span9" >
       <div class="row tool pull-right">
         <div class="btn-group">
          <a class="btn dropdown-toggle" data-toggle="dropdown" onclick='$(this).dropdown()' href="#"><i class='icon-align-justify'></i> <span class="caret"></span>
          </a>
         <ul class="dropdown-menu" style='margin-left:-100px;'>    
-        <% if listing.user.id == current_user.id %>
+            
+        <% if current_user && listing.user.id == current_user.id %>
+          <li>
+            <a href="/listing/<%= listing.id %>" >View Details
+            </a>
+          </li>
           <!-- Edit -->
           <li>
             <a href="/edit_listing?id=<%= listing.id %>&listing_type=offer" class='dynamolink'>Edit
@@ -29,7 +33,11 @@
                  :onmouseout=>"$(this).attr('src','/assets/Icon_Share_gray_regular.png');" ) %>
           </a>
           </li>
-        <% else %>
+        <% elsif current_user %>
+          <li>
+            <a href="/listing/<%= listing.id %>" >View Details
+            </a>
+          </li>
           <!-- Message-->
           <li>
           <a href="/sendmessage?id=<%= listing.user.id %>&replyTo=nil" class='dynamolink'>Message
@@ -64,6 +72,30 @@
           </a>
           </li>
          <!-- dropdown menu links -->
+          <% else %>
+             <li>
+              <a href="#signin" data-toggle="modal" >View Details
+              </a>
+            </li>
+             <!-- Message-->
+		<li>
+		  <a href="#signin" data-toggle="modal" >Message
+		  </a>
+		</li>
+		
+		<!-- Initiate Exchange-->
+		 <li>
+		    <a href="#signin" data-toggle="modal" >Start Exchange  
+		    </a>
+		  </li>
+		  <li> 
+		    <a href="#signin" data-toggle="modal" >Spend Kirpoints
+		    </a>
+		  </li>
+		  <li>
+		    <a href="#signin" data-toggle="modal" >Share
+		    </a>
+		  </li>
           <% end %>
         </ul>
        </div>
@@ -71,8 +103,6 @@
         
     </div> 
        
-        
-    <% end %>
  <div id="need-listing" class="span12">
       <div>
          
@@ -107,7 +137,7 @@
         (<%= Exchange.where("id != ?",listing.user.id).all.count %>) Exchanges<br />
         (0) Reviews 
     </div>
-    <div class="span3 pull-right" style='margin-top:15px;'>
+    <div class="span3 pull-right" style='margin-top:15px;font-size:12px;'>
           (<%= listing.user.needs.count %>) need(s)
           <br />
           (<%= listing.user.offers.count %>) offer(s) 

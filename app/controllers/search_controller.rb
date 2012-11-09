@@ -10,8 +10,9 @@ class SearchController < ApplicationController
               Action.log @user.id, 'search', params[:search].to_s()
 
 	    else
+              debugger
 	      @userlistings = UserListing.search(params[:search], :per_page => 100)#.paginate(:per_page => 5, :page => params[:page]) #.order(sort_column + " " + sort_direction)
-              Action.log nil, 'search', params[:search].to_s()
+              #Action.log 0, 'search', params[:search].to_s()
 	    end
     	render "show"
   	end

@@ -52,6 +52,7 @@ TestApp::Application.routes.draw do
 
   post '/sms/verify', :to => 'sms#verify'
   post '/sms/recieve', :to => 'sms#recieve'
+  get '/listing/:id', :to => 'userlistings#show'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
 

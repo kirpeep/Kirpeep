@@ -67,7 +67,7 @@ class UserlistingsController < ApplicationController
     end
   end 
 
-  def show
+  def show_listing
     @listing = UserListing.find(params[:id]) 
     render 'show'
   end
