@@ -70,6 +70,9 @@
               <li>
                 <%= link_to 'Messages', '#messages' , {:id => 'message_link', 'data-toggle' => 'tab'} %>
               </li>
+              <li>
+                <%= link_to 'Transactions', '#transactions' , {:id => 'transactions_link', 'data-toggle' => 'tab'} %>
+              </li>
             </ul>
     	    
             <div class="tab-content">
@@ -80,6 +83,9 @@
                 <div id="exchContainer" data-url="/user_exchanges/<%=current_user.id%>"></div>
               </div>
               <div id='messages' class="tab-pane"></div>
+              <div id='transactions' class="tab-pane">
+                 <div id='transContainer' data-url="/users/<%=@user.id%>/transactions"></div>
+              </div>
             </div> <!-- /.tab-content -->
           </div><!-- /.tabbable -->
         </div><!-- /#profile-header -->

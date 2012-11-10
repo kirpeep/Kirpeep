@@ -38,18 +38,11 @@ $(document).ready(function() {
 
 	$('.tTip').betterTooltip(); 
 
-	$('.dynamolink').live("click",function(event){
-	  var path = $(this).attr('href');
-	  $('#dynamobox').load(path);
-	  $('#dynamobox').modal('show');
-	  event.preventDefault();
-	});
-
 	var userimg = 'Please work';
 	$('#userImage').popover({  //I tried targeting it as an id instead of class
 		title: 'User',
-    	content: 'userimg'
-    });
+    	        content: 'userimg'
+        });
     
 	//Create Listing from exchange
 	$(".CreateListing").live("click", function(event){
@@ -78,19 +71,20 @@ $(document).ready(function() {
     return false;
   });
 
-  
+  var $container = $('#BrowseListings');
+ 
+  $container.masonry({
+   itemSelector: '.listings'
+  });
+
   $.when(
-  $(".listings").each(function(){
+    $(".listings").each(function(){
   	$(this).insertERBTemplateAjax();
-  })).done(function(){
-            setTimeout(function(){
-	    var $container = $('#BrowseListings');
-	   
-	    $container.imagesLoaded(function(){
-		     $container.masonry({
-			itemSelector: '.listings'
-		      });
-	    });}, 2000);
+    })
+   ).then(function(){
+       setTimeout(function(){ 
+	$container.masonry('reload'); 
+       }, 1000)
   });
 
 });  

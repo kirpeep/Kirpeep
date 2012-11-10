@@ -20,4 +20,11 @@ class UserMailer < ActionMailer::Base
     mail(:to => to_user.email, :subject => subject)
   end
 
+  def report_email(listing, user)
+    @listing = listing
+    @user = user
+    @url = $domain + '/listing/' + listing.id.to_s()
+    mail(:to => 'info@kirpeep.com', :subject => user.name + ' has reported a listing')
+  end
+
 end

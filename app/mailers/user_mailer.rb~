@@ -17,7 +17,13 @@ class UserMailer < ActionMailer::Base
     @subject = subject
     @text = text
 
-    mail(:to => to_user.email, :subject => @from_user.name + " has just sent you an message in Kirpeep.")
+    mail(:to => to_user.email, :subject => subject)
+  end
+
+  def report_email(listing, user)
+    @listing = listing
+    @user = user
+    mail(:to => 'info@kirpeep.com', :subject => user.name + ' has reported a listing')
   end
 
 end

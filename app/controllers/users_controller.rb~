@@ -43,7 +43,12 @@ class UsersController < ApplicationController
   def view
     @user = User.find(params[:id])
     @title = @user.name
-    
+
+    if signed_in?
+      Action.log current_user.id, 'viewOtherUsersProfile', @user.id
+    else
+      Action.log nil, 'viewOtherUsersProfile', @user.id
+    end
     respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @user }
@@ -257,7 +262,7 @@ class UsersController < ApplicationController
       amount = params[:kirpoints].to_i() * 100
       setup_response = gateway.setup_purchase(amount,
 	    :ip                => request.remote_ip,
-            :description => 'Yor are buying ' + params[:kirpoints] + ' Kirpoints',
+            :description => 'Yor are buying ' + params[:kirpoints] + ' Kirpoint(s)',
 	    :return_url        => url_for(:action => 'confirm', :only_path => false),
 	    :cancel_return_url => url_for(:action => 'index', :only_path => false)
 	  )
@@ -304,6 +309,49 @@ class UsersController < ApplicationController
     current_user.update_attribute(:kirpoints, kirpoints)
   end
 
+  #Returns true if user has an exchange with the current user
+  def hasExchangeWithUser(user)
+    @exchanges = exchange_list(user.id)
+    for exch in @exchanges
+      if current_user.id = exch.initUser || current_user.id = exch.targUser
+        return true
+      end
+    end
+    #user does not have exchange with 'user' if reached
+   return false 
+  end
+
+  #Returns array of exchanges with user
+  def exchangesWithUser(user)
+    @exchanges = exchange_list(user.id)
+    @exchangesWithCurrentUser 
+    for exch in @exchanges
+      if current_user.id = exch.initUser || current_user.id = exch.targUser
+        @exchangesWithCurrentUser = @exchangesWithCurrentUser + exch
+      end
+    end
+    #user does not have exchange with 'user' if reached
+   return @exchangesWithCurrentUser 
+  end
+
+
+  def review_list(user)
+    @exchanges = exchange_list(user.id)
+
+    @reviews = nil
+    for exch in @exchanges
+      @reviews_from_exchange = Review.find_by_exchange_id(exch.id)
+      if !@reviews_from_exchange.nil? 
+        @review = @review + @reviews_from_exchange 
+      end
+    end
+
+    return @reviews
+  end
+
+  def exchange_list(id)
+    @exchanges = Exchange.where("initUser = ? || targUser=?", id, id)
+  end
   private 
 
     def gateway

@@ -20,6 +20,7 @@ TestApp::Application.routes.draw do
   match  '/users/:id/needs/',    :to => 'users#needs'
   match  '/users/:id/need/:listing', :to => 'users#get_need'
   match  '/users/:id/offer/:listing', :to => 'users#get_offer'
+  match '/users/:id/transactions', :to => 'transaction#show'
   #match  '/users/:id', :to => 'users#show', :as => 'profile'
   match  '/search/',           :to => 'search#search'
   match  '/initiate_exchange/', :to => 'exchanges#initiate_exchange'
@@ -52,6 +53,9 @@ TestApp::Application.routes.draw do
 
   post '/sms/verify', :to => 'sms#verify'
   post '/sms/recieve', :to => 'sms#recieve'
+  get '/listing/:id', :to => 'userlistings#show_listing'
+  get '/listing/:id/report', :to => 'userlistings#report'
+  
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
 
@@ -116,6 +120,7 @@ TestApp::Application.routes.draw do
   resources :exchanges
   resources :profiles
   resources :messages
+  resources :transaction
   resources :sms, :only => [:verify, :recieve]
 
   # See how all your routes lay out with "rake routes"

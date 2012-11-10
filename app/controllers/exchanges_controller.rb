@@ -45,18 +45,21 @@ class ExchangesController < ApplicationController
     @user = current_user
     @targListing = UserListing.find params[:id]
     @targUser = @targListing.user
-    UserMailer.message_email(@targUser, @user, @user.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
+    
     render :partial  => 'initiate_exchange'
   end
 
   #Acceptance of initiated Exchange
   def accept_exchange
     exch = InitiateExchange.find(params[:exch_id])
-
+    @initUser = User.find exch.initUser
+    @targUser = User.find exch.targUser
     if(exch.initUser == params[:user_id])
       exch.initAcpt = true
+      UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
     else 
       exch.targAcpt = true
+      UserMailer.message_email(@initUser, @targUser, @targUser.name + " has accepted the exchange.", "Go to your profile on kirpeep.com and accept the exchange." ).deliver
     end
 
     if(exch.initAcpt == true && exch.targAcpt == true)
@@ -78,16 +81,16 @@ class ExchangesController < ApplicationController
         @targUser = User.find(exch.targUser)
         @initUser = User.find(exch.initUser)
         
-        UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade." ).deliver
-        UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade." ).deliver
+        UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade. Your code is " + targConfCode ).deliver
+        UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade.  Your code is " + initConfCode  ).deliver
 
         # only send if we have verified phone numbers for both parties. 
         if (@targUser.profile.phone_number && @targUser.profile.number_verified == true) &&
             (@initUser.profile.phone_number && @initUser.profile.number_verified == true)
 
            #Then send SMS conf codes
-           sendTxt(@targUser.profile.phone_number, "Your code is #{exch.targConfCode}. Text the other person's code when your are finished exchanging to let us it's complete. -Kirpeep")
-           sendTxt(@initUser.profile.phone_number, "Your code is #{exch.initConfCode}. Text the other person's code when your are finished exchanging to let us it's complete. -Kirpeep")
+           sendTxt(@targUser.profile.phone_number, "Your code is #{exch.targConfCode}. Text the other person's code when your are finished exchanging to let us know it's complete. -Kirpeep")
+           sendTxt(@initUser.profile.phone_number, "Your code is #{exch.initConfCode}. Text the other person's code when your are finished exchanging to let us know it's complete. -Kirpeep")
         end
 
         flash[:notice] = 'exchange moved to '  + (exch.type).to_s

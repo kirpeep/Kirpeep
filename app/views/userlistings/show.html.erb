@@ -1,0 +1,29 @@
+
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>Kirpeep | <%= @listing.title %></title>
+
+<%#= render 'needs/show' %>
+
+<%= stylesheet_link_tag    "results.css" %>
+</head>
+  <body>
+    <div class='container'>
+       <%= render 'shared/header' %>
+
+       <div><hr/></div>
+       <div class='row-fluid'>
+         <div style='margin-right:auto;margin-left:auto;width:400px;'>
+          <% if @listing.type == 'Offer' %>
+            <%= render :partial => 'userlistings/show_need', :locals => {:listing => @listing } %>
+          <% else %>
+            <%= render :partial => 'userlistings/show_offer', :locals => {:listing => @listing } %>
+          <% end %>
+         </div>
+       </div>
+    </div>
+    <%= render 'shared/footer' %>
+
+  <!-- Dynamobox Modal -->
+  <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+  </body>
+

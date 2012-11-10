@@ -67,20 +67,9 @@ class UserlistingsController < ApplicationController
     end
   end 
 
-  def show
+  def show_listing
     @listing = UserListing.find(params[:id]) 
-    
-    if(params[:listing_type] == "offer")
-      respond_to do |format|
-        format.html { show_offer.html }# show.html.erb
-        format.json 
-      end
-    else
-      respond_to do |format|
-        format.html {show_need.html}
-        format.json 
-      end
-    end
+    render 'show'
   end
 
   #display user listing on the results page
@@ -194,6 +183,11 @@ class UserlistingsController < ApplicationController
     @user_photo = listing.user.profile.photo.url
     render :partial => "share", :locals => {:@user_photo => @user_photo, :listing => listing}
   end 
+
+  def report
+     @listing = UserListing.find(params[:id])
+     UserMailer.report_email(@listing, current_user).deliver
+  end
 
   def getListing
     #render :json => UserListing.find(params[:id])

@@ -43,7 +43,12 @@ class UsersController < ApplicationController
   def view
     @user = User.find(params[:id])
     @title = @user.name
-    
+
+    if signed_in?
+      Action.log current_user.id, 'viewOtherUsersProfile', @user.id
+    else
+      Action.log nil, 'viewOtherUsersProfile', @user.id
+    end
     respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @user }
@@ -300,6 +305,7 @@ class UsersController < ApplicationController
       return
     end
     
+    Transaction.add_transaction current_user.id, amount
     kirpoints = current_user.kirpoints + params[:total].to_f()
     current_user.update_attribute(:kirpoints, kirpoints)
   end
