@@ -20,7 +20,7 @@ TestApp::Application.routes.draw do
   match  '/users/:id/needs/',    :to => 'users#needs'
   match  '/users/:id/need/:listing', :to => 'users#get_need'
   match  '/users/:id/offer/:listing', :to => 'users#get_offer'
-  match '/users/:id/transactions', :to => 'transaction#index'
+  match '/users/:id/transactions', :to => 'transaction#show'
   #match  '/users/:id', :to => 'users#show', :as => 'profile'
   match  '/search/',           :to => 'search#search'
   match  '/initiate_exchange/', :to => 'exchanges#initiate_exchange'

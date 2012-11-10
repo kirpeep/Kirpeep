@@ -67,7 +67,7 @@ class UserlistingsController < ApplicationController
     end
   end 
 
-  def show
+  def show_listing
     @listing = UserListing.find(params[:id]) 
     render 'show'
   end
@@ -183,6 +183,11 @@ class UserlistingsController < ApplicationController
     @user_photo = listing.user.profile.photo.url
     render :partial => "share", :locals => {:@user_photo => @user_photo, :listing => listing}
   end 
+
+  def report
+     @listing = UserListing.find(params[:id])
+     UserMailer.report_email(@listing).deliver
+  end
 
   def getListing
     #render :json => UserListing.find(params[:id])

@@ -1,0 +1,18 @@
+<html>
+  <head>
+  </head>
+  <body >
+    <div style='border: 10px solid #7ac943;border-radius: 15px;padding:25px;' >
+    <img src='<%= $domain %>/assets/kirpeep.png' style='height:50px;width:125px;'  />
+    <hr style='color: #ff931e;' />
+    <h2><%= @user.name + ' has reported a listing' %></h2>
+    <p>
+     Reporter's Email: <%= @user.email %>
+     Listing: <a href='<%= @url %>'><%= @url %></a>
+    </p>
+    <p>
+     Thanks,<br />
+     Kirpeep.com
+   </p>
+  </body>
+</html>

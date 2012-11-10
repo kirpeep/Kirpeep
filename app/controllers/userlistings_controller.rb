@@ -184,6 +184,11 @@ class UserlistingsController < ApplicationController
     render :partial => "share", :locals => {:@user_photo => @user_photo, :listing => listing}
   end 
 
+  def report
+     @listing = UserListing.find(params[:id])
+     UserMailer.report_email(@listing, current_user).deliver
+  end
+
   def getListing
     #render :json => UserListing.find(params[:id])
 
