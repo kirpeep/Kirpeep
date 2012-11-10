@@ -71,21 +71,18 @@ $(document).ready(function() {
     return false;
   });
 
+  var $container = $('#BrowseListings');
   
+  $container.masonry({
+   itemSelector: '.listings'
+  });
+
   $.when(
     $(".listings").each(function(){
   	$(this).insertERBTemplateAjax();
     })
-   ).done(function(){
-          setTimeout(function(){
-	    var $container = $('#BrowseListings');
-	   
-	    $container.imagesLoaded(function(){
-		     $container.masonry({
-			itemSelector: '.listings'
-		      });
-	    });
-          }, 2000);
+   ).then(function(){
+       setTimeout(function(){ $container.masonry('reload'); }, 1000)
   });
 
 });  
