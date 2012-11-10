@@ -29,6 +29,9 @@
                  :onmouseout=>"$(this).attr('src','/assets/Icon_Share_gray_regular.png');" ) %>
           </a>
           </li>
+          <li>
+            <%= link_to "Delete". @need, :method => :delete, :class => :destroy %>
+          </li>
         <% else %>
           <!-- Message-->
           <li>
