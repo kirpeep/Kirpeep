@@ -31,7 +31,14 @@
         <div id='BrowseListings'>
           <!-- % = will_paginate @userlistings%-->
           <% for listing in @userlistings %>
-            <div class="listings clearfix" style="width: 250px;" data-url="/show_listing?id=<%= listing.id %>"></div>
+            <div class="listings clearfix" style="width: 250px;">
+            <% if listing.type == 'Offer' %>
+              <%= render :partial => 'userlistings/show_offer', :locals => {:listing => listing } %>
+            <% else %>
+              <%= render :partial => 'userlistings/show_need', :locals => {:listing => listing } %>
+            <% end %>
+            </div>
+            <!-- <div class="listings clearfix" style="width: 250px;" data-url="/show_listing?id=<%= listing.id %>"></div> -->
           <% end %>
           <!-- %= will_paginate @userlistings%-->
         </div>

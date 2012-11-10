@@ -84,7 +84,7 @@ $(document).ready(function() {
    ).then(function(){
        setTimeout(function(){ 
 	$container.masonry('reload'); 
-       }, 800)
+       }, 1000)
   });
 
 });  
