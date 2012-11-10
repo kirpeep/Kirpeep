@@ -72,7 +72,7 @@ $(document).ready(function() {
   });
 
   var $container = $('#BrowseListings');
-  
+ 
   $container.masonry({
    itemSelector: '.listings'
   });
@@ -82,7 +82,9 @@ $(document).ready(function() {
   	$(this).insertERBTemplateAjax();
     })
    ).then(function(){
-       setTimeout(function(){ $container.masonry('reload'); }, 1000)
+       setTimeout(function(){ 
+	$container.masonry('reload'); 
+       }, 800)
   });
 
 });  

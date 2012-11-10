@@ -72,19 +72,19 @@ $(document).ready(function() {
   });
 
   var $container = $('#BrowseListings');
-  
+ 
   $container.masonry({
    itemSelector: '.listings'
   });
+
   $.when(
     $(".listings").each(function(){
   	$(this).insertERBTemplateAjax();
-       // $container.imagesLoaded(function(){
-          $container.masonry('reload');
-       //})
     })
    ).then(function(){
-       setTimeout(function(){ $container.masonry('reload'); }, 1000)
+       setTimeout(function(){ 
+	$container.masonry('reload'); 
+       }, 1000)
   });
 
 });  
