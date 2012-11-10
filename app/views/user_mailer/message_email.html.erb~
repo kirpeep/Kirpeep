@@ -13,6 +13,7 @@
       Message: <%= @text %>
     </p>
     <p>
+     Thanks,<br />
      Kirpeep.com
    </p>
   </body>

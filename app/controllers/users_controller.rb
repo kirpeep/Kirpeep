@@ -305,6 +305,7 @@ class UsersController < ApplicationController
       return
     end
     
+    Transaction.add_transaction current_user.id, amount
     kirpoints = current_user.kirpoints + params[:total].to_f()
     current_user.update_attribute(:kirpoints, kirpoints)
   end

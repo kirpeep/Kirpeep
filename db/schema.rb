@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121108005557) do
+ActiveRecord::Schema.define(:version => 20121110151320) do
 
   create_table "actions", :force => true do |t|
     t.integer  "userId"
@@ -164,6 +164,13 @@ ActiveRecord::Schema.define(:version => 20121108005557) do
     t.datetime "timeRated"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.integer  "user_id"
+    t.decimal  "amount",     :precision => 10, :scale => 0
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "user_listings", :force => true do |t|
