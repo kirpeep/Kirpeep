@@ -64,9 +64,19 @@ class ExchangesController < ApplicationController
     @targUser = User.find exch.targUser
     if(exch.initUser == params[:user_id])
       exch.initAcpt = true
+      for item in @initItems
+        if item.kirpoints != nil
+          commitKirpoints(@user, item.kirpoints)
+        end
+      end
       UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
     else 
       exch.targAcpt = true
+      for item in @initItems
+        if item.kirpoints != nil
+          commitKirpoints(@user, item.kirpoints)
+        end
+      end
       UserMailer.message_email(@initUser, @targUser, @targUser.name + " has accepted the exchange.", "Go to your profile on kirpeep.com and accept the exchange." ).deliver
     end
 
