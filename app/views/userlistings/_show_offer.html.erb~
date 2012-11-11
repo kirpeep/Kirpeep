@@ -104,6 +104,10 @@
 		    <a href="#signin" data-toggle="modal" >Share
 		    </a>
 		  </li>
+                  <li>
+		    <a href="#signin" data-toggle="modal" >Report
+		    </a>
+		  </li>
           <% end %>
         </ul>
        </div>
