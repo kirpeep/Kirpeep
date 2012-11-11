@@ -82,7 +82,7 @@ class ExchangesController < ApplicationController
         @initUser = User.find(exch.initUser)
         
         UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade. Your code is " + targConfCode ).deliver
-        UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade.  Your code is " + targConfCode  ).deliver
+        UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade.  Your code is " + initConfCode  ).deliver
 
         # only send if we have verified phone numbers for both parties. 
         if (@targUser.profile.phone_number && @targUser.profile.number_verified == true) &&

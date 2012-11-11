@@ -12,7 +12,7 @@ class ExchangesController < ApplicationController
     #@exchange.exchange_items.each.build
     #@exchange.build_message(params[:initiate_exchange][:message])
     @exchange.initAcpt = true
-     
+    UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
     
     if @exchange.save
         flash[:notice] = 'exchange saved.'
