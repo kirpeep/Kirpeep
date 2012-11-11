@@ -31,4 +31,36 @@ class ApplicationController < ActionController::Base
        :body => body
     )
   end
+
+  def hasEnoughKirpoints(user, amount)
+    if user.kirpoints >= amount
+      return true
+    else
+      return false
+    end
+  end
+
+  def commitKirpoints(user, amount)
+    if hasEnoughKirpoints(user, amount)
+      user.kirpoints -= amount
+      user.kirpoints_committed += amount
+      if user.save
+        return true
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
+
+  def transferKirpoints(fromUser, toUser, amount)
+    if fromUser.kirpoints_committed < amount
+      return false
+    else
+      fromUser.kirpoints_committed -= amount
+      toUser.kirpoints += amount
+      return true
+    end
+  end
 end
