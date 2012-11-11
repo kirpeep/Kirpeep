@@ -19,7 +19,7 @@ TestApp::Application.configure do
   config.assets.compress = true
 
   config.after_initialize do
-    ActiveMerchant::Billing::Base.mode = :test
+    ActiveMerchant::Billing::Base.mode = :production
   end
 
   # Don't fallback to assets pipeline if a precompiled asset is missed

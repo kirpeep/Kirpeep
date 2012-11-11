@@ -46,7 +46,7 @@
      
     
   </div>
-  <div class='pull-right' style='margin-top:25px;'>About | How It Works | FAQs</div> 
+  <div class='pull-right' style='margin-top:5px;'>About | How It Works | FAQs</div> 
    <% if flash[:notice] != nil %>
 	    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
 	       <button type="button" class="close" data-dismiss="alert">×</button>
@@ -75,7 +75,7 @@
         <div class="input-append">
           <%= hidden_field_tag :direction, params[:direction] %>
           <%= hidden_field_tag :sort, params[:sort] %>
-          <%= text_field_tag :search, params[:search] ,{ :class => 'span2' }%>
+          <%= text_field_tag :search, params[:search] ,{ :class => 'span4', :placeholder => 'search or browse listings' }%>
           <%= submit_tag "search", {:class => "btn"} %>
         </div>
       <% end %>
