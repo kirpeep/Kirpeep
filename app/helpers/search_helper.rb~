@@ -1,0 +1,16 @@
+
+module SearchHelper
+
+	def self.search(search)
+  		if search
+   	            results = find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+                    if results.empty?
+                      find(:all)
+                    else
+                      results
+                    end
+  		else
+    		    find(:all)
+  		end
+	end
+end

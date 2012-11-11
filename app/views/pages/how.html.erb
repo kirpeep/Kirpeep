@@ -1,0 +1,90 @@
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>Kirpeep | <%= @title %></title>
+<%= javascript_tag do %>
+  window.userID = <%= current_user.id %>
+<% end %>
+<%#= render 'needs/show' %>
+
+<%= javascript_include_tag "profile.js" %>
+
+<%= stylesheet_link_tag    "profile.css" %>
+</head>
+
+<body>
+
+<div class='container'>
+  
+  <%= render 'shared/header' %>
+
+   <div><hr/></div>
+
+  <div id='main-content' class='row'>
+<p>
+<h2>How It Works</h2>
+</p>
+<p>
+We believe everyone has a valuable skill, service, or product to offer. We also know that everyone has
+needs. Hence, our tool is based on offers and needs, expressed through listings and completed
+through exchanges. You can barter, use KirPoints, or use money to complete an exchange.
+</p>
+<p>
+<strong>Listings</strong>
+</p>
+<p>
+1. create a listing to let people know what you need and what you have to offer
+</p>
+<p class='offset1'>
+- add pictures of your need/offer
+<br>
+- add descriptions and let people know what you’d like in return
+<br>
+- be specific!
+</p>
+<p>
+2. listings allow users to find you through searching and browsing
+</p>
+<p class='offset1'>
+*you must be signed up to add a listing -- people have to know you’re a real person!
+</p>
+<p>
+<strong>Exchanges</strong>
+</p>
+<p>
+1. initiate an exchange with another user
+</p>
+<p class='offset1'>
+- if you find something you want, go ahead and try to get it!
+<br />
+- if you find something you can give, go ahead and give it!
+</p>
+<p>
+2. if the other user accepts, you may negotiate terms
+</p>
+<p>
+- what’s being exchanged for what
+
+- the time frame
+</p>
+<p>
+3. you and the other user complete the exchange
+</p>
+<p class='offset1'>
+- you get what you want and they get what they want
+<br>
+- you rate the experience you had to build and maintain reputation
+</p>
+<p>
+*another user may also initiate an exchange with you. in this case, you will receive a
+
+notification that someone is trying to start an exchange with you. you can accept, or deny if you don’t
+
+want to exchange with that user.
+</p>
+<p>
+   </div>
+   <%= render 'shared/footer' %>
+
+  <!-- Dynamobox Modal -->
+  <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+  
+</body>
