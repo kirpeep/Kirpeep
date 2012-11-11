@@ -31,13 +31,6 @@ $(document).ready(function(){
 		  $('#dynamobox').modal('show');
 		  event.preventDefault();
 	});
-
-         $('.dropdown-menu').find('li').click(function (event) {   
-            if (is_touch_device) {
-                    event.preventDefault();
-                    return false;
-            }
-         });
 });
 
 

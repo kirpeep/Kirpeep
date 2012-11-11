@@ -32,7 +32,7 @@ $(document).ready(function(){
 		  event.preventDefault();
 	});
 
-         $('.dropdown-menu li').click(function (event) {   
+         $('.dropdown-menu').find('li').click(function (event) {   
             if (is_touch_device) {
                     event.preventDefault();
                     return false;
