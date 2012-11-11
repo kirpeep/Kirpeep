@@ -1,0 +1,232 @@
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>Kirpeep | <%= @title %></title>
+<%= javascript_tag do %>
+  window.userID = <%= current_user.id %>
+<% end %>
+<%#= render 'needs/show' %>
+
+<%= javascript_include_tag "profile.js" %>
+
+<%= stylesheet_link_tag    "profile.css" %>
+</head>
+
+<body>
+
+<div class='container'>
+  
+  <%= render 'shared/header' %>
+
+   <div><hr/></div>
+
+  <div id='main-content' class='row'>
+
+<strong>Terms of Service</strong>
+<p>
+You agree not to post, email, or otherwise make available Content:
+</p>
+<p>
+a) that is unlawful, harmful, threatening, abusive, harassing, defamatory, libelous,
+invasive of another's privacy, or is harmful to minors in any way;
+</p>
+<p>
+b) that is pornographic or depicts a human being engaged in actual sexual conduct
+including but not limited to (i) sexual intercourse, including genital-genital, oral-genital,
+anal-genital, or oral-anal, whether between persons of the same or opposite sex, or (ii)
+bestiality, or (iii) masturbation, or (iv) sadistic or masochistic abuse, or (v) lascivious
+exhibition of the genitals or pubic area of any person;
+</p>
+<p>
+c) that harasses, degrades, intimidates or is hateful toward an individual or group of
+individuals on the basis of religion, gender, sexual orientation, race, ethnicity, age, or
+disability;
+</p>
+<p>
+d) that violates the Fair Housing Act by stating, in any notice or ad for the sale or rental
+of any dwelling, a discriminatory preference based on race, color, national origin,
+religion, sex, familial status or handicap (or violates any state or local law prohibiting
+discrimination on the basis of these or other characteristics);
+</p>
+<p>
+e) that violates federal, state, or local equal employment opportunity laws, including but
+not limited to, stating in any advertisement for employment a preference or requirement
+based on race, color, religion, sex, national origin, age, or disability.
+</p>
+<p>
+f) with respect to employers that employ four or more employees, that violates the anti-
+discrimination provision of the Immigration and Nationality Act, including requiring
+U.S. citizenship or lawful permanent residency (green card status) as a condition for
+employment, unless otherwise required in order to comply with law, regulation, executive
+order, or federal, state, or local government contract.
+</p>
+<p>
+g) that impersonates any person or entity or falsely states or otherwise misrepresents your
+affiliation with a person or entity (this provision does not apply to Content that
+constitutes lawful non-deceptive parody of public figures.);
+<p>
+</p>
+h) that includes personal or identifying information about another person without that
+person's explicit consent;
+</p>
+<p>
+i) that is false, deceptive, misleading, deceitful, misinformative, or constitutes a bait and
+switch;
+</p>
+<p>
+j) that infringes any patent, trademark, trade secret, copyright or other proprietary rights
+of any party, or Content that you do not have a right to make available under any law or
+under contractual or fiduciary relationships;
+</p>
+<p>
+k) that constitutes or contains marketing efforts, link referral codes, junk mail, spam,
+chain letters, pyramid schemes, or unsolicited commercial correspondence of any nature;
+</p>
+<p>
+l) that constitutes or contains any form of advertising or solicitation if: posted in areas
+of the site which are not designated for such purposes; or emailed to site users who have
+not indicated in writing that it is ok to contact them about other services, products or
+commercial interests.
+</p>
+<p>
+m) that includes links to commercial services or web sites, except as allowed in
+Kirpeep "services";
+</p>
+<p>
+n) that advertises any illegal service or the sale of any items the sale of which is
+prohibited or restricted by any applicable law;
+</p>
+<p>
+o) that contains software viruses or any other computer code, files or programs designed
+to interrupt, destroy or limit the functionality of any computer software or hardware or
+telecommunications equipment;
+</p>
+<p>
+p) that disrupts the normal flow of dialogue with an excessive amount of Content
+(flooding attack) to the Service, or that otherwise negatively affects other users' ability to
+use the Service; or
+</p>
+<p>
+q) that employs misleading email addresses, or forged headers or otherwise manipulated
+identifiers in order to disguise the origin of Content transmitted through the Service.
+</p>
+<p>
+Additionally, you agree not to:
+</p>
+<p>
+r) contact anyone who has asked not to be contacted, or make unsolicited contact with
+anyone for any commercial purpose;
+</p>
+<p>
+s) stalk or otherwise harass anyone;
+</p>
+<p>
+t) collect personal data about other users for commercial or unlawful purposes;
+</p>
+<p>
+u) use automated means, including spiders, robots, crawlers, data mining tools, or the like
+to download data from the Service - unless expressly permitted by the site;
+</p>
+<p>
+v) post Content in a locale in which you do not live, work, or travel, or otherwise
+irrelevant Content, repeatedly post the same or similar Content or otherwise impose an
+unreasonable or disproportionately large load on our infrastructure;
+</p>
+<p>
+w) post the same item or service in more than one classified category or forum, or outside
+of a locale in which you live, work, or travel;
+</p>
+<p>
+x) attempt to gain unauthorized access to site systems or engage in any activity that
+disrupts, diminishes the quality of, interferes with the performance of, or impairs the
+functionality of, the Service;
+</p>
+<p>
+y) use any form of automated device or computer program that enables the submission
+of postings on the site without each posting being manually entered by the author thereof
+(an "automated posting device"), including without limitation, the use of any such
+automated posting device to submit postings in bulk, or for automatic submission of
+postings at regular intervals.
+</p>
+<p>
+By clicking on the links below, I release the site from any liability that may arise from
+my use of this site.
+DISCLAIMER OF WARRANTIES
+</p>
+<p>
+YOU AGREE THAT USE OF THE SITE AND THE SERVICE IS ENTIRELY AT
+YOUR OWN RISK. THE SITE AND THE SERVICE ARE PROVIDED ON AN "AS
+IS" OR "AS AVAILABLE" BASIS, WITHOUT ANY WARRANTIES OF ANY
+KIND. ALL EXPRESS AND IMPLIED WARRANTIES, INCLUDING, WITHOUT
+LIMITATION, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE, AND NON-INFRINGEMENT OF PROPRIETARY
+RIGHTS ARE EXPRESSLY DISCLAIMED TO THE FULLEST EXTENT
+PERMITTED BY LAW. TO THE FULLEST EXTENT PERMITTED BY LAW,
+THE SITE DISCLAIMS ANY WARRANTIES FOR THE SECURITY, RELIABILITY,
+TIMELINESS, ACCURACY, AND PERFORMANCE OF THE SITE AND THE
+SERVICE. TO THE FULLEST EXTENT PERMITTED BY LAW, THE SITE
+DISCLAIMS ANY WARRANTIES FOR OTHER SERVICES OR GOODS RECEIVED
+THROUGH OR ADVERTISED ON THE SITE OR THE SITES OR SERVICE,
+OR ACCESSED THROUGH ANY LINKS ON THE SITE. TO THE FULLEST
+EXTENT PERMITTED BY LAW, THE SITE DISCLAIMS ANY WARRANTIES FOR
+VIRUSES OR OTHER HARMFUL COMPONENTS IN CONNECTION WITH THE
+SITE OR THE SERVICE.
+</p>
+<p>
+<strong>LIMITATIONS OF LIABILITY</strong>
+</p>
+<p>
+UNDER NO CIRCUMSTANCES SHALL THE SITE BE LIABLE FOR DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR EXEMPLARY
+DAMAGES (EVEN IF THE SITE HAS BEEN ADVISED OF THE POSSIBILITY
+OF SUCH DAMAGES), RESULTING FROM ANY ASPECT OF YOUR USE OF
+THE SITE OR THE SERVICE, WHETHER THE DAMAGES ARISE FROM USE OR
+MISUSE OF THE SITE OR THE SERVICE, FROM INABILITY TO USE THE SITE
+OR THE SERVICE, OR THE INTERRUPTION, SUSPENSION, MODIFICATION,
+ALTERATION, OR TERMINATION OF THE SITE OR THE SERVICE. SUCH
+LIMITATION SHALL ALSO APPLY WITH RESPECT TO DAMAGES
+INCURRED BY REASON OF OTHER SERVICES OR PRODUCTS RECEIVED
+THROUGH OR ADVERTISED IN CONNECTION WITH THE SITE OR THE
+SERVICE OR ANY LINKS ON THE SITE, AS WELL AS BY REASON OF ANY
+</p>
+<p>
+INFORMATION OR ADVICE RECEIVED THROUGH OR ADVERTISED IN
+CONNECTION WITH THE SITE OR THE SERVICE OR ANY LINKS ON THE SITE.
+THESE LIMITATIONS SHALL APPLY TO THE FULLEST EXTENT PERMITTED
+BY LAW.
+</p>
+<p>
+<strong>INDEMNITY</strong>
+</p>
+<p>
+You agree to indemnify and hold the site, its officers, subsidiaries, affiliates, successors,
+assigns, directors, officers, agents, service providers, suppliers and employees, harmless
+from any claim or demand, including reasonable attorney fees and court costs, made
+by any third party due to or arising out of Content you submit, post or make available
+through the Service, your use of the Service, your violation of the Terms of Service, your
+breach of any of the representations and warranties herein, or your violation of any rights
+of another.
+</p>
+<p>
+<strong>CHOICE OF LAW</strong>
+</p>
+<p>
+You agree that the provisions of this contract are to be interpreted by and in accordance
+with Nevada law.
+</p>
+<p>
+<strong>ARBITRATION</strong>
+</p>
+<p>
+Any controversy or claim arising out of or relating to this contract, or the breach thereof,
+shall be settled by arbitration administered in Nevada by the American Arbitration
+Association under its Commercial Arbitration Rules, and judgment on the award rendered
+by the arbitrator(s) may be entered in any court having jurisdiction thereof.
+</p>
+
+</div>
+   <%= render 'shared/footer' %>
+
+  <!-- Dynamobox Modal -->
+  <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+  
+</body>
+  

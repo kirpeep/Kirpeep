@@ -77,14 +77,14 @@ $(document).ready(function() {
    itemSelector: '.listings'
   });
 
-  $.when(
-    $(".listings").each(function(){
-  	$(this).insertERBTemplateAjax();
-    })
-   ).then(function(){
-       setTimeout(function(){ 
-	$container.masonry('reload'); 
-       }, 1000)
-  });
+  //$.when(
+  //  $(".listings").each(function(){
+  //	#$(this).insertERBTemplateAjax();
+  //  })
+  // ).then(function(){
+  //    setTimeout(function(){ 
+  //	$container.masonry('reload'); 
+  //     }, 1000)
+  //});
 
 });  

@@ -19,6 +19,7 @@ class ExchangesController < ApplicationController
         commitKirpoints(@user, item.kirpoints)
       end
     end
+    UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
     
     if @exchange.save
         flash[:notice] = 'exchange saved.'

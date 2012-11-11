@@ -1,0 +1,111 @@
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>Kirpeep | <%= @title %></title>
+<%= javascript_tag do %>
+  window.userID = <%= current_user.id %>
+<% end %>
+<%#= render 'needs/show' %>
+
+<%= javascript_include_tag "profile.js" %>
+
+<%= stylesheet_link_tag    "profile.css" %>
+</head>
+
+<body>
+
+<div class='container'>
+  
+  <%= render 'shared/header' %>
+
+   <div><hr/></div>
+
+  <div id='main-content' class='row'>
+<p>
+<strong>Privacy Policy</strong>
+</p>
+<p>
+This site is owned and operated by Kirpeeps, Inc. (“Kirpeeps”). Because we gather
+certain types of information about our users, we feel you should fully understand
+our policy and the terms and conditions surrounding the acquisition and use of that
+information. This privacy statement discloses what information we gather and how we
+use it.
+</p>
+
+<ul>
+<li>
+Through the normal use of this site, Kirpeeps servers gather two types of information:
+</li>
+<li>
+Information that users provide through registration submissions and
+general site use. This is data that each user actively enters while using the
+site.
+</li>
+</ul>
+
+<p>
+
+Information Kirpeeps gathers through aggregated tracking information
+derived mainly by tallying page views throughout our sites. This is
+information about what parts of the site you may be looking at over time
+and information that is automatically collected through your computer’s
+accessing of the site contained on our servers.
+</p>
+<p>
+Kirpeeps will NEVER distribute your email address, IP address, or personal contact
+information without your consent or unless required to do so by law.
+</p>
+<p>
+<strong>Children</strong>
+</p>
+<p>
+Consistent with the Federal Children's Online Privacy Protection Act of 1998 (COPPA),
+we will never knowingly request personally identifiable information from anyone under
+the age of 13 without requesting parental consent.
+</p>
+<p>
+<strong>Cookies</strong>
+</p>
+<p>
+We may place a text file called a "cookie" in the browser files of your computer. The
+cookie itself does not contain Personal Information although it will enable us to relate
+your use of this site to information that you have specifically and knowingly provided.
+</p>
+<p>
+<strong>USE OF INFORMATION</strong>
+</p>
+<p>
+We use site traffic information to determine which areas of our sites users like and don't
+like based on traffic to those areas. This helps us continue to build a better service for
+you.
+</p>
+<p>
+Kirpeeps creates aggregate reports on user demographics and traffic patterns for
+advertisers, sponsors and partners. These reports do not contain any personally-
+identifying data.
+</p>
+<p>
+<strong>SHARING OF THE INFORMATION</strong>
+</p>
+<p>
+During the registration process, each user has the ability to choose how personalized and
+effective they would like their Kirpeep experience to be, by telling Kirpeep which of the
+user’s information can be shared with third-parties and other users. If you already have
+an account, you can change your personalization settings at any time in your account
+settings, or by clicking here.
+</p>
+<p>
+<strong>YOUR CONSENT</strong>
+</p>
+<p>
+By using this site, you consent to the collection and use of this information in accordance
+with this privacy policy and the corresponding Terms of Service. In the event that this
+privacy policy is altered in any way, Kirpeeps will always email you directly and inform
+you of same at your next login.
+</p>
+<p>
+   </div>
+   <%= render 'shared/footer' %>
+
+  <!-- Dynamobox Modal -->
+  <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+  
+</body

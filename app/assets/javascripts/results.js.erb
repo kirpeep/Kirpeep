@@ -72,9 +72,10 @@ $(document).ready(function() {
   });
 
   var $container = $('#BrowseListings');
- 
+  $container.imagesLoaded( function(){
   $container.masonry({
    itemSelector: '.listings'
+  });
   });
 
   //$.when(

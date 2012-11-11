@@ -6,7 +6,7 @@ TestApp::Application.configure do
   ThinkingSphinx.deltas_enabled = true 
   ThinkingSphinx.updates_enabled = true
 
-  $domain = 'http://test.kirpeep.com'
+  $domain = 'http://ww.kirpeep.com'
   
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = true
@@ -19,7 +19,7 @@ TestApp::Application.configure do
   config.assets.compress = true
 
   config.after_initialize do
-    ActiveMerchant::Billing::Base.mode = :test
+    ActiveMerchant::Billing::Base.mode = :production
   end
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
