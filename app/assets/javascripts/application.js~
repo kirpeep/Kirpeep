@@ -23,7 +23,24 @@
   	xhr.setRequestHeader("Accept", "text/javascript")
   }
 });*/
+var is_touch_device = 'ontouchstart' in document.documentElement;
+$(document).ready(function(){
+	$('.dynamolink').live("click",function(event){
+		  var path = $(this).attr('href');
+		  $('#dynamobox').load(path);
+		  $('#dynamobox').modal('show');
+		  event.preventDefault();
+	});
 
+         $('.dropdown-menu li').click(function (event) {
+                    
+                    var elementId = $(this).attr('id');
+                    if (is_touch_device) {
+                            event.preventDefault();
+                            return false;
+                    }
+         });
+});
 
 
 function get_query(){
@@ -113,12 +130,4 @@ jQuery.fn.insertTemplateAjax = function(path, dataobject, insert_method){
   });   
 }
 
-$(document).ready(function(){
-	$('.dynamolink').live("click",function(event){
-		  var path = $(this).attr('href');
-		  $('#dynamobox').load(path);
-		  $('#dynamobox').modal('show');
-		  event.preventDefault();
-	});
-});
 
