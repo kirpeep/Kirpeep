@@ -6,7 +6,7 @@
 
 class UserListing < ActiveRecord::Base
 	include SearchHelper
-
+       
 	attr_accessible :type, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints
 
 	belongs_to :profile
@@ -16,7 +16,7 @@ class UserListing < ActiveRecord::Base
 	has_many :exchanges, :through => :exchangeItem
 	has_many :assets
 	accepts_nested_attributes_for :assets
-	
+ 
 	#paperclip
 	  has_attached_file :photo,
 	     :styles => {
