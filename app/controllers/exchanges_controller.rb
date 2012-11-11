@@ -12,7 +12,13 @@ class ExchangesController < ApplicationController
     #@exchange.exchange_items.each.build
     #@exchange.build_message(params[:initiate_exchange][:message])
     @exchange.initAcpt = true
-     
+    @initItems = exchanged_items.find_all_by_targ_user_id(@user.id)
+
+    for item in @initItems
+      if item.kirpoints != nil
+        commitKirpoints(@user, item.kirpoints)
+      end
+    end
     
     if @exchange.save
         flash[:notice] = 'exchange saved.'
@@ -32,6 +38,7 @@ class ExchangesController < ApplicationController
     #multiparty exchanges. To resolve a migration should be made to include initUsers id 
     #so that it doesn't need to be pulled from the listing
     #for now the items with :targ_user_id will be assinged
+    #11/11/12 - I added the migration and now items have init and targ ids
     @targItems = @exchange_items.find_all_by_targ_user_id( @targUser.id)
     @initItems = @exchange_items.find_all_by_targ_user_id(@initUser.id)
   end

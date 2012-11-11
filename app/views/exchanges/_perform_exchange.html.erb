@@ -50,7 +50,7 @@
     <div class="modal-body">
             
         <!--opens middle section-->
-            <div class='row-fluid'>
+        <div class='row-fluid'>
             <!-- Left Side-->
             <div class="span6">
                 <div>
@@ -59,9 +59,16 @@
 
 
                 <!-- Start of tabs for items user is receiving--> 
-                <% for item in @initItems %>
-                    <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=need"></div>
-                <%end%>
+                <% if (current_user.id).to_s == (@initUser.id).to_s %>
+                    <% for item in @initItems %>
+                        <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=need"></div>
+                    <%end%>
+                <% else %>
+                    <% for item in @targItems %>
+                        <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=offer"></div>
+                    <%end%>
+                <% end %>
+                <span>Give this co</span>
                 <!-- End of tabs for items user is receiving--> 
             </div><!-- .span6-->
 
@@ -73,9 +80,15 @@
                 </div>
 
                 <!-- Start of tabs for items targ is receiving--> 
-                <% for item in @targItems %>
-                    <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=offer"></div>
-                <%end%>
+                <% if (current_user.id).to_s == (@initUser.id).to_s %>
+                    <% for item in @targItems %>
+                        <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=offer"></div>
+                    <%end%>
+                <% else %>
+                    <% for item in @initItems %>
+                        <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=need"></div>
+                    <%end%>
+                <% end %>
                 <!-- End of tabs for items targ is receiving--> 
 
             </div>

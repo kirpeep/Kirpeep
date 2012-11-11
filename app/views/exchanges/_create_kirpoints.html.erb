@@ -1,16 +1,21 @@
 <script type="text/javascript">
+    initContext = <%= initUser.to_json.html_safe %>;
     $(document).ready(function() {
         $('#add-kirpoints').live('click', function(e) {
             e.preventDefault();
-            $(this).prev('.amount').before('<span>'+$(this).prev('.amount').val()+' Kirpoints</span>');
-            if(console) console.log($(this).closest('.amount'));
-            $('.points').val($(this).prev('.amount').val());
-            $('.points').removeClass('points');
+            if($(this).prev('.amount').val() > initContext['kirpoints']){
+                alert("You Do Not Have Sufficent Funds. Add some kirpoints");
+                return false;
+            }
+            else{
+                $(this).prev('.amount').before('<span>'+$(this).prev('.amount').val()+' Kirpoints</span>');
+                if(console) console.log($(this).closest('.amount'));
+                $('.points').val($(this).prev('.amount').val());
+                $('.points').removeClass('points');
 
-            $(this).prev('.amount').remove();
-            $(this).hide();
-
-
+                $(this).prev('.amount').remove();
+                $(this).hide();
+            }
         });
     });
 </script>

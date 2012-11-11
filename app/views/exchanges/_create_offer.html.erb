@@ -5,18 +5,16 @@
         });
     });
 </script>
-<div class="tab-pane active" id="newTargListing">
-    <div class="rounded-offer shadow">
-    	<a type="button" class="close" aria-hidden="true">×</a>
-        <div>
-            <span id="selectoffer">Select a offer or <a href="/new_listing?type=offer" class="CreateListing">Create</a> a new one.
-            </span>
-        </div>
-        <div>
-        	<span>
-                <%= select_tag :listing_id, options_for_select(dropdownItems), { :class => 'selectOfferListing'} %>
-        	</span>
-            
-        </div>
+<div class="rounded-offer shadow">
+	<a type="button" class="close" aria-hidden="true">×</a>
+    <div>
+        <span id="selectoffer">Select a offer or <a href="/new_listing?type=offer" class="CreateListing">Create</a> a new one.
+        </span>
+    </div>
+    <div>
+    	<span>
+            <%= select_tag :listing_id, options_for_select(dropdownItems), { :class => 'selectOfferListing'} %>
+    	</span>
+        
     </div>
 </div>

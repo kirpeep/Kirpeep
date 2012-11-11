@@ -17,7 +17,6 @@
             /*form_id = $('new_exchange_item_0').attr('id');
             $('new_exchange_item_0').attr('id', form_id.);*/
             $(".tab-content").live("hover", function(){
-
             });
 
             $(".close").live("click", function(){
@@ -42,7 +41,7 @@
                 }
                 //Type: -1 == need
                 else if(listing == -2){
-                    $.get("/exch_add_kirpoints?init="+userContext["id"]+"&targ="+targContext["id"]+"&type=-2", function(data) {
+                    $.get("/exch_add_kirpoints?init="+targContext["id"]+"&targ="+userContext["id"]+"&type=-2", function(data) {
                         var o = $(data);
                         listingContainer.replaceWith(o);
                         o.fadeIn();
