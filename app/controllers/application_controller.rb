@@ -9,6 +9,18 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  def tos
+       render :template => 'pages/tos'
+  end
+
+  def privacy
+       render :template => 'pages/privacy'
+  end
+
+  def how
+       render :template => 'pages/how'
+  end
+
   private
   
   
