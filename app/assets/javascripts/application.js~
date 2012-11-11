@@ -32,13 +32,11 @@ $(document).ready(function(){
 		  event.preventDefault();
 	});
 
-         $('.dropdown-menu li').click(function (event) {
-                    
-                    var elementId = $(this).attr('id');
-                    if (is_touch_device) {
-                            event.preventDefault();
-                            return false;
-                    }
+         $('.dropdown-menu li').click(function (event) {   
+            if (is_touch_device) {
+                    event.preventDefault();
+                    return false;
+            }
          });
 });
 
