@@ -15,14 +15,17 @@ class ExchangesController < ApplicationController
     @initItems = exchanged_items.find_all_by_targ_user_id(@user.id)
 
     for item in @initItems
-      if item.kirpoints != nil
-        commitKirpoints(@user, item.kirpoints)
+      if item.kirpoints_amounts != nil
+        commitKirpoints(@user, item.kirpoints_amounts)
       end
     end
-    UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
     
     if @exchange.save
         flash[:notice] = 'exchange saved.'
+        @targUser = User.find(@exchange.targUser)
+        @initUser = User.find(@exchange.initUser)
+        #UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
+    
         redirect_to current_user
     else
   	  flash[:error] = @exchange.errors.full_messages.to_sentence
@@ -62,22 +65,26 @@ class ExchangesController < ApplicationController
     exch = InitiateExchange.find(params[:exch_id])
     @initUser = User.find exch.initUser
     @targUser = User.find exch.targUser
+
     if(exch.initUser == params[:user_id])
       exch.initAcpt = true
+
+      @initItems = exchanged_items.find_all_by_targ_user_id(@initUser.id)
       for item in @initItems
-        if item.kirpoints != nil
-          commitKirpoints(@user, item.kirpoints)
+        if item.kirpoints_amounts != nil
+          commitKirpoints(@user, item.kirpoints_amounts)
         end
       end
-      UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
+      #UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
     else 
       exch.targAcpt = true
-      for item in @initItems
-        if item.kirpoints != nil
-          commitKirpoints(@user, item.kirpoints)
+      @targItems = exchanged_items.find_all_by_targ_user_id( @targUser.id)
+      for item in @targItems
+        if item.kirpoints_amounts != nil
+          commitKirpoints(@user, item.kirpoints_amounts)
         end
       end
-      UserMailer.message_email(@initUser, @targUser, @targUser.name + " has accepted the exchange.", "Go to your profile on kirpeep.com and accept the exchange." ).deliver
+      #UserMailer.message_email(@initUser, @targUser, @targUser.name + " has accepted the exchange.", "Go to your profile on kirpeep.com and accept the exchange." ).deliver
     end
 
     if(exch.initAcpt == true && exch.targAcpt == true)
