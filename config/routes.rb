@@ -1,4 +1,4 @@
-TestApp::Application.routes.draw do
+Kirpeep::Application.routes.draw do
   #get "sessions/new"
   match '/sessions/signin', :controller => 'sessions', :action => 'signin'
 

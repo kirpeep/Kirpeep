@@ -15,12 +15,13 @@ class UsersController < ApplicationController
   #before_filter :correct_user, :only => [:show, :edit, :update, :destroy]
   
   def index
-    @users = User.all
+    #@users = User.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
+    #respond_to do |format|
+    #  format.html {root_path}
+    #  format.json { render json: @users }
+    #end
+    redirect_to root_path
   end
 
   # GET /users/1

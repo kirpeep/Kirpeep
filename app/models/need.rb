@@ -14,6 +14,7 @@ class Need < UserListing
 	       :thumb => "100x100#",
 	       :small  => "40x40" }
 
-	validates :quantity, :presence =>true, :length => {:minimum => 1}
-	validates :quantityUnit, :presence => true
+	#validates :quantity, :presence =>true, :length => {:minimum => 1}
+	#validates :quantityUnit, :presence => true
+        #validates :photo, :presence => true
 end

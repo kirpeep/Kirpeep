@@ -16,6 +16,7 @@ class Offer < UserListing
 	       :small  => "40x40" }
     
 	#validates :inventoryCount, :length => {:minimum => 1}
+        #validates :photo, :presence => true
 
 	
 end
