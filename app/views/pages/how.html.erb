@@ -1,11 +1,7 @@
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <title>Kirpeep | <%= @title %></title>
-<%= javascript_tag do %>
-  window.userID = <%= current_user.id %>
-<% end %>
 <%#= render 'needs/show' %>
 
-<%= javascript_include_tag "profile.js" %>
 
 <%= stylesheet_link_tag    "profile.css" %>
 </head>

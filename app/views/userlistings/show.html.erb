@@ -13,7 +13,7 @@
        <div><hr/></div>
        <div class='row-fluid'>
          <div style='margin-right:auto;margin-left:auto;width:400px;'>
-          <% if @listing.type == 'Offer' %>
+          <% if @listing.type == 'Need' %>
             <%= render :partial => 'userlistings/show_need', :locals => {:listing => @listing } %>
           <% else %>
             <%= render :partial => 'userlistings/show_offer', :locals => {:listing => @listing } %>

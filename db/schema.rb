@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121110225437) do
+ActiveRecord::Schema.define(:version => 20121110151320) do
 
   create_table "actions", :force => true do |t|
     t.integer  "userId"
@@ -144,6 +144,8 @@ ActiveRecord::Schema.define(:version => 20121110225437) do
   end
 
   create_table "reviews", :force => true do |t|
+    t.string   "reviewID"
+    t.string   "profileID"
     t.text     "review"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -201,12 +203,11 @@ ActiveRecord::Schema.define(:version => 20121110225437) do
     t.string   "encrypted_password"
     t.string   "remember_token"
     t.string   "salt"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
     t.boolean  "Active"
     t.string   "token"
-    t.decimal  "kirpoints",           :precision => 10, :scale => 0
-    t.decimal  "kirpoints_committed", :precision => 10, :scale => 0
+    t.decimal  "kirpoints",          :precision => 10, :scale => 0
   end
 
 end

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
+gem 'rack'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -53,13 +54,13 @@ gem 'client_side_validations'
 
 #gem 'css_sprite' #More efficient CSS
 
-group :test, :development, :kyle, :john do
-	gem 'rspec-rails'
-	gem 'guard-rspec'
-	gem 'launchy'
-	gem 'ruby-debug19'
-	gem 'rails-erd'
-end
+#group :test, :development, :kyle, :john do
+#	gem 'rspec-rails'
+#	gem 'guard-rspec'
+#	gem 'launchy'
+#	gem 'ruby-debug19'
+#	gem 'rails-erd'
+#end
 
 #Run the following the following(each is a line)
 #guard init
