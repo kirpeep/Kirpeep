@@ -25,7 +25,7 @@
             </a>
           </li>
           <li>
-            <%= link_to 'Delete', '/destroy_listing?id='+listing.id %>
+            <%= link_to 'Delete', '/destroy_listing?id='+listing.id.to_s %>
             <%#= image_tag('Icon_Edit_nocolor.png', 
                  :class=>"editIcon", 
                  :title=>"Edit", 
