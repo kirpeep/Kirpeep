@@ -7,12 +7,7 @@
 class ExchangeItemsController < ApplicationController
 
 	def create
-		if [:exchange_item][:kirpoints] != nil
-			@exchange_item = ExchangeItemKirpoint.new params[:exchange_item_kirpoint]
-		else
-			@exchange_item = ExchangeItem.new params[:exchange_item]
-			
-		end
+		@exchange_item = ExchangeItem.new params[:exchange_item]
 
 		if @exchange_item.save
 	          flash[:notice] = 'exchange item saved.'

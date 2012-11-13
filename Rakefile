@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-TestApp::Application.load_tasks
+Kirpeep::Application.load_tasks

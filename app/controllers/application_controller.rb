@@ -53,6 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   def commitKirpoints(user, amount)
+    debugger
     if hasEnoughKirpoints(user, amount)
       user.kirpoints -= amount
       user.kirpoints_committed += amount

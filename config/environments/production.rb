@@ -1,4 +1,4 @@
-TestApp::Application.configure do
+Kirpeep::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -6,7 +6,7 @@ TestApp::Application.configure do
   ThinkingSphinx.deltas_enabled = true 
   ThinkingSphinx.updates_enabled = true
 
-  $domain = 'http://ww.kirpeep.com'
+  $domain = 'http://www.kirpeep.com'
   
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = true

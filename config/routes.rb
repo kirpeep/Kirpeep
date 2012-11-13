@@ -1,4 +1,4 @@
-TestApp::Application.routes.draw do
+Kirpeep::Application.routes.draw do
   #get "sessions/new"
   match '/sessions/signin', :controller => 'sessions', :action => 'signin'
 
@@ -7,6 +7,7 @@ TestApp::Application.routes.draw do
   match  '/new_listing',         :to => 'userlistings#new'
   match  '/exchange_listing/',   :to => 'userlistings#show_listing_exchange'
   match  '/show_listing/',       :to => 'userlistings#show_listing_result'
+  match  '/destroy_listing',     :to => 'userlistings#destroy'
   #match  '/quicksale/:id',      :to => 'userlisting#quicksale'
   match  '/share/:id',           :to => 'userlistings#share'
   #match  '/list_offer/:id',     :to => 'offers#new'

@@ -69,7 +69,7 @@ $(document).ready(function(){
             <li><strong>1 Review (stars)<strong></li> 
       	</ul>
 
-        <h1>Reviews</h1>
+	<h1>Reviews</h1>
         <% debugger %>
         <% if  controller.review_list(@user).nil?%>
           <span>No Reviews</span>
@@ -81,8 +81,6 @@ $(document).ready(function(){
             </div>
           <% end %>
         <% end %>
-
-        <a href="#" class="dynamolink">Add Review</a>
       </div>
         
         <div class='span8'>
