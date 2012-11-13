@@ -62,7 +62,6 @@ $(document).ready(function(){
           <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
             <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>
             <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
-            <li><strong>Birth Date:</strong> <%= best_in_place @profile, :birthdate %></li>
             <li><strong>Gender:</strong> <%= best_in_place @profile, :gender %></li>
             <li><strong><%= @user.needs.count %> Needs / <%= @user.offers.count %> Offers</strong> </li>
             <li><strong>Completed Exchanges</strong> </li>
@@ -70,7 +69,6 @@ $(document).ready(function(){
       	</ul>
 
 	<h1>Reviews</h1>
-        <% debugger %>
         <% if  controller.review_list(@user).nil?%>
           <span>No Reviews</span>
         <% else %>

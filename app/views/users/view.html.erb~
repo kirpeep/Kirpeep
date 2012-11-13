@@ -69,8 +69,7 @@ $(document).ready(function(){
             <li><strong>1 Review (stars)<strong></li> 
       	</ul>
 
-        <h1>Reviews</h1>
-        <% debugger %>
+	<h1>Reviews</h1>
         <% if  controller.review_list(@user).nil?%>
           <span>No Reviews</span>
         <% else %>
@@ -81,8 +80,6 @@ $(document).ready(function(){
             </div>
           <% end %>
         <% end %>
-
-        <a href="#" class="dynamolink">Add Review</a>
       </div>
         
         <div class='span8'>
@@ -95,17 +92,14 @@ $(document).ready(function(){
                 <li class='active'>
                   <%= link_to 'Profile', '#profile' , {:id => 'profile_link', 'data-toggle' => 'tab'} %>
                 </li>
-                <li>
-                  <%= link_to 'Exchanges', '#exchanges' , {:id => 'exch_link', 'data-toggle' => 'tab'} %></li>
+                
               </ul>
       	    
               <div class="tab-content" >
                 <div id='profile' class="tab-pane active">
                   <%= render :partial => 'profile', :locals => {:user => @user} %>
                 </div>
-                <div id='exchanges' class="tab-pane">
-                  <div id="exchContainer" data-url="/user_exchanges/<%=params[:id]%>"></div>
-                </div>
+               
               </div> <!-- /.tab-content -->
             </div><!-- /.tabbable -->
           </div><!-- /#profile-header -->
