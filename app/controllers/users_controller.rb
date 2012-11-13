@@ -226,12 +226,14 @@ class UsersController < ApplicationController
   end
   
   def reset_password
-    if params[:id].nil? || params[:token].nil? 
-      redirect_to root_path, notice: 'Missing Requirements'  
+    if !(params[:id] && params[:token]) 
+      redirect_to root_path, error: 'Missing Requirements'
+      return
     else
       @user = User.where("id = ? AND token = ?", params[:id], params[:token]).first!
       if @user.nil?
-        redirect_to root_path, notice: 'Missing Requirements'
+        redirect_to root_path, error: 'Could not find the user'
+        return
       else
         respond_to do |format|
           format.html
@@ -241,15 +243,18 @@ class UsersController < ApplicationController
   end
 
   def process_reset_password
-    if params[:id].nil? || params[:password].nil? || params[:confirm].nil?
+    if !(params[:id] && params[:password] && params[:confirm])
       redirect_to '/resetpassword', error: 'Missing some information'
+      return
     else
       if params[:password] != params[:confirm]
         redirect_to '/resetpassword', error: 'Passwords do not match'
+        return
       else
         @user = User.find(params[:id])
         @user.update_attribute(:password, params[:password])
-        redirect_to '/resetpassword', notice: 'Your password has been reset'
+        flash[:notice] = 'Your password has been reset'
+        redirect_to root_url
       end
     end 
   end

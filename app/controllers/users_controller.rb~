@@ -15,12 +15,13 @@ class UsersController < ApplicationController
   #before_filter :correct_user, :only => [:show, :edit, :update, :destroy]
   
   def index
-    @users = User.all
+    #@users = User.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
+    #respond_to do |format|
+    #  format.html {root_path}
+    #  format.json { render json: @users }
+    #end
+    redirect_to root_path
   end
 
   # GET /users/1
@@ -78,6 +79,7 @@ class UsersController < ApplicationController
     if params[:password] != params[:password_confirmation]
       flash[:error] = "Passwords do not match"
       redirect_to root_url
+      return
     end
     @user = User.new
     # A user must activate via an activation email
@@ -224,12 +226,14 @@ class UsersController < ApplicationController
   end
   
   def reset_password
-    if params[:id].nil? || params[:token].nil? 
-      redirect_to root_path, notice: 'Missing Requirements'  
+    if !(params[:id] && params[:token]) 
+      redirect_to root_path, error: 'Missing Requirements'
+      return
     else
       @user = User.where("id = ? AND token = ?", params[:id], params[:token]).first!
       if @user.nil?
-        redirect_to root_path, notice: 'Missing Requirements'
+        redirect_to root_path, error: 'Could not find the user'
+        return
       else
         respond_to do |format|
           format.html
@@ -239,15 +243,18 @@ class UsersController < ApplicationController
   end
 
   def process_reset_password
-    if params[:id].nil? || params[:password].nil? || params[:confirm].nil?
+    if !(params[:id] && params[:password] && params[:confirm])
       redirect_to '/resetpassword', error: 'Missing some information'
+      return
     else
       if params[:password] != params[:confirm]
         redirect_to '/resetpassword', error: 'Passwords do not match'
+        return
       else
         @user = User.find(params[:id])
         @user.update_attribute(:password, params[:password])
         redirect_to '/resetpassword', notice: 'Your password has been reset'
+        return
       end
     end 
   end
