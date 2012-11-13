@@ -75,9 +75,18 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    if params[:password] != params[:password_confirmation]
+      flash[:error] = "Passwords do not match"
+      redirect_to root_url
+      return
+    end
+    @user = User.new
     # A user must activate via an activation email
     # Before they are allowed to use the system - kyle
+    @user.email = params[:email]
+    @user.name = params[:name]
+    @user.password = params[:password]
+    @user.password_confirmation = params[:password_confirmation]
     @user.Active = false 
     @user.token = User.generateToken
     @user.profile = Profile.new
@@ -86,10 +95,11 @@ class UsersController < ApplicationController
       if @user.save
         UserMailer.activate_email(@user).deliver
        # sign_in @user
-        format.html { redirect_to @user, notice: 'User was successfully created and your activation email has been sent.' }
+        flash[:notice] = 'User was successfully created, but your account must be activated.  Please check your email.'
+        format.html { redirect_to root_url }
         format.json { render json: @user, status: :created, location: @user }
       else
-        format.html {  redirect_to root_url, notice: 'User was not successfully created.'  }
+        format.html {  redirect_to root_url, error: 'User was not successfully created.'  }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end
