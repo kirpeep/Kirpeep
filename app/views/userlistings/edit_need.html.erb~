@@ -6,30 +6,31 @@
   <div class="modal-body">
 	  <div class='span3 pull-left'>
 		  <div class="field">
-		    <%= f.label :title %><br />
+		    <%= f.label :title %>
 		    <%= f.text_field :title %>
 		  </div>
 		  <div class="field">
-		    <%= f.label :description %><br />
-		    <%= f.text_area :description, {:rows => '5'}  %><br />
+		    <%= f.label :description %>
+		    <%= f.text_area :description, {:rows => '5'}  %>
 		  </div>
           </div>
           <div class='span2 pull-left'>
 		  <div class="field">
-		    <%= f.label :quantity %><br />
+		    <%= f.label :quantity %>
 		    <%= f.text_field :quantity %>
 		  </div>
 		  <div class="field">
-		    <%= f.label :quantityUnit %><br />
+		    <%= f.label :quantityUnit %>
 		    <%= f.text_field :quantityUnit %>
 		  </div>
 		  <div class="field">
-		    <%= f.label :photo %><br />
+		    <%= f.label :photo %>
 		    <%= f.file_field :photo %>
 		  </div>
           </div>
   </div>
   <div class="modal-footer">
+  	<%= button_to "Delete". @listing, :method => :delete, :class => :destroy %>
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     <%= f.submit 'Save', :class => 'btn btn-primary' %>
   </div>

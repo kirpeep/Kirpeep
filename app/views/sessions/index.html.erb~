@@ -46,7 +46,7 @@
      
     
   </div>
-  <div class='pull-right' style='margin-top:5px;margin-right:35px;'><a herf='/how'>How It Works</a></div> 
+  <div class='pull-right' style='margin-top:5px;margin-right:35px;'></div> 
    <% if flash[:notice] != nil %>
 	    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
 	       <button type="button" class="close" data-dismiss="alert">×</button>
@@ -85,17 +85,31 @@
   <div class='row'>
     <% if !signed_in? %>
     <div id="signup" class='span6 offset3 align-center'>
-      <span id="signup" >Get Started by introducing yourself.</span>
-      <%= form_tag("/signup/", :method =>"get") do %>
-      <%= text_field_tag :email, 'Email', {'data-inline' => 'true' }%>
-      <%= password_field_tag :password, 'Password',  {'data-inline' => 'true' } %>
-      <%= submit_tag 'Sign up', :class => "dynamosignup btn", 'data-toggle' => "modal", 'role' => "button" %>
-
+      <p><span id="signup" >Get Started by introducing yourself.</span></p>
+      <%= form_tag("/signup/", :method =>"post") do %>
+      <table style='width:300px;margin-left:auto;margin-right:auto;'>
+      <tr>
+      <td>Name:</td><td><%= text_field_tag :name, 'Name' %></td> 
+      </tr>
+      <tr>
+      <td>Email:</td><td><%= text_field_tag :email, 'Email' %></td> 
+      </tr>
+      <tr>
+      <td>Password:</td><td><%= password_field_tag :password, 'Password' %></td>
+      </tr>
+      <tr>
+      <td>Confirm:</td><td><%= password_field_tag :password_confirmation, 'Confirm' %></td>
+      </tr>
+     
+      </table>
+      <span style='color: #000;'>I agree to <a href='/tos'>terms</a></span> 
+      <br><br>
+      <%= submit_tag 'Sign up', :class => "btn btn-sucsess",'role' => "button" %>
       <%end%>
     </div>
     <%end%>
     <div class='align-center'>
-      <p><a href='/tos'>Terms of Use</a> | <a href='/privacy'>Privacy</a><br />
+      <p><a href='/how'>How It Works</a> | <a href='/tos'>Terms of Use</a> | <a href='/privacy'>Privacy</a><br />
       &copy; 2012 Kirpeeps Inc.</p>
     </div>
   </div>

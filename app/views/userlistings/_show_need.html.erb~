@@ -16,7 +16,16 @@
           </li>
           <!-- Edit -->
           <li>
-            <a href="/edit_listing?id=<%= listing.id %>&listing_type=offer" class='dynamolink'>Edit
+            <a href="/edit_listing?id=<%= listing.id %>&listing_type=need" class='dynamolink'>Edit
+            <%#= image_tag('Icon_Edit_nocolor.png', 
+                 :class=>"editIcon", 
+                 :title=>"Edit", 
+                 :onmouseover=>"$(this).attr('src','/assets/Icon_Edit_color.png');",
+                 :onmouseout=>"$(this).attr('src','/assets/Icon_Edit_nocolor.png');") %>
+            </a>
+          </li>
+          <li>
+            <%= link_to 'Delete', '/destroy_listing?id='+listing.id.to_s %>
             <%#= image_tag('Icon_Edit_nocolor.png', 
                  :class=>"editIcon", 
                  :title=>"Edit", 
@@ -137,7 +146,7 @@
       <% else %>
         <a href='/view/<%= listing.user.id %>'><%= image_tag(listing.user.profile.photo.url, {:style=>'width:70px;', :class => 'img-polaroid'}) %></a>
       <% end %>
-      <%= image_tag('stars.png') %>
+      <%#= image_tag('stars.png') %>
     </div>
     
     <div class='pull-left'>

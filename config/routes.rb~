@@ -15,6 +15,7 @@ TestApp::Application.routes.draw do
   match  '/messages/:id',        :to => 'users#messages'
   match  '/view/:id',            :to => 'users#view'
   match  '/signup/',             :to => 'users#new'
+  post   '/signup/',             :to => 'users#create'
   match  '/signup/:email&:pass', :to => 'users#new'
   match  '/users/:id/offers',    :to => 'users#offers'
   match  '/users/:id/needs/',    :to => 'users#needs'
@@ -58,6 +59,7 @@ TestApp::Application.routes.draw do
 
   match '/tos', :to => 'application#tos'
   match '/privacy', :to => 'application#privacy'
+  match '/how', :to => 'application#how'
   
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'

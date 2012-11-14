@@ -76,9 +76,18 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    if params[:password] != params[:password_confirmation]
+      flash[:error] = "Passwords do not match"
+      redirect_to root_url
+      return
+    end
+    @user = User.new
     # A user must activate via an activation email
     # Before they are allowed to use the system - kyle
+    @user.email = params[:email]
+    @user.name = params[:name]
+    @user.password = params[:password]
+    @user.password_confirmation = params[:password_confirmation]
     @user.Active = false 
     @user.token = User.generateToken
     @user.profile = Profile.new
@@ -87,10 +96,11 @@ class UsersController < ApplicationController
       if @user.save
         UserMailer.activate_email(@user).deliver
        # sign_in @user
-        format.html { redirect_to @user, notice: 'User was successfully created and your activation email has been sent.' }
+        flash[:notice] = 'User was successfully created, but your account must be activated.  Please check your email.'
+        format.html { redirect_to root_url }
         format.json { render json: @user, status: :created, location: @user }
       else
-        format.html {  redirect_to root_url, notice: 'User was not successfully created.'  }
+        format.html {  redirect_to root_url, error: 'User was not successfully created.'  }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end
@@ -216,12 +226,14 @@ class UsersController < ApplicationController
   end
   
   def reset_password
-    if params[:id].nil? || params[:token].nil? 
-      redirect_to root_path, notice: 'Missing Requirements'  
+    if !(params[:id] && params[:token]) 
+      redirect_to root_path, error: 'Missing Requirements'
+      return
     else
       @user = User.where("id = ? AND token = ?", params[:id], params[:token]).first!
       if @user.nil?
-        redirect_to root_path, notice: 'Missing Requirements'
+        redirect_to root_path, error: 'Could not find the user'
+        return
       else
         respond_to do |format|
           format.html
@@ -231,15 +243,18 @@ class UsersController < ApplicationController
   end
 
   def process_reset_password
-    if params[:id].nil? || params[:password].nil? || params[:confirm].nil?
+    if !(params[:id] && params[:password] && params[:confirm])
       redirect_to '/resetpassword', error: 'Missing some information'
+      return
     else
       if params[:password] != params[:confirm]
         redirect_to '/resetpassword', error: 'Passwords do not match'
+        return
       else
         @user = User.find(params[:id])
         @user.update_attribute(:password, params[:password])
-        redirect_to '/resetpassword', notice: 'Your password has been reset'
+        flash[:notice] = 'Your password has been reset'
+        redirect_to root_url
       end
     end 
   end

@@ -17,10 +17,10 @@
 							<div class='row-fluid'>
 								<div class="span4">
 									<% if (message.initUser).to_s == (current_user.id).to_s %>
-										<%= image_tag @targUser.profile.photo.url, {:width => "70px", :height => '70px'} %>
+										<%= link_to image_tag(@targUser.profile.photo.url, {:width => "70px", :height => '70px'}), @targUser %>
 										<%= User.find(message.targUser).name %>
 									<% else %>
-										<%= image_tag @initUser.profile.photo.url, {:width => "70px", :height => '70px'} %>
+										<%= link_to image_tag(@initUser.profile.photo.url, {:width => "70px", :height => '70px'}), @initUser %>
 										<%= User.find(message.initUser).name %>
 									<% end %>
 								</div>

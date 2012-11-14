@@ -10,12 +10,12 @@
     <div class='span7 pull-left' style='font-weight:normal;' >
       <strong>About</strong><br>
      <!-- <hr style='margin: 10px  0 !important;' /> -->
-      <%= user.profile.about %>
+      <%= best_in_place user.profile, :about %>
     </div>
     <div class='span4 pull-right' style='font-weight:normal;'>
      <strong>Education</strong><br>
      <!-- <hr style='margin: 10px 0 !important;' /> -->
-     <%= user.profile.education %>
+     <%= best_in_place user.profile, :education %>
    </div>
 </div>
 <hr />
