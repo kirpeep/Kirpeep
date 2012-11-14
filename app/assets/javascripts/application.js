@@ -23,7 +23,7 @@
   	xhr.setRequestHeader("Accept", "text/javascript")
   }
 });*/
-var is_touch_device = 'ontouchstart' in document.documentElement;
+
 $(document).ready(function(){
 	$('.dynamolink').live("click",function(event){
 		  var path = $(this).attr('href');
@@ -31,6 +31,13 @@ $(document).ready(function(){
 		  $('#dynamobox').modal('show');
 		  event.preventDefault();
 	});
+
+  $(function() {
+    // touch device dropdown click bootstrap fix
+    $('body').on('touchstart.dropdown', '.dropdown-menu', function(e) {
+    e.stopPropagation();
+    });
+  });
 });
 
 

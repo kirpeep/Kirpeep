@@ -1,4 +1,4 @@
-TestApp::Application.configure do
+Kirpeep::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -6,6 +6,8 @@ TestApp::Application.configure do
   ThinkingSphinx.deltas_enabled = true 
   ThinkingSphinx.updates_enabled = true
 
+  $domain = 'http://localhost:3000'
+  
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
@@ -26,7 +28,7 @@ TestApp::Application.configure do
     ActiveMerchant::Billing::Base.mode = :test
   end
   
-  $domain = 'http://localhost:3000'
+  
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
