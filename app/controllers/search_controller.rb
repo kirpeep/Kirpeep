@@ -4,9 +4,9 @@ class SearchController < ApplicationController
 
 	    if signed_in?
 	      @user = current_user
-	      @userlistings = UserListing.where("user_id != ? AND is_deleted == ?",@user.id.to_s, "false")#.paginate(:per_page => 5, :page => params[:page])#.order(sort_column + " " + sort_direction)
-	      #.paginate(:per_page => 5, :page => params[:page]) #.order(sort_column + " " + sort_direction)
-	      @userlistings = @userlistings.search(params[:search], :per_page => 100)
+	      #
+	      @userlistings = UserListing.search(params[:search], :per_page => 100)
+	      @userlistings = UserListing.where("is_deleted = false")
               Action.log @user.id, 'search', params[:search].to_s()
 	    else
               
