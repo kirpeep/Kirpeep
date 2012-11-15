@@ -1,4 +1,4 @@
-TestApp::Application.configure do
+Kirpeep::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -11,6 +11,10 @@ TestApp::Application.configure do
 
   $domain = 'http://test.kirpeep.com'
 
+  $account_sid = 'AC0c0a7ba5f860c03bbe3e787840311779'
+  $auth_token = '373cfa0549ab3a994ffb5bf0c9d6f2c9'
+  $ourNumber = '617-431-2087'
+
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
@@ -18,6 +22,10 @@ TestApp::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+  end
+ 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 

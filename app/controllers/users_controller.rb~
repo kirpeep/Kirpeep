@@ -253,8 +253,8 @@ class UsersController < ApplicationController
       else
         @user = User.find(params[:id])
         @user.update_attribute(:password, params[:password])
-        redirect_to '/resetpassword', notice: 'Your password has been reset'
-        return
+        flash[:notice] = 'Your password has been reset'
+        redirect_to root_url
       end
     end 
   end

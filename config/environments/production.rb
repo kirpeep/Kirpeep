@@ -7,6 +7,14 @@ Kirpeep::Application.configure do
   ThinkingSphinx.updates_enabled = true
 
   $domain = 'http://www.kirpeep.com'
+   
+  $pplogin = 'steven_api1.kirpeep.com',
+  $pppwd = 'A6XRB54GCXDUM93W',
+  $ppsig 'A8UNsxeLtkH.r50vYFpz9lNlJDNVACLkkpd7WbhRTOhhujgCb3cB41cT'
+
+  $account_sid = 'AC0c0a7ba5f860c03bbe3e787840311779'
+  $auth_token = '373cfa0549ab3a994ffb5bf0c9d6f2c9'
+  $ourNumber = '617-431-2087'
   
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = true
