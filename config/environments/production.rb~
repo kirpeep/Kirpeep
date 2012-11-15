@@ -8,8 +8,8 @@ Kirpeep::Application.configure do
 
   $domain = 'http://www.kirpeep.com'
    
-  $pplogin = 'steven_api1.kirpeep.com',
-  $pppwd = 'A6XRB54GCXDUM93W',
+  $pplogin = 'steven_api1.kirpeep.com'
+  $pppwd = 'A6XRB54GCXDUM93W'
   $ppsig 'A8UNsxeLtkH.r50vYFpz9lNlJDNVACLkkpd7WbhRTOhhujgCb3cB41cT'
 
   $account_sid = 'AC0c0a7ba5f860c03bbe3e787840311779'
