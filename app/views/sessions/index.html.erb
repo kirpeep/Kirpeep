@@ -87,7 +87,7 @@
     <div id="signup" class='span6 offset3 align-center'>
       <p><span id="signup" >Get Started by introducing yourself.</span></p>
       <%= form_tag("/signup/", :method =>"post") do %>
-      <table style='width:300px;margin-left:auto;margin-right:auto;'>
+      <table style='margin-left:auto;margin-right:auto;'>
       <tr>
       <td>Name:</td><td><%= text_field_tag :name, 'Name',{:class=>'span3'} %></td> 
       </tr>
