@@ -17,13 +17,6 @@ $(document).ready(function(){
   //enter edit information here	
   });
   
-  //Exchange Modal JQuery
-  $('.dynamolink').click(function(event){
-      var path = $(this).attr('href');
-      $('#dynamobox').load(path);
-      $('#dynamobox').modal('show');
-      event.preventDefault();
-    });
   $('#exchContainer').insertERBTemplateAjax("over");
 });
 </script>
@@ -62,7 +55,6 @@ $(document).ready(function(){
           <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
             <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>
             <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
-            <li><strong>Birth Date:</strong> <%= best_in_place @profile, :birthdate %></li>
             <li><strong>Gender:</strong> <%= best_in_place @profile, :gender %></li>
             <li><strong><%= @user.needs.count %> Needs / <%= @user.offers.count %> Offers</strong> </li>
             <li><strong>Completed Exchanges</strong> </li>

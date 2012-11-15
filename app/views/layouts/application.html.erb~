@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%= stylesheet_link_tag    "bootstrap.css" %>
 <%= javascript_include_tag "application" %>
 
 <!--For responsive bootstrap-->
 <%#= stylesheet_link_tag    "bootstrap-responsive.css" %>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 
 <%= yield %>

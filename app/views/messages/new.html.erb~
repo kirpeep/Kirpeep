@@ -46,14 +46,14 @@
 		  </div>
          </div>
          <div class='clearfix'></div>
-         <div class="field">
+         <div class="field" style='margin-top:15px;'>
             <%= f.label :Message %>
 	    <%= f.text_area :text, :rows => '3', :style=>'width:600px;margin-bottom:15px;'%>
 	</div>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <%= f.submit 'Save', :class => 'btn btn-primary' %>
+    <%= f.submit 'Send', :class => 'btn btn-primary' %>
 
     <% end %> <!-- end of form -->
   </div>
