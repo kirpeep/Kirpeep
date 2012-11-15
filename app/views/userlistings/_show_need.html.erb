@@ -25,13 +25,7 @@
             </a>
           </li>
           <li>
-            <%= link_to 'Delete', '/destroy_listing?id='+listing.id.to_s %>
-            <%#= image_tag('Icon_Edit_nocolor.png', 
-                 :class=>"editIcon", 
-                 :title=>"Edit", 
-                 :onmouseover=>"$(this).attr('src','/assets/Icon_Edit_color.png');",
-                 :onmouseout=>"$(this).attr('src','/assets/Icon_Edit_nocolor.png');") %>
-            </a>
+            <%= link_to 'Remove', '/destroy_listing?id='+listing.id.to_s %>
           </li>
           <li>
           <a class="dynamolink" href="/share/<%= listing.id.to_s%>">Share
