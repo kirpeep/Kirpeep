@@ -84,7 +84,7 @@
               </div>
               <div id='messages' class="tab-pane"></div>
               <div id='transactions' class="tab-pane">
-                 <div data-url="/users/<%=@user.id%>/transactions"></div>
+                 <div id='transContainer' data-url="/users/<%=@user.id%>/transactions"></div>
               </div>
             </div> <!-- /.tab-content -->
           </div><!-- /.tabbable -->
