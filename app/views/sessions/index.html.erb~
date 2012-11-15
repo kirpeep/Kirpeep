@@ -102,7 +102,7 @@
       </tr>
      
       </table>
-      <span style='color: #000;'>I agree to <a href='/tos'>terms</a></span> 
+      <span style='color: #000;'>By clicking sign up, you agree to the <a href='/tos'>terms</a></span> 
       <br><br>
       <%= submit_tag 'Sign up', :class => "btn btn-sucsess",'role' => "button" %>
       <%end%>
