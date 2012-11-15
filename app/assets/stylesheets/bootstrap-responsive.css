@@ -855,13 +855,19 @@
     margin-left: 0;
   }
   .modal {
-   position: fixed; 
-    top: 3%; 
-    right: 3%; 
-    left: 3%; 
-    width: auto; 
-    margin: 0; 
+   position: fixed;
+   top: 3%;
+   right: 3%;
+   left: 3%;
+   bottom: 3%;
+   width: auto;
+   margin: 0; 
   }
+
+  .modal-body {
+   height: 60%;
+  }
+
   .modal.fade.in {
     top: auto;
   }
@@ -903,9 +909,6 @@
   .modal-header .close {
     padding: 10px;
     margin: -10px;
-  }
-  .modal-body{
-    height: 60%; 
   }
   .carousel-caption {
     position: static;
