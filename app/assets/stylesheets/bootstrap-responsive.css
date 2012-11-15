@@ -904,6 +904,9 @@
     padding: 10px;
     margin: -10px;
   }
+  .modal-body{
+    height: 60%; 
+  }
   .carousel-caption {
     position: static;
   }
