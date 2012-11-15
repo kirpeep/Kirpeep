@@ -31,13 +31,13 @@
           
         </ul>
       </div>
-      <span class='span2 pull-right'>
+      <span class='pull-right'>
       <%= link_to raw('<i class="icon-plus-sign"></i> Need'), 
 	   new_userlisting_path(:type => "need"), 
 	   {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
 
       </span>
-      <span class='span2 pull-right'>
+      <span class='pull-right'>
       <%= link_to raw('<i class="icon-plus-sign"></i> Offer'), new_userlisting_path(:type => "offer"), 
            {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
       </span>
