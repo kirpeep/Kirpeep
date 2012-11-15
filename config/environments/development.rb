@@ -11,8 +11,8 @@ Kirpeep::Application.configure do
 
   $domain = 'http://test.kirpeep.com'
 
-  $pplogin = 'steven_1351543516_biz_api1.kirpeep.com',
-  $pppwd = '1351543534',
+  $pplogin = 'steven_1351543516_biz_api1.kirpeep.com'
+  $pppwd = '1351543534'
   $ppsig 'AvKdi0LrEbeG03EMIoKHsOro2HLNAYUeGaf.kyjQwy2IVHVCok1i-fcE '
 
   $account_sid = 'AC0c0a7ba5f860c03bbe3e787840311779'
