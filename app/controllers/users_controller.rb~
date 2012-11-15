@@ -373,9 +373,9 @@ class UsersController < ApplicationController
 
     def gateway
        @gateway ||= PaypalExpressGateway.new(
-         :login => 'steven_api1.kirpeep.com',
-         :password => 'A6XRB54GCXDUM93W',
-         :signature => 'A8UNsxeLtkH.r50vYFpz9lNlJDNVACLkkpd7WbhRTOhhujgCb3cB41cT'
+         :login => $pplogin,
+         :password => $pppwd,
+         :signature => $ppsig
        )
     end
 
