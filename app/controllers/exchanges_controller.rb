@@ -24,7 +24,7 @@ class ExchangesController < ApplicationController
         flash[:notice] = 'exchange saved.'
         @targUser = User.find(@exchange.targUser)
         @initUser = User.find(@exchange.initUser)
-        #UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
+        UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
     
         redirect_to current_user
     else
