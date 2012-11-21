@@ -1,9 +1,9 @@
 $(document).ready(function() {
-  $('.dynamolink').click(function(event){
+  $('.dynamolink').live("click", function(event){
     var path = $(this).attr('href');
     $('#dynamobox').load(path);
     $('#dynamobox').modal('show');
-    //event.preventDefault();
+    event.preventDefault();
   });
 
   $('.dynamosignup').click(function(event){
@@ -12,8 +12,18 @@ $(document).ready(function() {
     email = email.split('.').join('_')
     email = encodeURIComponent(email);
     var password = $('#password').attr("value");
-    $('#dynamobox').load(path+''+email+'&'+password);
+    $('#dynamobox').load('/signup/'+email+'&'+password);
     $('#dynamobox').modal('show');
-    //event.preventDefault();
+    event.preventDefault();
   });
+});
+
+$(document).ready(function () {
+	$('#search').keyup(function(){
+          console.log($('#search'))
+	  if ($('#search').text() == '')
+	    $('#btnViewListings').val('Browse');
+	  else
+	    $('#btnViewListings').val('Search');
+	});
 });

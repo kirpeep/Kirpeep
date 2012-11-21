@@ -1,7 +1,7 @@
 @import url(bootstrap.min.css);
 @charset "utf-8";
-table#search { border:hidden; background:#59C3D7; color:#FFF} 
-div#search { border: 3px solid; 
+table.search { border:hidden; background:#59C3D7; color:#FFF} 
+div.search { border: 3px solid; 
 			 border-color:#7EC247; 
 			 background-color:#59C3D7; 
 			 color:#FFF; 

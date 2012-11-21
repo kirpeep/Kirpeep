@@ -16,7 +16,7 @@
 //= require bootstrap.min
 //= require jquery.purr
 //= require best_in_place
-//= require rails.validations
+
 
 /*jQuery.ajaxSetup({ 
   beforeSend: function(xhr) {

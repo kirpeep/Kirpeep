@@ -55,10 +55,9 @@ $(document).ready(function(){
           <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
             <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>
             <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
-            <li><strong>Gender:</strong> <%= best_in_place @profile, :gender %></li>
             <li><strong><%= @user.needs.count %> Needs / <%= @user.offers.count %> Offers</strong> </li>
             <li><strong>Completed Exchanges</strong> </li>
-            <li><strong>1 Review (stars)<strong></li> 
+            <li><strong>Review (stars)<strong></li> 
       	</ul>
 
 	<h1>Reviews</h1>
