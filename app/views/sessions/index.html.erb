@@ -1,6 +1,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Kirpeep | Realize Yourself</title>
+<%= javascript_include_tag "jquery.cycle.js" %>
 <%= javascript_include_tag "index.js" %>
+
 <%= stylesheet_link_tag    "index.css" %>
 
 </head>
@@ -64,8 +66,17 @@
     <% end %>
 
   <div class='row'>
-    <div class='span6 offset3 align-center'>
-      <%= image_tag('kirpeep.png') %>
+    <div class='span8 offset2 align-center'>
+      <div class="logo">
+        <%= image_tag('kirp.png') %>
+      </div>
+      <div id="ee">
+        <%= image_tag('ee.png') %>
+        <%= image_tag('bikee.png') %>
+      </div>
+      <div class="logo">
+        <%= image_tag('p.png') %>
+      </div>
     </div>
   </div>
   <div class='row'>
@@ -89,16 +100,16 @@
       <%= form_tag("/signup/", :method =>"post") do %>
       <table style='margin-left:auto;margin-right:auto;'>
       <tr>
-      <td>Name:</td><td><%= text_field_tag :name, 'Name',{:class=>'span3'} %></td> 
+      <td></td><td><%= text_field_tag :name, '', { :class=>'span3', :placeholder => 'Name'} %></td> 
       </tr>
       <tr>
-      <td>Email:</td><td><%= text_field_tag :email, 'Email',{:class=>'span3'} %></td> 
+      <td></td><td><%= text_field_tag :email, '', {:class=>'span3', :placeholder => 'Email'} %></td> 
       </tr>
       <tr>
-      <td>Password:</td><td><%= password_field_tag :password, 'Password',{:class=>'span3'} %></td>
+      <td></td><td><%= password_field_tag :password, '', {:class=>'span3', :placeholder => 'Password'} %></td>
       </tr>
       <tr>
-      <td>Confirm:</td><td><%= password_field_tag :password_confirmation, 'Confirm',{:class=>'span3'} %></td>
+      <td></td><td><%= password_field_tag :password_confirmation, '',{:class=>'span3', :placeholder => 'Confirm Password'} %></td>
       </tr>
      
       </table>

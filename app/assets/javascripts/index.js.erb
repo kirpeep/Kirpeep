@@ -6,6 +6,11 @@ $(document).ready(function() {
     event.preventDefault();
   });
 
+  $("#ee").cycle({
+    fx: 'scrollDown',
+    speed: 2000 
+  });
+  //used when signup is in a modal
   $('.dynamosignup').click(function(event){
     var path = $(this).attr('href');
     var email = $('#email').attr("value");
@@ -16,6 +21,8 @@ $(document).ready(function() {
     $('#dynamobox').modal('show');
     event.preventDefault();
   });
+
+
 });
 
 $(document).ready(function () {
