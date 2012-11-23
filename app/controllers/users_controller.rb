@@ -276,13 +276,16 @@ class UsersController < ApplicationController
 
    def add_kirpoints
       amount = params[:kirpoints].to_i() * 100
-      setup_response = gateway.setup_purchase(amount,
-	    :ip                => request.remote_ip,
-            :description => 'Yor are buying ' + params[:kirpoints] + ' Kirpoint(s)',
-	    :return_url        => url_for(:action => 'confirm', :only_path => false),
-	    :cancel_return_url => url_for(:action => 'index', :only_path => false)
-	  )
-	  redirect_to gateway.redirect_url_for(setup_response.token)
+   
+      #if amount >= 2500
+	      setup_response = gateway.setup_purchase(amount,
+		    :ip                => request.remote_ip,
+		    :description => 'Yor are buying ' + params[:kirpoints] + ' Kirpoint(s)',
+		    :return_url        => url_for(:action => 'confirm', :only_path => false),
+		    :cancel_return_url => url_for(:action => 'index', :only_path => false)
+		  )
+		  redirect_to gateway.redirect_url_for(setup_response.token)
+      #end
    end
 
    def kirpoints

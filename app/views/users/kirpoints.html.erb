@@ -7,16 +7,19 @@
     <div class="field pull-left clearfix">
        $1 = 1 Kirpoint
     </div>
-    <br><br>
+    <br> 
+    <label style='color:red;display:none;' id='wrnKirpoints'>Must purchase at least $25 kirpoints</label>
+    <br>
     <div class="field pull-left">
        <label>How many kirpoints</label>
        <input type='text' name='kirpoints' id='kirpoints' />
+       
     </div>
     <div class='field span4 pull-right'>
        <label>In order to buy Kirpoints you may need a paypal account.</label>
     </div>
 </div>
   <div class="modal-footer">
-  <a onclick='$("#frmKirpoints").submit()' style='margin-right:15px;cursor:pointer;'><%= image_tag('https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif') %></a>
+  <a onclick='processPoints()' style='margin-right:15px;cursor:pointer;'><%= image_tag('https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif') %></a>
 </div>
 </form>
