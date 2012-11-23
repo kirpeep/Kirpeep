@@ -24,6 +24,21 @@
   }
 });*/
 
+function processPoints()
+{
+  
+  var points = $('#kirpoints').val();
+  if (parseInt(points) < 25)
+  {
+     $('#wrnKirpoints').show();
+  }
+  else
+  {
+    $('#frmKirpoints').submit();
+  }
+
+}
+
 $(document).ready(function(){
 	$('.dynamolink').live("click",function(event){
 		  var path = $(this).attr('href');
@@ -31,6 +46,7 @@ $(document).ready(function(){
 		  $('#dynamobox').modal('show');
 		  event.preventDefault();
 	});
+  
 
   $(function() {
     // touch device dropdown click bootstrap fix

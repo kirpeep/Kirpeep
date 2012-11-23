@@ -16,13 +16,28 @@
 //= require bootstrap.min
 //= require jquery.purr
 //= require best_in_place
-//= require rails.validations
+
 
 /*jQuery.ajaxSetup({ 
   beforeSend: function(xhr) {
   	xhr.setRequestHeader("Accept", "text/javascript")
   }
 });*/
+
+function processPoints()
+{
+  
+  var points = $('#kirpoints').val();
+  if (parseInt(points) < 25)
+  {
+     $('#wrnKirpoints').show();
+  }
+  else
+  {
+    $('#frmKirpoints').submit();
+  }
+
+}
 
 $(document).ready(function(){
 	$('.dynamolink').live("click",function(event){
@@ -31,6 +46,8 @@ $(document).ready(function(){
 		  $('#dynamobox').modal('show');
 		  event.preventDefault();
 	});
+  
+  $('#frmKirpoints').
 
   $(function() {
     // touch device dropdown click bootstrap fix
