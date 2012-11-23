@@ -9,24 +9,22 @@ class ExchangesController < ApplicationController
   def create
     @user = current_user
     @exchange = InitiateExchange.new params[:initiate_exchange]
-    #@exchange.exchange_items.each.build
-    #@exchange.build_message(params[:initiate_exchange][:message])
     @exchange.initAcpt = true
-    @initItems = exchanged_items.find_all_by_targ_user_id(@user.id)
-
-    for item in @initItems
-      if item.kirpoints_amounts != nil
-        commitKirpoints(@user, item.kirpoints_amounts)
-      end
-    end
     
     if @exchange.save
-        flash[:notice] = 'exchange saved.'
-        @targUser = User.find(@exchange.targUser)
-        @initUser = User.find(@exchange.initUser)
-        UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
-    
-        redirect_to current_user
+      flash[:notice] = 'exchange saved.'
+      @targUser = User.find(@exchange.targUser)
+      @initUser = User.find(@exchange.initUser)
+      UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
+      
+      @initItems = exchanged_items(@exchange.id).find_all_by_init_user_id(@user.id)
+
+      for item in @initItems
+        if item.kirpoints_amounts != nil
+          commitKirpoints(@user, item.kirpoints_amounts)
+        end
+      end
+      redirect_to current_user
     else
   	  flash[:error] = @exchange.errors.full_messages.to_sentence
       redirect_to current_user
@@ -37,7 +35,7 @@ class ExchangesController < ApplicationController
     @exch = Exchange.find(params[:id]) 
     @targUser = User.find(@exch.targUser )
     @initUser = User.find(@exch.initUser )
-    @exchange_items = exchanged_items
+    @exchange_items = exchanged_items(@exch.id)
     #not the greatest way to do this, with this code we will not be able to do \
     #multiparty exchanges. To resolve a migration should be made to include initUsers id 
     #so that it doesn't need to be pulled from the listing
@@ -69,19 +67,19 @@ class ExchangesController < ApplicationController
     if(exch.initUser == params[:user_id])
       exch.initAcpt = true
 
-      @initItems = exchanged_items.find_all_by_targ_user_id(@initUser.id)
+      @initItems = exchanged_items(exch.id).find_all_by_init_user_id(params[:user_id])
       for item in @initItems
         if item.kirpoints_amounts != nil
-          commitKirpoints(@user, item.kirpoints_amounts)
+          commitKirpoints(@initUser, item.kirpoints_amounts)
         end
       end
       #UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
     else 
       exch.targAcpt = true
-      @targItems = exchanged_items.find_all_by_targ_user_id( @targUser.id)
+      @targItems = exchanged_items(exch.id).find_all_by_init_user_id(params[:user_id])
       for item in @targItems
         if item.kirpoints_amounts != nil
-          commitKirpoints(@user, item.kirpoints_amounts)
+          commitKirpoints(@targUser, item.kirpoints_amounts)
         end
       end
       #UserMailer.message_email(@initUser, @targUser, @targUser.name + " has accepted the exchange.", "Go to your profile on kirpeep.com and accept the exchange." ).deliver
@@ -155,9 +153,23 @@ class ExchangesController < ApplicationController
 
       exch = exch.becomes(RateExchange)
       if exch.save
-          flash[:notice] = 'exchange moved to '  + (exch.type).to_s
-          redirect_to current_user
-          return
+        flash[:notice] = 'exchange moved to '  + (exch.type)
+      
+        @initItems = exchanged_items(exch.id).find_all_by_init_user_id(@initUser.id)
+        for item in @initItems
+          if item.kirpoints_amounts != nil
+            transferKirpoints(@initUser, @targUser, item.kirpoints_amounts)
+          end
+        end
+      
+        @targItems = exchanged_items(exch.id).find_all_by_init_user_id(@targUser.id)
+        for item in @targItems
+          if item.kirpoints_amounts != nil
+            transferKirpoints(@targUser, @initUser, item.kirpoints_amounts)
+          end
+        end
+        redirect_to current_user
+        return
       else
           flash[:notice] = 'did not save'
           redirect_to current_user
@@ -208,6 +220,10 @@ class ExchangesController < ApplicationController
 
   def exchanged_items
     ExchangeItem.where("exchange_id = ?", params[:id])
+  end
+
+  def exchanged_items(id)
+    ExchangeItem.where("exchange_id = ?", id)
   end
 
   def add_need

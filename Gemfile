@@ -54,13 +54,14 @@ gem 'client_side_validations'
 
 #gem 'css_sprite' #More efficient CSS
 
-#group :test, :development, :kyle, :john do
-#	gem 'rspec-rails'
-#	gem 'guard-rspec'
-#	gem 'launchy'
-#	gem 'ruby-debug19'
-#	gem 'rails-erd'
-#end
+group :test, :development, :kyle, :john do
+	gem 'rspec-rails'
+	gem 'guard-rspec'
+	gem 'launchy'
+	gem 'ruby-debug19'
+	gem 'rails-erd'
+	gem 'rb-readline'
+end
 
 #Run the following the following(each is a line)
 #guard init
