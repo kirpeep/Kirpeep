@@ -16,14 +16,29 @@
 //= require bootstrap.min
 //= require jquery.purr
 //= require best_in_place
-//= require rails.validations
+
 
 /*jQuery.ajaxSetup({ 
   beforeSend: function(xhr) {
   	xhr.setRequestHeader("Accept", "text/javascript")
   }
 });*/
-var is_touch_device = 'ontouchstart' in document.documentElement;
+
+function processPoints()
+{
+  
+  var points = $('#kirpoints').val();
+  if (parseInt(points) < 25)
+  {
+     $('#wrnKirpoints').show();
+  }
+  else
+  {
+    $('#frmKirpoints').submit();
+  }
+
+}
+
 $(document).ready(function(){
 	$('.dynamolink').live("click",function(event){
 		  var path = $(this).attr('href');
@@ -31,13 +46,15 @@ $(document).ready(function(){
 		  $('#dynamobox').modal('show');
 		  event.preventDefault();
 	});
+  
+  $('#frmKirpoints').
 
-         $('.dropdown-menu').find('li').click(function (event) {   
-            if (is_touch_device) {
-                    event.preventDefault();
-                    return false;
-            }
-         });
+  $(function() {
+    // touch device dropdown click bootstrap fix
+    $('body').on('touchstart.dropdown', '.dropdown-menu', function(e) {
+    e.stopPropagation();
+    });
+  });
 });
 
 

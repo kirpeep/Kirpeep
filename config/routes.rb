@@ -52,6 +52,8 @@ Kirpeep::Application.routes.draw do
   post '/kirpoints', :to => 'users#add_kirpoints'
   match '/kirpoints/confirm', :to=> 'users#confirm'
   match '/kirpoints/complete', :to=> 'users#complete'
+  get '/kirpoints/cashout', :to=>'users#cashout_kirpoints'
+  post '/kirpoints/cashout', :to=>'users#process_cashout_kirpoints'
 
   post '/sms/verify', :to => 'sms#verify'
   post '/sms/recieve', :to => 'sms#recieve'

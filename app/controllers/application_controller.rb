@@ -51,13 +51,17 @@ class ApplicationController < ActionController::Base
   def commitKirpoints(user, amount)
     debugger
     if hasEnoughKirpoints(user, amount)
-      user.kirpoints -= amount
-      user.kirpoints_committed += amount
-      if user.save
-        return true
-      else
-        return false
+      kirpoints = user.kirpoints - amount
+
+      if user.kirpoints_committed.nil?
+        user.kirpoints_committed = 0
       end
+
+      kirpoints_committed = user.kirpoints_committed + amount
+      
+      user.update_attribute(:kirpoints_committed, kirpoints_committed)
+      user.update_attribute(:kirpoints, kirpoints)
+        return true
     else
       return false
     end
@@ -67,8 +71,10 @@ class ApplicationController < ActionController::Base
     if fromUser.kirpoints_committed < amount
       return false
     else
-      fromUser.kirpoints_committed -= amount
-      toUser.kirpoints += amount
+      kirpoints_committed = fromUser.kirpoints_committed - amount
+      kirpoints = toUser.kirpoints + amount
+      fromUser.update_attribute(:kirpoints_committed, kirpoints_committed)
+      toUser.update_attribute(:kirpoints, kirpoints)
       return true
     end
   end

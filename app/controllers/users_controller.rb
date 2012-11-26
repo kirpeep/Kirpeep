@@ -276,13 +276,16 @@ class UsersController < ApplicationController
 
    def add_kirpoints
       amount = params[:kirpoints].to_i() * 100
-      setup_response = gateway.setup_purchase(amount,
-	    :ip                => request.remote_ip,
-            :description => 'Yor are buying ' + params[:kirpoints] + ' Kirpoint(s)',
-	    :return_url        => url_for(:action => 'confirm', :only_path => false),
-	    :cancel_return_url => url_for(:action => 'index', :only_path => false)
-	  )
-	  redirect_to gateway.redirect_url_for(setup_response.token)
+   
+      #if amount >= 2500
+	      setup_response = gateway.setup_purchase(amount,
+		    :ip                => request.remote_ip,
+		    :description => 'Yor are buying ' + params[:kirpoints] + ' Kirpoint(s)',
+		    :return_url        => url_for(:action => 'confirm', :only_path => false),
+		    :cancel_return_url => url_for(:action => 'index', :only_path => false)
+		  )
+		  redirect_to gateway.redirect_url_for(setup_response.token)
+      #end
    end
 
    def kirpoints
@@ -324,6 +327,52 @@ class UsersController < ApplicationController
     Transaction.add_transaction current_user.id, amount
     kirpoints = current_user.kirpoints.to_f() + params[:total].to_f()
     current_user.update_attribute(:kirpoints, kirpoints)
+  end
+
+  def cashout_kirpoints
+    respond_to do |format|
+        format.html { render "cashout_kirpoints.html" }
+    end
+  end
+
+  def process_cashout_kirpoints
+    #does our params exist?
+    if (!params[:amount] || params[:amount] == '') && (!params[:ppemail] || params[:ppemail == ''])
+      flash[:error] = 'Must enter an amount and your paypal email to cashout'
+      redirect_to '/kirpoints/cashout'
+      return
+    #is it a number
+    elsif params[:amount].to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == false
+      flash[:error] = 'Must be a number'
+      redirect_to '/kirpoints/cashout'
+      return
+    #is it a value over 50
+    elsif params[:amount].to_f() < 50
+      flash[:error] = 'The cashout value must be at least $25'
+      redirect_to '/kirpoints/cashout'
+      return
+    #do you have enough money to cover this
+    elsif current_user.kirpoints.to_f() < params[:amount].to_f()
+      flash[:error] = 'Insufficient kirpoints'
+      redirect_to '/kirpoints/cashout'
+      return
+    end
+    
+    #Calculate out the amount - our 5% cut
+    @amount = (params[:amount].to_f() * 100) - (params[:amount].to_f() * 100 * 0.05)
+    #Store the email
+    @rec = params[:ppemail]
+    #Make the transfer
+    transfer = gateway.transfer(@amount,@rec, :subject => "Kirpoints Cashout", :note => "You are cashing out kirpoints into your paypal account.")
+    
+    if transfer.success?
+     flash[:notice] = 'Your kirpoints have been cashed out.  Please check your paypal account.'
+     current_user.kirpoints = current_user.kirpoints.to_f() - params[:amount].to_f()
+     current_user.save
+    else
+     flash[:error] = 'Transfer failed'
+    end
+    redirect_to '/kirpoints/cashout'
   end
 
   #Returns true if user has an exchange with the current user

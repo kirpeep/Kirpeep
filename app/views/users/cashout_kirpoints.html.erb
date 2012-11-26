@@ -1,0 +1,59 @@
+
+
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>Kirpeep | <%= @title %></title>
+<%= javascript_tag do %>
+  window.userID = <%= current_user.id %>
+<% end %>
+<%#= render 'needs/show' %>
+
+<%= javascript_include_tag "kirpoints.js" %>
+
+<%= stylesheet_link_tag    "profile.css" %>
+</head>
+
+<body>
+
+    <div class='container'>
+  
+	  <%= render 'shared/header' %>
+
+	  <div><hr/></div>
+
+	  <div id='main-content' class='row'>
+	  	 <% if flash[:notice] != nil %>
+	    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
+	       <button type="button" class="close" data-dismiss="alert">×</button>
+	       <div id="flash_notice">
+	         <%= flash[:notice] %>
+	       </div>
+	    </div>
+	    <% elsif flash[:error] != nil %>
+	    <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
+	       <button type="button" class="close" data-dismiss="alert">×</button>
+	       <div id="flash_notice">
+	         <%= flash[:error] %>
+	       </div>
+	    </div>
+	    <% end %>
+	</div>
+    
+    <h2>Kirpoints Cash Out</h2>
+    <p>Minimum cashout of $50 <em>and a 5% transaction fee will occur.</em></p>
+   
+    <div>
+    	<%= form_tag('/kirpoints/cashout', :method => 'POST', :id => 'frmCashout') do %>
+    	<label>How many points would you like to cash out?</label>
+    	<input type='text' id='amount' name='amount' />
+    	<label>What is your paypal email</label>
+    	<input type='text' id='ppemail' name='ppemail' />
+    	<br>
+    	<button type='submit' class='btn btn-success'>Cashout</button>
+    	<% end %>
+    </div>
+
+    <%= render 'shared/footer' %>
+
+   <!-- Dynamobox Modal -->
+   <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+</body>
