@@ -24,6 +24,7 @@
         </a>
         <ul class="dropdown-menu">
             <li><%= link_to 'Buy Kirpoints' , '/kirpoints', :class => "dynamolink" %></li>
+            <li><%= link_to 'Cashout Kirpoints' , '/kirpoints/cashout' %></li>
             <li><%= link_to 'View Profile', current_user %></li>
             <li><%= link_to 'Edit Profile' , edit_profile_path(current_user.profile), :class => "dynamolink" %></li>
             <li><%= link_to 'Edit Account', edit_user_path(current_user), :class => "dynamolink" %></li>
