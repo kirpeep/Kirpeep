@@ -1,0 +1,594 @@
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-1.9.1  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main() {return 0;}
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-1.9.1 -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-1.9.1 -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-1.9.1 -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-1.9.1 -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic     -lruby-1.9.1 -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic     -lruby-1.9.1 -lmysqlclient  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lm... -------------------- yes
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-1.9.1 -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lz... -------------------- no
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lz
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lz
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { main(); return 0; }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lsocket... -------------------- no
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lsocket -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lsocket
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lsocket -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lsocket
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { main(); return 0; }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lmysqlclient -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lnsl... -------------------- yes
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lm  -lruby-1.9.1 -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lmygcc... -------------------- no
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmygcc -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmygcc
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmygcc -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmygcc
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { main(); return 0; }
+/* end */
+
+--------------------
+
+find_library: checking for mysql_query() in -lmysqlclient... -------------------- no
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:5:53: error: ‘mysql_query’ undeclared (first use in this function)
+conftest.c:5:53: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { void ((*volatile p)()); p = (void ((*)()))mysql_query; return 0; }
+/* end */
+
+"gcc -o conftest -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/ruby/backward -I/usr/include/ruby-1.9.1 -I. -I/usr/local/include  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2 -fPIC conftest.c  -L. -L/usr/lib -L/usr/local/lib -L/usr/local/lib/mysql -L.  -rdynamic -Wl,-export-dynamic    -lnsl -lm  -lruby-1.9.1 -lmysqlclient -lnsl -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+/usr/bin/ld: cannot find -lmysqlclient
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: /*top*/
+4: int main() {return 0;}
+5: int t() { mysql_query(); return 0; }
+/* end */
+
+--------------------
+
