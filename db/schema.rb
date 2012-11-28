@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121110225437) do
+ActiveRecord::Schema.define(:version => 20121128092317) do
 
   create_table "actions", :force => true do |t|
     t.integer  "userId"
@@ -123,21 +123,21 @@ ActiveRecord::Schema.define(:version => 20121110225437) do
   end
 
   create_table "profiles", :force => true do |t|
-    t.string   "interests"
-    t.string   "quickPitch"
-    t.text     "about"
-    t.string   "education"
-    t.string   "location"
-    t.string   "languages"
+    t.string   "interests",          :default => "Click Here to Edit Your Interests"
+    t.string   "quickPitch",         :default => "Click Here to Edit Your Headline"
+    t.string   "about",              :default => "Click Here to Edit Your About Me"
+    t.string   "education",          :default => "Click Here to Edit Your Education"
+    t.string   "location",           :default => "Click Here to Edit Your Location"
+    t.string   "languages",          :default => "Click Here to Edit Your Languages"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.integer  "user_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.string   "gender"
-    t.string   "birthdate"
-    t.integer  "zipcode"
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
+    t.string   "gender",             :default => "Click Here to Edit Your Gender"
+    t.string   "birthdate",          :default => "Click Here to Edit Your Birthday"
+    t.string   "zipcode",            :default => "Click Here to Edit Your Zipcode"
     t.string   "phone_number"
     t.boolean  "phone_verified"
     t.boolean  "number_verified"
