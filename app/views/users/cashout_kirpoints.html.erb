@@ -40,17 +40,27 @@
     
     <h2>Kirpoints Cash Out</h2>
     <p>Minimum cashout of $50 <em>and a 5% transaction fee will occur.</em></p>
-   
-    <div>
-    	<%= form_tag('/kirpoints/cashout', :method => 'POST', :id => 'frmCashout') do %>
-    	<label>How many points would you like to cash out?</label>
-    	<input type='text' id='amount' name='amount' />
-    	<label>What is your paypal email</label>
-    	<input type='text' id='ppemail' name='ppemail' />
-    	<br>
-    	<button type='submit' class='btn btn-success'>Cashout</button>
-    	<% end %>
-    </div>
+     
+    <table>
+	    <tr>
+		    <td style='width:400px;'>
+		    	<%= form_tag('/kirpoints/cashout', :method => 'POST', :id => 'frmCashout') do %>
+		    	<label>How many points would you like to cash out?</label>
+		    	<input type='text' id='amount' name='amount' />
+		    	<label>What is your paypal email</label>
+		    	<input type='text' id='ppemail' name='ppemail' />
+		    	<br>
+		    	<button type='submit' class='btn btn-success'>Cashout</button>
+		    	<% end %>
+		    </td>
+		    <td style='vertical-align:top;'>
+		         Cashout Amount: <span id='disAmount'></span><br/>
+		         Transaction Fee: 5% <br/>
+		         -----------------------------<br/>
+		         You will get: <span id='disTotal'></span>
+		    </td>
+		</tr>
+	</table>
 
     <%= render 'shared/footer' %>
 
