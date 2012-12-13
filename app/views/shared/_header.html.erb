@@ -6,9 +6,19 @@
   </div>
   <div class="span2 align-center" style='margin-top:20px;'>
     <%= form_tag search_path, :method => 'get', :class =>"form-search" do %>
-      <div class="input-append">
-        <%= hidden_field_tag :direction, params[:direction] %>
-        <%= hidden_field_tag :sort, params[:sort] %>
+      <div class="input-prepend input-append">
+        <div class="btn-group">
+	  <button class="btn dropdown-toggle" data-toggle="dropdown" style="width: 180px !important;">
+        	<span id='catTitle'>Categories</span>
+	       <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <% $categories.each do |cat| %>
+		<li style='text-align:left;'><a href='#' onclick='$("#catTitle").html("<%= cat %>");$("#category").val("<%= cat %>");' ><%= cat %></a></li>
+	    <% end %>
+	  </ul>
+	</div>
+        <%= hidden_field_tag :category %>
         <%= text_field_tag :search, params[:search] ,{ :class => 'span3' }%>
         <%= submit_tag "search", {:class => "btn"} %>
       </div>

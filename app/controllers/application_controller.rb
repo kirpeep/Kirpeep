@@ -9,6 +9,38 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  $categories = [
+	"Electronics",
+	"Hand Made Items",
+ 	"Clothing",
+	"Art",
+	"Home Decor",
+	"Misc",
+	"Movies and TV",
+	"Collectables",
+	"Baby",
+	"Tools",
+	"Instruments",
+	"Appliances",
+	"Beauty",
+	"Creative",
+	"Computer",
+	"Events",
+	"Financial",
+	"Legal",
+	"Lessons",
+	"Marine",
+	"Pets",
+	"Automotive",
+	"Farm+Garden",
+	"Household",
+	"Labor/Moving",
+	"Real Estate",
+	"Small Business",
+	"Theraputic",
+	"Travel/Vacation"
+  ]
+
   def tos
        render :template => 'pages/tos'
   end

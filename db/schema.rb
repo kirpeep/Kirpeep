@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128092317) do
+ActiveRecord::Schema.define(:version => 20121213045145) do
 
   create_table "actions", :force => true do |t|
     t.integer  "userId"
@@ -195,6 +195,7 @@ ActiveRecord::Schema.define(:version => 20121128092317) do
     t.boolean  "is_modified_exchange",                                :default => false, :null => false
     t.boolean  "is_deleted",                                          :default => false, :null => false
     t.decimal  "kirpoints",            :precision => 10, :scale => 0
+    t.string   "category"
   end
 
   create_table "users", :force => true do |t|

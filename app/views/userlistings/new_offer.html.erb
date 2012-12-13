@@ -38,6 +38,11 @@
 	    How many Kirpoints for this item?
 	    <%= f.text_field :kirpoints %>
 	  </div>
+	  <div class="field">
+	    <%= f.label :category %><br />
+	    <%= f.select :category, $categories %>
+	  </div>
+
   </div>
 </div>
 <div class="modal-footer">
