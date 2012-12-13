@@ -49,7 +49,6 @@ class ApplicationController < ActionController::Base
   end
 
   def commitKirpoints(user, amount)
-    debugger
     if hasEnoughKirpoints(user, amount)
       kirpoints = user.kirpoints - amount
 
@@ -64,6 +63,18 @@ class ApplicationController < ActionController::Base
         return true
     else
       return false
+    end
+  end
+
+  def giftKirpoints(fromUser, toUser, amount)
+    if fromUser.kirpoints_committed < amount
+      return false
+    else
+      kirpoints_committed = fromUser.kirpoints_committed - amount
+      kirpoints = toUser.kirpoints + amount
+      fromUser.update_attribute(:kirpoints_committed, kirpoints_committed)
+      toUser.update_attribute(:kirpoints, kirpoints)
+      return true
     end
   end
 

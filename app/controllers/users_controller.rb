@@ -375,6 +375,10 @@ class UsersController < ApplicationController
     redirect_to '/kirpoints/cashout'
   end
 
+  def gift_kirpoints
+    render 'gift'    
+  end
+
   #Returns true if user has an exchange with the current user
   def hasExchangeWithUser(user)
     @exchanges = exchange_list(user.id)
