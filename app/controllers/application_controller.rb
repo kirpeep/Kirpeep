@@ -86,6 +86,9 @@ class ApplicationController < ActionController::Base
       kirpoints = toUser.kirpoints + amount
       fromUser.update_attribute(:kirpoints_committed, kirpoints_committed)
       toUser.update_attribute(:kirpoints, kirpoints)
+
+      Transaction.add_transaction fromUser.id, amount*-1
+      Transaction.add_transaction toUser.id, amount
       return true
     end
   end

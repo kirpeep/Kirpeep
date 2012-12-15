@@ -81,7 +81,7 @@ class ExchangesController < ApplicationController
     @targListing = UserListing.find params[:id]
     @targUser = @targListing.user
     
-    render :partial  => 'initiate_exchange'
+    render 'initiate_exchange'
   end
 
   #Acceptance of initiated Exchange

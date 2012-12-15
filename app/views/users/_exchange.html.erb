@@ -16,28 +16,32 @@
                 <% else %>
                 <% @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all %>
                 <% end %>
-			
-				<% for exchange in exch %>
 				
-				<% next if exchange.type == 'ArchivedExchange' || exchange.is_deleted %>
+				<% for exchange in @exch %>
+				
+				<% next if exchange.type == 'ArchivedExchange' || exchange.is_deleted == "0" %>
 				<a class="dynamolink" href="/exchanges/<%= exchange.id %>" >
 					<div class='row-fluid'>
 						<a href="/destroy_exchange?id=<%= exchange.id %>" type="button" class="close" aria-hidden="true">×</a>
 						<div class="span3">
 							<% if (exchange.initUser).to_s == (current_user.id).to_s %>
-								<div>
-	        						<%= image_tag User.find(exchange.targUser).profile.photo.url, {:width => "70px", :height => '70px'} %> 
-	        					</div> 
-	            				<div >
-	            					<%= User.find(exchange.targUser).name %>
-	            				</div>
+								<a href="/view/<%= exchange.targUser %>">
+									<div>
+		        						<%= image_tag User.find(exchange.targUser).profile.photo.url, {:width => "70px", :height => '70px'} %> 
+		        					</div> 
+		            				<div >
+		            					<%= User.find(exchange.targUser).name %>
+		            				</div>
+		            			</a>
 							<%else%>
-								<div>
-	        						<%= image_tag User.find(exchange.initUser).profile.photo.url, {:width => "70px", :height => '70px'} %> 
-	        					</div> 
-	            				<div>
-	            					<%= User.find(exchange.initUser).name %>
-		            			</div>
+								<a href="/view/<%= exchange.initUser %>">
+									<div>
+		        						<%= image_tag User.find(exchange.initUser).profile.photo.url, {:width => "70px", :height => '70px'} %> 
+		        					</div> 
+		            				<div>
+		            					<%= User.find(exchange.initUser).name %>
+			            			</div>
+			            		</a>
 							<%end%>
 		           		</div>
 						<div class='span2 offset5 c_exchange'>
