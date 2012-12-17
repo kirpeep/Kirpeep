@@ -4,7 +4,7 @@
 # Comments:  No longer in use                      #
 ####################################################
 
-class PagesController < ApplicationController
+class OldPagesController < ApplicationController
 before_filter :signed_in_user
 
 	def index

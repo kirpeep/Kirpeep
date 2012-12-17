@@ -15,7 +15,7 @@ class ExchangesController < ApplicationController
       flash[:notice] = 'exchange saved.'
       @targUser = User.find(@exchange.targUser)
       @initUser = User.find(@exchange.initUser)
-      UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
+      #UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
       
       @initItems = exchanged_items(@exchange.id).find_all_by_init_user_id(@user.id)
 
@@ -48,6 +48,32 @@ class ExchangesController < ApplicationController
   def new
     @exchange = InitiateExchange.new
   end
+  
+  def destroy
+    exch = Exchange.find(params[:id])
+    #change value of 'is_deleted' to true so that it no longer displays
+    exch.is_deleted = true
+
+    if exch.save
+      flash[:notice] = 'Exchange Removed'  
+      
+      respond_to do |format|
+        format.html {redirect_to current_user}
+        format.js 
+      end
+    else
+
+      flash[:error] = exch.errors
+
+        if exch.errors.any?
+            exch.errors.full_messages.each do |msg|
+                puts msg
+            end
+        end
+
+      redirect_to current_user
+    end
+  end
 
   def initiate_exchange
     @initexch = InitiateExchange.new
@@ -55,7 +81,7 @@ class ExchangesController < ApplicationController
     @targListing = UserListing.find params[:id]
     @targUser = @targListing.user
     
-    render :partial  => 'initiate_exchange'
+    render 'initiate_exchange'
   end
 
   #Acceptance of initiated Exchange
@@ -73,7 +99,7 @@ class ExchangesController < ApplicationController
           commitKirpoints(@initUser, item.kirpoints_amounts)
         end
       end
-      #UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
+      ##UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
     else 
       exch.targAcpt = true
       @targItems = exchanged_items(exch.id).find_all_by_init_user_id(params[:user_id])
@@ -82,7 +108,7 @@ class ExchangesController < ApplicationController
           commitKirpoints(@targUser, item.kirpoints_amounts)
         end
       end
-      #UserMailer.message_email(@initUser, @targUser, @targUser.name + " has accepted the exchange.", "Go to your profile on kirpeep.com and accept the exchange." ).deliver
+      ##UserMailer.message_email(@initUser, @targUser, @targUser.name + " has accepted the exchange.", "Go to your profile on kirpeep.com and accept the exchange." ).deliver
     end
 
     if(exch.initAcpt == true && exch.targAcpt == true)
@@ -104,8 +130,8 @@ class ExchangesController < ApplicationController
         @targUser = User.find(exch.targUser)
         @initUser = User.find(exch.initUser)
         
-        UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade. Your code is " + targConfCode ).deliver
-        UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade.  Your code is " + initConfCode  ).deliver
+        #UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade. Your code is " + targConfCode ).deliver
+        #UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade.  Your code is " + initConfCode  ).deliver
 
         # only send if we have verified phone numbers for both parties. 
         if (@targUser.profile.phone_number && @targUser.profile.number_verified == true) &&
@@ -138,11 +164,11 @@ class ExchangesController < ApplicationController
     @initUser = User.find(exch.initUser)
         
     if(exch.initUser == params[:user_id])
-      UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to be rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver
+      #UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to be rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver
       exch.initComp = true
       flash[:notice] = 'exchange updated.'
     else
-      UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to be rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver  
+      #UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to be rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver  
       exch.targComp = true
       flash[:notice] = 'exchange updated.'
     end
