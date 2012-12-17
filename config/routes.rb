@@ -27,6 +27,7 @@ Kirpeep::Application.routes.draw do
   match  '/search/',           :to => 'search#search'
   match  '/initiate_exchange/', :to => 'exchanges#initiate_exchange'
   match  '/create_exchange/', :to => 'exchanges#create'
+  match  '/destroy_exchange/',  :to => 'exchanges#destroy'
   match  '/accept_exchange/', :to => 'exchanges#accept_exchange', :as => 'accept_exchange'
   match  '/accept_perform/' , :to => 'exchanges#accept_perform' , :as => 'accept_perform'
   match  '/rate_exchange/'  , :to => 'exchanges#rate_exchange' , :as => 'rate_exchange'
@@ -54,6 +55,7 @@ Kirpeep::Application.routes.draw do
   match '/kirpoints/complete', :to=> 'users#complete'
   get '/kirpoints/cashout', :to=>'users#cashout_kirpoints'
   post '/kirpoints/cashout', :to=>'users#process_cashout_kirpoints'
+  match 'kirpoints/gift', :to => 'users#gift_kirpoints'
 
   post '/sms/verify', :to => 'sms#verify'
   post '/sms/recieve', :to => 'sms#recieve'

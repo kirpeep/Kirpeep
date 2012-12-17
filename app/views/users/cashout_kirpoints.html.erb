@@ -39,18 +39,35 @@
 	</div>
     
     <h2>Kirpoints Cash Out</h2>
-    <p>Minimum cashout of $50 <em>and a 5% transaction fee will occur.</em></p>
-   
-    <div>
-    	<%= form_tag('/kirpoints/cashout', :method => 'POST', :id => 'frmCashout') do %>
-    	<label>How many points would you like to cash out?</label>
-    	<input type='text' id='amount' name='amount' />
-    	<label>What is your paypal email</label>
-    	<input type='text' id='ppemail' name='ppemail' />
-    	<br>
-    	<button type='submit' class='btn btn-success'>Cashout</button>
-    	<% end %>
-    </div>
+    <p>Minimum cashout of $50 <em>and a 5% Kirpeep connection charge will occur.</em></p>
+     
+    <table >
+	    <tr>
+		    <td style='width:400px;'>
+		    	<%= form_tag('/kirpoints/cashout', :method => 'POST', :id => 'frmCashout') do %>
+		    	<label>How many points would you like to cash out?</label>
+		    	<input type='text' id='amount' name='amount' />
+		    	<label>What is your paypal email</label>
+		    	<input type='text' id='ppemail' name='ppemail' />
+		    	<br>
+		    	<button type='submit' class='btn btn-success'>Cashout</button>
+		    	<% end %>
+		    </td>
+		    <td style='vertical-align:top; border: 3px solid #6FBE44; padding:15px; border-radius: 20px;'>
+		    	<table>
+		    	 <tr>
+		           <td style='padding-right:15px;'>Cashout Amount:</td><td> <span id='disAmount'></span> Kirpoints</td>
+		         </tr>
+		         <tr style='border-bottom: 1px dashed #000'>
+		           <td style='padding-right:15px;'>Kirpeep connection charge:</td><td> <span id='disCharge'></span> Kirpoints </td>
+		         </tr>
+		         <tr>
+		           <td style='padding-right:15px;'>You will get:</td><td>$<span id='disTotal'></span></td>
+		         </tr>
+		        </table>
+		    </td>
+		</tr>
+	</table>
 
     <%= render 'shared/footer' %>
 

@@ -7,7 +7,7 @@
 class UserListing < ActiveRecord::Base
 	include SearchHelper
        
-	attr_accessible :type, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints, :is_deleted
+	attr_accessible :type, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints, :is_deleted, :category
 
 	belongs_to :profile
 	has_many :exchanges
@@ -28,6 +28,7 @@ class UserListing < ActiveRecord::Base
 		indexes description
 		indexes type
 		indexes is_deleted
+                indexes category
 		indexes user.profile.location, :as => :user_location
 		indexes user.profile.education, :as => :user_education
 		indexes user.profile.zipcode, :as => :zipcode

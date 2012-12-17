@@ -1,6 +1,6 @@
-<!--div class="modal fade hide" id="InitiateExch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
  <html>
  <head>
+    <%= stylesheet_link_tag    "results.css" %>
     <script type="text/javascript">
         var context;
         $(document).ready(function() {
@@ -163,7 +163,11 @@
         });    
     </script>
 </head>
-
-<%= render :partial => "initiate_exchange_form", :locals => {:exch => @exch, :targUser => @targUser, :initUser => @initUser, :targItems => @targItems, :initItems => @initItems} %> 
-
+<body>
+    <div class='container'>
+        <%= render 'shared/header' %>
+        <%= render :partial => "initiate_exchange_form", :locals => {:exch => @exch, :targUser => @targUser, :initUser => @initUser, :targItems => @targItems, :initItems => @initItems} %> 
+        <%= render 'shared/footer' %>
+    </div>
+</body>
 </html>

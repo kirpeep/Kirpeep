@@ -9,6 +9,38 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  $categories = [
+	"Electronics",
+	"Hand Made Items",
+ 	"Clothing",
+	"Art",
+	"Home Decor",
+	"Misc",
+	"Movies and TV",
+	"Collectables",
+	"Baby",
+	"Tools",
+	"Instruments",
+	"Appliances",
+	"Beauty",
+	"Creative",
+	"Computer",
+	"Events",
+	"Financial",
+	"Legal",
+	"Lessons",
+	"Marine",
+	"Pets",
+	"Automotive",
+	"Farm+Garden",
+	"Household",
+	"Labor/Moving",
+	"Real Estate",
+	"Small Business",
+	"Theraputic",
+	"Travel/Vacation"
+  ]
+
   def tos
        render :template => 'pages/tos'
   end
@@ -49,7 +81,6 @@ class ApplicationController < ActionController::Base
   end
 
   def commitKirpoints(user, amount)
-    debugger
     if hasEnoughKirpoints(user, amount)
       kirpoints = user.kirpoints - amount
 
@@ -67,6 +98,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def giftKirpoints(fromUser, toUser, amount)
+    if fromUser.kirpoints_committed < amount
+      return false
+    else
+      kirpoints_committed = fromUser.kirpoints_committed - amount
+      kirpoints = toUser.kirpoints + amount
+      fromUser.update_attribute(:kirpoints_committed, kirpoints_committed)
+      toUser.update_attribute(:kirpoints, kirpoints)
+      return true
+    end
+  end
+
   def transferKirpoints(fromUser, toUser, amount)
     if fromUser.kirpoints_committed < amount
       return false
@@ -75,6 +118,9 @@ class ApplicationController < ActionController::Base
       kirpoints = toUser.kirpoints + amount
       fromUser.update_attribute(:kirpoints_committed, kirpoints_committed)
       toUser.update_attribute(:kirpoints, kirpoints)
+
+      Transaction.add_transaction fromUser.id, amount*-1
+      Transaction.add_transaction toUser.id, amount
       return true
     end
   end

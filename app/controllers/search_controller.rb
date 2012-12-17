@@ -1,15 +1,20 @@
 class SearchController < ApplicationController
 
 	def search
-
 	    if signed_in?
 	      @user = current_user
-	      #
-	      @userlistings = UserListing.search(params[:search], :conditions => {:is_deleted => '0'},:per_page => 100)
+              if params[:category] && params[:category] != ""
+                @userlistings = UserListing.search(params[:search], :conditions => {:is_deleted => '0', :category => params[:category]}, :per_page => 100)
+              else
+	        @userlistings = UserListing.search(params[:search], :conditions => {:is_deleted => '0'},:per_page => 100)
+              end
               Action.log @user.id, 'search', params[:search].to_s()
 	    else
-              
-	      @userlistings = UserListing.search(params[:search], :conditions => {:is_deleted => '0'}, :per_page => 100)
+              if params[:cagtegory] && params[:category] != ""
+                @userlistings = UserListing.search(params[:search], :conditions => {:is_deleted => '0', :category => params[:category]}, :per_page => 100)
+              else
+	        @userlistings = UserListing.search(params[:search], :conditions => {:is_deleted => '0'}, :per_page => 100)
+              end
               Action.log 0, 'search', params[:search].to_s()
 	    end
 
