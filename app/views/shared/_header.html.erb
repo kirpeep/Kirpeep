@@ -18,6 +18,7 @@
                   <a href='#' onclick='$("#catTitle").html("<%= cat %>");$("#category").val("<%= cat %>");' ><%= cat %></a>
                 </li>
 	    <% end %>
+            <li><a href='#' onclick='$("#catTitle").html("Categories");$("#category").val("");' style='text-align:center;'><em>Clear Category</em></a></li>
 	  </ul>
 	</div>
         <%= hidden_field_tag :category, params[:category] %>
