@@ -12,9 +12,9 @@
         	<span id='catTitle'>Categories</span>
 	       <span class="caret"></span>
 	  </button>
-	  <ul class="dropdown-menu">
+	  <ul class="dropdown-menu" style='width:500px !important;'>
 	    <% $categories.each do |cat| %>
-		<li style='text-align:left;'><a href='#' onclick='$("#catTitle").html("<%= cat %>");$("#category").val("<%= cat %>");' ><%= cat %></a></li>
+		<li style='text-align:left;width:150px !important;float:left !important;'><a href='#' onclick='$("#catTitle").html("<%= cat %>");$("#category").val("<%= cat %>");' ><%= cat %></a></li>
 	    <% end %>
 	  </ul>
 	</div>
