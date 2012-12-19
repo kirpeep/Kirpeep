@@ -8,6 +8,7 @@ require 'date'
 
 class MessagesController < ApplicationController
 
+  #Function creates a message that is sent to a user
   def create 
    
     message = Message.new params[:message]
@@ -30,6 +31,7 @@ class MessagesController < ApplicationController
     end
   end
 
+  #Function shows new message modal
   def new
     @user = current_user
     @message = Message.new
@@ -40,6 +42,7 @@ class MessagesController < ApplicationController
     end
   end
 
+  #Function replies to a message 
   def reply
     user = current_user
     #message =Message.find(params[:message_id])
@@ -68,10 +71,12 @@ class MessagesController < ApplicationController
     end
   end
 
+  #Function shows a message
   def show
 
   end
   
+  #Function marks a message as read after user has opened it
   def markAsRead
     message = Message.find(params[:id])
 
@@ -88,6 +93,7 @@ class MessagesController < ApplicationController
     render :json => message
   end
 
+  #Function marks a message as unread 
   def markAsUnread
     message = Message.find(params[:id])
 
@@ -104,8 +110,7 @@ class MessagesController < ApplicationController
     render :json => message  
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+  #Function destroys a message
   def destroy
     message = Message.find(params[:id])
     #change value of 'is_deleted' to true so that it no longer displays

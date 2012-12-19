@@ -37,10 +37,9 @@
        </div>
     </div>
     <% end %>
-      <% @profile = @user.profile %>
       
     	<div class='span3'>
-        <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
+        <%= image_tag @user.profilePic, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
         <br><br>
       	<ul class='profileInfo'>
           <li onmouseover="$('#locationEdit').show()" onmouseout="$('#locationEdit').hide()" ><strong>Location:</strong> <%= best_in_place @profile, :location %> <i id='locationEdit' style='display:none;' class='icon-edit'></i></li>

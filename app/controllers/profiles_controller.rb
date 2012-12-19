@@ -9,17 +9,7 @@ class ProfilesController < ApplicationController
   respond_to :html, :json
   #before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy]
 
-  def index
-    @profile = User.current_user
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
-  end
-
-  # GET /users/1
-  # GET /users/1.json
+  #Function shows users profile and shows read only version of profile if current_user != profile being viewed
   def show
     @profile = Profile.find(params[:id])
     
@@ -35,13 +25,12 @@ class ProfilesController < ApplicationController
     @profile = Profile.new 
   end
 
-  # GET /users/1/edit
+  #Function edits users profile
   def edit
     @profile = Profile.find(params[:id])
   end
 
-  # POST /users
-  # POST /users.json
+  #Function creates a new profile
   def create
     
     @profile = Profile.find(params[:id])
@@ -51,8 +40,7 @@ class ProfilesController < ApplicationController
 
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
+  #Function updates a users profile
   def update
     @profile = Profile.find(params[:id])
     params[:profile][:phone_number] = params[:profile][:phone_number].gsub(/[^0-9]/, '')
@@ -67,9 +55,9 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+  #TODO no way to destroy profile at this time
   def destroy
     
   end
+
 end

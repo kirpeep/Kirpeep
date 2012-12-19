@@ -1,11 +1,12 @@
 ####################################################
-# Controller::OffersController                     #
-# Desc:                                            #
+# Controller::UserlistingsController               #
+# Desc: Offers/needs listed on users profiles      #
 # Comments:                                        #
 ####################################################
 
 class UserlistingsController < ApplicationController
 
+  #Function shows modal for new user listing
   def new
     @user = current_user
     @listing = nil
@@ -24,6 +25,7 @@ class UserlistingsController < ApplicationController
     5.times {@listing.assets.build}
   end
 
+  #Function creates a new user listing
   def create 
     debugger 
     user = current_user 
@@ -68,6 +70,7 @@ class UserlistingsController < ApplicationController
     end
   end 
 
+  #Function shows specified user listing
   def show_listing
     @listing = UserListing.find(params[:id]) 
     render 'show'
@@ -102,6 +105,7 @@ class UserlistingsController < ApplicationController
     end
   end
 
+  #Function edits specified user listing
   def edit
     @listing = UserListing.find(params[:id]) 
 
@@ -118,8 +122,7 @@ class UserlistingsController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
+  #Function updates user listing
   def update
     
     @listing = UserListing.find(params[:id])
@@ -147,8 +150,7 @@ class UserlistingsController < ApplicationController
     end   
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+  #Function removes user listing from users profile
   def destroy
     listing = UserListing.find(params[:id])
     #change value of 'is_deleted' to true so that it no longer displays
@@ -179,17 +181,21 @@ class UserlistingsController < ApplicationController
     end
   end
 
+  #Function shares specified user listing
   def share
     listing = UserListing.find(params[:id])
     @user_photo = listing.user.profile.photo.url
     render :partial => "share", :locals => {:@user_photo => @user_photo, :listing => listing}
   end 
 
+  #Function reports specified user listing
   def report
      @listing = UserListing.find(params[:id])
      UserMailer.report_email(@listing, current_user).deliver
   end
 
+  #Function returns specified user listing
+  #TODO not sure if this is still required
   def getListing
     #render :json => UserListing.find(params[:id])
 

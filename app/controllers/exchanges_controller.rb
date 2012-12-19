@@ -1,11 +1,12 @@
 ####################################################
 # Controller::ExchangesControler                   #
-# Desc:                                            #
+# Desc: Creates an exchange between two users      #
 # Comments:                                        #
 ####################################################
 
 class ExchangesController < ApplicationController
 
+  #Function Creates a new exchange in the initiated phase
   def create
     @user = current_user
     @exchange = InitiateExchange.new params[:initiate_exchange]
@@ -31,12 +32,13 @@ class ExchangesController < ApplicationController
     end
   end
 
+  #Function shows an exchange
   def show
     @exch = Exchange.find(params[:id]) 
     @targUser = User.find(@exch.targUser )
     @initUser = User.find(@exch.initUser )
     @exchange_items = exchanged_items(@exch.id)
-    #not the greatest way to do this, with this code we will not be able to do \
+    #TODO not the greatest way to do this, with this code we will not be able to do \
     #multiparty exchanges. To resolve a migration should be made to include initUsers id 
     #so that it doesn't need to be pulled from the listing
     #for now the items with :targ_user_id will be assinged
@@ -44,11 +46,13 @@ class ExchangesController < ApplicationController
     @targItems = @exchange_items.find_all_by_targ_user_id( @targUser.id)
     @initItems = @exchange_items.find_all_by_targ_user_id(@initUser.id)
   end
-
+  
+  #TODO not sure where this is used
   def new
     @exchange = InitiateExchange.new
   end
   
+  #Function removes an exchange from a users page
   def destroy
     exch = Exchange.find(params[:id])
     #change value of 'is_deleted' to true so that it no longer displays
@@ -75,6 +79,7 @@ class ExchangesController < ApplicationController
     end
   end
 
+  #Function initiates an exchange
   def initiate_exchange
     @initexch = InitiateExchange.new
     @user = current_user
@@ -99,7 +104,7 @@ class ExchangesController < ApplicationController
           commitKirpoints(@initUser, item.kirpoints_amounts)
         end
       end
-      ##UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
+      UserMailer.message_email(@targUser, @initUser, @initUser.name + " would like to start an exchange with you.", "Go to your profile on kirpeep.com to see your new exchange!" ).deliver
     else 
       exch.targAcpt = true
       @targItems = exchanged_items(exch.id).find_all_by_init_user_id(params[:user_id])
@@ -108,7 +113,7 @@ class ExchangesController < ApplicationController
           commitKirpoints(@targUser, item.kirpoints_amounts)
         end
       end
-      ##UserMailer.message_email(@initUser, @targUser, @targUser.name + " has accepted the exchange.", "Go to your profile on kirpeep.com and accept the exchange." ).deliver
+      UserMailer.message_email(@initUser, @targUser, @targUser.name + " has accepted the exchange.", "Go to your profile on kirpeep.com and accept the exchange." ).deliver
     end
 
     if(exch.initAcpt == true && exch.targAcpt == true)
@@ -130,8 +135,8 @@ class ExchangesController < ApplicationController
         @targUser = User.find(exch.targUser)
         @initUser = User.find(exch.initUser)
         
-        #UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade. Your code is " + targConfCode ).deliver
-        #UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade.  Your code is " + initConfCode  ).deliver
+        UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade. Your code is " + targConfCode ).deliver
+        UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to perform the exchange.", "Go to your profile on kirpeep.com to see accept the exchange or use our SMS confirmation during your meet up to confirm the trade.  Your code is " + initConfCode  ).deliver
 
         # only send if we have verified phone numbers for both parties. 
         if (@targUser.profile.phone_number && @targUser.profile.number_verified == true) &&
@@ -164,11 +169,11 @@ class ExchangesController < ApplicationController
     @initUser = User.find(exch.initUser)
         
     if(exch.initUser == params[:user_id])
-      #UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to be rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver
+      UserMailer.message_email(@targUser, @initUser, @initUser.name + " is ready to be rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver
       exch.initComp = true
       flash[:notice] = 'exchange updated.'
     else
-      #UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to be rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver  
+      UserMailer.message_email(@initUser, @targUser, @targUser.name + " is ready to be rated.", "Go to your profile on kirpeep.com to rate your exchange." ).deliver  
       exch.targComp = true
       flash[:notice] = 'exchange updated.'
     end
@@ -206,6 +211,7 @@ class ExchangesController < ApplicationController
     redirect_to current_user
   end
 
+  #Function rates a completed exchange
   def rate_exchange
     exch = RateExchange.find(params[:exch_id])
 
@@ -244,14 +250,16 @@ class ExchangesController < ApplicationController
     redirect_to current_user
   end
 
+  #Function returns and array of ExchangeItems for particular :id passed
   def exchanged_items
     ExchangeItem.where("exchange_id = ?", params[:id])
   end
-
+  #Function returns and array of ExchangeItems for particular id passed
   def exchanged_items(id)
     ExchangeItem.where("exchange_id = ?", id)
   end
 
+  #Function adds a need to an exchange
   def add_need
     initUser = User.find(params[:init])
     targUser = User.find(params[:targ])
@@ -266,6 +274,8 @@ class ExchangesController < ApplicationController
     render :partial => 'create_need', :locals => {:initUser => initUser, :targUser => targUser, :dropdownItems => dropdownItems}    
   end
 
+
+  #Function adds a offer to an exchange
   def add_offer
     initUser = User.find(params[:init])
     targUser = User.find(params[:targ])

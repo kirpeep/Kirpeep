@@ -67,6 +67,11 @@ class User < ActiveRecord::Base
 	SecureRandom.urlsafe_base64
   end
 
+  #Function returns users profile pic
+  def profilePic
+    self.profile.photo.url
+  end
+
   private
 
   	def encrypt_password

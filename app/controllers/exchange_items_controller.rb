@@ -1,11 +1,13 @@
-####################################################
-# Controller::ExchangeItemsController              #
-# Desc:                                            #
-# Comments:                                        #
-####################################################
+#####################################################
+# Controller::ExchangeItemsController               #
+# Desc: Item created when listing is pulled into an #
+# exchange                                          #
+# Comments:                                         #
+#####################################################
 
 class ExchangeItemsController < ApplicationController
 
+	#Function creates a new ExchangeItem 
 	def create
 		@exchange_item = ExchangeItem.new params[:exchange_item]
 
@@ -19,10 +21,12 @@ class ExchangeItemsController < ApplicationController
 	    end
 	end
 
+	#function #TODO [not sure where this is used]
 	def new
 		@exchange_item = ExchangeItem.new
 	end
 	
+	#function #TODO [not sure where this is used]
 	def show
 
 	end

@@ -1,5 +1,11 @@
+#####################################################
+# Controller::SearchController                      #
+# Desc: Controller used for searching listing/users #
+# Comments:                                         #
+#####################################################
 class SearchController < ApplicationController
 
+  #Function returns an array of user_listings based on search paramm passed
 	def search
 	    if signed_in?
 	      @user = current_user

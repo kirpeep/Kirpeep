@@ -1,35 +1,21 @@
 ####################################################
 # Controller::UsersController                      #
-# Desc:                                            #
+# Desc: Basic user account info                    #
 # Comments:                                        #
 ####################################################
 
 class UsersController < ApplicationController
   include ActiveMerchant::Billing
   helper_method :sort_column, :sort_direction
-  # GET /users
-  # GET /users.json
-
 
   before_filter :signed_in_user, :only => [:show, :edit, :update, :destroy], :except => [:forgot, :process_forgot, :reset_password, :process_reset_password, :new, :create, :activate, :view]
   #before_filter :correct_user, :only => [:show, :edit, :update, :destroy]
-  
-  def index
-    #@users = User.all
 
-    #respond_to do |format|
-    #  format.html {root_path}
-    #  format.json { render json: @users }
-    #end
-    redirect_to root_path
-  end
-
-  # GET /users/1
-  # GET /users/1.json
+  #Function shows users profile 
   def show
     @user = User.find(params[:id])
     @title = @user.name
-    
+    @profile = @user.profile
     
     if @user && @user.id == current_user.id
       respond_to do |format|
@@ -41,6 +27,7 @@ class UsersController < ApplicationController
     end
   end
 
+  #Function shows read only view of users profile
   def view
     @user = User.find(params[:id])
     @title = @user.name
@@ -56,25 +43,12 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
-  def new
-    @user = User.new
-    @profile = Profile.new 
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
-    end
-  end
-
-  # GET /users/1/edit
+  #Function shows edit page for specified user
   def edit
     @user = User.find(params[:id])
   end
 
-  # POST /users
-  # POST /users.json
+  #Function creates a new user account
   def create
     if params[:password] != params[:password_confirmation]
       flash[:error] = "Passwords do not match"
@@ -106,8 +80,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
+  #Function updates specified users profile
   def update
 
     @user = User.find(params[:id])
@@ -124,8 +97,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+  #Function destroys users profile
+  #TODO not sure if used
   def destroy
     @user = User.find(params[:id])
     @user.destroy
@@ -136,12 +109,14 @@ class UsersController < ApplicationController
     end
   end
 
+  #Function Shows specifed user profile
   def profile
     @user = User.find(params[:id])
 
     render :partial => 'profile', :locals => {:user => @user}
   end
 
+  #Function shows specified users exchanges
   def exchanges
     @user = User.find(params[:id])
     @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all 
@@ -150,6 +125,7 @@ class UsersController < ApplicationController
     render :partial => 'exchange', :locals => {:user => @user, :exch => @exch, :pastExch => @pastExch}
   end
 
+  #Function shows messages from specified user
   def messages
     @user = current_user
     @messages = Message.order("updated_at DESC").where("responseToMsgID = ? AND (initUser = ? OR targUser = ?)", "start", current_user.id, current_user.id).all
@@ -158,6 +134,7 @@ class UsersController < ApplicationController
     render :partial => 'messages', :locals => {:user => @user, :messages => @messages}
   end
 
+  #TODO not sure if used
   def needs
     # This method is meant to be an ajax
     #call to get all the users needs in JSON format
@@ -171,6 +148,7 @@ class UsersController < ApplicationController
     end
   end
 
+  #Function returns a json object of users need
   def get_need
     @needs = User.find(params[:id]).needs
     @need = @needs.find(params[:listing])
@@ -179,6 +157,7 @@ class UsersController < ApplicationController
     end
   end
 
+  #Function returns json object of users offers
   def offers
     if params[:id].nil?
       flash[:error] = "Missing Requirements: ID"
@@ -190,6 +169,7 @@ class UsersController < ApplicationController
     end
   end
 
+  #Function returns a json object of users offer
   def get_offer
     @offers = User.find(params[:id]).offers
     @offer = @offers.find(params[:listing])
@@ -198,13 +178,14 @@ class UsersController < ApplicationController
     end
   end
 
-
+  #Function display forgot password page
   def forgot
     respond_to do |format|
       format.html
     end 
   end
 
+  #Function sends email for forgotten password
   def process_forgot
     # First thing we need to do is check the user account
     if params[:email].nil?
@@ -225,6 +206,7 @@ class UsersController < ApplicationController
     end	
   end
   
+  #Function resets password
   def reset_password
     if !(params[:id] && params[:token]) 
       redirect_to root_path, error: 'Missing Requirements'
@@ -241,7 +223,8 @@ class UsersController < ApplicationController
       end
     end
   end
-
+  
+  #Function resets users password
   def process_reset_password
     if !(params[:id] && params[:password] && params[:confirm])
       redirect_to '/resetpassword', error: 'Missing some information'
@@ -259,6 +242,7 @@ class UsersController < ApplicationController
     end 
   end
 
+  #Function activates users account after creation
   def activate
     if params[:id].nil? || params[:token].nil?
 	redirect_to root_path, notice: 'Missing Requirements'
@@ -274,7 +258,8 @@ class UsersController < ApplicationController
     end
   end
 
-   def add_kirpoints
+  #adds kirpoints to users account
+  def add_kirpoints
       amount = params[:kirpoints].to_i() * 100
    
       #if amount >= 2500
@@ -288,12 +273,14 @@ class UsersController < ApplicationController
       #end
    end
 
+   #Function displays page to buy kirpoints
    def kirpoints
         respond_to do |format|
             format.html { render "kirpoints.html" }
         end
    end
 
+   #Function confirms Kirpoints order 
    def confirm
 	 redirect_to :action => 'index' unless params[:token]
   
@@ -310,6 +297,8 @@ class UsersController < ApplicationController
         @address = details_response.address
    end
 
+  
+  #Function completes order and checks for success
   def complete
     amount = params[:total].to_i() * 100
     purchase = gateway.purchase(amount,
@@ -329,12 +318,14 @@ class UsersController < ApplicationController
     current_user.update_attribute(:kirpoints, kirpoints)
   end
 
+  #Function displays kirpoints cash out paghe
   def cashout_kirpoints
     respond_to do |format|
         format.html { render "cashout_kirpoints.html" }
     end
   end
 
+  #Function cashout of kirpoints to paypal
   def process_cashout_kirpoints
     #does our params exist?
     if (!params[:amount] || params[:amount] == '') && (!params[:ppemail] || params[:ppemail == ''])
@@ -375,6 +366,7 @@ class UsersController < ApplicationController
     redirect_to '/kirpoints/cashout'
   end
 
+  #Function displays kirpoints gifting page
   def gift_kirpoints
     render 'gift'    
   end
@@ -404,7 +396,7 @@ class UsersController < ApplicationController
    return @exchangesWithCurrentUser 
   end
 
-
+  #Function returns a list of reviews for specified user
   def review_list(user)
     @exchanges = exchange_list(user.id)
 
@@ -419,6 +411,7 @@ class UsersController < ApplicationController
     return @reviews
   end
 
+  #Function returns a list of exchanges specified user engaged in
   def exchange_list(id)
     @exchanges = Exchange.where("initUser = ? || targUser=?", id, id)
   end
@@ -442,15 +435,5 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
-    end
-
-
-    #Search
-    def sort_column
-      Offer.column_names.include?(params[:sort]) ? params[:sort] : "title"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

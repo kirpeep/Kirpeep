@@ -7,14 +7,12 @@
 class SessionsController < ApplicationController
   #include SessionsHelper
 
+  #Function show the sign in modal
   def index
   	@title = "Kirpeep | Realize Yourself"
   end
 
-  def new
-  	render :partial  => 'shared/signin'
-  end
-
+  #Function show the sign in modal
   def signin
   	render :partial  => 'shared/signin'
   end

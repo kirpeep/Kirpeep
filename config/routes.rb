@@ -1,6 +1,6 @@
 Kirpeep::Application.routes.draw do
   #get "sessions/new"
-  match '/sessions/signin', :controller => 'sessions', :action => 'signin'
+  match '/sessions/signin', :to =>'sessions#signin'
 
   match  'destroy_session',      :to => 'sessions#destroy'
   match  '/create_listing/',     :to => 'userlistings#create'
@@ -15,7 +15,6 @@ Kirpeep::Application.routes.draw do
   match  '/user_exchanges/:id',  :to => 'users#exchanges'
   match  '/messages/:id',        :to => 'users#messages'
   match  '/view/:id',            :to => 'users#view'
-  get  '/signup/',             :to => 'users#new'
   post   '/signup/',             :to => 'users#create'
   match  '/signup/:email&:pass', :to => 'users#new'
   match  '/users/:id/offers',    :to => 'users#offers'

@@ -1,6 +1,6 @@
 ####################################################
 # Controller::ApplicationController                #
-# Desc:                                            #
+# Desc: Globally accessable values and functions   #
 # Comments:                                        #
 ####################################################
 
@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  #Array of catagories for user listings
   $categories = [
 	"Electronics",
 	"Hand Made Items",
@@ -41,14 +42,17 @@ class ApplicationController < ActionController::Base
 	"Travel/Vacation"
   ]
 
+  #Renders the terms of service page
   def tos
        render :template => 'pages/tos'
   end
-
+  
+  #Renders the privacy page
   def privacy
        render :template => 'pages/privacy'
   end
 
+  #Renders the 'How Kirpeep Works" page'
   def how
        render :template => 'pages/how'
   end
@@ -63,6 +67,10 @@ class ApplicationController < ActionController::Base
 	
   helper_method :current_user 
 
+  #Function sends text message to a user
+  #ARGS
+  # to => user that the message will be sent to
+  # body => text that will be in the body of the message
   def sendTxt(to, body)
     $client = Twilio::REST::Client.new $account_sid, $auth_token
     $client.account.sms.messages.create(
@@ -72,6 +80,11 @@ class ApplicationController < ActionController::Base
     )
   end
 
+  #Function checks if a user has a specific amount of kirpoints in their account
+  #Returns a boolean, if user has the passed amount of kirpoints, true is returned, else false
+  #ARGS
+  # user => user account that is beinging checked
+  # amount => the amount of Kirpoints that are being verified
   def hasEnoughKirpoints(user, amount)
     if user.kirpoints >= amount
       return true
@@ -80,6 +93,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  #Function commits Kirpoints that user has promised in an exchange by taking them out of the availble funds
+  #Returns true if points are availible and are successfully commited, else false
+  #ARGS
+  # user => user account that has Kirpoints that need to be commited
+  # amount => the amount of Kirpoints that are being commited
   def commitKirpoints(user, amount)
     if hasEnoughKirpoints(user, amount)
       kirpoints = user.kirpoints - amount
@@ -98,6 +116,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  #Function that gifts points from one user to another
+  #Returns true if the points are sucessfully gifted, else false
+  #ARGS
+  # fromUser => user account that is beinging gifted from
+  # toUser => user account that is beinging gifted to
+  # amount => the amount of Kirpoints that are being gifted
   def giftKirpoints(fromUser, toUser, amount)
     if fromUser.kirpoints_committed < amount
       return false
@@ -110,6 +134,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  #Function that transfers Kirpoints from one user to another
+  #Returns true if the points are sucessfully transferred, else false
+  #ARGS
+  # fromUser => user account that is beinging tranferred from
+  # toUser => user account that is beinging tranferred to
+  # amount => the amount of Kirpoints that are being tranferred
   def transferKirpoints(fromUser, toUser, amount)
     if fromUser.kirpoints_committed < amount
       return false

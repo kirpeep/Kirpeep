@@ -1,6 +1,11 @@
-
+#####################################################
+# Controller::SmsController                         #
+# Desc: Sends and parses SMS messages               #
+# Comments:                                         #
+#####################################################
 class SmsController < ApplicationController
  
+  #Function sends text message to users phone for verification purposes 
   def verify
     if params[:to] and params[:body]
        sendTxt(params[:to], params[:body])
@@ -11,7 +16,8 @@ class SmsController < ApplicationController
        redirect_to root_path
     end
   end
-
+  
+  #Function parses text received for user phone verification
   def recieve
     
     if params[:Body]
