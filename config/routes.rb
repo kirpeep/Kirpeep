@@ -65,7 +65,7 @@ Kirpeep::Application.routes.draw do
   match '/tos', :to => 'application#tos'
   match '/privacy', :to => 'application#privacy'
   match '/how', :to => 'application#how'
-
+  post '/admin/credit', :to => 'admin#credit'
   
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
