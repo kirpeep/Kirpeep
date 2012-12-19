@@ -29,6 +29,11 @@
 		    <label>How many Kirpoints for this item?</label>
 		    <%= f.text_field :kirpoints %>
 		  </div>
+                  <div class="field">
+                    <%= f.label :category %><br />
+                    <%= f.select :category, $categories %>
+                  </div>
+
 		  <!-- add listing type -->
 		  <div class="actions">
 		    
