@@ -15,5 +15,9 @@ class ExchangeItem < ActiveRecord::Base
   belongs_to :archived_exchange
 
   validates :targ_user_id, :presence => true
-  validates :user_listing_id, :presence => true
+  validates :user_listing_id, :presence => 
+
+  def listingTitle
+  	(UserListing.find(self.user_listing_id)).title
+  end
 end
