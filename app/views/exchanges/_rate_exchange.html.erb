@@ -1,5 +1,6 @@
 <html>
 <head>
+    <%= stylesheet_link_tag    "results.css" %>
     <script type="text/javascript">
     $(document).ready(function() {
         $(".itemTemplate").each(function(){
@@ -8,85 +9,167 @@
     });
     </script>
 </head>
-        <div class="modal-header">
-            <div class="row-fluid">
-                <div class="span6">
-                    <h3 id="myModalLabel">Rate Exchange</h3>
-                    <div class='align-center' id="exchangeStatus">
-                            <div class="progress progress-striped">
-                                <div class="bar" style="width: 75%;"></div>
-                            </div>
-                        </div>
-                </div>
-                <div class="span6">
-                    <div class='row-fluid'>
-                        <div class='span4' id="userInfo">
-                            <%= image_tag(current_user.profile.photo.url, {:width => '50px', :height => '50px'}) %><br>
-                            <%= current_user.name %>
-                        </div>
-
-                        <!--Kirpeep Exchage Status Logo -->
-                        <div class='span4 align-center' id="exchangeStatus">
-                            <span id="with">exchanging with</span>
-                        </div>
-
-                        <!--exchange partner -->
-                        <div class='span4 align-right' id="exchangePartner" >
-                            <%= image_tag(@targUser.profile.photo.url, {:width => '50px', :height => '50px'}) %><br>
-                            <%= @targUser.name %>
-                        </div>
+<body>
+    <div class="container">
+        <%= render 'shared/header' %>
+        <div class="row">
+            <div class="span6">
+                <h3 id="myModalLabel">Initiated Exchange</h3>
+                <div class='align-center' id="exchangeStatus">
+                    <div class="progress progress-striped">
+                        <div class="bar" style="width: 20%;"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <%= form_for @exch, :url => url_for(:controller => 'exchanges', :action => 'rate_exchange') do |f|%>
-        <div class="modal-body">
-            <!--opens middle section-->
-            <div class='row-fluid'>
-                <!-- Left Side-->
-                <div class="span6">
-                    <div>
-                        <span id="getting">You are getting...</span>
+        
+        <div class='row'>
+            <div class='span1' id="userInfo">
+                <%= image_tag(current_user.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
+                <%= current_user.name %>
+            </div>
+            <div class='span2' id="userInfo">
+                <span><%= current_user.name %></span><br>
+                <span>"X" Exchanges</span><br>
+                <span>"x" Reviews</span>
+            </div>
+
+            <!--Kirpeep Exchage Status Logo -->
+            <div class='span6 align-center' id="exchangeStatus">
+                <span id="with">exchanging with</span>
+            </div>
+
+            <!--exchange partner -->
+            <div class='span2 align-right' id="targInfo">
+                <span><%= @targUser.name %></span><br>
+                <span>"X" Exchanges</span><br>
+                <span>"x" Reviews</span>
+            </div>
+            <div class='span1 align-right' id="exchangePartner" >
+            
+                    <%= image_tag(@targUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+                    <br>
+                    <%= @targUser.name %>
+            </div>
+        </div>  
+
+        <div class='row'>
+            <!--left side-->
+            <div class='span6'>
+                <div><span id="getting">You are getting...</span></div>
+                <!-- Start of tabs for items user is receiving--> 
+                <% if (current_user.id).to_s == (@initUser.id).to_s %>
+                    <div class="tabbable tabs-left">
+                        <ul class="nav nav-tabs" id="userItems">
+                            <% @initItems.each_with_index do |item, index| %>
+                                <% if index == 0 %>
+                                    <li class="active"><a href="#offer<%= index %>" data-toggle="tab"><%= item.listingTitle %></a></li>
+                                <% else %>
+                                    <li><a href="#offer<%= index %>" data-toggle="tab"><%= item.listingTitle %></a></li>
+
+                                <% end %>
+                            <% end %>
+                        </ul>
+                        <div class="tab-content" id="userExchItems">
+                            <% @initItems.each_with_index do |item, index| %>
+                                <% if index == 0 %>
+                                    <div class="tab-pane span4 active" id="offer<%= index %>">
+                                <% else %>
+                                    <div class="tab-pane span4" id="offer<%= index %>">
+                                <% end %>
+                                <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=need"></div>
+                                </div>
+                            <%end%>
+                        </div>
                     </div>
+                <% else %>
+                    <div class="tabbable tabs-left">
+                        <ul class="nav nav-tabs" id="userItems">
+                            <% @targItems.each_with_index do |item, index| %>
+                                <% if index == 0 %>
+                                    <li class="active"><a href="#offer<%= index %>" data-toggle="tab"><%= item.listingTitle %></a></li>
+                                <% else %>
+                                    <li><a href="#offer<%= index %>" data-toggle="tab"><%= item.listingTitle %></a></li>
 
-
-                    <!-- Start of tabs for items user is receiving--> 
-                    <% if (current_user.id).to_s == (@initUser.id).to_s %>
-                        <% for item in @initItems %>
-                            <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=need"></div>
-                        <%end%>
-                    <% else %>
-                        <% for item in @targItems %>
-                            <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=offer"></div>
-                        <%end%>
-                    <% end %>
-                    <span>Give this co</span>
-                    <!-- End of tabs for items user is receiving--> 
-                </div><!-- .span6-->
-
-
-                <!--Right Side-->
-                <div class="span6">
-                    <div>
-                        <span id="getting">You are giving...</span>
+                                <% end %>
+                            <% end %>
+                        </ul>
+                        <div class="tab-content" id="userExchItems">
+                            <% @targItems.each_with_index do |item, index| %>
+                                <% if index == 0 %>
+                                    <div class="tab-pane span4 active" id="offer<%= index %>">
+                                <% else %>
+                                    <div class="tab-pane span4" id="offer<%= index %>">
+                                <% end %>
+                                    <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=offer"></div>
+                                    </div>
+                            <%end%>
+                        </div>
                     </div>
+                <% end %>
+                <!-- End of tabs for items user is receiving--> 
+            </div><!-- .span6-->
 
-                    <!-- Start of tabs for items targ is receiving--> 
-                    <% if (current_user.id).to_s == (@initUser.id).to_s %>
-                        <% for item in @targItems %>
-                            <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=offer"></div>
-                        <%end%>
-                    <% else %>
-                        <% for item in @initItems %>
-                            <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=need"></div>
-                        <%end%>
-                    <% end %>
-                    <!-- End of tabs for items targ is receiving--> 
 
+            <!--Right Side-->
+            <div class="span6">
+                <div>
+                    <span id="getting">You are giving...</span>
                 </div>
-            </div>         
-            <!-- Exchange Message-->
-            <div class="row-fluid">
+
+                <!-- Start of tabs for items targ is receiving--> 
+                <% if (current_user.id).to_s == (@initUser.id).to_s %>
+                    <div class="tabbable tabs-right">
+                        <ul class="nav nav-tabs" id="targItems">
+                            <% @targItems.each_with_index do |item, index| %>
+                                <% if index == 0 %>
+                                    <li class="active"><a href="#need<%= index %>" data-toggle="tab"><%= item.listingTitle %></a></li>
+                                <% else %>
+                                    <li><a href="#need<%= index %>" data-toggle="tab"><%= item.listingTitle %></a></li>
+                                <% end %>
+                            <% end %>
+                        </ul>
+                        <div class="tab-content" id="targExchItems">
+                            <% @targItems.each_with_index do |item, index| %>
+                                <% if index == 0 %>
+                                    <div class="tab-pane span4 active" id="need<%= index %>">
+                                <% else %>
+                                    <div class="tab-pane span4" id="need<%= index %>">
+                                <% end %>
+                                    <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=need<% index %>"></div>
+                                    </div>
+                            <%end%>
+                        </div>
+                    </div>
+                <% else %>
+                    <div class="tabbable tabs-right">
+                        <ul class="nav nav-tabs" id="targItems">
+                            <% @initItems.each_with_index do |item, index| %>
+                                <% if index == 0 %>
+                                    <li class="active"><a href="#need<%= index %>" data-toggle="tab"><%= item.listingTitle %></a></li>
+                                <% else %>
+                                    <li><a href="#need<%= index %>" data-toggle="tab"><%= item.listingTitle %></a></li>
+                                <% end %>
+                            <% end %>
+                        </ul>
+                        <div class="tab-content" id="targExchItems">
+                            <% @initItems.each_with_index do |item, index| %>
+                                <% if index == 0 %>
+                                    <div class="tab-pane span4 active" id="need<%= index %>">
+                                <% else %>
+                                    <div class="tab-pane span4" id="need<%= index %>">
+                                <% end %>
+                                    <div class="itemTemplate" data-url="/get_listing?id=<%= item.user_listing_id %>&targ=<%= item.targ_user_id %>&init=<%= item.init_user_id %>&type=need"></div>
+                                </div>
+                            <%end%>
+                        </div>
+                    </div>
+                <% end %>
+                <!-- End of tabs for items targ is receiving--> 
+            </div>
+        </div>         
+        <div class="row" id="messagebox">
+            <div class='span6 offset3'>    
                 <span>Message</span>
                 <div class="rounded-map shadow" id="message" style="overflow:scroll; height: 100px;">
                     <% current_message = @exch.message%>
@@ -97,37 +180,36 @@
                         <% current_message = Message.where(:responseToMsgID => current_message.id).first %>
                     <% end while(current_message != nil) %>
                     <div>
-                        <%= fields_for Message.new, :remote => true, :html => {:class => "reply_message"} do |fa| %>
+                        <%= form_for Message.new, :remote => true, :html => {:class => "reply_message"} do |f| %>
              
-                            <%= fa.hidden_field :initUser, :value => current_user.id %>
-                            <%= fa.hidden_field :responseToMsgID, :value =>  reply_message_id %>
+                            <%= f.hidden_field :initUser, :value => current_user.id %>
+                            <%= f.hidden_field :responseToMsgID, :value =>  reply_message_id %>
                             <% if is_current_user(@initUser) %>
-                                <%= fa.hidden_field :targUser, :value => @targUser.id %>
+                                <%= f.hidden_field :targUser, :value => @targUser.id %>
                             <% else %>
-                                <%= fa.hidden_field :targUser, :value => @initUser.id %>
+                                <%= f.hidden_field :targUser, :value => @initUser.id %>
                             <% end %>
-                            <%= fa.text_field :text %>
+                            <%= f.text_field :text %>
                             
-                            <%= fa.submit :reply, :class => "btn btn-primary" %>
+                            <%= f.submit :reply, :class => "btn btn-primary" %>
                         <% end %>
                     </div>
                 </div>
             </div><!-- .row-fluid-->
+        </div>    
+        <div class='row'>
             
-            <div class='row-fluid'>
-                
-                Time: <%= range_field_tag "time", :in => 1...5 %><br>
-                Cost: <%= range_field_tag "cost", :in => 1...5 %><br>
-                Ease: <%= range_field_tag "ease", :in => 1...5 %><br>
-                Overall: <%= range_field_tag "overall", :in => 1...5%><br>
-                Comments:<br><%= text_area_tag :comments %><br>
+            Time: <%= range_field_tag "time", :in => 1...5 %><br>
+            Cost: <%= range_field_tag "cost", :in => 1...5 %><br>
+            Ease: <%= range_field_tag "ease", :in => 1...5 %><br>
+            Overall: <%= range_field_tag "overall", :in => 1...5%><br>
+            Comments:<br><%= text_area_tag :comments %><br>
 
-                <%= hidden_field_tag :exch_id, @exch.id %>
-                <%= hidden_field_tag :user_id, (current_user.id).to_s%>
-            </div><!-- .row-fluid -->
-        </div>
+            <%= hidden_field_tag :exch_id, @exch.id %>
+            <%= hidden_field_tag :user_id, (current_user.id).to_s%>
+        </div><!-- .row-fluid -->
         <!--Opens Bottom Section-->
-        <div class="modal-footer">
+        <div class="row">
             <% if((@exch.initUser).to_s == (current_user.id).to_s ) %>
                 <% if @exch.init_rating_overall != nil %>
                     Waiting for user
@@ -145,4 +227,5 @@
             <%end%>
         </div>
         <% end %>
+    </body>
 </html>

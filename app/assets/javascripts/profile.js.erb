@@ -19,8 +19,15 @@ $(document).ready(function(){
   
   if (userID){
     $('#messages').load('/messages/'+userID);
-}
+  }
   
+  $('.linkable').live('click', function(event){
+    var href = ($(this).data('url'));
+    window.location = href;
+    return true; 
+    event.preventDefault();
+  });
+
   $('#loc').mouseover(function(){
     $('#loc').css('background-color','green');
     $('#edit').css('display', 'inline');

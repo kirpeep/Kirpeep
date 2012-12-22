@@ -20,7 +20,7 @@
 				<% for exchange in @exch %>
 				
 				<% next if exchange.type == 'ArchivedExchange' || exchange.is_deleted == "0" %>
-				<a class="dynamolink" href="/exchanges/<%= exchange.id %>" >
+				<div class="linkable" data-url="/exchanges/<%= exchange.id %>" >
 					<div class='row-fluid'>
 						<a href="/destroy_exchange?id=<%= exchange.id %>" type="button" class="close" aria-hidden="true">×</a>
 						<div class="span3">
@@ -61,7 +61,7 @@
 							</span>
 						</div>
 					</div>
-				</a>
+				</div>
 				<%end%>
 			</div>
 			<div id='past_exchanges' class="tab-pane">
