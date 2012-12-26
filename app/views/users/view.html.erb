@@ -47,9 +47,11 @@ $(document).ready(function(){
     </div>
     <% end %>
       <% @profile = @user.profile %>
-      
+            
     	<div class='span4'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
+        <br><br>
+        <a href="/sendmessage?id=<%= @user.id %>&replyTo=nil" class='btn span2 dynamolink' style='margin-left: 20px;' >Send Message</a>
         <br><br>
       	<ul class='profileInfo'>
           <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>

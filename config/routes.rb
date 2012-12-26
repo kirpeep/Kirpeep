@@ -65,6 +65,7 @@ Kirpeep::Application.routes.draw do
   match '/tos', :to => 'application#tos'
   match '/privacy', :to => 'application#privacy'
   match '/how', :to => 'application#how'
+  post '/admin/credit', :to => 'admin#credit'
   
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'
@@ -131,6 +132,7 @@ Kirpeep::Application.routes.draw do
   resources :profiles
   resources :messages
   resources :transaction
+  resources :admin
   resources :sms, :only => [:verify, :recieve]
 
   # See how all your routes lay out with "rake routes"

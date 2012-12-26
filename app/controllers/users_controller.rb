@@ -81,6 +81,13 @@ class UsersController < ApplicationController
       redirect_to root_url
       return
     end
+
+    if params[:password].to_s().length < 6
+     flash[:error] = "Password must be at least 6 characters in length."
+     redirect_to root_url
+     return
+    end
+
     @user = User.new
     # A user must activate via an activation email
     # Before they are allowed to use the system - kyle

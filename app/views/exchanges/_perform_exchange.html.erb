@@ -55,35 +55,6 @@
         </div><!-- .row-fluid-->
     </div>
 
-    <!-- Exchange Message-->
-    <div class="row" id="messagebox">
-        <div class='span6 offset3'>    
-            <span>Message</span>
-            <div class="rounded-map shadow" id="message" style="overflow:scroll; height: 100px;">
-                <% current_message = @exch.message%>
-                <% reply_message_id = current_message.id %>
-                <% begin %>
-                    <%= render :partial =>current_message, :locals => {:current_message => current_message} %>
-                    <% reply_message_id = current_message.id %>
-                    <% current_message = Message.where(:responseToMsgID => current_message.id).first %>
-                <% end while(current_message != nil) %>
-                <div>
-                    <%= form_for Message.new, :remote => true, :html => {:class => "reply_message"} do |f| %>
-         
-                        <%= f.hidden_field :initUser, :value => current_user.id %>
-                        <%= f.hidden_field :responseToMsgID, :value =>  reply_message_id %>
-                        <% if is_current_user(@initUser) %>
-                            <%= f.hidden_field :targUser, :value => @targUser.id %>
-                        <% else %>
-                            <%= f.hidden_field :targUser, :value => @initUser.id %>
-                        <% end %>
-                        <%= f.text_field :text %>
-                        
-                        <%= f.submit :reply, :class => "btn btn-primary" %>
-                    <% end %>
-                </div>
-            </div>
-        </div><!-- .row-fluid-->
     <!--Opens Bottom Section-->
     <div class="row">
         <div class="span6 offset3">

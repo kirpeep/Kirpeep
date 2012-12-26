@@ -55,7 +55,7 @@ class ProfilesController < ApplicationController
   # PUT /users/1.json
   def update
     @profile = Profile.find(params[:id])
-    params[:profile][:phone_number] = params[:profile][:phone_number].gsub(/[^0-9]/, '')
+    params[:profile][:phone_number] = params[:profile][:phone_number].gsub(/[^0-9]/, '') if !params[:profile][:phone_number].nil?
     respond_to do |format|
       if @profile.update_attributes(params[:profile])
         format.html { redirect_to current_user, notice: 'User was successfully updated.' }
