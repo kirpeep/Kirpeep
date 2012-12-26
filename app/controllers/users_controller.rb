@@ -119,7 +119,7 @@ class UsersController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable }
       end
     end
   end
@@ -144,7 +144,7 @@ class UsersController < ApplicationController
 
   def exchanges
     @user = User.find(params[:id])
-    @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all 
+    @exch = Exchange.where("is_deleted = false AND type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all 
     @pastExch = Exchange.where("type = ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all
     
     render :partial => 'exchange', :locals => {:user => @user, :exch => @exch, :pastExch => @pastExch}
@@ -433,6 +433,7 @@ class UsersController < ApplicationController
     end
 
     def signed_in_user
+      debugger
       unless signed_in?
         store_location
         redirect_to root_path, notice: "Please sign in."

@@ -22,8 +22,8 @@
         </div>
         <div class='span2' id="userInfo">
             <span><%= current_user.name %></span><br>
-            <span>"X" Exchanges</span><br>
-            <span>"x" Reviews</span>
+            <span>"<%= current_user.numOfExchanges %>" Exchanges</span><br>
+            <span>"<%= current_user.numOfReviews %>" Reviews</span>
         </div>
 
         <!--Kirpeep Exchage Status Logo -->
@@ -34,8 +34,8 @@
         <!--exchange partner -->
         <div class='span2 align-right' id="targInfo">
             <span><%= @targUser.name %></span><br>
-            <span>"X" Exchanges</span><br>
-            <span>"x" Reviews</span>
+            <span>"<%= @targUser.numOfExchanges %>" Exchanges</span><br>
+            <span>"<%= @targUser.numOfReviews %>" Reviews</span>
         </div>
         <div class='span1 align-right' id="exchangePartner" >
         

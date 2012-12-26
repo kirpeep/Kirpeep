@@ -67,6 +67,20 @@ class User < ActiveRecord::Base
 	SecureRandom.urlsafe_base64
   end
 
+  def profilePic
+    self.profile.photo.url
+  end
+
+  def numOfExchanges
+    @exchanges = Exchange.where(:initUser => self.id, :targUser => self.id)
+    @exchanges.count
+  end
+
+  def numOfReviews
+    #@reviews = Exchange.where(:initUser => self.id, :targUser => self.id)
+    @reviews = 0
+  end
+
   private
 
   	def encrypt_password

@@ -2,8 +2,8 @@ module SessionsHelper
 
   def sign_in(user)
      if user.Active == true
-	cookies.permanent.signed[:remember_token] = [user.id, user.salt]
-	self.current_user = user
+	     cookies.permanent.signed[:remember_token] = [user.id, user.salt]
+	     self.current_user = user
      else
        flash[:error] = "This account has not yet been activated."
      end
@@ -37,6 +37,7 @@ module SessionsHelper
   end
 
   def create
+    debugger
   	user = User.authenticate(params[:session][:email], 
                 params[:session][:password])
 

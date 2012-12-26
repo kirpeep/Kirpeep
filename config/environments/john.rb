@@ -6,7 +6,7 @@ Kirpeep::Application.configure do
   ThinkingSphinx.deltas_enabled = true 
   ThinkingSphinx.updates_enabled = true
 
-  $domain = 'http://localhost:3000'
+  $domain = 'localhost:3000'
   
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = true
