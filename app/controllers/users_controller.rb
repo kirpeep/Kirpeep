@@ -29,8 +29,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @title = @user.name
-    
-    
+    @messagesTabTxt = (@user.numOfUnreadMessages > 0)? "Messages ("+@user.numOfUnreadMessages+")" : "Messages"
+        
     if @user && @user.id == current_user.id
       respond_to do |format|
         format.html # show.html.erb
@@ -440,7 +440,6 @@ class UsersController < ApplicationController
     end
 
     def signed_in_user
-      debugger
       unless signed_in?
         store_location
         redirect_to root_path, notice: "Please sign in."

@@ -37,8 +37,7 @@ module SessionsHelper
   end
 
   def create
-    debugger
-  	user = User.authenticate(params[:session][:email], 
+    user = User.authenticate(params[:session][:email], 
                 params[:session][:password])
 
   	if user.nil?

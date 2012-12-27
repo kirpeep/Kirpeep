@@ -24,8 +24,7 @@ class UserlistingsController < ApplicationController
     5.times {@listing.assets.build}
   end
 
-  def create 
-    debugger 
+  def create  
     user = current_user 
     listingType = params[:type]
     listing = nil

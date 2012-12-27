@@ -81,6 +81,29 @@ class User < ActiveRecord::Base
     @reviews = 0
   end
 
+  def numOfMessages
+    messages = Message.where("initUser = ? OR targUser = ?", self.id,self.id).count
+  end
+
+  def numOfUnreadMessages
+    
+    messages = Message.where("initUser = ? OR targUser = ?", self.id,self.id)
+
+    unreadCount = 0
+    for message in messages
+      
+      user = self.id.to_s
+
+      if user == message.initUser && message.initUnread
+        unreadCount += 1
+      elsif user == message.targUser && message.targUnread
+        unreadCount += 1
+      end
+    end
+
+    return unreadCount.to_s
+  end
+
   private
 
   	def encrypt_password
