@@ -25,9 +25,15 @@ class Message < ActiveRecord::Base
   #updates the starting message associated
   def updateStartingMessage
     #update starting message
-    parent_message = Message.find(id)
-    while parent_message.responseToMsgID.to_i != 0
-      parent_message = Message.find(parent_message.responseToMsgID)
+
+    if self.id.to_i != 0
+      parent_message = Message.find(self.id)
+    else
+      parent_message = self
+    end
+
+    while parent_message.prevMessage != nil
+      parent_message = parent_message.prevMessage
     end
     #update timestamp
       parent_message.update_attribute("updated_at", DateTime.now.to_datetime)
@@ -55,5 +61,29 @@ class Message < ActiveRecord::Base
     else
       targUnread = false
     end
+  end
+
+  def prevMessage
+    if self.responseToMsgID.to_i == 0
+      return nil
+    else
+      Message.find(self.responseToMsgID)
+    end
+  end
+
+  def nextMessage
+    if self.responseToMsgID.to_i == 0
+      return nil
+    else
+      Message.find(self.next_message_id)
+    end
+  end
+
+  def setPrevMessage(messageID)
+    self.responseToMsgID = messageID
+  end
+
+  def setNextMessage(messageID)
+    self.next_message_id = messageID
   end
 end

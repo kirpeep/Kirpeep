@@ -29,8 +29,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @title = @user.name
-    
-    
+    @messagesTabTxt = (@user.numOfUnreadMessages > 0)? "Messages ("+@user.numOfUnreadMessages+")" : "Messages"
+        
     if @user && @user.id == current_user.id
       respond_to do |format|
         format.html # show.html.erb
@@ -126,7 +126,7 @@ class UsersController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable }
       end
     end
   end
@@ -151,7 +151,7 @@ class UsersController < ApplicationController
 
   def exchanges
     @user = User.find(params[:id])
-    @exch = Exchange.where("type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all 
+    @exch = Exchange.where("is_deleted = false AND type != ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all 
     @pastExch = Exchange.where("type = ? AND initUser = ? OR targUser = ? ", 'ArchivedExchange', @user.id, @user.id).all
     
     render :partial => 'exchange', :locals => {:user => @user, :exch => @exch, :pastExch => @pastExch}
