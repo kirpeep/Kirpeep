@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    return unreadCount.to_s
+    return unreadCount.to_i
   end
 
   private
