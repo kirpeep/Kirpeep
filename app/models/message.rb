@@ -5,7 +5,7 @@
 #                  For multiple File Uploads       # 
 ####################################################
 class Message < ActiveRecord::Base
-  attr_accessible :photo, :initUser, :targUser, :text, :subject, :responseToMsgID, :targUnread, :initUnread, :targ_is_deleted, :init_is_deleted, :updated_at 
+  attr_accessible :photo, :initUser, :targUser, :text, :subject, :next_message_id, :responseToMsgID, :targUnread, :initUnread, :targ_is_deleted, :init_is_deleted, :updated_at 
   belongs_to :user
   has_one :profile, :through => :user
   belongs_to :searchQuery

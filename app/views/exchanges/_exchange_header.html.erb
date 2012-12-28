@@ -1,0 +1,29 @@
+<div class='row'>
+    <div class='span1' id="userInfo">
+        <%= image_tag(current_user.profile.photo.url, {:width => '100px', :height => '100px'}) %><br>
+        <%= current_user.name %>
+    </div>
+    <div class='span2' id="userInfo">
+        <span><%= current_user.name %></span><br>
+        <span>"<%= current_user.numOfExchanges %>" Exchanges</span><br>
+        <span>"<%= current_user.numOfReviews %>" Reviews</span>
+    </div>
+
+    <!--Kirpeep Exchage Status Logo -->
+    <div class='span6 align-center' id="exchangeStatus">
+        <span id="with">exchanging with</span>
+    </div>
+
+    <!--exchange partner -->
+    <div class='span2 align-right' id="targInfo">
+        <span><%= @targUser.name %></span><br>
+        <span>"<%= @targUser.numOfExchanges %>" Exchanges</span><br>
+        <span>"<%= @targUser.numOfReviews %>" Reviews</span>
+    </div>
+    <div class='span1 align-right' id="exchangePartner" >
+
+            <%= image_tag(@targUser.profile.photo.url, {:width => '100px', :height => '100px'}) %>
+            <br>
+            <%= @targUser.name %>
+    </div>
+</div> 
