@@ -11,15 +11,16 @@ class MessagesController < ApplicationController
   def create 
    
     message = Message.new params[:message]
-    message.targUnread = true
     user = current_user
     toUser = User.find(params[:message][:targUser])
-    
+
     if message.save  
     	flash[:notice] = 'message saved.'
-        #UserMailer.message_email(toUser, user, user.name + " has just sent you an message in Kirpeep.", params[:message][:text] ).deliver
+        UserMailer.message_email(toUser, user, user.name + " has just sent you an message in Kirpeep.", params[:message][:text] ).deliver
         message.updateStartingMessage
-
+        if message.prevMessage != nil 
+          (message.prevMessage).setNextMessage(message.id)
+        end
     	respond_to do |format|
         format.html {redirect_to user}
         format.js 

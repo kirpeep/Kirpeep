@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213053855) do
+ActiveRecord::Schema.define(:version => 20121227231822) do
 
   create_table "actions", :force => true do |t|
     t.integer  "userId"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20121213053855) do
     t.integer  "photo_file_size"
     t.boolean  "targ_is_deleted",    :default => false, :null => false
     t.boolean  "init_is_deleted",    :default => false, :null => false
+    t.integer  "next_message_id"
   end
 
   create_table "modified_exchanges", :force => true do |t|
