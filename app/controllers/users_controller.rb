@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @title = @user.name
-    @messagesTabTxt = (@user.numOfUnreadMessages > 0)? "Messages ("+@user.numOfUnreadMessages+")" : "Messages"
+    @messagesTabTxt = (@user.numOfUnreadMessages > 0)? "Messages ("+@user.numOfUnreadMessages.to_s+")" : "Messages"
         
     if @user && @user.id == current_user.id
       respond_to do |format|
