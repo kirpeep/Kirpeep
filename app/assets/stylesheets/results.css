@@ -88,6 +88,37 @@
 
 }
 
+/*Style for User 'listing' */
+.rounded-user {
+	background-color:#FFF;
+	border: 5px solid #FF931E;
+	border-radius: 20px;
+	overflow:hidden;
+}
+
+
+.user-span {
+	border: 3px solid #FF931E; 
+	background-color:#E6E6E6;*/
+	font: Franklin Gothic Heavy;
+}
+
+.rounded-user p{
+	font: Franklin Gothic Book;
+}
+
+.rounded-user .user-name {
+	padding: 0px 30px 0px 0px;
+}
+
+.rounded-user .user-actions {
+
+}
+
+.rounded-user .user-listing {
+
+}
+
 /*Style for need listing */
 .rounded-need {
 	margin-top: 10px;
