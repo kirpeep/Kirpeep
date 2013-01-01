@@ -49,10 +49,15 @@
           <!-- % = will_paginate @userlistings%-->
           <% for listing in @userlistings.sort_by(&:created_at).reverse %>
             <div class="listings clearfix" style="width: 250px;">
-            <% if listing.type == 'Offer' %>
-              <%= render :partial => 'userlistings/show_offer', :locals => {:listing => listing } %>
-            <% else %>
-              <%= render :partial => 'userlistings/show_need', :locals => {:listing => listing } %>
+              <% debugger %>
+            <% if listing.is_a? User %>
+              <%= render :partial => 'users/show_user_as_listing', :locals => {:user => listing } %>
+            <% elsif listing.is_a? UserListing %>
+              <% if listing.type == 'Offer' %>
+                <%= render :partial => 'userlistings/show_offer', :locals => {:listing => listing } %>
+              <% elsif listing.type == 'Need' %>
+                <%= render :partial => 'userlistings/show_need', :locals => {:listing => listing } %>
+              <% end %>
             <% end %>
             </div>
             <!-- <div class="listings clearfix" style="width: 250px;" data-url="/show_listing?id=<%= listing.id %>"></div> -->

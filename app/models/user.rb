@@ -6,10 +6,10 @@
 
 require 'digest'
 class User < ActiveRecord::Base
-  attr_accessor :password
+  attr_accessor :password, :email, :name
   
   attr_accessible :email, :name, :password, :password_confirmation, :token, :Active, :kirpoints_committed, :kirpoints
-  has_one :profile
+  has_one :profile, :dependent => :destroy
   has_many :messages
   has_many :needs, :through => :profile
   has_many :offers, :through => :profile
@@ -23,6 +23,14 @@ class User < ActiveRecord::Base
   has_many :transactions
   has_and_belongs_to_many :searchQueries
 
+  define_index do 
+    indexes email
+    indexes :name
+    indexes is_deleted
+
+    set_property :delta => true
+  end
+
   email_regex = /^.+@.+$/
   #old regex:    /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -35,12 +43,11 @@ class User < ActiveRecord::Base
                         :length       => {:within => 6..40})
   validates(:password_confirmation, :presence => true)
   
-  has_one :profile, :dependent => :destroy
+  
   
   before_save { |user| user.email = email.downcase }
   before_save :encrypt_password
   before_save :create_remember_token
-
 
   def has_password?(submitted_password)
   	self.encrypted_password == encrypt(submitted_password)
@@ -50,10 +57,10 @@ class User < ActiveRecord::Base
   	user = find_by_email(email)
   	#return nil if user.nil?  || !user.has_password?(submitted_password)
   	if user && user.has_password?(submitted_password)
-           return user
-        else
-           return nil
-        end
+      return user
+    else
+       return nil
+    end
   end
 
   def self.authenticate_with_salt(id, cookie_salt)
@@ -65,10 +72,6 @@ class User < ActiveRecord::Base
   # This will be used for things like reset/forgot passwords
   def self.generateToken()
 	SecureRandom.urlsafe_base64
-  end
-
-  def profilePic
-    self.profile.photo.url
   end
 
   def numOfExchanges
@@ -104,13 +107,22 @@ class User < ActiveRecord::Base
     return unreadCount.to_i
   end
 
+  #Profile accessor methods
+  def aboutMe
+    self.profile.about
+  end
+
+  def profilePic
+    self.profile.photo.url
+  end
+
   private
 
   	def encrypt_password
-              if new_record?
-  		self.salt = make_salt 
-  		self.encrypted_password = encrypt(password)
-              end
+      if new_record?
+  		  self.salt = make_salt 
+  		  self.encrypted_password = encrypt(password)
+      end
   	end
 
   	def encrypt(string)
