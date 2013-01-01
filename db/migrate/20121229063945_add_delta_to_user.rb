@@ -1,5 +1,5 @@
 class AddDeltaToUser < ActiveRecord::Migration
   def change
-    add_column :users, :delta, :boolean
+    add_column :users, :delta, :boolean, :default => true, :null => false
   end
 end
