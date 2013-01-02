@@ -74,6 +74,12 @@ class User < ActiveRecord::Base
 	  SecureRandom.urlsafe_base64
   end
 
+  def resetPassword new_password
+    self.salt = make_salt 
+    self.encrypted_password = encrypt(new_password)
+    self.save(:validate => false)
+  end
+
   def numOfExchanges
     @exchanges = Exchange.where(:initUser => self.id, :targUser => self.id)
     @exchanges.count
