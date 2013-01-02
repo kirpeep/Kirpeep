@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
   end
 
   def numOfExchanges
-    @exchanges = Exchange.where(:initUser => self.id, :targUser => self.id)
+    @exchanges = Exchange.where('initUser = ? OR targUser = ?',  self.id, self.id)
     @exchanges.count
   end
 
