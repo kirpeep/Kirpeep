@@ -226,6 +226,7 @@ class UsersController < ApplicationController
     else
        @token = User.generateToken
        @user.update_attribute(:token, @token.to_s)
+       @user.update_attribute(:Active, true)
        UserMailer.forgot_email(@user).deliver
        flash[:notice] = 'An email was sent to your email account.'
        redirect_to('/')
