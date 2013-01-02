@@ -1,7 +1,8 @@
 class SearchController < ApplicationController
 
 	def search
-    if signed_in?
+    flash[:error] = nil
+    if signed_in? && params[:search] != ''
       @userlistings = searchAll(params[:search])#, :conditions => {:is_deleted => '0', :category => params[:category]}, :per_page => 100)
     else
       @userlistings = UserListing.search(params[:search], :conditions => {:is_deleted => '0'}, :per_page => 100)
