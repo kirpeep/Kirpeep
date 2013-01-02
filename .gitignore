@@ -14,7 +14,6 @@
 /log/*.log
 /tmp
 /db/sphinx
-.gitignore
 
 #Ignore Deltas
 /db/sphinx/*.*
@@ -26,4 +25,4 @@
 /public/system/*.*
 
 # Ignore .gitignore
-/.gitignore
+#/.gitignore
