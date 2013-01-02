@@ -6,7 +6,7 @@
 
 require 'digest'
 class User < ActiveRecord::Base
-  attr_accessor :password, :email, :name
+  attr_accessor :password
   
   attr_accessible :email, :name, :password, :password_confirmation, :token, :Active, :kirpoints_committed, :kirpoints
   has_one :profile, :dependent => :destroy
@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   # Helper method that will generate a token for the user account
   # This will be used for things like reset/forgot passwords
   def self.generateToken()
-	SecureRandom.urlsafe_base64
+	  SecureRandom.urlsafe_base64
   end
 
   def numOfExchanges

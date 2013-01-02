@@ -218,7 +218,7 @@ class UsersController < ApplicationController
        flash[:error] = 'We are sorry something went wrong. Please try again.'
        redirect_to('/') 
     end
-   	
+   	debugger
     @user = User.find_by_email(params[:email])
     if @user.nil?
        flash[:error] = 'We were unable to find this email in our system.'
