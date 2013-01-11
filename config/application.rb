@@ -67,7 +67,7 @@ module Kirpeep
     :port                 => 25,
     :domain               => 'kirpeep.com',
     :user_name            => 'info@kirpeep.com',
-    :password             => '0112kiratx',
+    :password             => 'kirpeep2013',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 
