@@ -2,10 +2,15 @@ class SearchController < ApplicationController
 
 	def search
     flash[:error] = nil
-    if signed_in? && params[:search] != ''
-      @userlistings = searchAll(params[:search])#, :conditions => {:is_deleted => '0', :category => params[:category]}, :per_page => 100)
+    debugger
+    if(signed_in? && !params[:catagory])
+      if params[:search] && params[:search] != '' 
+        @userlistings = searchAll(params[:search], params[:catagory])#, :conditions => {:is_deleted => '0', :category => params[:category]}, :per_page => 100)
+      else
+        @userlistings = searchListings(params[:search], params[:catagory])
+      end
     else
-      @userlistings = UserListing.search(params[:search], :conditions => {:is_deleted => '0'}, :per_page => 100)
+      @userlistings = searchListings(params[:search], params[:catagory])
     end
 
     if @userlistings.empty?
@@ -17,9 +22,9 @@ class SearchController < ApplicationController
 	end
 
   private
-    def searchNeeds(search_query)
+    def searchNeeds(search_query, catagory)
     
-      if params[:category] && params[:category] != ""
+      if catagory && catagory != ''
         @needs = UserListing.search(search_query, :conditions => {:type => 'Need', :is_deleted => '0', :category => params[:category]}, :per_page => 100)
       else
         @needs = UserListing.search(search_query, :conditions => {:type => 'Need', :is_deleted => '0'}, :per_page => 100)
@@ -34,8 +39,8 @@ class SearchController < ApplicationController
       return @needs
     end
 
-    def searchOffers(search_query)
-      if params[:category] && params[:category] != ""
+    def searchOffers(search_query, catagory)
+      if catagory && catagory != ''
         @offers = UserListing.search(search_query, :conditions => {:type => 'Offer', :is_deleted => '0', :category => params[:category]}, :per_page => 100)
       else
         @offers = UserListing.search(search_query, :conditions => {:type => 'Offer', :is_deleted => '0'}, :per_page => 100)
@@ -50,7 +55,7 @@ class SearchController < ApplicationController
       return @offers
     end
 
-    def searchUsers(search_query)
+    def searchUsers(search_query, catagory)
       @users= User.search(search_query, :conditions => {:is_deleted => '0'}, :per_page => 100)
       if signed_in?
         Action.log current_user.id, 'searched_users', search_query.to_s()
@@ -61,8 +66,13 @@ class SearchController < ApplicationController
       return @users
     end
 
-    def searchAll(search_query)
-      @all = searchOffers(search_query).flatten+searchNeeds(search_query).flatten+searchUsers(search_query).flatten
-      #TODO Add independant action
+    def searchListings(search_query, catagory)
+        return searchOffers(search_query, catagory).flatten + searchNeeds(search, catagory).flatten
+        
+    end
+
+    def searchAll(search_query, catagory)
+      @all = searchOffers(search_query, catagory).flatten+searchNeeds(search_query, catagory).flatten+searchUsers(search_query, catagory).flatten
+      #TODO Add independant action to be logged
     end
 end
