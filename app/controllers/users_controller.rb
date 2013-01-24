@@ -218,7 +218,6 @@ class UsersController < ApplicationController
        flash[:error] = 'We are sorry something went wrong. Please try again.'
        redirect_to('/') 
     end
-   	debugger
     @user = User.find_by_email(params[:email])
     if @user.nil?
        flash[:error] = 'We were unable to find this email in our system.'
@@ -259,9 +258,13 @@ class UsersController < ApplicationController
         redirect_to '/resetpassword', error: 'Passwords do not match'
         return
       else
+        debugger
         @user = User.find(params[:id])
-        @user.update_attribute(:password, params[:password])
-        flash[:notice] = 'Your password has been reset'
+        if @user.resetPassword(params[:confirm])
+          flash[:notice] = 'Your password has been reset'
+        else
+          flash[:error] = "There was an issue resetting your password"
+        end
         redirect_to root_url
       end
     end 

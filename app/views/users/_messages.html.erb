@@ -15,27 +15,31 @@
 	      				<a class="accordion-toggle" data-toggle="collapse" data-parent="#messageAccordion" href="#collapse<%= i %>">
 	        			
 							<div class='row-fluid'>
-								<div class="span4">
+								<div class="span2">
 									<% if (message.initUser).to_s == (current_user.id).to_s %>
-										<%= link_to image_tag(@targUser.profile.photo.url, {:width => "70px", :height => '70px'}), @targUser %>
-										<%= User.find(message.targUser).name %>
+										<div class='linkable' data-url='/view/<%= @targUser.id %>'>
+											<%= image_tag(@targUser.profilePic, {:width => "50px", :height => '50px'}) %>
+											<%= @targUser.name %>
+										</div>
 									<% else %>
-										<%= link_to image_tag(@initUser.profile.photo.url, {:width => "70px", :height => '70px'}), @initUser %>
-										<%= User.find(message.initUser).name %>
+										<div class='linkable' data-url='/view/<%= @initUser.id %>'>
+											<%= image_tag(@initUser.profile.photo.url, {:width => "50px", :height => '50px'}) %>
+											<%= @initUser.name %>
+										</div>
 									<% end %>
 								</div>
-								<div class="span4">
+								<div class="span4 offset2">
 									<span>
 										<%= message.subject %> - <%= message.updated_at %>
 									</span>
 								</div>
 								<div class="span4">
 									<%# if message.type == 'InitiateExchange' %>
-										<%#= image_tag('InitExchIco.png', {:width => '70px', :height => '70px'}) %>
+										<%#= image_tag('InitExchIco.png', {:width => '50px', :height => '50px'}) %>
 									<%# elsif message.type == 'PerformExchange' %>
-										<%#= image_tag('PerfExchIco.png', {:width => '70px', :height => '70px'}) %>
+										<%#= image_tag('PerfExchIco.png', {:width => '50px', :height => '50px'}) %>
 									<%# elsif message.type == 'RateExchange' %>
-										<%#= image_tag('RRExchIco.png', {:width => '70px', :height => '70px'}) %>
+										<%#= image_tag('RRExchIco.png', {:width => '50px', :height => '50px'}) %>
 									<%# else %>
 									<%#end%>
 								</div>

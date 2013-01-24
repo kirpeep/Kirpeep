@@ -150,7 +150,7 @@
 
     <div style='font-weight:normal; '>
     <div class="span4 pull-left" style='margin-top:15px;font-size:12px;'>
-        (<%= Exchange.where("id != ?",listing.user.id).all.count %>) Exchanges<br />
+        (<%= listing.user.numOfExchanges %>) Exchanges<br />
         (0) Reviews 
     </div>
     <div class="span3 pull-right" style='margin-top:15px;font-size:12px;'>
