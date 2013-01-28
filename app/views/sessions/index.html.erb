@@ -6,6 +6,7 @@
 <%= stylesheet_link_tag    "index.css" %>
 
 </head>
+
 <body>
 
 <!--< %= render 'shared/signin' %>-->
@@ -69,21 +70,31 @@
     
   </div>
   <div class='pull-right' style='margin-top:5px;margin-right:35px;'></div> 
-   <% if flash[:notice] != nil %>
+   
+
+
+
+  <% if flash[:notice] != nil %>
 	    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
 	       <button type="button" class="close" data-dismiss="alert">×</button>
 	       <div id="flash_notice">
 		 <%= flash[:notice] %>
 	       </div>
 	    </div>
-	    <% elsif flash[:error] != nil %>
+
+	<% elsif flash[:error] != nil %>
 	    <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
 	       <button type="button" class="close" data-dismiss="alert">×</button>
 	       <div id="flash_notice">
 		 <%= flash[:error] %>
 	       </div>
 	    </div>
-    <% end %>
+  <% end %>
+
+
+
+
+
 
   <div class='row'>
     <div class='span8 offset2 align-center'>

@@ -9,12 +9,16 @@ class SearchController < ApplicationController
     end
 
     if @userlistings.empty?
-      flash[:error] = 'No results found. Instead browse our recent listings.'
+      flash.now[:error] = 'No results found. Instead browse our recent listings.'
       @userlistings = UserListing.search(nil, :conditions => {:is_deleted => '0'}, :per_page => 100)
     end
 
   	render "show"
 	end
+
+
+
+
 
   private
     def searchNeeds(search_query)
@@ -34,6 +38,8 @@ class SearchController < ApplicationController
       return @needs
     end
 
+
+
     def searchOffers(search_query)
       if params[:category] && params[:category] != ""
         @offers = UserListing.search(search_query, :conditions => {:type => 'Offer', :is_deleted => '0', :category => params[:category]}, :per_page => 100)
@@ -49,6 +55,8 @@ class SearchController < ApplicationController
 
       return @offers
     end
+
+
 
     def searchUsers(search_query)
       @users= User.search(search_query, :conditions => {:is_deleted => '0'}, :per_page => 100)

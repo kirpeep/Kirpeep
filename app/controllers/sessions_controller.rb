@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
 
   def index
   	@title = "Kirpeep | Realize Yourself"
+
   end
 
   def new
