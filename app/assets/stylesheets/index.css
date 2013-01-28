@@ -35,6 +35,12 @@ span#signup { background-color:#FFF;
 .logo{
 	display: inline-block; vertical-align:top;
 }
+
+.not-signed-in-area{
+	margin-top:10px;
+	margin-left:10px;
+}
+
 /*Styles for fuzz overlay & message box
 #fuzz{ position:absolute; top:0; left:0; width:100%; z-index:100; background: repeat; background-image: url('images/fuzz.png'); display:none; text-align:left; }  
   

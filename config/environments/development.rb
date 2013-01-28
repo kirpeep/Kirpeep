@@ -5,7 +5,7 @@ Kirpeep::Application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   # Code is not reloaded between requests
-  config.cache_classes = true
+  config.cache_classes = false
   ThinkingSphinx.deltas_enabled = true 
   ThinkingSphinx.updates_enabled = true
 
@@ -24,7 +24,7 @@ Kirpeep::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
 
   config.after_initialize do
     ActiveMerchant::Billing::Base.mode = :test
@@ -46,9 +46,13 @@ Kirpeep::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   config.active_record.auto_explain_threshold_in_seconds = 0.5
 
+
   # Do not compress assets
   config.assets.compress = false
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.serve_static_assets = false
+  config.assets.digest = false
 end

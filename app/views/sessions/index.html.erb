@@ -10,16 +10,22 @@
 
 <!--< %= render 'shared/signin' %>-->
 
-
   <div class='container'>
     <div class='row'>
       <div class="span6 offset1 pull-right">
+      
+
+
       <% if signed_in? %>
+
+
       <div class="btn-group pull-right">
+        
         <a class="btn dropdown-toggle" data-toggle="dropdown" onclick='$(this).dropdown()' href="#">
             <%= current_user.name %> - <%= if current_user.kirpoints == nil then 0 else current_user.kirpoints end %> kps
             <span class="caret"></span>
         </a>
+        
         <ul class="dropdown-menu">
             <li><%= link_to 'Buy Kirpoints' , '/kirpoints', :class => "dynamolink" %></li>
             <li><%= link_to 'Cashout Kirpoints' , '/kirpoints/cashout' %></li>
@@ -29,22 +35,35 @@
             <li><%= link_to 'Sign Out' , destroy_session_path %></li>
           
         </ul>
+      
       </div>
 
-      <%= link_to raw('<i class="icon-plus-sign"></i> Need'), 
-	   new_userlisting_path(:type => "need"), 
+      <%= link_to raw('<i class="icon-plus-sign"></i> Need'), new_userlisting_path(:type => "need"), 
 	   {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
 
-      
       <%= link_to raw('<i class="icon-plus-sign"></i> Offer'), new_userlisting_path(:type => "offer"), 
            {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
+
     <% else %>
-      <div class='row pull-right'>
+
+      <div class='row pull-right  not-signed-in-area'>
 	      <a href='/forgot' class='dynamolink'>Forgot Password</a>
 	      <a href="#signin" role="button" class="btn" data-toggle="modal" >Sign In</a>
       </div>
+
     <%end%>
      
+
+
+
+
+
+
+
+
+
+
+
     </div>
      
     
@@ -133,7 +152,7 @@
     <%end%>
     <div class='align-center'>
       <p><a href='/how'>How It Works</a> | <a href='/tos'>Terms of Use</a> | <a href='/privacy'>Privacy</a><br />
-      &copy; 2012 Kirpeeps Inc.</p>
+      &copy; 2012 - 2013 Kirpeeps Inc.</p>
     </div>
   </div>
 
