@@ -213,7 +213,7 @@ ActiveRecord::Schema.define(:version => 20121231214527) do
     t.string   "token"
     t.decimal  "kirpoints",           :precision => 10, :scale => 0
     t.decimal  "kirpoints_committed", :precision => 10, :scale => 0
-    t.boolean  "delta"
+    t.boolean  "delta",                                              :default => true,  :null => false
     t.boolean  "is_deleted",                                         :default => false
   end
 

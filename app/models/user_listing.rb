@@ -21,7 +21,7 @@ class UserListing < ActiveRecord::Base
 	     :styles => {
 	       :thumb=> "100x100#",
 	       :small  => "400x400>" }
-       
+	       
 	define_index do 
 		indexes title
 		indexes description

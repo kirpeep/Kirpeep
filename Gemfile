@@ -58,7 +58,7 @@ group :test, :development, :kyle, :john do
 	gem 'rspec-rails'
 	gem 'guard-rspec'
 	gem 'launchy'
-	gem 'ruby-debug19'
+	gem 'debugger'
 	gem 'rails-erd'
 	gem 'rb-readline'
 end

@@ -7,5 +7,5 @@ development:
 production:
   bin_path: '/usr/local/bin'
 
-john:
+development:
   bin_path: '/usr/bin'
