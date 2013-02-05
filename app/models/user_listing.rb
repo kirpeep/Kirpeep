@@ -27,6 +27,7 @@ class UserListing < ActiveRecord::Base
 		indexes description
 		indexes type
 		indexes is_deleted
+		indexes created_at
         indexes category
 		indexes user.profile.location, :as => :user_location
 		indexes user.profile.education, :as => :user_education
