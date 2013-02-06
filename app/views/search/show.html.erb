@@ -47,7 +47,7 @@
        
         <div id='BrowseListings'>
           <!-- % = will_paginate @userlistings%-->
-          <% for listing in @userlistings.sort_by(&:created_at).reverse %>
+          <% for listing in @userlistings %>
             <div class="listings clearfix" style="width: 250px;">
               <% debugger %>
             <% if listing.is_a? User %>
