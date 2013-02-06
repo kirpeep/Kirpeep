@@ -1,5 +1,5 @@
 development:
-  bin_path: '/usr/local/bin'
+  bin_path: '/usr/bin'
 #For Local (Ronin-PC) owned by John Lozano     bin_path: 'C:\Sphinx\bin'
 #searchd_binary_name: searchd
 #indexer_binary_name: indexer

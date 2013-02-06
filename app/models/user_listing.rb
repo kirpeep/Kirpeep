@@ -6,7 +6,7 @@
 
 class UserListing < ActiveRecord::Base
        
-	attr_accessible :type, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints, :is_deleted, :category
+	attr_accessible :type, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints, :is_deleted, :category, :created_at
 
 	belongs_to :profile
 	has_many :exchanges
@@ -23,17 +23,18 @@ class UserListing < ActiveRecord::Base
 	       :small  => "400x400>" }
        
 	define_index do 
+		has created_at, updated_at
 		indexes title
 		indexes description
 		indexes type
 		indexes is_deleted
-		indexes created_at
-        indexes category
+ 	        indexes category
 		indexes user.profile.location, :as => :user_location
 		indexes user.profile.education, :as => :user_education
 		indexes user.profile.zipcode, :as => :zipcode
 
 		set_property :delta => true
+
 	end
 		
 	validates :description, :presence => true, :length => {:maximum =>180}
@@ -41,6 +42,6 @@ class UserListing < ActiveRecord::Base
 	#validates :listingtype#, :presence => true
 
 	def self.GetAllByQuery(query)
-	  self.search(query, :conditions => {:is_deleted => '0'}, :order => :created_at, :per_page => 100)
+	  UserListing.search(query, :sql_order => "created_at DESC", :conditions => {:is_deleted => '0'}, :per_page => 100)
 	end
 end
