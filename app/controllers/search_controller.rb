@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     @userlistings = UserListing.GetAllByQuery(params[:search])
     if @userlistings.empty?
       flash[:error] = 'No results found. Instead browse our recent listings.'
-      @userlistings = UserListing.search(nil, :conditions => {:is_deleted => '0'}, :order => "created_at DESC", :per_page => 100)
+      @userlistings = UserListing.search(nil, :conditions => {:is_deleted => '0'}, :order => :created_at, :sort_mode => :desc, :per_page => 100)
     end
 
   	render "show"
