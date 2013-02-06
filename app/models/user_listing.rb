@@ -41,6 +41,6 @@ class UserListing < ActiveRecord::Base
 	#validates :listingtype#, :presence => true
 
 	def self.GetAllByQuery(query)
-	  self.search(query)
+	  self.search(query, :conditions => {:is_deleted => '0'}, :order => :created_at, :per_page => 100)
 	end
 end
