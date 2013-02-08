@@ -33,7 +33,12 @@ module Kirpeep
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-
+    
+    #Google Analytics
+    if Rails.env == "production"
+      config.middleware.use("Rack::GoogleAnalytics", :web_property_id => "UA-28823224-1")
+    end
+    
     config.cache_classes = true
     ThinkingSphinx.deltas_enabled = true 
     ThinkingSphinx.updates_enabled = true
