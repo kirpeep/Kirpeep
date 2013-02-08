@@ -18,6 +18,12 @@ gem 'thinking-sphinx'
 gem 'ts-delayed-delta'
 gem 'delayed_job_active_record'
 
+#Google Analytics
+group :production do
+	gem 'rack-google_analytics', :require => "rack/google_analytics"
+end	
+	
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
