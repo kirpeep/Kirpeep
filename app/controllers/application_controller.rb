@@ -38,8 +38,8 @@ class ApplicationController < ActionController::Base
 	"Real Estate",
 	"Small Business",
 	"Theraputic",
-	"Travel/Vacation"
-	"Non-Profit"
+	"Travel/Vacation",
+	"Non-Profit",
 	"Free"
   ]
 
