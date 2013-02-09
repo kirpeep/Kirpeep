@@ -49,7 +49,6 @@
           <!-- % = will_paginate @userlistings%-->
           <% for listing in @userlistings %>
             <div class="listings clearfix" style="width: 250px;">
-              <% debugger %>
             <% if listing.is_a? User %>
               <%= render :partial => 'users/show_user_as_listing', :locals => {:user => listing } %>
             <% elsif listing.is_a? UserListing %>
