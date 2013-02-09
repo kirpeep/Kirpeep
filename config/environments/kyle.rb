@@ -3,8 +3,6 @@ Kirpeep::Application.configure do
 
   # Code is not reloaded between requests
   config.cache_classes = true
-  ThinkingSphinx.deltas_enabled = true 
-  ThinkingSphinx.updates_enabled = true
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
