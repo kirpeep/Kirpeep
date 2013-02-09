@@ -6,8 +6,6 @@ Kirpeep::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   # Code is not reloaded between requests
   config.cache_classes = true
-  ThinkingSphinx.deltas_enabled = true 
-  ThinkingSphinx.updates_enabled = true
 
   $domain = 'http://test.kirpeep.com'
 
