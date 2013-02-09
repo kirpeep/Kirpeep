@@ -35,8 +35,6 @@ module Kirpeep
     # config.i18n.default_locale = :de
 
     config.cache_classes = true
-    ThinkingSphinx.deltas_enabled = true 
-    ThinkingSphinx.updates_enabled = true
 
     #Full error reports are disabled and caching is turned on
     config.consider_all_requests_local       = true

@@ -14,9 +14,9 @@ gem 'will_paginate', '3.0.3'
 gem 'riddle'
 
 #Search Gems
-gem 'thinking-sphinx'
-gem 'ts-delayed-delta'
 gem 'delayed_job_active_record'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 # Gems used only for assets and not required
 # in production environments by default.

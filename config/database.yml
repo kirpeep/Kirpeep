@@ -58,6 +58,6 @@ john:
   database: KIRPEEP_TEST
   pool: 5
   username: root
-  password: kirpeep2012
+  password: root
   host: localhost
   socket: /var/run/mysqld/mysqld.sock

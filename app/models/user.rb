@@ -23,12 +23,9 @@ class User < ActiveRecord::Base
   has_many :transactions
   has_and_belongs_to_many :searchQueries
 
-  define_index do 
-    indexes email
-    indexes :name
-    indexes is_deleted
-
-    set_property :delta => true
+  searchable do 
+    text :email, :name, :location
+    integer :zipcode
   end
 
   email_regex = /^.+@.+$/

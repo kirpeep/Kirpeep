@@ -22,18 +22,14 @@ class UserListing < ActiveRecord::Base
 	       :thumb=> "100x100#",
 	       :small  => "400x400>" }
        
-	define_index do 
-		indexes title
-		indexes description
-		indexes type
-		indexes is_deleted
-		indexes created_at
-        indexes category
-		indexes user.profile.location, :as => :user_location
-		indexes user.profile.education, :as => :user_education
-		indexes user.profile.zipcode, :as => :zipcode
+	searchable do 
+		text :title, :description, :type, :category
+		boolean :is_deleted
+		time :created_at
+        
+		#indexes user.profile.location, :as => :user_location
+		#indexes user.profile.zipcode, :as => :zipcode
 
-		set_property :delta => true
 	end
 		
 	validates :description, :presence => true, :length => {:maximum =>180}
@@ -41,6 +37,13 @@ class UserListing < ActiveRecord::Base
 	#validates :listingtype#, :presence => true
 
 	def self.GetAllByQuery(query)
-	  self.search(query, :conditions => {:is_deleted => '0'}, :order => :created_at, :per_page => 100)
+	  search = self.search do
+	    fulltext query
+            with :is_deleted, '0'
+	    order_by :created_at, :desc
+	    paginate :per_page => 100
+	  end
+          
+          return search.results
 	end
 end
