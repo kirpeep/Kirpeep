@@ -18,6 +18,12 @@ gem 'delayed_job_active_record'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 
+#Google Analytics
+group :production do
+	gem 'rack-google_analytics', :require => "rack/google_analytics"
+end	
+	
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

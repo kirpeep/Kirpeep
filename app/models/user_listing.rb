@@ -6,7 +6,7 @@
 
 class UserListing < ActiveRecord::Base
        
-	attr_accessible :type, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints, :is_deleted, :category
+	attr_accessible :type, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints, :is_deleted, :category, :created_at
 
 	belongs_to :profile
 	has_many :exchanges

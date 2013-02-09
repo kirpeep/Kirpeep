@@ -38,7 +38,9 @@ class ApplicationController < ActionController::Base
 	"Real Estate",
 	"Small Business",
 	"Theraputic",
-	"Travel/Vacation"
+	"Travel/Vacation",
+	"Non-Profit",
+	"Free"
   ]
 
   def tos
