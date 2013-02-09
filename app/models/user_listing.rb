@@ -23,7 +23,9 @@ class UserListing < ActiveRecord::Base
 	       :small  => "400x400>" }
        
 	searchable do 
-		text :title, :description, :type, :category
+		text :title, :description 
+		#string :type 
+		string :category
 		boolean :is_deleted
 		time :created_at
         
@@ -36,10 +38,24 @@ class UserListing < ActiveRecord::Base
 	validates :title, :presence => true, :length => {:maximum => 50}
 	#validates :listingtype#, :presence => true
 
-	def self.GetAllByQuery(query)
+	def self.SearchByQuery(query)
 	  search = self.search do
 	    fulltext query
             with :is_deleted, false
+	    order_by :created_at, :desc
+	    paginate :per_page => 100
+	  end
+          
+          return search.results
+	end
+
+	def self.SearchByQueryAndCategory(query, category)
+	  search = self.search do
+	    fulltext query
+            with :category, category
+            all_of do
+		with :is_deleted, false
+	    end
 	    order_by :created_at, :desc
 	    paginate :per_page => 100
 	  end
