@@ -7,8 +7,6 @@ TestApp::Application.configure do
   # and recreated between test runs. Don't rely on the data there!
   # Code is not reloaded between requests
   config.cache_classes = true
-  ThinkingSphinx.deltas_enabled = true 
-  ThinkingSphinx.updates_enabled = true
 
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true

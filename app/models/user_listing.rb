@@ -39,7 +39,7 @@ class UserListing < ActiveRecord::Base
 	def self.GetAllByQuery(query)
 	  search = self.search do
 	    fulltext query
-            with :is_deleted, '0'
+            with :is_deleted, false
 	    order_by :created_at, :desc
 	    paginate :per_page => 100
 	  end
