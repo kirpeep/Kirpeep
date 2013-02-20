@@ -2,7 +2,6 @@ class SearchController < ApplicationController
 
   def search
     flash[:error] = nil
-debugger
     if params[:category] && params[:category] != ""
     @userlistings = UserListing.SearchByQueryAndCategory(params[:search], params[:category])
     else 

@@ -2,139 +2,29 @@
   <span class="offer-span">OFFERED</span><br />
   <span class="offer-title span10"><%= listing.title %></span>
   
-    <div id="need-actions" class="span9" >
-      <div class="row tool pull-right">
-        <div class="btn-group">
-         <a class="btn dropdown-toggle" data-toggle="dropdown" onclick='$(this).dropdown()' href="#"><i class='icon-align-justify'></i> <span class="caret"></span>
-         </a>
-        <ul class="dropdown-menu" style='margin-left:-100px;'>  
-          
-        <% if current_user && listing.user.id == current_user.id %>
-          <li>
-            <a href="/listing/<%= listing.id %>" >View Details
-            <%#= image_tag('Icon_Edit_nocolor.png', 
-                 :class=>"editIcon", 
-                 :title=>"Edit", 
-                 :onmouseover=>"$(this).attr('src','/assets/Icon_Edit_color.png');",
-                 :onmouseout=>"$(this).attr('src','/assets/Icon_Edit_nocolor.png');") %>
-            </a>
-          </li>  
-          <!-- Edit -->
-          <li>
-            <a href="/edit_listing?id=<%= listing.id %>&listing_type=offer" class='dynamolink'>Edit
-            <%#= image_tag('Icon_Edit_nocolor.png', 
-                 :class=>"editIcon", 
-                 :title=>"Edit", 
-                 :onmouseover=>"$(this).attr('src','/assets/Icon_Edit_color.png');",
-                 :onmouseout=>"$(this).attr('src','/assets/Icon_Edit_nocolor.png');") %>
-            </a>
-          </li>
-          <li>
-          <a class="dynamolink" href="/share/<%= listing.id.to_s%>">Share
-            <%#= image_tag('Icon_Share_gray_regular.png', 
-                 :class=>"shareIcon",
-                 :title=>"Share", 
-                 :onmouseover=>"$(this).attr('src','/assets/Icon_Share_green_rollover.png');",
-                 :onmouseout=>"$(this).attr('src','/assets/Icon_Share_gray_regular.png');" ) %>
-          </a>
-          </li>
-          <li>
-            <%= link_to 'Remove', '/destroy_listing?id='+listing.id.to_s %>
-          </li>
-          <li>
-          <a class="dynamolink" href="/listing/<%= listing.id.to_s%>/report">Report
-          </a>
-          </li>
-        <% elsif current_user %>
-          <li>
-            <a href="/listing/<%= listing.id %>" >View Details
-            <%#= image_tag('Icon_Edit_nocolor.png', 
-                 :class=>"editIcon", 
-                 :title=>"Edit", 
-                 :onmouseover=>"$(this).attr('src','/assets/Icon_Edit_color.png');",
-                 :onmouseout=>"$(this).attr('src','/assets/Icon_Edit_nocolor.png');") %>
-            </a>
-          </li>  
-          <!-- Message-->
-          <li>
-          <a href="/sendmessage?id=<%= listing.user.id %>&replyTo=nil" class='dynamolink'>Message
-          </a>
-          </li>
-        
-        <!-- Initiate Exchange-->
-        
-         <li>
-             <a  href="/initiate_exchange?id=<%= listing.id.to_s%>">Start Exchange
-              
-              </a>
-          </li>
-          <li> 
-          <a class="dynamolink" href="/quicksale/<%= listing.id.to_s%>">Spend Kirpoints
-            
-          </a>
-          </li>
-          <li>
-          <a class="dynamolink" href="/share/<%= listing.id.to_s%>">Share
-          
-          </a>
-          </li>
-          <li>
-          <a class="dynamolink" href="/listing/<%= listing.id.to_s%>/report">Report
-          </a>
-          </li>
-         <!-- dropdown menu links -->
-          <% else %>
-             <li>
-              <a href="#signin" data-toggle="modal" >View Details
-              </a>
-            </li>
-             <!-- Message-->
-		<li>
-		  <a href="#signin" data-toggle="modal" >Message
-		  </a>
-		</li>
-		
-		<!-- Initiate Exchange-->
-		 <li>
-		    <a href="#signin" data-toggle="modal" >Start Exchange  
-		    </a>
-		  </li>
-		  <li> 
-		    <a href="#signin" data-toggle="modal" >Spend Kirpoints
-		    </a>
-		  </li>
-		  <li>
-		    <a href="#signin" data-toggle="modal" >Share
-		    </a>
-		  </li>
-                  <li>
-		    <a href="#signin" data-toggle="modal" >Report
-		    </a>
-		  </li>
-          <% end %>
-        </ul>
-       </div>
-      </div>
-        
-    </div> 
+  <div id="need-actions" class="span9" >
+    <%= render :partial => 'userlistings/listing_actions', :locals => {:listing => listing} %>
+  </div> 
   
-    <div id="need-listing" class="span12">
-      <div>
+  <div id="offer-listing" class="span12">
+    <div>
+      <a href="/listing/<%= listing.id %>" >
         <% if !(listing.photo.url =~ /missing.png/) %>
-          <%= image_tag(listing.photo.url, :style=>'width:95%;') %>
+        <%= image_tag(listing.photo.url, :style=>'width:95%;') %>
         <% else %>
-          <div class='noListingImage'></div>
+        <div class='noListingImage'></div>
         <% end %>
-      </div>
+      </a>
     </div>
-    <div class="span12">
-      <p class="need-desc"><%= listing.description %></p>
-      <p>Category: <%= listing.category %></p>
-    </div>
-   <div class="span12">
+  </div>
+  <div class="span12">
+    <p class="offer-desc"><%= listing.description %></p>
+    <p>Category: <%= listing.category %></p>
+  </div>
+  <div class="span12">
     <strong><%= if listing.kirpoints == nil then 0 else listing.kirpoints end %> kirpoint(s) for this item</strong>
-    </div>
-   
+  </div>
+
   <div style= "display:none;">
     <%= image_tag('favorite.png') %> <!-- width="30" height="30" /><br /> -->
     <%= image_tag('kid.png') %> <!-- width="43" height="34" /> -->
@@ -142,28 +32,30 @@
   <div class="row-fluid">
     <div class="span4 pull-left">
       <% if signed_in? && listing.user.id == current_user.id %>
-      	<%= link_to image_tag(listing.user.profile.photo.url, {:style=>'width:70px;', :class => 'img-polaroid'}), listing.user, {:id => 'userImage', 'rel' =>'popover' } %>
+      <%= link_to image_tag(listing.user.profile.photo.url, {:style=>'width:70px;', :class => 'img-polaroid'}), listing.user, {:id => 'userImage', 'rel' =>'popover' } %>
       <% else %>
-        <a href='/view/<%= listing.user.id %>'><%= image_tag(listing.user.profile.photo.url, {:style=>'width:70px;', :class => 'img-polaroid'}) %></a>
+      <a href='/view/<%= listing.user.id %>'><%= image_tag(listing.user.profile.photo.url, {:style=>'width:70px;', :class => 'img-polaroid'}) %></a>
       <% end %>
       <%#= image_tag('stars.png') %>
     </div>
     
     <div class='pull-left'>
-    <%#= listing.user.name %>
+      <%#= listing.user.name %>
     </div>
 
     <div style='font-weight:normal;'>
-    <div class="span5 pull-left" style='margin-top:15px;font-size:12px;'>
+      <div class="span5 pull-left" style='margin-top:15px;font-size:12px;'>
         (<%= listing.user.numOfExchanges %>) Exchanges<br />
         (0) Reviews 
+      </div>
+      <div class="span3 pull-right" style='margin-top:15px;font-size:12px;'>
+        (<%= listing.user.needs.count %>) need(s)
+        <br />
+        (<%= listing.user.offers.count %>) offer(s) 
+      </div>
+      <div>
+        Posted <%= time_ago_in_words(listing.created_at) %> ago.
+      </div>
     </div>
-    <div class="span3 pull-right" style='margin-top:15px;font-size:12px;'>
-          (<%= listing.user.needs.count %>) need(s)
-          <br />
-          (<%= listing.user.offers.count %>) offer(s) 
-    </div>
-    
-  </div>
   </div> 
 </div>

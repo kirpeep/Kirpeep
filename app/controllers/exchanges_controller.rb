@@ -35,6 +35,10 @@ class ExchangesController < ApplicationController
     @exch = Exchange.find(params[:id]) 
     @targUser = User.find(@exch.targUser )
     @initUser = User.find(@exch.initUser )
+
+    if current_user.id != @targUser.id && current_user.id != @initUser.id
+      redirect_to "/users/"+current_user.id.to_s
+    end
     @exchange_items = exchanged_items(@exch.id)
     #not the greatest way to do this, with this code we will not be able to do \
     #multiparty exchanges. To resolve a migration should be made to include initUsers id 

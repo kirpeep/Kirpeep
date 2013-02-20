@@ -1,5 +1,10 @@
 Kirpeep::Application.routes.draw do
-  #get "sessions/new"
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
+  match 'auth/:provider/callback', :to => 'sessions#facebook_create'
+  match 'auth/failure', to: redirect('/')
   match '/sessions/signin', :to => 'sessions#signin'
 
   match  'destroy_session',      :to => 'sessions#destroy'
@@ -40,6 +45,7 @@ Kirpeep::Application.routes.draw do
   put '/userlisting/:id', :to => 'userlistings#update'
   get  '/edit_listing/',  :to => 'userlistings#edit'
   match  '/get_listing/', :to => 'userlistings#getListing'
+  get '/userlisting/:id/ditto/', :to => 'userlistings#ditto'
   get  '/sendmessage/?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
   match '/add_review/', :to => 'reviews#new'
   # Forgot password and password reset hacks

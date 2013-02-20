@@ -65,6 +65,18 @@ class User < ActiveRecord::Base
   	(user && user.salt == cookie_salt) ? user : nil
   end
 
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
+      user.mail = auth.info.email
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
+    end
+  end	
+  
   # Helper method that will generate a token for the user account
   # This will be used for things like reset/forgot passwords
   def self.generateToken()

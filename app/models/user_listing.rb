@@ -39,7 +39,7 @@ class UserListing < ActiveRecord::Base
 	#validates :listingtype#, :presence => true
 
 	def self.SearchByQuery(query)
-	  search = self.search do
+	  search = Sunspot.search(self) do
 	    fulltext query
             with :is_deleted, false
 	    order_by :created_at, :desc
@@ -50,7 +50,7 @@ class UserListing < ActiveRecord::Base
 	end
 
 	def self.SearchByQueryAndCategory(query, category)
-	  search = self.search do
+	  search = Sunspot.search(self) do
 	    fulltext query
             with :category, category
             all_of do
@@ -61,5 +61,15 @@ class UserListing < ActiveRecord::Base
 	  end
           
           return search.results
+	end
+
+	def self.GetDaysSinceListingCreated(listing_id)
+		listing = self.find(listing_id)
+
+  		time_ago_in_words(listing.created_at)
+	end
+	
+	def self.GetByUserId(id)
+	  listings =self.find_by_user_id(id, :conditions => {:is_deleted => false})
 	end
 end
