@@ -92,5 +92,7 @@ module Kirpeep
  	    # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    ENV['FACEBOOK_APP_ID'] = "498098446874679"
+    ENV['FACEBOOK_SECRET'] = "4420a79f48bcc05bbeeaefd5ab947967" 
   end
 end

@@ -18,6 +18,10 @@ gem 'delayed_job_active_record'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 
+#Admin Page
+gem 'activeadmin'
+gem "meta_search",    '>= 1.1.0.pre'
+
 #Google Analytics
 group :production do
 	gem 'rack-google_analytics', :require => "rack/google_analytics"
@@ -63,11 +67,16 @@ gem 'client_side_validations'
 group :test, :development, :kyle, :john do
 	gem 'rspec-rails'
 	gem 'guard-rspec'
+	gem 'guard-livereload'
 	gem 'launchy'
 	gem 'ruby-debug19'
 	gem 'rails-erd'
 	gem 'rb-readline'
 end
+
+#Facebook login	
+gem 'omniauth-facebook' 
+
 
 #Run the following the following(each is a line)
 #guard init

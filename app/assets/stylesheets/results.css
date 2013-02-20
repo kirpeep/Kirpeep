@@ -3,6 +3,12 @@
 */
 @charset "utf-8";
 
+/*Nofication pop up*/
+.notify{
+  background-color:#eee;color: #777;border:5px solid #FF931E;border-radius:20px;overflow:hidden;display:block;position:fixed;bottom:0;left:0;float:left;margin: 20px 20px 50px 50px;width: 100px; font-weight: bold ; text-align:center;
+}
+
+
 /*Header and footer styles*/ 
 #header{
 	margin-top: 15px;
@@ -98,7 +104,7 @@
 
 
 .user-span {
-	border: 3px solid #FF931E; 
+	/*border: 3px solid #FF931E; 
 	background-color:#E6E6E6;*/
 	font: Franklin Gothic Heavy;
 }
@@ -161,8 +167,6 @@
 }
 
 .need-span {
-	/*border: 3px solid #0F0; 
-	background-color:#E6E6E6;*/
 	font: Franklin Gothic Heavy;
 }
 

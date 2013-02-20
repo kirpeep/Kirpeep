@@ -17,55 +17,55 @@
     <%= render 'shared/header' %>
 
     <div id='main-content' class='row'>
-    <hr/></div>
-    <div class="row-fluid">
+      <hr/></div>
+      <div class="row-fluid">
        <% if flash[:notice] != nil %>
-	    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
-	       <button type="button" class="close" data-dismiss="alert">×</button>
-	       <div id="flash_notice">
-		 <%= flash[:notice] %>
-	       </div>
-	    </div>
-	    <% elsif flash[:error] != nil %>
-	    <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
-	       <button type="button" class="close" data-dismiss="alert">×</button>
-	       <div id="flash_notice">
-		 <%= flash[:error] %>
-	       </div>
-	    </div>
-      <% end %>
+       <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <div id="flash_notice">
+         <%= flash[:notice] %>
+       </div>
+     </div>
+     <% elsif flash[:error] != nil %>
+     <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <div id="flash_notice">
+       <%= flash[:error] %>
+     </div>
+   </div>
+   <% end %>
 
-       <!--yes, I know this is not indented right. I want to make sure it works first-->
-                          <!-- nice job on the comments, I was about to call you a bitch for nothing, good job -->
-        <div class="row-fluid">
-          <% if params[:search].to_s == ''%>
-            <h1>Browse Listings</h1>
-          <%else%>
-            <h1>Search Results For <%= params[:search] %></h1> 
-          <%end%>
-        </div>
-       
-        <div id='BrowseListings'>
-          <!-- % = will_paginate @userlistings%-->
-          <% for listing in @userlistings %>
-            <div class="listings clearfix" style="width: 250px;">
-            <% if listing.is_a? User %>
-              <%= render :partial => 'users/show_user_as_listing', :locals => {:user => listing } %>
-            <% elsif listing.is_a? UserListing %>
-              <% if listing.type == 'Offer' %>
-                <%= render :partial => 'userlistings/show_offer', :locals => {:listing => listing } %>
-              <% elsif listing.type == 'Need' %>
-                <%= render :partial => 'userlistings/show_need', :locals => {:listing => listing } %>
-              <% end %>
-            <% end %>
-            </div>
-            <!-- <div class="listings clearfix" style="width: 250px;" data-url="/show_listing?id=<%= listing.id %>"></div> -->
-          <% end %>
-          <!-- %= will_paginate @userlistings%-->
-        </div>
-      <!-- .span4 -->
-     
-     <!--   <div class="span5 offset2"> -->
+   <!--yes, I know this is not indented right. I want to make sure it works first-->
+   <!-- nice job on the comments, I was about to call you a bitch for nothing, good job -->
+   <div class="row-fluid">
+    <% if params[:search].to_s == ''%>
+    <h1>Browse Listings</h1>
+    <%else%>
+    <h1>Search Results For <%= params[:search] %></h1> 
+    <%end%>
+  </div>
+
+  <div id='BrowseListings'>
+    <!-- % = will_paginate @userlistings%-->
+    <% for listing in @userlistings %>
+    <div class="listings clearfix" style="width: 250px;">
+      <% if listing.is_a? User %>
+      <%= render :partial => 'users/show_user_as_listing', :locals => {:user => listing } %>
+      <% elsif listing.is_a? UserListing %>
+      <% if listing.type == 'Offer' %>
+      <%= render :partial => 'userlistings/show_offer', :locals => {:listing => listing } %>
+      <% elsif listing.type == 'Need' %>
+      <%= render :partial => 'userlistings/show_need', :locals => {:listing => listing } %>
+      <% end %>
+      <% end %>
+    </div>
+    
+    <% end %>
+    <!-- %= will_paginate @userlistings%-->
+  </div>
+  <!-- .span4 -->
+
+  <!--   <div class="span5 offset2"> -->
         <!-- MAP 
         <div class="rounded-map">
           <iframe width="600" height="398" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=geekdom&amp;aq=&amp;sll=31.168934,-100.076842&amp;sspn=9.074154,12.634277&amp;ie=UTF8&amp;hq=geekdom&amp;hnear=&amp;t=m&amp;ll=29.428594,-98.491937&amp;spn=0.071946,0.071946&amp;output=embed"></iframe>
@@ -79,7 +79,7 @@
           <div class="adblock">AD</div>
         </div>
       </div>--> <!-- .span5 .offset3--> 
-       
+
     </div>
     <%= render 'shared/footer' %>
   </div>

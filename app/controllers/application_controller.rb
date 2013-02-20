@@ -6,7 +6,7 @@
 
 class ApplicationController < ActionController::Base
   include SessionsHelper
-
+  helper_method :current_user, :cookies 
   protect_from_forgery
 
   $categories = [
@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
   #	@current_user ||= User.find(session[:user_id]) if session[:user_id]
   #end
 	
-  helper_method :current_user 
+  
 
   def sendTxt(to, body)
     $client = Twilio::REST::Client.new $account_sid, $auth_token
