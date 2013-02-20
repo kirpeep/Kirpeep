@@ -13,6 +13,9 @@ gem 'mysql2'
 gem 'will_paginate', '3.0.3'
 gem 'riddle'
 
+#Maps API
+gem 'gmaps4rails'
+
 #Search Gems
 gem 'delayed_job_active_record'
 gem 'sunspot_rails'
