@@ -33,7 +33,11 @@
                     <%= f.label :category %><br />
                     <%= f.select :category, $categories %>
                   </div>
-
+		  <div class="field">
+                    <%= f.label :shippable, "Can this item can be shipped?" %>
+                    <%= f.check_box :shippable %>
+                  </div>
+		  
 		  <!-- add listing type -->
 		  <div class="actions">
 		    
