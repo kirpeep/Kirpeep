@@ -45,43 +45,45 @@ class UserlistingsController < ApplicationController
       else
         flash[:notice] = 'Need saved'
       end  
-    	 
+
       respond_to do |format|
-    	 format.html {redirect_to user}
-       format.json
+        format.html {redirect_to user}
+        format.json
       end
     else
 
     	flash[:error] = listing.errors.full_messages.to_sentence
 
-        if listing.errors.any?
-            listing.errors.full_messages.each do |msg|
-                puts msg
-            end
+      if listing.errors.any?
+        listing.errors.full_messages.each do |msg|
+          puts msg
         end
+      end
 
-    	respond_to do |format|
+      respond_to do |format|
        format.html {redirect_to user}
        format.json #code to inform 
-      end
-    end
-  end 
+     end
+   end
+ end 
 
-  def show_listing
-    @listing = UserListing.find(params[:id]) 
-    render 'show'
-  end
+ def show_listing
+  @listing = UserListing.find(params[:id]) 
+  render 'show'
+end
 
   #display user listing on the results page
   def show_listing_result
-      listing = UserListing.find(params[:id]) 
-      @user = listing.user
-      
-      if listing.type == "Offer"
-        render :partial => 'show_offer', :locals => {:listing => listing, :@user => @user}
-      else 
-        render :partial => 'show_need', :locals => {:listing => listing, :@user => @user}
-      end
+    debugger
+    listing = UserListing.find(params[:id]) 
+    @user = listing.user
+    posted_on = time_ago_in_words(listing.created_at)
+
+    if listing.type == "Offer"
+      render :partial => 'show_offer', :locals => {:listing => listing, :@user => @user, :posted_on => posted_on}
+    else 
+      render :partial => 'show_need', :locals => {:listing => listing, :@user => @user, :posted_on => posted_on}
+    end
   end
 
   #display user listing on the exchange modals
@@ -120,7 +122,7 @@ class UserlistingsController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    
+
     @listing = UserListing.find(params[:id])
     
     if(@listing.type == "Offer")
@@ -168,11 +170,11 @@ class UserlistingsController < ApplicationController
 
       flash[:error] = listing.errors
 
-        if listing.errors.any?
-            listing.errors.full_messages.each do |msg|
-                puts msg
-            end
+      if listing.errors.any?
+        listing.errors.full_messages.each do |msg|
+          puts msg
         end
+      end
 
       redirect_to current_user
     end
@@ -185,11 +187,11 @@ class UserlistingsController < ApplicationController
   end 
 
   def report
-     @listing = UserListing.find(params[:id])
-     UserMailer.report_email(@listing, current_user).deliver
-  end
+   @listing = UserListing.find(params[:id])
+   UserMailer.report_email(@listing, current_user).deliver
+ end
 
-  def getListing
+ def getListing
     #render :json => UserListing.find(params[:id])
 
     listing = UserListing.find(params[:id])
@@ -201,4 +203,24 @@ class UserlistingsController < ApplicationController
       render :partial => 'show_exchange_need', :locals => {:listing => listing, :targUser => targUser, :initUser => initUser}
     end
   end
+
+  def ditto
+    @listing = UserListing.find(params[:id])
+
+    user = current_user 
+    
+    if(@listing.type == "offer")
+      listing = user.profile.offers.new @listing.dup.attributes 
+    else 
+      listing = user.profile.needs.new @listing.dup.attributes
+      
+    end
+    if listing.save
+      flash[:success] = "Yay"
+    else
+     flash[:error] = "fuck"
+   end
+
+   redirect_to root_url
+ end
 end

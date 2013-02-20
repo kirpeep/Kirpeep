@@ -42,6 +42,14 @@
       <div class='row pull-right'>
 	      <a href='/forgot' class='dynamolink'>Forgot Password</a>
 	      <a href="#signin" role="button" class="btn" data-toggle="modal" >Sign In</a>
+		<div id="user_nav">
+  		  <% if current_user %>
+    		    Signed in as <strong><%= current_user.name %></strong>!
+    		    <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  		  <% else %>
+    		    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+  		  <% end %>
+		</div>
       </div>
     <%end%>
      
@@ -73,7 +81,9 @@
       </div>
       <div id="ee">
         <%= image_tag('ee.png') %>
-        <%= image_tag('bikee.png') %>
+        <%= image_tag('bicycle.png') %>
+        <%= image_tag('books.png') %>
+        <%= image_tag('cupcake.png') %>
       </div>
       <div class="logo">
         <%= image_tag('p.png') %>
@@ -105,6 +115,15 @@
     </div>
   </div>
 
+  <div style="text-align: center">
+    <iframe width="560" height="315" src="http://www.youtube.com/embed/23KsCPqibJs" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <div style="text-align: center">
+    <%= link_to image_tag("facebook.jpg"), "www.facebook.com/Kirpeep", :width => "100" %>
+    <%= link_to image_tag("twitter.png"), "www.twitter.com/Kirpeep" , :width => "100" %>
+    <%= link_to image_tag("pinterest.png"), "www.pinterest.com/Kirpeep", :width => "100"  %>
+  </div>
   <div class='row'>
     <% if !signed_in? %>
     <div id="signup" class='span6 offset3 align-center'>

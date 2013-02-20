@@ -1,6 +1,7 @@
 module SessionsHelper 
 
-  def sign_in(user)
+  #sign_in being used by devise, had to change global signin function
+  def sign_in_(user)
      if user.Active == true
 	     cookies.permanent.signed[:remember_token] = [user.id, user.salt]
 	     self.current_user = user
@@ -45,7 +46,7 @@ module SessionsHelper
   		@title = "Sign In"
   		redirect_to root_path
   	else 
-  	    sign_in user
+  	    sign_in_ user
   	    flash[:notice] = "Welcome, #{user.name}"
   	    redirect_to user
   	end
