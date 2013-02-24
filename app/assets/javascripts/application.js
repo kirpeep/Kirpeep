@@ -16,7 +16,8 @@
 //= require bootstrap.min
 //= require jquery.purr
 //= require best_in_place
-
+//= require gmaps4rails.base
+//= require gmaps4rails.googlemaps
 
 /*jQuery.ajaxSetup({ 
   beforeSend: function(xhr) {

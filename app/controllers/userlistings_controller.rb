@@ -119,6 +119,20 @@ end
     end
   end
 
+  def edit_location
+    @listing = UserListing.find(params[:id]) 
+    @marker = @listing.to_gmaps4rails
+    
+    if @listing.user.id != current_user.id
+      flash[:error] = "There was an issue accessing specified listing"
+      redirect_to current_user
+    end
+    respond_to do |format|
+      format.html {render 'edit_listing_location'} 
+      format.json 
+    end
+  end
+
   # PUT /users/1
   # PUT /users/1.json
   def update

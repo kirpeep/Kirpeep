@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220173920) do
+ActiveRecord::Schema.define(:version => 20130223062507) do
 
   create_table "actions", :force => true do |t|
     t.integer  "userId"
@@ -233,6 +233,9 @@ ActiveRecord::Schema.define(:version => 20130220173920) do
     t.decimal  "kirpoints",            :precision => 10, :scale => 0
     t.string   "category"
     t.boolean  "shippable"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
   end
 
   create_table "users", :force => true do |t|
