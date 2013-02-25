@@ -16,14 +16,6 @@
           </div>
           <div class='span2 pull-left'>
 		  <div class="field">
-		    <%= f.label :quantity %>
-		    <%= f.text_field :quantity %>
-		  </div>
-		  <div class="field">
-		    <%= f.label :quantityUnit %>
-		    <%= f.text_field :quantityUnit %>
-		  </div>
-		  <div class="field">
 		    <%= f.label :photo %>
 		    <%= f.file_field :photo %>
 		  </div>
@@ -34,6 +26,9 @@
                   <div class="field">
                     <%= f.label :shippable, "Can this item can be shipped?" %>
                     <%= f.check_box :shippable %>
+                  </div>
+		  <div class="field">
+                    <%= link_to 'edit location', "/userlisting/"+@listing.id.to_s+"/edit_location/' %>
                   </div>
           </div>
   </div>
