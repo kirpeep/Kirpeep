@@ -32,13 +32,13 @@
       
       <div class="btn-group pull-right">
         <a class="btn dropdown-toggle" data-toggle="dropdown" onclick='$(this).dropdown()' href="#" style='margin-left:5px;' >
-            <%= current_user.name %> - <%= if current_user.kirpoints == nil then 0 else current_user.kirpoints end %> kps
+            <%= current_user.name %> <!--= if current_user.kirpoints == nil then 0 else current_user.kirpoints end %> kps-->
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <li><%= link_to 'Buy Kirpoints' , '/kirpoints', :class => "dynamolink" %></li>
-            <li><%= link_to 'Gift Kirpoints' , '/kirpoints/gift', :class => "dynamolink" %></li>
-            <li><%= link_to 'Cashout Kirpoints' , '/kirpoints/cashout' %></li>
+            <!--li><%#= link_to 'Buy Kirpoints' , '/kirpoints', :class => "dynamolink" %></li-->
+            <!--li><%#= link_to 'Gift Kirpoints' , '/kirpoints/gift', :class => "dynamolink" %></li-->
+            <!--li><%#= link_to 'Cashout Kirpoints' , '/kirpoints/cashout' %></li-->
             <li><%= link_to 'View Profile', current_user %></li>
             <li><%= link_to 'Edit Profile' , edit_profile_path(current_user.profile), :class => "dynamolink" %></li>
             <li><%= link_to 'Edit Account', edit_user_path(current_user), :class => "dynamolink" %></li>

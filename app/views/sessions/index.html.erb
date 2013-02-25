@@ -21,8 +21,8 @@
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <li><%= link_to 'Buy Kirpoints' , '/kirpoints', :class => "dynamolink" %></li>
-            <li><%= link_to 'Cashout Kirpoints' , '/kirpoints/cashout' %></li>
+            <!--li><%#= link_to 'Buy Kirpoints' , '/kirpoints', :class => "dynamolink" %></li>
+            <li><%#= link_to 'Cashout Kirpoints' , '/kirpoints/cashout' %></li-->
             <li><%= link_to 'View Profile', current_user %></li>
             <li><%= link_to 'Edit Profile' , edit_profile_path(current_user.profile), :class => "dynamolink" %></li>
             <li><%= link_to 'Edit Account', edit_user_path(current_user), :class => "dynamolink" %></li>
@@ -120,9 +120,9 @@
   </div>
 
   <div style="text-align: center">
-    <%= link_to image_tag("facebook.jpg"), "www.facebook.com/Kirpeep", :width => "100" %>
-    <%= link_to image_tag("twitter.png"), "www.twitter.com/Kirpeep" , :width => "100" %>
-    <%= link_to image_tag("pinterest.png"), "www.pinterest.com/Kirpeep", :width => "100"  %>
+    <%= link_to image_tag("facebook.jpg", :style => "height:100px"), "www.facebook.com/Kirpeep" %>
+    <%= link_to image_tag("twitter.png", :style => "height:100px" ), "www.twitter.com/Kirpeep"%>
+    <%= link_to image_tag("pinterest.png", :style => "height:100px"), "www.pinterest.com/Kirpeep" %>
   </div>
   <div class='row'>
     <% if !signed_in? %>
