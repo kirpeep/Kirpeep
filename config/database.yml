@@ -2,12 +2,14 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: KirpeepTest
+  #database: KirpeepTest
+  database: KIRPEEP
   pool: 5
   #username: kirpeepdb
   #password: Kirmahgerd22!
   #host: 2a0abd798bcaa6826f2bdf23778fc0a8052de8f0.rackspaceclouddb.com
   host: 10.177.136.131
+  port: 3306
   username: root
   password: kirpeep2012
   socket: /var/run/mysqld/mysqld.sock

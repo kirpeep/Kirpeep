@@ -24,5 +24,7 @@
 # Ignore Images
 /public/system/*.*
 
+
 # Ignore .gitignore
-#/.gitignore
+/.gitignore
+.gitignore
