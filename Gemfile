@@ -30,6 +30,8 @@ group :production do
 	gem 'rack-google_analytics', :require => "rack/google_analytics"
 end	
 	
+#Private Pub
+gem 'private_pub'
 
 # Gems used only for assets and not required
 # in production environments by default.

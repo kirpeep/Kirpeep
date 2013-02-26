@@ -224,17 +224,20 @@ end
     user = current_user 
     
     if(@listing.type == "offer")
-      listing = user.profile.offers.new @listing.dup.attributes 
+     @new_listing = user.profile.offers.new @listing.dup.attributes 
     else 
-      listing = user.profile.needs.new @listing.dup.attributes
+     @new_listing = user.profile.needs.new @listing.dup.attributes
       
     end
-    if listing.save
-      flash[:success] = "Yay"
+    if @new_listing.save
+      flash[:success] = "Listing Dittoed"
     else
-     flash[:error] = "fuck"
+     flash[:error] = "Error processing request"
    end
 
-   redirect_to root_url
+   respond_to do |format|
+     format.html {redirect_to root_url}
+     format.js {render 'ditto_success'}
+   end
  end
 end

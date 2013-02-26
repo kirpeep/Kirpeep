@@ -88,14 +88,4 @@ $(document).ready(function() {
   //     }, 1000)
   //});
 
-  $(".ditto").live("click", function(e){
-    //e.preventDefault();
-    $("body").append("<div class='notify'>Ditto Posted! </div>");
-    setTimeout(function(){
-      $('.notify').fadeOut("slow", function () {
-        $('.notify').remove();
-      });
-    }, 2000);
-  });
-
 });  
