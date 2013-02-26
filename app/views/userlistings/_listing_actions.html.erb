@@ -1,6 +1,12 @@
 <div class="row tool pull-right">
 	<div class="ditto" style="display:inline">
+	<% if current_user && listing.user.id == current_user.id %>
+		<%=link_to image_tag("ditto.png", :style => "height:20px"), "#", :class => "ditto", "data-user" => current_user.id,  :remote => true %>
+	<% elsif current_user %>
 		<%=link_to image_tag("ditto.png", :style => "height:20px"), "/userlisting/"+listing.id.to_s+"/ditto", :class => "ditto", "data-user" => current_user.id,  :remote => true %>
+	<%else%>
+		<%=link_to image_tag("ditto.png", :style => "height:20px"), "#", :class => "ditto", "data-user" => "nil",  :remote => true %>
+	<%end%>
 	</div>
 	<div class="share" style="display:inline">
 		<%=link_to image_tag("share.png", :style => "height:20px"),  "/share/"+listing.id.to_s %>

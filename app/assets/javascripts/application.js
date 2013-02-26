@@ -18,6 +18,7 @@
 //= require best_in_place
 //= require gmaps4rails.base
 //= require gmaps4rails.googlemaps
+//= require private_pub
 
 /*jQuery.ajaxSetup({ 
   beforeSend: function(xhr) {
