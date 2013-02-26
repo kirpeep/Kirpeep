@@ -14,11 +14,13 @@
 /log/*.log
 /tmp
 /db/sphinx
+/solr/*.*
 
 #Ignore Deltas
 /db/sphinx/*.*
 
 # Ignore .rvmrc
+/.rvmrc
 .rvmrc
 
 # Ignore Images
