@@ -1,0 +1,53 @@
+<h1>Pin Listing Location</h1>
+
+<%= gmaps({
+        "map_options" => { "zoom" => 2, "auto_adjust" => false, "detect_location" => true},
+        "markers"     => { "data" => @markers }
+        })
+%>
+<% content_for :scripts do %>
+    <script type="text/javascript" charset="utf-8">
+        var markersArray = [];
+        // On click, clear markers, place a new one, update coordinates in the form
+        Gmaps.map.callback = function() {
+            google.maps.event.addListener(Gmaps.map.serviceObject, 'click', function(event) {
+              clearOverlays();
+              placeMarker(event.latLng);
+              updateFormLocation(event.latLng);
+            });
+        };
+        // Update form attributes with given coordinates
+        function updateFormLocation(latLng) {
+            $('#location_attributes_latitude').val(latLng.lat());
+            $('#location_attributes_longitude').val(latLng.lng());
+            $('#location_attributes_gmaps_zoom').val(Gmaps.map.serviceObject.getZoom());
+        }
+        // Add a marker with an open infowindow
+        function placeMarker(latLng) {
+            var marker = new google.maps.Marker({
+                position: latLng, 
+                map: Gmaps.map.serviceObject,
+                draggable: true
+            });
+            markersArray.push(marker);
+            // Set and open infowindow
+            var infowindow = new google.maps.InfoWindow({
+                content: '<div class="popup"><h2>Awesome!</h2><p>Drag me and adjust the zoom level.</p>'
+            });
+            infowindow.open(Gmaps.map.serviceObject,marker);
+            // Listen to drag & drop
+            google.maps.event.addListener(marker, 'dragend', function() {
+                updateFormLocation(this.getPosition());
+            });
+        }
+        // Removes the overlays from the map
+        function clearOverlays() {
+          if (markersArray) {
+            for (var i = 0; i < markersArray.length; i++ ) {
+              markersArray[i].setMap(null);
+            }
+          }
+          markersArray.length = 0;
+        }
+    </script>
+<% end %>
