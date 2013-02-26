@@ -61,3 +61,38 @@ john:
   password: root
   host: localhost
   socket: /var/run/mysqld/mysqld.sock
+
+steven:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: KIRPEEP_TEST
+  pool: 5
+  username: root
+  password: root
+  host: localhost
+  socket: /var/run/mysqld/mysqld.sock
+
+ryan:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: KIRPEEP_TEST
+  pool: 5
+  username: root
+  password: root
+  host: localhost
+  socket: /var/run/mysqld/mysqld.sock
+
+ben:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: KIRPEEP_TEST
+  pool: 5
+  username: root
+  password: root
+  host: localhost
+  socket: /var/run/mysqld/mysqld.sock
+
+
