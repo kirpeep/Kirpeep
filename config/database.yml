@@ -1,17 +1,15 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
 development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
   database: KirpeepTest
   pool: 5
-  username: kirpeepdb
-  password: Kirmahgerd22!
-  host: 2a0abd798bcaa6826f2bdf23778fc0a8052de8f0.rackspaceclouddb.com
+  #username: kirpeepdb
+  #password: Kirmahgerd22!
+  #host: 2a0abd798bcaa6826f2bdf23778fc0a8052de8f0.rackspaceclouddb.com
+  host: 10.177.136.131
+  username: root
+  password: kirpeep2012
   socket: /var/run/mysqld/mysqld.sock
 
 
@@ -37,6 +35,7 @@ production:
   pool: 5
   username: root
   password: kirpeep2012
+  #host: 10.177.136.131
   host: 127.0.0.1
   socket: /var/run/mysqld/mysqld.sock
 
