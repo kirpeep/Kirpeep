@@ -10,7 +10,7 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
+//= require jquery-1.8.3.min
 //= require jquery_ujs
 //= require handlebars-1.0.rc.1.js
 //= require bootstrap.min
