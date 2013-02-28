@@ -140,7 +140,7 @@ Kirpeep::Application.routes.draw do
   resources :transaction
   resources :admin
   resources :sms, :only => [:verify, :recieve]
-
+  resources :chat
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
