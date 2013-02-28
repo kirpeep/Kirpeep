@@ -27,6 +27,3 @@
 /public/system/*.*
 
 
-# Ignore .gitignore
-/.gitignore
-.gitignore
