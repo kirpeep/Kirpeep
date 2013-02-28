@@ -205,6 +205,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def chat_status
+    User.set_chat_status(params[:id], params[:status])
+  end
 
   def forgot
     respond_to do |format|

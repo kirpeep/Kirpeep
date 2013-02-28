@@ -20,6 +20,7 @@ Kirpeep::Application.routes.draw do
   match  '/user_exchanges/:id',  :to => 'users#exchanges'
   match  '/messages/:id',        :to => 'users#messages'
   match  '/view/:id',            :to => 'users#view'
+  match  '/users/:id/chat_status/:status', :to => 'users#chat_status'
   get  '/signup/',             :to => 'users#new'
   post   '/signup/',             :to => 'users#create'
   match  '/signup/:email&:pass', :to => 'users#new'

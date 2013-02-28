@@ -51,8 +51,17 @@ $(document).ready(function(){
     	<div class='span4'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
         <br><br>
-        <a href="/sendmessage?id=<%= @user.id %>&replyTo=nil" class='btn span2 dynamolink' style='margin-left: 20px;' >Send Message</a>
-        <br><br>
+        <a href="/sendmessage?id=<%= @user.id %>&replyTo=nil" class='btn span2 dynamolink' style='margin-left: 20px;' >Send Message</a><br>
+	<a class="btn " href="#">Chat
+	  <%if @user.chat_status == "availible" %>
+            <i class="icon-comment icon-green"></i></a>
+	  <%elsif @user.chat_status == "away" %>
+            <i class="icon-comment icon-yellow"></i></a>
+	  <%else%>
+            <i class="icon-comment icon-red"></i></a>
+	  <%end%>
+
+	        <br><br>
       	<ul class='profileInfo'>
           <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
             <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>

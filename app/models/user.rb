@@ -131,6 +131,12 @@ class User < ActiveRecord::Base
     self.profile.photo.url
   end
 
+  def self.set_chat_status(id, status)
+    user = self.find(id)
+
+    user.chat_status = status
+    user.save(:validate => false)
+  end
   private
 
   	def encrypt_password

@@ -41,7 +41,36 @@
       
     	<div class='span3'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
-        <br><br>
+        <div class="btn-group">
+	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+	  <%if @user.chat_status == "availible" %>
+            <i class="icon-comment icon-green"></i> Availible</a>
+	  <%elsif @user.chat_status == "away" %>
+            <i class="icon-comment icon-yellow"></i> Away</a>
+	  <%else%>
+            <i class="icon-comment icon-red"></i> Busy</a>
+	  <%end%> 
+
+
+  	  <ul class="dropdown-menu">
+	    <li>
+	      <%= link_to "/users/"+ current_user.id.to_s+"/chat_status/availible", :remote => true do %>
+		<i class="icon-comment icon-green"></i> Availible
+	      <%end%>
+	    </li>
+   	    <li>
+	      <%= link_to "/users/"+current_user.id.to_s+"/chat_status/away", :remote => true do %>
+		<i class="icon-comment icon-yellow"></i> Away
+	      <%end%>
+	    </li>
+    	    <li>
+	      <%= link_to "/users/"+current_user.id.to_s+"/chat_status/busy", :remote => true do %>
+		<i class="icon-comment icon-red"></i> Busy
+	      <%end%>
+	    </li>
+  	  </ul>
+	</div>
+<br><br>
       	<ul class='profileInfo'>
           <li onmouseover="$('#locationEdit').show()" onmouseout="$('#locationEdit').hide()" ><strong>Location:</strong> <%= best_in_place @profile, :location %> <i id='locationEdit' style='display:none;' class='icon-edit'></i></li>
             <li onmouseover="$('#zipcodeEdit').show()" onmouseout="$('#zipcodeEdit').hide()"><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %> <i id='zipcodeEdit' style='display:none;' class='icon-edit'></i></li>
