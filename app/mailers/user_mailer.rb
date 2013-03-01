@@ -8,7 +8,7 @@ class UserMailer < ActionMailer::Base
 
   def activate_email(user)
     @url = $domain + '/activate?id=' +user.id.to_s + '&token=' + user.token.to_s
-    mail(:to => user.email, :subject => 'Activate your Kirpeep account now!')
+    mail(:to => user.email, :subject => 'Congratulations on your new Kirpeep account!')
   end
 
   def message_email(to_user, from_user, subject, text)
