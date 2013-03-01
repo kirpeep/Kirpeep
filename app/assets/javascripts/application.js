@@ -41,6 +41,11 @@ function processPoints()
 
 }
 
+function chat_window(url) {
+	popupWindow = window.open(
+		url,'popUpWindow','height=300,width=200,left=10,top=10,resizable=no,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=no');
+}
+
 function get_query(){
   var url = location.href;
   var qs = url.substring(url.indexOf('?') + 1).split('&');

@@ -74,7 +74,6 @@ end
 
   #display user listing on the results page
   def show_listing_result
-    debugger
     listing = UserListing.find(params[:id]) 
     @user = listing.user
     posted_on = time_ago_in_words(listing.created_at)
@@ -169,7 +168,7 @@ end
     #change value of 'is_deleted' to true so that it no longer displays
     listing.is_deleted = true
 
-    if listing.save
+    if listing.save(:validate => false)
       if(listing.type == "Offer")
         flash[:notice] = 'Offer Deleted'  
       else
@@ -182,11 +181,11 @@ end
       end
     else
 
-      flash[:error] = listing.errors
+
 
       if listing.errors.any?
         listing.errors.full_messages.each do |msg|
-          puts msg
+          flash[:error] = msg
         end
       end
 
@@ -229,10 +228,10 @@ end
      @new_listing = user.profile.needs.new @listing.dup.attributes
       
     end
-    if @new_listing.save
+    if @new_listing.save(:validate => false)
       flash[:success] = "Listing Dittoed"
     else
-     flash[:error] = "Error processing request"
+     flash[:error] = @new_listing.errors.full_messages.first
    end
 
    respond_to do |format|

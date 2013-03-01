@@ -16,7 +16,7 @@ class UserListing < ActiveRecord::Base
 	has_many :exchanges, :through => :exchangeItem
 	has_many :assets
 	accepts_nested_attributes_for :assets
-	acts_as_gmappable
+	acts_as_gmappable :validation => false
 
 	#paperclip
 	has_attached_file :photo,

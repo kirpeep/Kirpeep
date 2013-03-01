@@ -3,7 +3,7 @@
     <h3 id="myModalLabel">Edit Offer</h3>
 </div>
 
-<%= form_for @listing, :url => '/userlisting/' + @listing.id.to_s(), :method => 'put', :html => { :multipart => true } do |f| %>
+<%= form_for @listing, :url => '/userlistings/' + @listing.id.to_s(), :method => 'put', :html => { :multipart => true } do |f| %>
 <div class="modal-body">
 	  <div class='span3 pull-left'>
 

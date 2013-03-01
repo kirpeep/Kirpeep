@@ -17,7 +17,7 @@
 
   <!-- Dynamobox Modal -->
   <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-
+<%= subscribe_to "/notify/"+current_user.id.to_s %>
   <%= yield :scripts %>
 
 </html>

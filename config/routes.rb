@@ -128,13 +128,10 @@ Kirpeep::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'sessions#index'
-  resources :userlistings
-
   resources :search
   resources :users do |user|
-    resources :userlistings
-    resources :profiles
   end
+  resources :userlistings
   resources :sessions#, :only => [:new, :create, :destroy]
   resources :exchanges
   resources :profiles
@@ -142,7 +139,9 @@ Kirpeep::Application.routes.draw do
   resources :transaction
   resources :admin
   resources :sms, :only => [:verify, :recieve]
-  resources :chat
+  resources :chat do |chat|
+    post "reply", :to => "chat#reply"
+  end
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

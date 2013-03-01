@@ -2,7 +2,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Edit Listing</h3>
   </div>
-  <%= form_for @listing, :url => '/userlisting/' + @listing.id.to_s(), :method => 'put', :html => { :multipart => true } do |f| %>
+  <%= form_for @listing, :url => '/userlistings/' + @listing.id.to_s(), :method => 'put', :html => { :multipart => true } do |f| %>
   <div class="modal-body">
 	  <div class='span3 pull-left'>
 		  <div class="field">
