@@ -32,24 +32,24 @@
       </div>
 
       <%= link_to raw('<i class="icon-plus-sign"></i> Need'), 
-	   new_userlisting_path(:type => "need"), 
-	   {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
+     new_userlisting_path(:type => "need"), 
+     {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
 
       
       <%= link_to raw('<i class="icon-plus-sign"></i> Offer'), new_userlisting_path(:type => "offer"), 
            {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
     <% else %>
       <div class='row pull-right'>
-	      <a href='/forgot' class='dynamolink'>Forgot Password</a>
-	      <a href="#signin" role="button" class="btn" data-toggle="modal" >Sign In</a>
-		<div id="user_nav">
-  		  <% if current_user %>
-    		    Signed in as <strong><%= current_user.name %></strong>!
-    		    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-  		  <% else %>
-    		    <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-  		  <% end %>
-		</div>
+        <a href='/forgot' class='dynamolink'>Forgot Password</a>
+        <a href="#signin" role="button" class="btn" data-toggle="modal" >Sign In</a>
+    <div id="user_nav">
+        <% if current_user %>
+            Signed in as <strong><%= current_user.name %></strong>!
+            <%= link_to "Sign out", signout_path, id: "sign_out" %>
+        <% else %>
+            <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+        <% end %>
+    </div>
       </div>
     <%end%>
      
@@ -59,19 +59,19 @@
   </div>
   <div class='pull-right' style='margin-top:5px;margin-right:35px;'></div> 
    <% if flash[:notice] != nil %>
-	    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
-	       <button type="button" class="close" data-dismiss="alert">×</button>
-	       <div id="flash_notice">
-		 <%= flash[:notice] %>
-	       </div>
-	    </div>
-	    <% elsif flash[:error] != nil %>
-	    <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
-	       <button type="button" class="close" data-dismiss="alert">×</button>
-	       <div id="flash_notice">
-		 <%= flash[:error] %>
-	       </div>
-	    </div>
+      <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
+         <button type="button" class="close" data-dismiss="alert">×</button>
+         <div id="flash_notice">
+     <%= flash[:notice] %>
+         </div>
+      </div>
+      <% elsif flash[:error] != nil %>
+      <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
+         <button type="button" class="close" data-dismiss="alert">×</button>
+         <div id="flash_notice">
+     <%= flash[:error] %>
+         </div>
+      </div>
     <% end %>
 
   <div class='row'>
@@ -115,54 +115,62 @@
     </div>
   </div>
 
-  <div style="text-align: center">
-    <iframe width="560" height="315" src="http://www.youtube.com/embed/23KsCPqibJs" frameborder="0" allowfullscreen></iframe>
-  </div>
+
+    <div class="row">
+      <div class="span6">
+      <iframe width="560" height="315" src="http://www.youtube.com/embed/23KsCPqibJs" frameborder="0" allowfullscreen></iframe>    
+      </div>
+      <div class="span3">
+      <% if !signed_in? %>
+        <div id="signup" class='span6 offset3 align-center'>
+          <p><span id="signup" >Get Started! (IT'S FREE!)</span></p>
+          <%= form_tag("/signup/", :method =>"post") do %>
+          <table style='margin-left:auto;margin-right:auto;'>
+          <tr>
+          <td></td><td><%= text_field_tag :name, '', { :class=>'span3', :placeholder => 'Name'} %></td> 
+          </tr>
+          <tr>
+          <td></td><td><%= text_field_tag :email, '', {:class=>'span3', :placeholder => 'Email'} %></td> 
+          </tr>
+          <tr>
+          <td></td><td><%= password_field_tag :password, '', {:class=>'span3', :placeholder => 'Password'} %></td>
+          </tr>
+          <tr>
+          <td></td><td><%= password_field_tag :password_confirmation, '',{:class=>'span3', :placeholder => 'Confirm Password'} %></td>
+          </tr>
+         
+          </table>
+          <span style='color: #000;'>By clicking sign up, you agree to the <a href='/tos'>terms</a></span> 
+          <br><br>
+          <%= submit_tag 'Sign up', :class => "btn btn-sucsess",'role' => "button" %>
+          <%end%>
+        </div>
+      <%end%>
+      </div>
+    </div>
+
 
   <div style="text-align: center">
     <%= link_to image_tag("facebook.jpg", :style => "height:100px"), "www.facebook.com/Kirpeep" %>
     <%= link_to image_tag("twitter.png", :style => "height:100px" ), "www.twitter.com/Kirpeep"%>
     <%= link_to image_tag("pinterest.png", :style => "height:100px"), "www.pinterest.com/Kirpeep" %>
   </div>
-  <div class='row'>
-    <% if !signed_in? %>
-    <div id="signup" class='span6 offset3 align-center'>
-      <p><span id="signup" >Get Started! (IT'S FREE!)</span></p>
-      <%= form_tag("/signup/", :method =>"post") do %>
-      <table style='margin-left:auto;margin-right:auto;'>
-      <tr>
-      <td></td><td><%= text_field_tag :name, '', { :class=>'span3', :placeholder => 'Name'} %></td> 
-      </tr>
-      <tr>
-      <td></td><td><%= text_field_tag :email, '', {:class=>'span3', :placeholder => 'Email'} %></td> 
-      </tr>
-      <tr>
-      <td></td><td><%= password_field_tag :password, '', {:class=>'span3', :placeholder => 'Password'} %></td>
-      </tr>
-      <tr>
-      <td></td><td><%= password_field_tag :password_confirmation, '',{:class=>'span3', :placeholder => 'Confirm Password'} %></td>
-      </tr>
-     
-      </table>
-      <span style='color: #000;'>By clicking sign up, you agree to the <a href='/tos'>terms</a></span> 
-      <br><br>
-      <%= submit_tag 'Sign up', :class => "btn btn-sucsess",'role' => "button" %>
-      <%end%>
-    </div>
-    <%end%>
+
+  <<div class='row'>
+    
     <div class='align-center'>
       <p><a href='/how'>How It Works</a> | <a href='/tos'>Terms of Use</a> | <a href='/privacy'>Privacy</a><br />
       &copy; 2012-2013 Kirpeep, Inc.</p>
     </div>
-  </div>
+  </div> 
 
 
 <!--The overlay and message box 
   <div id="fuzz">  
     <div id="msgbawx" class="msgbox" >  
     
-	     
-  	</div>  
+       
+    </div>  
   </div> --> 
   
 </body>
