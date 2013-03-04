@@ -14,7 +14,7 @@
 /log/*.log
 /tmp
 /db/sphinx
-/solr/*.*
+
 
 #Ignore Deltas
 /db/sphinx/*.*
@@ -27,6 +27,3 @@
 /public/system/*.*
 
 
-# Ignore .gitignore
-/.gitignore
-.gitignore
