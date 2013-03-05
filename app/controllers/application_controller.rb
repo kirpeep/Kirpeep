@@ -27,7 +27,9 @@ class ApplicationController < ActionController::Base
 	"Computer",
 	"Events",
 	"Financial",
+	"Medical",
 	"Legal",
+	"Dental",
 	"Lessons",
 	"Marine",
 	"Pets",
@@ -37,7 +39,7 @@ class ApplicationController < ActionController::Base
 	"Labor/Moving",
 	"Real Estate",
 	"Small Business",
-	"Theraputic",
+	"Therapeutic",
 	"Travel/Vacation",
 	"Non-Profit",
 	"Free"
