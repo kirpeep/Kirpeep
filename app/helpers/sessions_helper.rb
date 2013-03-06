@@ -3,8 +3,10 @@ module SessionsHelper
   #sign_in being used by devise, had to change global signin function
   def sign_in_(user)
      if user.Active == true
-	     cookies.permanent.signed[:remember_token] = [user.id, user.salt]
-	     self.current_user = user
+	cookies.permanent.signed[:remember_token] = [user.id, user.salt]
+	self.current_user = user
+	User.set_chat_status(current_user.id, "available")
+	
      else
        flash[:error] = "This account has not yet been activated."
      end
@@ -12,6 +14,7 @@ module SessionsHelper
 
   def sign_out
 	cookies.delete(:remember_token)
+	User.set_chat_status(current_user.id, "logged_off")
 	self.current_user = nil
   end
 

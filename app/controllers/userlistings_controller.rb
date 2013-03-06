@@ -67,10 +67,15 @@ class UserlistingsController < ApplicationController
    end
  end 
 
- def show_listing
-  @listing = UserListing.find(params[:id]) 
-  render 'show'
-end
+  def show_listing
+    @listing = UserListing.find(params[:id]) 
+    if signed_in?
+      Action.log current_user.id, 'viewListingDetailsPage', @listing.id
+    else
+      Action.log nil, 'viewListingDetailsPage', @listing.id
+    end
+    render 'show'
+  end
 
   #display user listing on the results page
   def show_listing_result

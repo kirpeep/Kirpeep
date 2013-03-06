@@ -42,30 +42,30 @@
     	<div class='span3'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
         <div class="btn-group">
-	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-	  <%if @user.chat_status == "availible" %>
-            <i class="icon-comment icon-green"></i> Availible</a>
+	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" id="chat_status">
+	  <%if @user.chat_status == "available" %>
+            <span style="color: #0F0;">&bull;</span>Available</a>
 	  <%elsif @user.chat_status == "away" %>
-            <i class="icon-comment icon-yellow"></i> Away</a>
+            <span style="color: #FA0;">&bull;</span> Away</a>
 	  <%else%>
-            <i class="icon-comment icon-red"></i> Busy</a>
+            <span style="color: #F00;">&bull;</span> Busy</a>
 	  <%end%> 
 
 
   	  <ul class="dropdown-menu">
 	    <li>
-	      <%= link_to "/users/"+ current_user.id.to_s+"/chat_status/availible", :remote => true do %>
-		<i class="icon-comment icon-green"></i> Availible
+	      <%= link_to "/users/"+ current_user.id.to_s+"/chat_status/available", :class => "chat", :remote => true do %>
+                <span style="color: #0F0;">&bull;</span> Available
 	      <%end%>
 	    </li>
    	    <li>
-	      <%= link_to "/users/"+current_user.id.to_s+"/chat_status/away", :remote => true do %>
-		<i class="icon-comment icon-yellow"></i> Away
+	      <%= link_to "/users/"+current_user.id.to_s+"/chat_status/away", :class => "chat", :remote => true do %>
+                <span style="color: #FA0;">&bull;</span> Away
 	      <%end%>
 	    </li>
     	    <li>
-	      <%= link_to "/users/"+current_user.id.to_s+"/chat_status/busy", :remote => true do %>
-		<i class="icon-comment icon-red"></i> Busy
+	      <%= link_to "/users/"+current_user.id.to_s+"/chat_status/busy", :class => "chat", :remote => true do %>
+              <span style="color: #F00;">&bull;</span> Busy
 	      <%end%>
 	    </li>
   	  </ul>
