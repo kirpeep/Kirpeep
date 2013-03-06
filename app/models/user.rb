@@ -70,10 +70,10 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
-      user.mail = auth.info.email
+      user.email = auth.info.email
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
+      user.save(:validate => false)
     end
   end	
   
@@ -131,6 +131,12 @@ class User < ActiveRecord::Base
     self.profile.photo.url
   end
 
+  def self.set_chat_status(id, status)
+    user = self.find(id)
+
+    user.chat_status = status
+    user.save(:validate => false)
+  end
   private
 
   	def encrypt_password
