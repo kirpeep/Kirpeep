@@ -13,9 +13,9 @@ module SessionsHelper
   end
 
   def sign_out
-	cookies.delete(:remember_token)
-	User.set_chat_status(current_user.id, "logged_off")
-	self.current_user = nil
+    User.set_chat_status(current_user.id, "logged_off")
+	  cookies.delete(:remember_token)
+	  self.current_user = nil
   end
 
   def current_user=(user)
