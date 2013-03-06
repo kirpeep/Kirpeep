@@ -12,7 +12,7 @@ div#signup {  border: 3px dashed;
 			  border-color:#7EC247; 
 			  background-color:#FFF; 
 			  color:#7EC247; 
-			  margin-bottom: 10px;
+			  height: 100%;
 }
 span#signup { background-color:#FFF; 
 }
