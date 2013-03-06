@@ -15,6 +15,11 @@ class ChatController < ApplicationController
   
   def show
     @chat = Chat.find(params[:id])
+    if current_user.id != @chat.init_user && current_user.id != @chat.targ_user
+        flash[:warning] = "there was an error procesing your request"
+	redirect_to current_user
+    end
+
     if @chat.init_user == current_user.id
       @user = User.find(@chat.targ_user)
     else
