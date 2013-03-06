@@ -1,5 +1,5 @@
 development:
-  server: "http://localhost:9292/faye"
+  server: "http://test.kirpeep.com:9292/faye"
   secret_token: "secret"
 test:
   server: "http://localhost:9292/faye"

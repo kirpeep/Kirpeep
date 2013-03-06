@@ -6,7 +6,7 @@
 
 class UserListing < ActiveRecord::Base
        
-	attr_accessible :type, :profile_id, :user_id, :inventoryCount, :listingType, :photo_file_name, :photo_content_type, :photo_file_size, :updated_at, :delta, :is_modified_exchange, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints, :is_deleted, :category, :created_at, :shippable
+	attr_accessible :type, :profile_id, :user_id, :inventoryCount, :listingType, :photo_file_name, :photo_content_type, :photo_file_size, :updated_at, :delta, :is_modified_exchange, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints, :is_deleted, :category, :created_at, :shippable, :longitude, :latitude, :gmaps
 
 
 	belongs_to :profile
