@@ -25,6 +25,7 @@ class UserlistingsController < ApplicationController
   end
 
   def create  
+debugger
     user = current_user 
     listingType = params[:type]
     listing = nil
