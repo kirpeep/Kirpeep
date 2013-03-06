@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   	render :partial  => 'shared/signin'
   end
 
-  def create_facebook
+  def facebook_create
     user = User.from_omniauth(env['omniauth.auth'])
     if user.nil?
       flash[:error] = "Invalid email/password combination."

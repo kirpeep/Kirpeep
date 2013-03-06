@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220173920) do
+ActiveRecord::Schema.define(:version => 20130228195911) do
 
   create_table "actions", :force => true do |t|
     t.integer  "userId"
@@ -62,6 +62,23 @@ ActiveRecord::Schema.define(:version => 20130220173920) do
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
+  end
+
+  create_table "chat_replies", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "message"
+    t.integer  "init_user"
+    t.integer  "targ_user"
+    t.integer  "chat_id"
+  end
+
+  create_table "chats", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "init_user"
+    t.integer  "targ_user"
+    t.string   "message"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -233,6 +250,9 @@ ActiveRecord::Schema.define(:version => 20130220173920) do
     t.decimal  "kirpoints",            :precision => 10, :scale => 0
     t.string   "category"
     t.boolean  "shippable"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
   end
 
   create_table "users", :force => true do |t|
@@ -253,6 +273,7 @@ ActiveRecord::Schema.define(:version => 20130220173920) do
     t.string   "provider"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.string   "chat_status"
   end
 
 end
