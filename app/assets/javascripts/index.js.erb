@@ -26,11 +26,11 @@ $(document).ready(function() {
 });
 
 $(document).ready(function () {
-	$('#search').keyup(function(){
+	$('.search').keyup(function(){
          
-	  if ($('#search').val() == '')
-	    $('#btnViewListings').val('Browse');
+	  if ($('.search').val() == '')
+	    $('.btnViewListings').val('Browse');
 	  else
-	    $('#btnViewListings').val('Search');
+	    $('.btnViewListings').val('Search');
 	});
 });

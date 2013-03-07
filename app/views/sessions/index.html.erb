@@ -95,13 +95,14 @@
           <%= image_tag("kirpeep.png") %>
         </div>
 
-        <div class='row'>
+        <!-- Kirpeepdesktop -->
+        <div class='row hidden-phone'>
           <div class='span6 offset3 align-center search'>
             <p>the Real way to Buy, Sell, and Trade!</p>
             <%= form_tag search_path, :method => 'get', :class =>"form-search", :validate => true do %>
-            <div class="input-prepend input-append">
+            <div class="row-fluid input-prepend input-append">
               <div class="btn-group">
-                <button class="btn dropdown-toggle span2" data-toggle="dropdown">
+                <button class="btn dropdown-toggle " data-toggle="dropdown">
                   <span id='catTitle'>Categories</span>
                   <span class="caret"></span>
                 </button>
@@ -113,8 +114,38 @@
                 </ul>
               </div>
               <%= hidden_field_tag :category %>
-              <%= text_field_tag :search, params[:search] ,{ :class => 'span3', :placeholder => 'Click browse to view listings or search' }%>
-              <%= submit_tag "Browse", {:class => "btn", :id => 'btnViewListings'} %>
+              <%= text_field_tag :search, params[:search] ,{ :class => 'search span6', :placeholder => 'Click browse to view listings or search' }%>
+              <%= submit_tag "Browse", {:class => "btn btnViewListings"} %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- KirpeepPhone -->
+        <div class='row visible-phone'>
+          <div class='span6 offset3 align-center search'>
+            <p>the Real way to Buy, Sell, and Trade!</p>
+            <%= form_tag search_path, :method => 'get', :class =>"form-search", :validate => true do %>
+            <div class="row-fluid input-prepend input-append">
+              <div class="btn-group btn-block">
+                <button class="btn dropdown-toggle " style = "width:90%" data-toggle="dropdown">
+                  <span id='catTitle'>Categories</span>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style='width:500px !important;'>
+                  <% $categories.each do |cat| %>
+                  <li style='text-align:left;width:150px !important;float:left !important;'><a href='#' onclick='$("#catTitle").html("<%= cat %>");$("#category").val("<%= cat %>");' ><%= cat %></a></li>
+                  <% end %>
+                  <li><a href='#' onclick='$("#catTitle").html("Categories");$("#category").val("");'><em>Clear Category</em></a></li>
+                </ul>
+              </div>
+              <%= hidden_field_tag :category %>
+              <div class="span10">
+              <%= text_field_tag :search, params[:search] ,{ :class=> "search", :style => "width:90%", :placeholder => 'Click browse to view listings or search' }%>
+              </div>
+              <div class="span10">
+              <%= submit_tag "Browse", { :style => "width:90%", :class => "btn btn-primary btnViewListings"} %>
+              </div>
             </div>
             <% end %>
           </div>
