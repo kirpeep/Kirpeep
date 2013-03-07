@@ -114,8 +114,8 @@
                 </ul>
               </div>
               <%= hidden_field_tag :category %>
-              <%= text_field_tag :search, params[:search] ,{ :class => 'search span6', :placeholder => 'Click browse to view listings or search' }%>
-              <%= submit_tag "Browse", {:class => "btn btnViewListings"} %>
+              <%= text_field_tag :search, params[:search] ,{ :class => 'span6', :placeholder => 'Click browse to view listings or search' }%>
+              <%= submit_tag "Browse", {:class => "btn btn-primary", :id => "btnViewListings"} %>
             </div>
             <% end %>
           </div>
@@ -141,10 +141,10 @@
               </div>
               <%= hidden_field_tag :category %>
               <div class="span10">
-              <%= text_field_tag :search, params[:search] ,{ :class=> "search", :style => "width:90%", :placeholder => 'Click browse to view listings or search' }%>
+              <%= text_field_tag :search_mobile, params[:search] ,{ :style => "width:90%", :placeholder => 'Click browse to view listings or search' }%>
               </div>
               <div class="span10">
-              <%= submit_tag "Browse", { :style => "width:90%", :class => "btn btn-primary btnViewListings"} %>
+              <%= submit_tag "Browse", { :style => "width:90%", :class => "btn btn-primary ", :id => "btnViewListings_mobile"} %>
               </div>
             </div>
             <% end %>
