@@ -29,7 +29,7 @@
               <li><%= link_to 'Sign Out' , destroy_session_path %></li>
             </ul>
           </div>
-        </div>
+        
 
         <%= link_to raw('<i class="icon-plus-sign"></i> Need'), 
         new_userlisting_path(:type => "need"), 
@@ -38,21 +38,22 @@
 
         <%= link_to raw('<i class="icon-plus-sign"></i> Offer'), new_userlisting_path(:type => "offer"), 
         {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
+        
         <% else %>
         <div class='row pull-right'>
           <a href='/forgot' class='dynamolink'>Forgot Password</a>
           <a href="#signin" role="button" class="btn" data-toggle="modal" >Sign In</a>
-          <div id="user_nav">
-            <% if current_user %>
-            Signed in as <strong><%= current_user.name %></strong>!
-            <%= link_to "Sign out", signout_path, id: "sign_out" %>
-            <% else %>
+          <!--div id="user_nav">
+            <%# if current_user %>
+            Signed in as <strong><%#= current_user.name %></strong>!
+            <%#= link_to "Sign out", signout_path, id: "sign_out" %>
+            <%#else %>
             <%#= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-            <% end %>
-          </div>
+            <%# end %>
+          </div-->
         </div>
         <%end%>
-
+</div>
 
         <div class='pull-right' style='margin-top:5px;margin-right:35px;'></div> 
         <% if flash[:notice] != nil %>
