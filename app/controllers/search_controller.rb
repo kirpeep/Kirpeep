@@ -13,6 +13,8 @@ class SearchController < ApplicationController
       @userlistings = UserListing.SearchByQuery(nil)
     end
 
+    @markers = @userlistings.to_gmaps4rails
+
   	render "show"
   end
 end

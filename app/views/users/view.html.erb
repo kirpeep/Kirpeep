@@ -51,8 +51,27 @@ $(document).ready(function(){
     	<div class='span4'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
         <br><br>
-        <a href="/sendmessage?id=<%= @user.id %>&replyTo=nil" class='btn span2 dynamolink' style='margin-left: 20px;' >Send Message</a>
-        <br><br>
+        <a href="/sendmessage?id=<%= @user.id %>&replyTo=nil" class='btn span2 dynamolink' style='margin-left: 20px;' >Send Message</a><br>
+	  <%if @user.chat_status == "available" %>
+	  <script type="text/javascript">
+	    function create_chat(url){
+	      var pop = window.open("","chat",'height=300,width=200,left=10,top=10,resizable=no,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no,status=no');
+	      var html = "<html><body><form id='chat' method='post' action='"+url+"' target='chat'></form>";
+	      pop.document.write(html);
+              pop.document.getElementById('chat').submit();
+	      return pop;
+	    }
+	  </script>
+            <%= link_to "#", :onclick => "Javascript:create_chat('/chat?targ_id="+@user.id.to_s+"')", :class => "btn", :target => "_top", :method => "post" do %>
+	      <span style="color: #0F0;">&bull;</span> Available
+	    <%end%>
+	  <%elsif @user.chat_status == "away" %>
+            <a class="btn " href="#"><span style="color: #FA0;">&bull;</span> Away</a>
+	  <%else%>
+            <a class="btn " href="#"><span style="color: #F00;">&bull;</span> Busy</a>
+	  <%end%>
+
+	        <br><br>
       	<ul class='profileInfo'>
           <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
             <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>
