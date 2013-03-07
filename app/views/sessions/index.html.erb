@@ -53,25 +53,25 @@
           </div-->
         </div>
         <%end%>
-</div>
+      </div>
 
-        <div class='pull-right' style='margin-top:5px;margin-right:35px;'></div> 
-        <% if flash[:notice] != nil %>
-        <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
-          <button type="button" class="close" data-dismiss="alert">×</button>
-          <div id="flash_notice">
-            <%= flash[:notice] %>
-          </div>
+      <div class='pull-right' style='margin-top:5px;margin-right:35px;'></div> 
+      <% if flash[:notice] != nil %>
+      <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <div id="flash_notice">
+          <%= flash[:notice] %>
         </div>
-        <% elsif flash[:error] != nil %>
-        <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
-          <button type="button" class="close" data-dismiss="alert">×</button>
-          <div id="flash_notice">
-            <%= flash[:error] %>
-          </div>
+      </div>
+      <% elsif flash[:error] != nil %>
+      <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <div id="flash_notice">
+          <%= flash[:error] %>
         </div>
-        <% end %>
-
+      </div>
+      <% end %>
+    </div>
         <!-- Kirpeep logo on desktops -->
         <div class='row hidden-phone'>
           <div class='span8 offset2 align-center'>
@@ -123,6 +123,9 @@
         <div class='row-fluid' style="text-align: center">
           <% if !signed_in? %>
           <div class="span6">
+
+              <iframe width="100%" height="315" src="http://www.youtube.com/embed/23KsCPqibJs" frameborder="0" allowfullscreen></iframe>
+            </div>
             <div id="signup" class='span6'>
               <p><span id="signup" >Get Started! (IT'S FREE!)</span></p>
               <%= form_tag("/signup/", :method =>"post") do %>
@@ -145,8 +148,8 @@
               <br><br>
               <%= submit_tag 'Sign up', :class => "btn btn-sucsess",'role' => "button" %>
               <%end%>
-            </div>
-          </div>  
+            </div> 
+            
           <%else%>
           <div class="row align-center">
 
