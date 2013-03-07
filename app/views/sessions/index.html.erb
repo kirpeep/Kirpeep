@@ -74,7 +74,8 @@
 	    </div>
     <% end %>
 
-  <div class='row'>
+  <!-- Kirpeep logo on desktops -->
+  <div class='row hidden-phone'>
     <div class='span8 offset2 align-center'>
       <div class="logo">
         <%= image_tag('kirp.png') %>
@@ -89,6 +90,11 @@
         <%= image_tag('p.png') %>
       </div>
     </div>
+  </div>
+
+  <!-- kirpeep for phones -->
+  <div class="row-fluid visible-phone">
+    <%= image_tag("kirpeep.png") %>
   </div>
   <div class='row'>
     <div class='span6 offset3 align-center search'>
