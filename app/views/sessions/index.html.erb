@@ -21,195 +21,150 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-<!--li><%#= link_to 'Buy Kirpoints' , '/kirpoints', :class => "dynamolink" %></li>
-  <li><%#= link_to 'Cashout Kirpoints' , '/kirpoints/cashout' %></li-->
-    <li><%= link_to 'View Profile', current_user %></li>
-    <li><%= link_to 'Edit Profile' , edit_profile_path(current_user.profile), :class => "dynamolink" %></li>
-    <li><%= link_to 'Edit Account', edit_user_path(current_user), :class => "dynamolink" %></li>
-    <li><%= link_to 'Sign Out' , destroy_session_path %></li>
+            <!--li><%#= link_to 'Buy Kirpoints' , '/kirpoints', :class => "dynamolink" %></li>
+            <li><%#= link_to 'Cashout Kirpoints' , '/kirpoints/cashout' %></li-->
+              <li><%= link_to 'View Profile', current_user %></li>
+              <li><%= link_to 'Edit Profile' , edit_profile_path(current_user.profile), :class => "dynamolink" %></li>
+              <li><%= link_to 'Edit Account', edit_user_path(current_user), :class => "dynamolink" %></li>
+              <li><%= link_to 'Sign Out' , destroy_session_path %></li>
+            </ul>
+          </div>
+        </div>
 
-  </ul>
-</div>
-
-<%= link_to raw('<i class="icon-plus-sign"></i> Need'), 
-new_userlisting_path(:type => "need"), 
-{:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
+        <%= link_to raw('<i class="icon-plus-sign"></i> Need'), 
+        new_userlisting_path(:type => "need"), 
+        {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
 
 
-<%= link_to raw('<i class="icon-plus-sign"></i> Offer'), new_userlisting_path(:type => "offer"), 
-{:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
-<% else %>
-<div class='row pull-right'>
-  <a href='/forgot' class='dynamolink'>Forgot Password</a>
-  <a href="#signin" role="button" class="btn" data-toggle="modal" >Sign In</a>
-  <div id="user_nav">
-    <% if current_user %>
-    Signed in as <strong><%= current_user.name %></strong>!
-    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-    <% else %>
-    <%#= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-    <% end %>
-  </div>
-</div>
-<%end%>
-
-  <!-- Kirpeep logo on desktops -->
-  <div class='row hidden-phone'>
-    <div class='span8 offset2 align-center'>
-      <div class="logo">
-        <%= image_tag('kirp.png') %>
-      </div>
-      <div id="ee">
-        <%= image_tag('ee.png') %>
-        <%= image_tag('bicycle.png') %>
-        <%= image_tag('books.png') %>
-        <%= image_tag('cupcake.png') %>
-      </div>
-      <div class="logo">
-        <%= image_tag('p.png') %>
-      </div>
-    </div>
-  </div>
-
-  <!-- kirpeep for phones -->
-  <div class="row-fluid visible-phone">
-    <%= image_tag("kirpeep.png") %>
-  </div>
-
-  <div class='row'>
-    <div class='span6 offset3 align-center search'>
-      <p>the Real way to Buy, Sell, and Trade!</p>
-      <%= form_tag search_path, :method => 'get', :class =>"form-search", :validate => true do %>
-        <div class="input-prepend input-append">
-          <div class="btn-group">
-          <button class="btn dropdown-toggle span2" data-toggle="dropdown">
-                <span id='catTitle'>Categories</span>
-               <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" style='width:500px !important;'>
-            <% $categories.each do |cat| %>
-                <li style='text-align:left;width:150px !important;float:left !important;'><a href='#' onclick='$("#catTitle").html("<%= cat %>");$("#category").val("<%= cat %>");' ><%= cat %></a></li>
+        <%= link_to raw('<i class="icon-plus-sign"></i> Offer'), new_userlisting_path(:type => "offer"), 
+        {:class => 'dynamolink btn btn-link pull-right', 'role' => "button", 'data-toggle' => "modal" }%>
+        <% else %>
+        <div class='row pull-right'>
+          <a href='/forgot' class='dynamolink'>Forgot Password</a>
+          <a href="#signin" role="button" class="btn" data-toggle="modal" >Sign In</a>
+          <div id="user_nav">
+            <% if current_user %>
+            Signed in as <strong><%= current_user.name %></strong>!
+            <%= link_to "Sign out", signout_path, id: "sign_out" %>
+            <% else %>
+            <%#= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
             <% end %>
-            <li><a href='#' onclick='$("#catTitle").html("Categories");$("#category").val("");'><em>Clear Category</em></a></li>
-          </ul>
+          </div>
         </div>
-        <%= hidden_field_tag :category %>
-          <%= text_field_tag :search, params[:search] ,{ :class => 'span3', :placeholder => 'Click browse to view listings or search' }%>
-          <%= submit_tag "Browse", {:class => "btn", :id => 'btnViewListings'} %>
+        <%end%>
+
+
+        <div class='pull-right' style='margin-top:5px;margin-right:35px;'></div> 
+        <% if flash[:notice] != nil %>
+        <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <div id="flash_notice">
+            <%= flash[:notice] %>
+          </div>
         </div>
-      <% end %>
-</div>
+        <% elsif flash[:error] != nil %>
+        <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <div id="flash_notice">
+            <%= flash[:error] %>
+          </div>
+        </div>
+        <% end %>
 
+        <!-- Kirpeep logo on desktops -->
+        <div class='row hidden-phone'>
+          <div class='span8 offset2 align-center'>
+            <div class="logo">
+              <%= image_tag('kirp.png') %>
+            </div>
+            <div id="ee">
+              <%= image_tag('ee.png') %>
+              <%= image_tag('bicycle.png') %>
+              <%= image_tag('books.png') %>
+              <%= image_tag('cupcake.png') %>
+            </div>
+            <div class="logo">
+              <%= image_tag('p.png') %>
+            </div>
+          </div>
+        </div>
 
-</div>
-<div class='pull-right' style='margin-top:5px;margin-right:35px;'></div> 
-<% if flash[:notice] != nil %>
-<div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
-  <button type="button" class="close" data-dismiss="alert">×</button>
-  <div id="flash_notice">
-    <%= flash[:notice] %>
-  </div>
-</div>
-<% elsif flash[:error] != nil %>
-<div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
-  <button type="button" class="close" data-dismiss="alert">×</button>
-  <div id="flash_notice">
-    <%= flash[:error] %>
-  </div>
-</div>
-<% end %>
+        <!-- kirpeep for phones -->
+        <div class="row-fluid visible-phone">
+          <%= image_tag("kirpeep.png") %>
+        </div>
 
-<div class='row'>
-  <div class='span8 offset2 align-center'>
-    <div class="logo">
-      <%= image_tag('kirp.png') %>
-    </div>
-    <div id="ee">
-      <%= image_tag('ee.png') %>
-      <%= image_tag('bicycle.png') %>
-      <%= image_tag('books.png') %>
-      <%= image_tag('cupcake.png') %>
-    </div>
-    <div class="logo">
-      <%= image_tag('p.png') %>
-    </div>
-  </div>
-</div>
+        <div class='row'>
+          <div class='span6 offset3 align-center search'>
+            <p>the Real way to Buy, Sell, and Trade!</p>
+            <%= form_tag search_path, :method => 'get', :class =>"form-search", :validate => true do %>
+            <div class="input-prepend input-append">
+              <div class="btn-group">
+                <button class="btn dropdown-toggle span2" data-toggle="dropdown">
+                  <span id='catTitle'>Categories</span>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style='width:500px !important;'>
+                  <% $categories.each do |cat| %>
+                  <li style='text-align:left;width:150px !important;float:left !important;'><a href='#' onclick='$("#catTitle").html("<%= cat %>");$("#category").val("<%= cat %>");' ><%= cat %></a></li>
+                  <% end %>
+                  <li><a href='#' onclick='$("#catTitle").html("Categories");$("#category").val("");'><em>Clear Category</em></a></li>
+                </ul>
+              </div>
+              <%= hidden_field_tag :category %>
+              <%= text_field_tag :search, params[:search] ,{ :class => 'span3', :placeholder => 'Click browse to view listings or search' }%>
+              <%= submit_tag "Browse", {:class => "btn", :id => 'btnViewListings'} %>
+            </div>
+            <% end %>
+          </div>
+        </div>
 
-<div class='row'>
-  <div class='span6 offset3 align-center search'>
-    <p>the Real way to Buy, Sell, and Trade!</p>
-    <%= form_tag search_path, :method => 'get', :class =>"form-search", :validate => true do %>
-    <div class="input-prepend input-append">
-      <div class="btn-group">
-        <button class="btn dropdown-toggle span2" data-toggle="dropdown">
-          <span id='catTitle'>Categories</span>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" style='width:500px !important;'>
-          <% $categories.each do |cat| %>
-          <li style='text-align:left;width:150px !important;float:left !important;'><a href='#' onclick='$("#catTitle").html("<%= cat %>");$("#category").val("<%= cat %>");' ><%= cat %></a></li>
-          <% end %>
-          <li><a href='#' onclick='$("#catTitle").html("Categories");$("#category").val("");'><em>Clear Category</em></a></li>
-        </ul>
-      </div>
-      <%= hidden_field_tag :category %>
-      <%= text_field_tag :search, params[:search] ,{ :class => 'span3', :placeholder => 'Click browse to view listings or search' }%>
-      <%= submit_tag "Browse", {:class => "btn", :id => 'btnViewListings'} %>
->>>>>>> a8075007f2066228e6a4ab86034f82b37884722b
-    </div>
-    <% end %>
-  </div>
-</div>
+        <div class='row-fluid' style="text-align: center">
+          <% if !signed_in? %>
+          <div class="span6">
+            <div id="signup" class='span6'>
+              <p><span id="signup" >Get Started! (IT'S FREE!)</span></p>
+              <%= form_tag("/signup/", :method =>"post") do %>
+              <table style='margin-left:auto;margin-right:auto;'>
+                <tr>
+                  <td></td><td><%= text_field_tag :name, '', { :placeholder => 'Name'} %></td> 
+                </tr>
+                <tr>
+                  <td></td><td><%= text_field_tag :email, '', { :placeholder => 'Email'} %></td> 
+                </tr>
+                <tr>
+                  <td></td><td><%= password_field_tag :password, '', {:placeholder => 'Password'} %></td>
+                </tr>
+                <tr>
+                  <td></td><td><%= password_field_tag :password_confirmation, '',{:placeholder => 'Confirm Password'} %></td>
+                </tr>
 
-<div class='row-fluid' style="text-align: center">
-  <% if !signed_in? %>
-  <div class="span6">
-  <%else%>
-  <div class="span6 offset3">
-  <%end%>
-    <iframe width="100%" height="315" src="http://www.youtube.com/embed/23KsCPqibJs" frameborder="0" allowfullscreen></iframe>
-  </div>
+              </table>
+              <span style='color: #000;'>By clicking sign up, you agree to the <a href='/tos'>terms</a></span> 
+              <br><br>
+              <%= submit_tag 'Sign up', :class => "btn btn-sucsess",'role' => "button" %>
+              <%end%>
+            </div>
+          </div>  
+          <%else%>
+          <div class="row align-center">
 
-  <% if !signed_in? %>
-  <div id="signup" class='span6'>
-    <p><span id="signup" >Get Started! (IT'S FREE!)</span></p>
-    <%= form_tag("/signup/", :method =>"post") do %>
-    <table style='margin-left:auto;margin-right:auto;'>
-      <tr>
-        <td></td><td><%= text_field_tag :name, '', { :placeholder => 'Name'} %></td> 
-      </tr>
-      <tr>
-        <td></td><td><%= text_field_tag :email, '', { :placeholder => 'Email'} %></td> 
-      </tr>
-      <tr>
-        <td></td><td><%= password_field_tag :password, '', {:placeholder => 'Password'} %></td>
-      </tr>
-      <tr>
-        <td></td><td><%= password_field_tag :password_confirmation, '',{:placeholder => 'Confirm Password'} %></td>
-      </tr>
+            <iframe width="500" height="315" src="http://www.youtube.com/embed/23KsCPqibJs" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <%end%>
+          <div style="text-align: center">
+            <%= link_to image_tag("facebook.jpg", :style => "height:29px"), "http://www.facebook.com/Kirpeep" %>
+            <%= link_to image_tag("twitter.png", :style => "height:29px" ), "http://www.twitter.com/Kirpeep"%>
+            <%= link_to image_tag("pinterest.png", :style => "height:29px"), "http://www.pinterest.com/Kirpeep" %>
+            <%= link_to image_tag("blog.png", :style => "height:29px"), "http://blog.kirpeep.com" %> 
+          </div>
 
-    </table>
-    <span style='color: #000;'>By clicking sign up, you agree to the <a href='/tos'>terms</a></span> 
-    <br><br>
-    <%= submit_tag 'Sign up', :class => "btn btn-sucsess",'role' => "button" %>
-    <%end%>
-  </div>
-  <%end%>
-</div>
-<div style="text-align: center">
-  <%= link_to image_tag("facebook.jpg", :style => "height:29px"), "http://www.facebook.com/Kirpeep" %>
-  <%= link_to image_tag("twitter.png", :style => "height:29px" ), "http://www.twitter.com/Kirpeep"%>
-  <%= link_to image_tag("pinterest.png", :style => "height:29px"), "http://www.pinterest.com/Kirpeep" %>
-  <%= link_to image_tag("blog.png", :style => "height:29px"), "http://blog.kirpeep.com" %> 
-</div>
-
-<div class='align-center'>
-  <p><a href='/how'>How It Works</a> | <a href='/tos'>Terms of Use</a> | <a href='/privacy'>Privacy</a><br />
-    &copy; 2012-2013 Kirpeep, Inc.</p>
-  </div>
-</div>
+          <div class='align-center'>
+            <p><a href='/how'>How It Works</a> | <a href='/tos'>Terms of Use</a> | <a href='/privacy'>Privacy</a><br />
+              &copy; 2012-2013 Kirpeep, Inc.</p>
+            </div>
+          </div>
 
 
 
-</body>
+        </body>
