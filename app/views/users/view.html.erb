@@ -62,7 +62,7 @@ $(document).ready(function(){
 	      return pop;
 	    }
 	  </script>
-            <%= link_to "#", :onclick => "Javascript:create_chat('/chat?targ_id="+@user.id.to_s+"')", :class => "btn", :method => "post" do %>
+            <%= link_to "#", :onclick => "Javascript:create_chat('/chat?targ_id="+@user.id.to_s+"')", :class => "btn", :target => "_top", :method => "post" do %>
 	      <span style="color: #0F0;">&bull;</span> Available
 	    <%end%>
 	  <%elsif @user.chat_status == "away" %>
