@@ -282,7 +282,7 @@ class UsersController < ApplicationController
          redirect_to root_path, notice: 'Missing Requirements'
        else
          @user.update_attribute(:Active, true)
-         sign_in @user
+         sign_in_ @user
          redirect_to root_path
        end
     end
