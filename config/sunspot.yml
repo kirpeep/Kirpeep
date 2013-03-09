@@ -15,3 +15,15 @@ test:
     hostname: localhost
     port: 8981
     log_level: WARNING
+    
+john:
+  solr:
+    hostname: localhost
+    port: 8982
+    log_level: INFO
+
+ryan:
+  solr:
+    hostname: localhost
+    port: 8982
+    log_level: INFO
