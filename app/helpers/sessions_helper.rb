@@ -56,7 +56,7 @@ module SessionsHelper
   end
 
   def destroy
-  	sign_out
+  	sign_out_
   	redirect_to root_path
   end	
 

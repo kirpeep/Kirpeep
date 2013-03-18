@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :searchQueries
 
   searchable do 
-    text :email, :name #, :location
+    text :email, :name, :location
     #integer :zipcode
   end
 
