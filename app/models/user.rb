@@ -8,7 +8,7 @@ require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
   
-  attr_accessible :email, :name, :password, :password_confirmation, :token, :Active, :kirpoints_committed, :kirpoints
+  attr_accessible :email, :name, :password, :password_confirmation, :token, :Active, :kirpoints_committed, :kirpoints, :encrypted_password, :remember_token, :salt, :delta, :is_deleted, :uid, :provider, :oauth_token, :oauth_expires_at, :chat_status
   has_one :profile, :dependent => :destroy
   has_many :messages
   has_many :needs, :through => :profile
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :searchQueries
 
   searchable do 
-    text :email, :name #, :location
+    text :email, :name
     #integer :zipcode
   end
 
@@ -67,13 +67,23 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+     isUser =  User.find_by_email(auth.info.email)
+
+     if	isUser
+	return isUser
+     else
+      user.profile = Profile.new
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
       user.email = auth.info.email
+      user.profile.photo = auth.info.image
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.Active = true;
+      
       user.save(:validate => false)
+     end
     end
   end	
   
