@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
       user.uid = auth.uid
       user.name = auth.info.name
       user.email = auth.info.email
-      user.profile.photo = open('https://graph.facebook.com/'+auth.uid+'/picture?type=large') {|f| f.read}
+      user.profile.photo = open('https://graph.facebook.com/'+auth.uid+'/picture?type=large') 
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.Active = true;
