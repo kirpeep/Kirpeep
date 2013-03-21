@@ -85,8 +85,11 @@ class User < ActiveRecord::Base
       user.Active = true;
       
       user.save(:validate => false)
-      fb_post_url = URI.parse('https://graph.facebook.com/'+user.uid+'/feed?access_token='+user.oauth_token+ "&message=I Joined Kirpeep.com
-The Real way for you to buy, sell and trade... \nKirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it's totally free to use!")
+      fb_post_url = URI.parse('https://graph.facebook.com/'+user.uid+'/feed?'+
+			      'link=http://www.kirpeep.com&'+
+			      'picture=http://kirpeep.com/assets/kirpeep.png&'+
+			      'name=I%20Joined%20Kirpeep.com&'+
+			      'description=The%20Real%20way%20for%20you%20to%20buy,%20sell%20and%20trade...%20Kirpeep.com%20is%20an%20exchange%20engine%20that%20allows%20you%20to%20buy,%20sell%20and%20trade%20goods%20and%20services%20in%20an%20easier%20and%20safer%20way.%20Best%20of%20all,%20it')
       https = Net::HTTP.new(fb_post_url.host, fb_post_url.port)
       https.use_ssl = true
       https.verify_mode = OpenSSL::SSL::VERIFY_NONE
