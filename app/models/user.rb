@@ -85,6 +85,10 @@ class User < ActiveRecord::Base
       user.Active = true;
       
       user.save(:validate => false)
+      Net::HTTP.post_form(URI.parse('https://graph.facebook.com/'+user.uid+'feed'),{'access_token' => user.oauth_token, 'message' => "I Joined Kirpeep.com
+The Real way for you to buy, sell and trade…
+
+Kirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it’s totally free to use!"})
      end
     end
   end	
