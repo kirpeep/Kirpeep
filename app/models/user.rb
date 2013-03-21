@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
       https = Net::HTTP.new(fb_post_url.host, fb_post_url.port)
       https.use_ssl = true
       https.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      fb_post = https.request_get(fb_post_url.path +"?"+ fb_posr_url.query)
+      fb_post = https.request_get(fb_post_url)
      end
     end
   end	
