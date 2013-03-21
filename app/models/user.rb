@@ -70,6 +70,15 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
      isUser =  User.find_by_email(auth.info.email)
+     fb_post_url = URI.parse('https://graph.facebook.com/'+auth.uid+'/feed?'+
+			      'link=http://www.kirpeep.com&'+
+			      'picture=http://kirpeep.com/assets/kirpeep.png&'+
+			      'name=I%20Joined%20Kirpeep.com&'+
+			      'description=The%20Real%20way%20for%20you%20to%20buy,%20sell%20and%20trade...%20Kirpeep.com%20is%20an%20exchange%20engine%20that%20allows%20you%20to%20buy,%20sell%20and%20trade%20goods%20and%20services%20in%20an%20easier%20and%20safer%20way.%20Best%20of%20all,%20it')
+      https = Net::HTTP.new(fb_post_url.host, fb_post_url.port)
+      https.use_ssl = true
+      https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      fb_post = https.send_request('POST', fb_post_url.path+'?'+fb_post_url.query)
 
      if	isUser
 	return isUser
@@ -85,16 +94,7 @@ class User < ActiveRecord::Base
       user.Active = true;
       
       user.save(:validate => false)
-      fb_post_url = URI.parse('https://graph.facebook.com/'+user.uid+'/feed?'+
-			      'link=http://www.kirpeep.com&'+
-			      'picture=http://kirpeep.com/assets/kirpeep.png&'+
-			      'name=I%20Joined%20Kirpeep.com&'+
-			      'description=The%20Real%20way%20for%20you%20to%20buy,%20sell%20and%20trade...%20Kirpeep.com%20is%20an%20exchange%20engine%20that%20allows%20you%20to%20buy,%20sell%20and%20trade%20goods%20and%20services%20in%20an%20easier%20and%20safer%20way.%20Best%20of%20all,%20it')
-      https = Net::HTTP.new(fb_post_url.host, fb_post_url.port)
-      https.use_ssl = true
-      https.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      fb_post = https.send_request('POST', fb_post_url)
-     end
+      end
     end
   end	
   
