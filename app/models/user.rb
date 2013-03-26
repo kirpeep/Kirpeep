@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
       user.Active = true;
       
       user.save(:validate => false)
-      user.put_wall_post("Logged into Kirpeep")
+      user.facebook.put_wall_post("Logged into Kirpeep")
 
       end
     end
