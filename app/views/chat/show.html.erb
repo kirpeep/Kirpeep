@@ -1,0 +1,43 @@
+<style>
+  #chat{
+    position:absolute;
+    overflow:scroll;
+    overflow-x:hidden;
+    display:block;
+    height: 50%;
+    width:90%;
+  }
+
+  #reply{
+    position: fixed;
+    bottom:0;
+    left:0;
+  }
+  #top{
+    position: relative;
+  }
+</style>
+<div class="row" id="top">
+  <div>
+    <%= image_tag(@user.profilePic, :width => "30px") %> <span id="username"><%= @user.name %></span>
+  </div>
+</div>
+<div id="chat">
+  Messages:<br>
+  <% for message in @messages %>
+  <%= render :partial => "reply", :locals => {:@reply => message} %>
+  <%end%>
+</div>
+<div id="reply">
+  <%= form_for ChatReply.new, :url => "/chat/"+@chat.id.to_s+"/reply", :remote => true do |f| %>
+    <%= f.text_area :message, :rows =>"3" %>
+    <%= f.submit "Send", :class => "btn btn-block btn-primary" %>
+    <%= f.hidden_field :init_user, :value => current_user.id.to_s%>
+    <% if @chat.init_user == current_user.id %>
+      <%= f.hidden_field :targ_user, :value => @chat.targ_user%>
+    <%else%>
+      <%= f.hidden_field :targ_user, :value => @chat.init_user%>
+    <%end%>
+  <%end%>
+</div>
+<%= subscribe_to "/chats/"+@chat.id.to_s %>

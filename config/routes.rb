@@ -20,6 +20,7 @@ Kirpeep::Application.routes.draw do
   match  '/user_exchanges/:id',  :to => 'users#exchanges'
   match  '/messages/:id',        :to => 'users#messages'
   match  '/view/:id',            :to => 'users#view'
+  match  '/users/:id/chat_status/:status', :to => 'users#chat_status'
   get  '/signup/',             :to => 'users#new'
   post   '/signup/',             :to => 'users#create'
   match  '/signup/:email&:pass', :to => 'users#new'
@@ -46,6 +47,7 @@ Kirpeep::Application.routes.draw do
   get  '/edit_listing/',  :to => 'userlistings#edit'
   match  '/get_listing/', :to => 'userlistings#getListing'
   get '/userlisting/:id/ditto/', :to => 'userlistings#ditto'
+  get '/userlisting/:id/edit_location/', :to => 'userlistings#edit_location'
   get  '/sendmessage/?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'
   match '/add_review/', :to => 'reviews#new'
   # Forgot password and password reset hacks
@@ -126,13 +128,10 @@ Kirpeep::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'sessions#index'
-  resources :userlistings
-
   resources :search
   resources :users do |user|
-    resources :userlistings
-    resources :profiles
   end
+  resources :userlistings
   resources :sessions#, :only => [:new, :create, :destroy]
   resources :exchanges
   resources :profiles
@@ -140,7 +139,9 @@ Kirpeep::Application.routes.draw do
   resources :transaction
   resources :admin
   resources :sms, :only => [:verify, :recieve]
-
+  resources :chat do |chat|
+    post "reply", :to => "chat#reply"
+  end
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

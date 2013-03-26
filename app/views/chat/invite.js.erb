@@ -1,0 +1,5 @@
+var id = <%= id %>;
+$("body").append("<div class='notify'><a class='close'>x</a> <%=username%> would like to chat, <a target='_top' href='#' onclick='Javascript:chat_window(\"/chat/"+id+"\");'>Accept</a></div>" );
+/*setTimeout(function(){ 
+  $('.notify').fadeOut(); 
+}, 6000);*/

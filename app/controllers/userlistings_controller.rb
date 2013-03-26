@@ -67,14 +67,18 @@ class UserlistingsController < ApplicationController
    end
  end 
 
- def show_listing
-  @listing = UserListing.find(params[:id]) 
-  render 'show'
-end
+  def show_listing
+    @listing = UserListing.find(params[:id]) 
+    if signed_in?
+      Action.log current_user.id, 'viewListingDetailsPage', @listing.id
+    else
+      Action.log nil, 'viewListingDetailsPage', @listing.id
+    end
+    render 'show'
+  end
 
   #display user listing on the results page
   def show_listing_result
-    debugger
     listing = UserListing.find(params[:id]) 
     @user = listing.user
     posted_on = time_ago_in_words(listing.created_at)
@@ -119,6 +123,20 @@ end
     end
   end
 
+  def edit_location
+    @listing = UserListing.find(params[:id]) 
+    @marker = @listing.to_gmaps4rails
+    
+    if @listing.user.id != current_user.id
+      flash[:error] = "There was an issue accessing specified listing"
+      redirect_to current_user
+    end
+    respond_to do |format|
+      format.html {render 'edit_listing_location'} 
+      format.json 
+    end
+  end
+
   # PUT /users/1
   # PUT /users/1.json
   def update
@@ -155,7 +173,7 @@ end
     #change value of 'is_deleted' to true so that it no longer displays
     listing.is_deleted = true
 
-    if listing.save
+    if listing.save(:validate => false)
       if(listing.type == "Offer")
         flash[:notice] = 'Offer Deleted'  
       else
@@ -168,11 +186,11 @@ end
       end
     else
 
-      flash[:error] = listing.errors
+
 
       if listing.errors.any?
         listing.errors.full_messages.each do |msg|
-          puts msg
+          flash[:error] = msg
         end
       end
 
@@ -213,12 +231,14 @@ end
      @new_listing = user.profile.offers.new @listing.dup.attributes 
     else 
      @new_listing = user.profile.needs.new @listing.dup.attributes
-      
     end
-    if @new_listing.save
+
+    @new_listing.photo = Magick::Image.read(@listing.photo(:url))
+
+    if @new_listing.save(:validate => false)
       flash[:success] = "Listing Dittoed"
     else
-     flash[:error] = "Error processing request"
+     flash[:error] = @new_listing.errors.full_messages.first
    end
 
    respond_to do |format|

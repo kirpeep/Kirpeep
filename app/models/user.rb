@@ -5,10 +5,12 @@
 ####################################################
 
 require 'digest'
+require 'open-uri'
+
 class User < ActiveRecord::Base
   attr_accessor :password
   
-  attr_accessible :email, :name, :password, :password_confirmation, :token, :Active, :kirpoints_committed, :kirpoints
+  attr_accessible :email, :name, :password, :password_confirmation, :token, :Active, :kirpoints_committed, :kirpoints, :encrypted_password, :remember_token, :salt, :delta, :is_deleted, :uid, :provider, :oauth_token, :oauth_expires_at, :chat_status
   has_one :profile, :dependent => :destroy
   has_many :messages
   has_many :needs, :through => :profile
@@ -24,7 +26,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :searchQueries
 
   searchable do 
-    text :email, :name #, :location
+    text :email, :name
     #integer :zipcode
   end
 
@@ -67,13 +69,32 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+     isUser =  User.find_by_email(auth.info.email)
+     fb_post_url = URI.parse('https://graph.facebook.com/'+auth.uid+'/feed?'+
+			      'link=http://www.kirpeep.com&'+
+			      'picture=http://kirpeep.com/assets/kirpeep.png&'+
+			      'name=I%20Joined%20Kirpeep.com&'+
+			      'description=The%20Real%20way%20for%20you%20to%20buy,%20sell%20and%20trade...%20Kirpeep.com%20is%20an%20exchange%20engine%20that%20allows%20you%20to%20buy,%20sell%20and%20trade%20goods%20and%20services%20in%20an%20easier%20and%20safer%20way.%20Best%20of%20all,%20it')
+      https = Net::HTTP.new(fb_post_url.host, fb_post_url.port)
+      https.use_ssl = true
+      https.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      fb_post = https.send_request('POST', fb_post_url.path+'?'+fb_post_url.query)
+
+     if	isUser
+	return isUser
+     else
+      user.profile = Profile.new
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
-      user.mail = auth.info.email
+      user.email = auth.info.email
+      user.profile.photo = open('https://graph.facebook.com/'+auth.uid+'/picture?type=large') 
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
+      user.Active = true;
+      
+      user.save(:validate => false)
+      end
     end
   end	
   
@@ -131,6 +152,12 @@ class User < ActiveRecord::Base
     self.profile.photo.url
   end
 
+  def self.set_chat_status(id, status)
+    user = self.find(id)
+
+    user.chat_status = status
+    user.save(:validate => false)
+  end
   private
 
   	def encrypt_password

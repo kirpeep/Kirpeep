@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.12'
 gem 'rack'
 
 # Bundle edge Rails instead:
@@ -24,12 +24,20 @@ gem 'sunspot_solr'
 #Admin Page
 gem 'activeadmin'
 gem "meta_search",    '>= 1.1.0.pre'
+##workaround for recent active_admin break
+gem 'coffee-script-source', '~> 1.4.0'
+
 
 #Google Analytics
 group :production do
 	gem 'rack-google_analytics', :require => "rack/google_analytics"
 end	
 	
+#thin server
+gem 'thin'
+
+#Private Pub
+gem 'private_pub'
 
 # Gems used only for assets and not required
 # in production environments by default.

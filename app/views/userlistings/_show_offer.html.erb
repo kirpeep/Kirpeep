@@ -22,11 +22,11 @@
     <span>Category: <%= listing.category %></span><br>
     <strong>Posted <%= time_ago_in_words(listing.created_at) %> ago.</strong><br>
     <% if listing.shippable %>
-      <i>This item can be shipped</i>
+      <i>Shipping available</i>
     <%end%>
   </div>
   <div class="span12">
-    <strong><%= if listing.kirpoints == nil then 0 else listing.kirpoints end %> kirpoint(s) for this item</strong>
+    <strong>$<%= if listing.kirpoints == nil then 0 else listing.kirpoints end %> dollar(s) for this item</strong>
   </div>
 
   <div style= "display:none;">
