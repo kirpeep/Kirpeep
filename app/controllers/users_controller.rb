@@ -418,6 +418,11 @@ class UsersController < ApplicationController
    return @exchangesWithCurrentUser 
   end
 
+  def oauth_failure
+    falsh[:error] = "Unable to authenticate with Facebook"
+    redirect_to root_url
+  end
+
 
   def review_list(user)
     @exchanges = exchange_list(user.id)
