@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
      isUser =  User.find_by_email(auth.info.email)
 
      if	isUser
-        isUser.facebook.put_wall_post("Logged into Kirpeep")
+        isUser.facebook.put_wall_post("I Joined Kirpeep.com! The real way for you to buy, sell and trade Kirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it's totally free to use!")
 	return isUser
      else
       user.profile = Profile.new
