@@ -76,6 +76,7 @@ class User < ActiveRecord::Base
      isUser =  User.find_by_email(auth.info.email)
 
      if	isUser
+       #TODO Delete this and line below before pushing to production
         isUser.facebook.try { |user_fb| user_fb.put_connections("me", "feed", {:caption => "The real way for you to buy, sell and trade", :description => "Kirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it's totally free to use!", :link => "www.kirpeep.com", :name => "I Joined Kirpeep.com!", :picture => "https://sphotos-a.xx.fbcdn.net/hphotos-ash3/13187_488342647893467_1211732767_n.png" })}
 	return isUser
      else
@@ -90,7 +91,7 @@ class User < ActiveRecord::Base
       user.Active = true;
       
       user.save(:validate => false)
-      user.facebook.put_wall_post("Logged into Kirpeep")
+      user.facebook.try { |user_fb| user_fb.put_connections("me", "feed", {:caption => "The real way for you to buy, sell and trade", :description => "Kirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it's totally free to use!", :link => "www.kirpeep.com", :name => "I Joined Kirpeep.com!", :picture => "https://sphotos-a.xx.fbcdn.net/hphotos-ash3/13187_488342647893467_1211732767_n.png" })}
 
       end
     end
