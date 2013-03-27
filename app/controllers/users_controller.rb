@@ -103,7 +103,7 @@ class UsersController < ApplicationController
       if @user.save
         UserMailer.activate_email(@user).deliver
        # sign_in @user
-        flash[:notice] = 'User was successfully created, but your account must be activated.  Please check your email.'
+        flash[:notice] = 'Thank you for creating an account. Please check your email to activate it.'
         format.html { redirect_to root_url }
         format.json { render json: @user, status: :created, location: @user }
       else
