@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
       user.Active = true;
       
       user.save(:validate => false)
-      user.facebook.try { |user_fb| user_fb.put_connections("me", "feed", {:caption => "The real way for you to buy, sell and trade", :description => "Kirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it's totally free to use!", :link => "www.kirpeep.com", :name => "I Joined Kirpeep.com!", :picture => "https://sphotos-a.xx.fbcdn.net/hphotos-ash3/13187_488342647893467_1211732767_n.png" })}
+      user.facebook.try(:put_connections,"me", "feed", {:caption => "The real way for you to buy, sell and trade", :description => "Kirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it's totally free to use!", :link => "www.kirpeep.com", :name => "I Joined Kirpeep.com!", :picture => "https://sphotos-a.xx.fbcdn.net/hphotos-ash3/13187_488342647893467_1211732767_n.png" })
 
       end
     end
