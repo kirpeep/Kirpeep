@@ -233,7 +233,11 @@ class UserlistingsController < ApplicationController
      @new_listing = user.profile.needs.new @listing.dup.attributes
     end
 
-    @new_listing.photo = Magick::Image.read(@listing.photo(:url))
+    begin  
+      @new_listing.photo = open(@listing.photo(:url))
+    rescue
+      @new_listing.photo = nil
+    end 
 
     if @new_listing.save(:validate => false)
       flash[:success] = "Listing Dittoed"

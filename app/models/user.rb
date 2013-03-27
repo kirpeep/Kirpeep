@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def facebook
+    @facebook ||= Koala::Facebook::API.new(oauth_token)
+  end
+
   def self.authenticate_with_salt(id, cookie_salt)
   	user = find_by_id(id)
   	(user && user.salt == cookie_salt) ? user : nil
@@ -70,15 +74,6 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
      isUser =  User.find_by_email(auth.info.email)
-     fb_post_url = URI.parse('https://graph.facebook.com/'+auth.uid+'/feed?'+
-			      'link=http://www.kirpeep.com&'+
-			      'picture=http://kirpeep.com/assets/kirpeep.png&'+
-			      'name=I%20Joined%20Kirpeep.com&'+
-			      'description=The%20Real%20way%20for%20you%20to%20buy,%20sell%20and%20trade...%20Kirpeep.com%20is%20an%20exchange%20engine%20that%20allows%20you%20to%20buy,%20sell%20and%20trade%20goods%20and%20services%20in%20an%20easier%20and%20safer%20way.%20Best%20of%20all,%20it')
-      https = Net::HTTP.new(fb_post_url.host, fb_post_url.port)
-      https.use_ssl = true
-      https.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      fb_post = https.send_request('POST', fb_post_url.path+'?'+fb_post_url.query)
 
      if	isUser
 	return isUser
@@ -94,10 +89,15 @@ class User < ActiveRecord::Base
       user.Active = true;
       
       user.save(:validate => false)
+      begin
+        user.facebook.put_connections("me", "feed", {:caption => "The real way for you to buy, sell and trade", :description => "Kirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it's totally free to use!", :link => "www.kirpeep.com", :name => "I Joined Kirpeep.com!", :picture => "https://sphotos-a.xx.fbcdn.net/hphotos-ash3/13187_488342647893467_1211732767_n.png" })
+      rescue 
+        nil
+       end
       end
     end
   end	
-  
+
   # Helper method that will generate a token for the user account
   # This will be used for things like reset/forgot passwords
   def self.generateToken()
