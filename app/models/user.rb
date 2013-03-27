@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
      isUser =  User.find_by_email(auth.info.email)
 
      if	isUser
-        isUser.facebook.put_connections("me", "links", {:description => "The real way for you to buy, sell and trade Kirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it's totally free to use!", :link => "www.kirpeep.com", :name => "I Joined Kirpeep.com!", :picture => "https://sphotos-a.xx.fbcdn.net/hphotos-ash3/13187_488342647893467_1211732767_n.png" })
+        isUser.facebook.put_connections("me", "feed", {:description => "The real way for you to buy, sell and trade Kirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it's totally free to use!", :link => "www.kirpeep.com", :name => "I Joined Kirpeep.com!", :picture => "https://sphotos-a.xx.fbcdn.net/hphotos-ash3/13187_488342647893467_1211732767_n.png" })
 	return isUser
      else
       user.profile = Profile.new
@@ -96,10 +96,6 @@ class User < ActiveRecord::Base
     end
   end	
 
-  def facebook
-    @facebook ||= Koala::Facebook::API.new(oauth_token)
-  end
-  
   # Helper method that will generate a token for the user account
   # This will be used for things like reset/forgot passwords
   def self.generateToken()
