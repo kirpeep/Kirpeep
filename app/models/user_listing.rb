@@ -36,6 +36,9 @@ class UserListing < ActiveRecord::Base
 		text :zip do
 			user.profile.zipcode
 		end
+		text :education do
+			user.profile.education
+		end
 	end
 
 	validates :description, :presence => true, :length => {:maximum =>180}
