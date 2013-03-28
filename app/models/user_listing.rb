@@ -30,6 +30,9 @@ class UserListing < ActiveRecord::Base
 		string :category
 		boolean :is_deleted
 		time :created_at
+		text :username do
+			user.name
+		end
 		text :location do
 			user.profile.location
 		end
