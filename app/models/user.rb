@@ -5,10 +5,12 @@
 ####################################################
 
 require 'digest'
+require 'open-uri'
+
 class User < ActiveRecord::Base
   attr_accessor :password
   
-  attr_accessible :email, :name, :password, :password_confirmation, :token, :Active, :kirpoints_committed, :kirpoints
+  attr_accessible :email, :name, :password, :password_confirmation, :token, :Active, :kirpoints_committed, :kirpoints, :encrypted_password, :remember_token, :salt, :delta, :is_deleted, :uid, :provider, :oauth_token, :oauth_expires_at, :chat_status
   has_one :profile, :dependent => :destroy
   has_many :messages
   has_many :needs, :through => :profile
@@ -24,7 +26,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :searchQueries
 
   searchable do 
-    text :email, :name #, :location
+    text :email, :name
     #integer :zipcode
   end
 
@@ -60,6 +62,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def facebook
+    @facebook ||= Koala::Facebook::API.new(oauth_token)
+  end
+
   def self.authenticate_with_salt(id, cookie_salt)
   	user = find_by_id(id)
   	(user && user.salt == cookie_salt) ? user : nil
@@ -67,16 +73,31 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+     isUser =  User.find_by_email(auth.info.email)
+
+     if	isUser
+	return isUser
+     else
+      user.profile = Profile.new
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
       user.email = auth.info.email
+      user.profile.photo = open('https://graph.facebook.com/'+auth.uid+'/picture?type=large') 
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.Active = true;
+      
       user.save(:validate => false)
+      begin
+        user.facebook.put_connections("me", "feed", {:caption => "The real way for you to buy, sell and trade", :description => "Kirpeep.com is an exchange engine that allows you to buy, sell and trade goods and services in an easier and safer way. Best of all, it's totally free to use!", :link => "www.kirpeep.com", :name => "I Joined Kirpeep.com!", :picture => "https://sphotos-a.xx.fbcdn.net/hphotos-ash3/13187_488342647893467_1211732767_n.png" })
+      rescue 
+        nil
+       end
+      end
     end
   end	
-  
+
   # Helper method that will generate a token for the user account
   # This will be used for things like reset/forgot passwords
   def self.generateToken()

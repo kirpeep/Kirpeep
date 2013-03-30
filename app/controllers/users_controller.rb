@@ -103,7 +103,7 @@ class UsersController < ApplicationController
       if @user.save
         UserMailer.activate_email(@user).deliver
        # sign_in @user
-        flash[:notice] = 'User was successfully created, but your account must be activated.  Please check your email.'
+        flash[:notice] = 'Thank you for creating an account. Please check your email to activate it.'
         format.html { redirect_to root_url }
         format.json { render json: @user, status: :created, location: @user }
       else
@@ -282,7 +282,7 @@ class UsersController < ApplicationController
          redirect_to root_path, notice: 'Missing Requirements'
        else
          @user.update_attribute(:Active, true)
-         sign_in @user
+         sign_in_ @user
          redirect_to root_path
        end
     end
@@ -416,6 +416,11 @@ class UsersController < ApplicationController
     end
     #user does not have exchange with 'user' if reached
    return @exchangesWithCurrentUser 
+  end
+
+  def oauth_failure
+    falsh[:error] = "Unable to authenticate with Facebook"
+    redirect_to root_url
   end
 
 

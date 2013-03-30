@@ -33,4 +33,12 @@ $(document).ready(function () {
 	  else
 	    $('#btnViewListings').val('Search');
 	});
+
+  $('#search_mobile').keyup(function(){
+         
+    if ($('#search_mobile').val() == '')
+      $('#btnViewListings_mobile').val('Browse');
+    else
+      $('#btnViewListings_mobile').val('Search');
+  });
 });

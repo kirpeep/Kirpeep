@@ -24,16 +24,24 @@ class UserListing < ActiveRecord::Base
 		:thumb=> "100x100#",
 		:small  => "400x400>" }
 
-		searchable do 
-			text :title, :description 
-	#string :type 
-	string :category
-	boolean :is_deleted
-	time :created_at
-
-	#indexes user.profile.location, :as => :user_location
-	#indexes user.profile.zipcode, :as => :zipcode
-
+	searchable do 
+		text :title, :description 
+		#string :type 
+		string :category
+		boolean :is_deleted
+		time :created_at
+		text :username do
+			user.name
+		end
+		text :location do
+			user.profile.location
+		end
+		text :zip do
+			user.profile.zipcode
+		end
+		text :education do
+			user.profile.education
+		end
 	end
 
 	validates :description, :presence => true, :length => {:maximum =>180}
