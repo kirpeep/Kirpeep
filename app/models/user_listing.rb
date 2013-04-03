@@ -68,7 +68,7 @@ class UserListing < ActiveRecord::Base
 	  if self.street_address
 	   self.street_address
 	  else 
-	    user.profile.zip
+	    user.profile.zipcode
 	  end
 	end
 
