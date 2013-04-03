@@ -6,9 +6,10 @@
 
 class UserListing < ActiveRecord::Base
        
-	attr_accessible :type, :profile_id, :user_id, :inventoryCount, :listingType, :photo_file_name, :photo_content_type, :photo_file_size, :updated_at, :delta, :is_modified_exchange, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints, :is_deleted, :category, :created_at, :shippable, :longitude, :latitude, :gmaps
+	attr_accessible :type, :profile_id, :user_id, :inventoryCount, :listingType, :photo_file_name, :photo_content_type, :photo_file_size, :updated_at, :delta, :is_modified_exchange, :description, :title, :imgURL, :availableUntil, :listingtype, :photo, :kirpoints, :is_deleted, :category, :created_at, :shippable, :longitude, :latitude, :gmaps, :street_address
 
-
+	geocoded_by :address
+	after_validation :geocode
 	belongs_to :profile
 	has_many :exchanges
 	has_one :user, :through => :profile
@@ -61,6 +62,14 @@ class UserListing < ActiveRecord::Base
 		end
 
 		return search.results
+	end
+
+	def address
+	  if self.street_address
+	   self.street_address
+	  else 
+	    user.profile.zip
+	  end
 	end
 
 	def self.SearchByQueryAndCategory(query, category)

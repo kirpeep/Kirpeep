@@ -72,6 +72,9 @@ gem 'activemerchant'
 #Twillio
 gem 'twilio-ruby'
 
+#Geocoder
+gem "geocoder"
+
 #Client-side vals
 gem 'client_side_validations'
 
