@@ -83,7 +83,7 @@ group :test, :development, :kyle, :john do
 	gem 'ruby-debug19'
 	gem 'rails-erd'
 	gem 'rb-readline'
-	gem ' ruby-debug19'
+	gem 'ruby-debug19'
 end
 
 #Facebook login	

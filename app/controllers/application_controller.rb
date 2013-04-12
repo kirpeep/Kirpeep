@@ -57,6 +57,10 @@ class ApplicationController < ActionController::Base
        render :template => 'pages/how'
   end
 
+  def about
+       render :template => 'pages/about'
+  end
+
   private
   
   
