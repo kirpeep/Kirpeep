@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228195911) do
+ActiveRecord::Schema.define(:version => 20130410195054) do
 
   create_table "actions", :force => true do |t|
     t.integer  "userId"
@@ -193,6 +193,8 @@ ActiveRecord::Schema.define(:version => 20130228195911) do
     t.string   "phone_number"
     t.boolean  "phone_verified"
     t.boolean  "number_verified"
+    t.string   "group"
+    t.string   "sector"
   end
 
   create_table "reviews", :force => true do |t|
