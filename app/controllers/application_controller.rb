@@ -45,6 +45,7 @@ class ApplicationController < ActionController::Base
 	"Free"
   ]
 
+  
   def tos
        render :template => 'pages/tos'
   end
@@ -59,6 +60,10 @@ class ApplicationController < ActionController::Base
 
   def about
        render :template => 'pages/about'
+  end
+
+  def faq
+       render :template => 'pages/faq'
   end
 
   private
