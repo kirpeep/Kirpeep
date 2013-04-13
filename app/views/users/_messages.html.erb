@@ -66,7 +66,7 @@
 						      	<% else %>
 						      		<%= f.hidden_field :targUser, :value => @initUser.id %>
 						      	<% end %>
-						      	<%= f.text_field :text, :id => "text"+i.to_s %>
+						      	<%= f.text_area :text,  :id => "text"+i.to_s, :rows => "6", :style => "width:86%"%>
 						      	
 						      	<%= f.submit :reply, :class => 'btn' %>
 							<% end %>

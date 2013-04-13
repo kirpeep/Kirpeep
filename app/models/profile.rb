@@ -5,7 +5,7 @@
 ####################################################
 
 class Profile < ActiveRecord::Base
-  attr_accessible :photo, :interests, :quickPitch, :about, :education, 
+  attr_accessible :photo, :interests, :quickPitch, :about, :education, :group, :sector, 
               :location, :languages, :gender, :birthdate, :zipcode, :phone_number, :number_verified
   after_commit :set_product_delta_flag
 
@@ -26,6 +26,8 @@ class Profile < ActiveRecord::Base
   validates :education,  :length => {:minimum => 0, :maximum => 500}
   validates :location,   :length => {:maximum => 160}#, :presence => true
   validates :languages,  :length => {:minimum => 0, :maximum => 500}
+  validates :group, 	 :length => {:minimum => 0, :maximum => 500}
+  validates :sector, 	 :length => {:minimum => 0, :maximum => 500}
 
   private
 

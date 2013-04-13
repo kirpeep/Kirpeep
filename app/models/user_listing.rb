@@ -30,11 +30,23 @@ class UserListing < ActiveRecord::Base
 		string :category
 		boolean :is_deleted
 		time :created_at
+		text :username do
+			user.name
+		end
+		text :group do
+			user.profile.group
+		end
+		text :sector do
+			user.profile.sector
+		end
 		text :location do
 			user.profile.location
 		end
 		text :zip do
 			user.profile.zipcode
+		end
+		text :education do
+			user.profile.education
 		end
 	end
 
@@ -71,6 +83,12 @@ class UserListing < ActiveRecord::Base
 		return search.results
 	end
 
+	#Display Hot Listings
+	#def self.DisplayHotListings(query, category)
+	#	if params[:search] ==""
+	#	if params[:search] =="" && params[:category] == #insert hot listing category here
+	#end
+			
 	def self.GetDaysSinceListingCreated(listing_id)
 		listing = self.find(listing_id)
 

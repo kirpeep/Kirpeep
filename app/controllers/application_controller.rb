@@ -11,6 +11,9 @@ class ApplicationController < ActionController::Base
 
   $categories = [
 	"Electronics",
+	"Furniture",
+	"Gigs",
+	"Internet/Development",
 	"Hand Made Items",
  	"Clothing",
 	"Art",

@@ -27,6 +27,8 @@ gem "meta_search",    '>= 1.1.0.pre'
 ##workaround for recent active_admin break
 gem 'coffee-script-source', '~> 1.4.0'
 
+#FB GRAPH API INTERFACE
+gem 'koala'
 
 #Google Analytics
 group :production do
