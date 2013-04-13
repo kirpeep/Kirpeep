@@ -73,15 +73,19 @@ $(document).ready(function(){
 
 	        <br><br>
       	<ul class='profileInfo'>
-          <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
+            <li><strong>Groups:</strong> <%= best_in_place @profile, :group %></li>
+            <li><strong>Sectors:</strong> <%= best_in_place @profile, :sector %></li>
+            <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
             <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>
             <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
             <li><strong><%= @user.needs.count %> Needs / <%= @user.offers.count %> Offers</strong> </li>
-            <li><strong>Completed Exchanges</strong> </li>
-            <li><strong>Review (stars)<strong></li> 
+            <%# Commenting out 'Completed Exchanges' and 'Review' until functional %>
+            <%# <li><strong>Completed Exchanges</strong> </li> %>
+            <%# <li><strong>Review (stars)<strong></li> %>
       	</ul>
-
-	<h1>Reviews</h1>
+  <%# Commenting out 'Reviews' until functional with if false%>    
+	<% if false %>
+  <h1>Reviews</h1>
         <% if  controller.review_list(@user).nil?%>
           <span>No Reviews</span>
         <% else %>
@@ -92,6 +96,8 @@ $(document).ready(function(){
             </div>
           <% end %>
         <% end %>
+  <% end %>
+
       </div>
         
         <div class='span8'>
