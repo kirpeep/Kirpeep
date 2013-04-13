@@ -8,25 +8,20 @@ production:
   server: "http://www.kirpeep.com:9292/faye"
   secret_token: "aff0c2050c578e37a1cc7367d6f94287d1e81a27249ce5cc30fd90dbbb4c7c2e"
   signature_expiration: 3600 # one hour
+
 john:
   server: "http://localhost:9292/faye"
   secret_token: "secret" 
   signature_expiration: 3600 # one hour
 
-<<<<<<< HEAD
-=======
 steven:
   server: "http://localhost:9292/faye"
   secret_token: "secret"
   signature_expiration: 3600 # one hour
 
->>>>>>> be4ecf75684d4fe8fac56e7a5264f108876ec032
 ryan:
   server: "http://localhost:9292/faye"
   secret_token: "secret"
   signature_expiration: 3600 # one hour
 
-<<<<<<< HEAD
-=======
 
->>>>>>> be4ecf75684d4fe8fac56e7a5264f108876ec032
