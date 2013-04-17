@@ -85,6 +85,7 @@ group :test, :development, :kyle, :john do
 	gem 'ruby-debug19'
 	gem 'rails-erd'
 	gem 'rb-readline'
+	gem 'ruby-debug19'
 end
 
 #Facebook login	
@@ -114,4 +115,3 @@ gem 'omniauth-facebook'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
