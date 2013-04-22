@@ -1,11 +1,37 @@
-<div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
-        <% if is_current_user(user) %>
-		<em onmouseover="$('#quickPitchEdit').show()" onmouseout="$('#quickPitchEdit').hide()"><%= best_in_place user.profile, :quickPitch%> <i id='quickPitchEdit' style='display:none;' class='icon-edit'></i></em>
-	<% else %>
-		<em><%= user.profile.quickPitch %></em>
-	<% end %>
-       
+
+<!-- Top row -->
+<div class='row-fluid' style='margin-bottom: 20px;'>
+
+	<!-- display gender -->
+    <div class='span3 pull-left' style='font-weight:normal;' >
+	    <strong>Gender:</strong>
+	    <!-- <hr style='margin: 10px  0 !important;' /> -->
+	     <%= best_in_place user.profile, :gender %>
+    </div>
+
+	<!-- display zipcode -->
+    <div class='span3 pull-right' style='font-weight:normal;'>
+	    <strong>Zipcode:</strong>
+	    <!-- <hr style='margin: 10px 0 !important;' /> -->
+	    <%= best_in_place user.profile, :zipcode %>
+  	</div>
+
+  	<!-- display location -->
+    <div class='span3 pull-right' style='font-weight:normal;'>
+	    <strong>Location:</strong>
+	    <!-- <hr style='margin: 10px 0 !important;' /> -->
+	    <%= best_in_place user.profile, :location %>
+  	</div>
+
+  	<!-- display birthday -->
+    <div class='span3 pull-right' style='font-weight:normal;'>
+	    <strong>Birth Date:</strong>
+	    <!-- <hr style='margin: 10px 0 !important;' /> -->
+	    <%= best_in_place user.profile, :birthdate %>
+  	</div>
+
 </div>
+<<<<<<< HEAD
 <div class='row-fluid' style='margin-bottom: 20px;'>
     <div class='span7 pull-left' style='font-weight:normal;' >
      <strong>About</strong><br>
@@ -20,35 +46,52 @@
 </div>
 <hr />
 <div class='row-fluid'> 
+=======
+
+<!-- Middle row -->
+<div class='row-fluid' style='margin-bottom: 20px;'>
+
+  	<div class='span6 pull-right' style='font-weight:normal;'>
+	    <strong>Languages:</strong>
+	    <!-- <hr style='margin: 10px 0 !important;' /> -->
+	    <%= best_in_place user.profile, :languages %>
+  	</div>
+
+    <div class='span6 pull-right' style='font-weight:normal;'>
+      <strong>Education:</strong>
+      <!-- <hr style='margin: 10px 0 !important;' /> -->
+      <%= best_in_place user.profile, :education %>
+    </div>
+
+</div>
+
+<!-- Bottom -->
+<div class='row-fluid' style='margin-bottom: 20px;'>
+>>>>>>> profile
 	
-	<!-- UserListings-->
+	<!-- display needs/offers -->
+    <div class='span3 pull-left' style='font-weight:normal;' >
+	    <strong><%= @user.needs.count %> Needs / <%= @user.offers.count %> Offers</strong>
+    </div>
 
-	<!-- NEEDS-->
-	<div class='span6'>
-		<div><span id='needLabel'>NEEDS - <%= user.needs.count %></span> 
-				<% if is_current_user(user) %>
-					<%= link_to 'Add Need', 
-					new_userlisting_path(:type => "need"), 
-					{:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
-				<% end %>
-			</div>
-			<% for need in user.needs %>
-				<% next if need.is_deleted %>
-				<%= render :partial => 'userlistings/show_need', :locals => {:listing => need } %>
-			<% end %>
+    <!-- display number verified -->
+    <div class='span3 pull-right' style='font-weight:normal;'>
+	    <strong><%= if @profile.number_verified then "Number Verified" end %></strong>
+  	</div>
 
-	</div> 
-	    
-	<!-- OFFERS-->
-	<div class='span6'>
-		<div><span id='offersLabel'>OFFERS - <%= user.offers.count %></span>
-			<% if is_current_user(user) %>
-				<%= link_to 'Add Offer', new_userlisting_path(:type => "offer"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
-			<% end %>
-		</div>
-		<% for offer in user.offers %>
-			<% next if offer.is_deleted %>
-			<%= render :partial => 'userlistings/show_offer', :locals => {:listing => offer } %>
-		<%end%>
-	</div>
-</div> 
+  	<!-- display reviews -->
+    <div class='span3 pull-right' style='font-weight:normal;'>
+    	<!-- still needs link -->
+	    <strong>Reviews:</strong>
+  	</div>
+  
+  	<!-- display completed exhanges -->
+    <div class='span3 pull-right' style='font-weight:normal;'>
+    	<!-- still needs link -->
+	    <strong>Completed Exchanges:</strong>
+  	</div>
+
+</div>
+
+<hr />
+ 

@@ -70,29 +70,51 @@
 	    </li>
   	  </ul>
 	</div>
-<br><br>
-      	<ul class='profileInfo'>
+
+    
+ 
+<br>
+
+      <ul class='profileInfo'>           
+
+            <%# display quick pitch %>
+            <div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
+            <% if is_current_user(@user) %>
+              <em onmouseover="$('#quickPitchEdit').show()" onmouseout="$('#quickPitchEdit').hide()"><%= best_in_place @user.profile, :quickPitch%> <i id='quickPitchEdit' style='display:none;' class='icon-edit'></i></em>
+            <% else %>
+              <em><%= @user.profile.quickPitch %></em>
+            <% end %>
+       </ul>
+    
+
+        <ul class='profileInfo'>           
+
+            <%# display user group %>
             <li onmouseover="$('#groupEdit').show()" onmouseout="$('#groupEdit').hide()" ><strong>Groups:</strong> <%= best_in_place @profile, :group %> <i id='groupEdit' style='display:none;' class='icon-edit'></i></li>
+            <%# display user sector %>
             <li onmouseover="$('#sectorEdit').show()" onmouseout="$('#sectorEdit').hide()" ><strong>Sectors:</strong> <%= best_in_place @profile, :sector %> <i id='sectorEdit' style='display:none;' class='icon-edit'></i></li>
-            <li onmouseover="$('#locationEdit').show()" onmouseout="$('#locationEdit').hide()" ><strong>Location:</strong> <%= best_in_place @profile, :location %> <i id='locationEdit' style='display:none;' class='icon-edit'></i></li>
-            <li onmouseover="$('#zipcodeEdit').show()" onmouseout="$('#zipcodeEdit').hide()"><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %> <i id='zipcodeEdit' style='display:none;' class='icon-edit'></i></li>
-            <li onmouseover="$('#languageEdit').show()" onmouseout="$('#languageEdit').hide()"><strong>Languages:</strong> <%= best_in_place @profile, :languages %> <i id='languageEdit' style='display:none;' class='icon-edit'></i></li>
-            <li onmouseover="$('#birthdateEdit').show()" onmouseout="$('#birthdateEdit').hide()"><strong>Birth Date:</strong> <%= best_in_place @profile, :birthdate %> <i id='birthdateEdit' style='display:none;' class='icon-edit'></i></li>
-            <li onmouseover="$('#genderEdit').show()" onmouseout="$('#genderEdit').hide()"><strong>Gender:</strong> <%= best_in_place @profile, :gender %> <i id='genderEdit' style='display:none;' class='icon-edit'></i></li>
-            <li ><strong><%= @user.needs.count %> Needs / <%= @user.offers.count %> Offers</strong> </li>
-            
-            <%# Commenting out 'Completed Exchanges' and 'Reviews' until functional %>
-            <%# <li><strong>Completed Exchanges</strong> </li> %>
-            <%# <li><strong>1 Review (stars)<strong></li> %>
-            <li><strong><%= if @profile.number_verified then "Number Verified" end %></strong></li>
-      	</ul>
-      </div>
+       </ul>
+
+      	</div>
       
       <div class='span8'>
         <div id='profile-header'>
         	<h2 class='profile-username'>
             <%= @user.name %>
           </h2>
+
+          <%# display about %>
+            <div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
+            <% if is_current_user(@user) %>
+              <em onmouseover="$('#aboutEdit').show()" onmouseout="$('#aboutEdit').hide()"><%= best_in_place @user.profile, :about%> <i id='aboutEdit' style='display:none;' class='icon-edit'></i></em>
+            <% else %>
+              <em><%= @user.profile.about %></em>
+            <% end %>
+          
+          </div>
+       
+          </div>
+
           <div class='tabbable'>
             <ul class='nav nav-tabs'>
               <li class='active'>
@@ -128,6 +150,40 @@
       </div> <!-- /.span8-->
     </div><!-- #main-content .row -->
 
+
+<div class='row-fluid'> 
+  
+  <!-- UserListings-->
+
+  <!-- NEEDS-->
+  <div class='span6'>
+    <div><span id='needLabel'>NEEDS - <%= @user.needs.count %></span> 
+        <% if is_current_user(@user) %>
+          <%= link_to 'Add Need', 
+          new_userlisting_path(:type => "need"), 
+          {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+        <% end %>
+      </div>
+      <% for need in @user.needs %>
+        <% next if need.is_deleted %>
+        <%= render :partial => 'userlistings/show_need', :locals => {:listing => need } %>
+      <% end %>
+
+  </div> 
+      
+  <!-- OFFERS-->
+  <div class='span6'>
+    <div><span id='offersLabel'>OFFERS - <%= @user.offers.count %></span>
+      <% if is_current_user(@user) %>
+        <%= link_to 'Add Offer', new_userlisting_path(:type => "offer"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+      <% end %>
+    </div>
+    <% for offer in @user.offers %>
+      <% next if offer.is_deleted %>
+      <%= render :partial => 'userlistings/show_offer', :locals => {:listing => offer } %>
+    <%end%>
+  </div>
+</div>
       
 
     <%= render 'shared/footer' %>
