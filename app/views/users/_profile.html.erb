@@ -35,17 +35,17 @@
 <!-- Middle row -->
 <div class='row-fluid' style='margin-bottom: 20px;'>
 
-    <div class='span4 pull-right' style='font-weight:normal;'>
-	    <strong>Education:</strong>
-	    <!-- <hr style='margin: 10px 0 !important;' /> -->
-	    <%= best_in_place user.profile, :education %>
-  	</div>
-
-  	<div class='span7 pull-right' style='font-weight:normal;'>
+  	<div class='span6 pull-right' style='font-weight:normal;'>
 	    <strong>Languages:</strong>
 	    <!-- <hr style='margin: 10px 0 !important;' /> -->
 	    <%= best_in_place user.profile, :languages %>
   	</div>
+
+    <div class='span6 pull-right' style='font-weight:normal;'>
+      <strong>Education:</strong>
+      <!-- <hr style='margin: 10px 0 !important;' /> -->
+      <%= best_in_place user.profile, :education %>
+    </div>
 
 </div>
 

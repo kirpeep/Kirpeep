@@ -70,13 +70,31 @@
 	    </li>
   	  </ul>
 	</div>
-<br><br>
 
-        <ul class='profileInfo'>
+    
+ 
+<br>
+
+      <ul class='profileInfo'>           
+
+            <%# display quick pitch %>
+            <div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
+            <% if is_current_user(@user) %>
+              <em onmouseover="$('#quickPitchEdit').show()" onmouseout="$('#quickPitchEdit').hide()"><%= best_in_place @user.profile, :quickPitch%> <i id='quickPitchEdit' style='display:none;' class='icon-edit'></i></em>
+            <% else %>
+              <em><%= @user.profile.quickPitch %></em>
+            <% end %>
+       </ul>
+    
+
+        <ul class='profileInfo'>           
+
+            <%# display user group %>
             <li onmouseover="$('#groupEdit').show()" onmouseout="$('#groupEdit').hide()" ><strong>Groups:</strong> <%= best_in_place @profile, :group %> <i id='groupEdit' style='display:none;' class='icon-edit'></i></li>
+            <%# display user sector %>
             <li onmouseover="$('#sectorEdit').show()" onmouseout="$('#sectorEdit').hide()" ><strong>Sectors:</strong> <%= best_in_place @profile, :sector %> <i id='sectorEdit' style='display:none;' class='icon-edit'></i></li>
        </ul>
-       
+
       	</div>
       
       <div class='span8'>
@@ -85,13 +103,15 @@
             <%= @user.name %>
           </h2>
 
-          <%#display about user %>
-          <div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
+          <%# display about %>
+            <div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
             <% if is_current_user(@user) %>
-              <em onmouseover="$('#quickPitchEdit').show()" onmouseout="$('#quickPitchEdit').hide()"><%= best_in_place @user.profile, :quickPitch%> <i id='quickPitchEdit' style='display:none;' class='icon-edit'></i></em>
+              <em onmouseover="$('#aboutEdit').show()" onmouseout="$('#aboutEdit').hide()"><%= best_in_place @user.profile, :about%> <i id='aboutEdit' style='display:none;' class='icon-edit'></i></em>
             <% else %>
-              <em><%= @user.profile.quickPitch %></em>
+              <em><%= @user.profile.about %></em>
             <% end %>
+          
+          </div>
        
           </div>
 
