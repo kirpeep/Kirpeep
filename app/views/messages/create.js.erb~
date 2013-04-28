@@ -1,2 +1,0 @@
-alert("this works");
-/*$("#reply_message")[0].reset();*/
