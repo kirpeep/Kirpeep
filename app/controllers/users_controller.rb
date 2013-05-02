@@ -283,7 +283,7 @@ class UsersController < ApplicationController
        else
          @user.update_attribute(:Active, true)
          sign_in_ @user
-         redirect_to root_path(@user, :modalurl => '')
+         redirect_to root_path(@user, :modalurl => '/userlistings/new?type=offer')
        end
     end
   end
