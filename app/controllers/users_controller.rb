@@ -392,7 +392,7 @@ class UsersController < ApplicationController
   def gift_kirpoints
     render 'gift'    
   end
-
+  #TODO: Move logic to model
   #Returns true if user has an exchange with the current user
   def hasExchangeWithUser(user)
     @exchanges = exchange_list(user.id)
@@ -405,6 +405,7 @@ class UsersController < ApplicationController
    return false 
   end
 
+  #TODO: Move logic to model
   #Returns array of exchanges with user
   def exchangesWithUser(user)
     @exchanges = exchange_list(user.id)
