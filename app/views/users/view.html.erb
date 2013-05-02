@@ -137,7 +137,7 @@ $(document).ready(function(){
         <% end %>
       </div>
       <% for need in @user.needs %>
-        <div class="span5">
+        <div class="span6">
         <% next if need.is_deleted %>
         <%= render :partial => 'userlistings/show_need', :locals => {:listing => need } %>
         </div>
@@ -153,7 +153,7 @@ $(document).ready(function(){
       <% end %>
     </div>
     <% for offer in @user.offers %>
-    <div class="span5">
+    <div class="span6">
       <% next if offer.is_deleted %>
       <%= render :partial => 'userlistings/show_offer', :locals => {:listing => offer } %>
     </div>
