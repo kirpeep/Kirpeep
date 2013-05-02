@@ -39,6 +39,16 @@
   <% if current_user != nil %>
     <%= subscribe_to "/notify/"+current_user.id.to_s %>
   <%end%>
+
+  <% if params[:modalurl] %>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#dynamobox').load('<%= params[:modalurl].to_s%>');
+        $('#dynamobox').modal('show');
+      });
+      
+    </script>
+  <%end%>
   <%= yield :scripts %>
 
 </html>
