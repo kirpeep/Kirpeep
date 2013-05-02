@@ -33,6 +33,7 @@ class SessionsController < ApplicationController
         redirect_to user(@user, :modalurl => '/userlisting/new?type=offer')
       else
         redirect_to user
+      end
     end
   end
 end
