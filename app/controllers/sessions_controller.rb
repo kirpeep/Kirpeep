@@ -29,8 +29,8 @@ class SessionsController < ApplicationController
       sign_in_ user
       flash[:notice] = "Welcome, #{user.name}"
 
-      if user.created_at < 1.minute.ago
-        redirect_to user + '?modalurl=/userlisting/new?type=offer'
+      if user.created_at > 1.minute.ago
+        redirect_to 'users/'+user.id.to_s+'/?modalurl=/userlisting/new?type=offer'
       else
         redirect_to user
       end
