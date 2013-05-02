@@ -151,7 +151,7 @@
     </div><!-- #main-content .row -->
 
 
-<div class='row-fluid'> 
+<div class='row'> 
   
   <!-- UserListings-->
 
@@ -165,8 +165,10 @@
         <% end %>
       </div>
       <% for need in @user.needs %>
+        <div class="span6">
         <% next if need.is_deleted %>
         <%= render :partial => 'userlistings/show_need', :locals => {:listing => need } %>
+        </div>
       <% end %>
 
   </div> 
@@ -179,8 +181,10 @@
       <% end %>
     </div>
     <% for offer in @user.offers %>
+    <div class="span6">
       <% next if offer.is_deleted %>
       <%= render :partial => 'userlistings/show_offer', :locals => {:listing => offer } %>
+    </div>
     <%end%>
   </div>
 </div>

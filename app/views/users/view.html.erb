@@ -123,11 +123,45 @@ $(document).ready(function(){
           </div><!-- /#profile-header -->
         </div> <!-- /.span8-->
       </div><!-- .row-fluid-->
+<div class='row-fluid'> 
+  
+  <!-- UserListings-->
 
+  <!-- NEEDS-->
+  <div class='span6'>
+    <div><span id='needLabel'>NEEDS - <%= @user.needs.count %></span> 
+        <% if is_current_user(@user) %>
+          <%= link_to 'Add Need', 
+          new_userlisting_path(:type => "need"), 
+          {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+        <% end %>
+      </div>
+      <% for need in @user.needs %>
+        <div class="span6">
+        <% next if need.is_deleted %>
+        <%= render :partial => 'userlistings/show_need', :locals => {:listing => need } %>
+        </div>
+      <% end %>
+
+  </div> 
+      
+  <!-- OFFERS-->
+  <div class='span6'>
+    <div><span id='offersLabel'>OFFERS - <%= @user.offers.count %></span>
+      <% if is_current_user(@user) %>
+        <%= link_to 'Add Offer', new_userlisting_path(:type => "offer"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+      <% end %>
+    </div>
+    <% for offer in @user.offers %>
+    <div class="span6">
+      <% next if offer.is_deleted %>
+      <%= render :partial => 'userlistings/show_offer', :locals => {:listing => offer } %>
+    </div>
+    <%end%>
+  </div>
+</div>
+      
     <%= render 'shared/footer' %>
   </div>
-   <!-- Sign in Modal -->
-  <%= render 'shared/signin' %>
-  <!-- Dynamobox Modal -->
-  <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+
 </body>
