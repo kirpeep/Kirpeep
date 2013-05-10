@@ -50,8 +50,8 @@ class UserListing < ActiveRecord::Base
 		end
 	end
 
-	validates :description, :presence => true, :length => {:maximum =>180}
-	validates :title, :presence => true, :length => {:maximum => 50}
+	validates :description, :presence => true#, :length => {:maximum =>180}
+	validates :title, :presence => true#, :length => {:maximum => 50}
 	#validates :listingtype#, :presence => true
 
 	def gmaps4rails_address
