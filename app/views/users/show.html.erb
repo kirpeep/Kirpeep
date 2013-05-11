@@ -3,7 +3,7 @@
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <title>Kirpeep | <%= @title %></title>
 <%= javascript_tag do %>
-  window.userID = <%= current_user.id %>
+window.userID = <%= current_user.id %>
 <% end %>
 <%#= render 'needs/show' %>
 
@@ -14,105 +14,107 @@
 
 <body>
 
-<div class='container'>
-  
-  <%= render 'shared/header' %>
+  <div class='container'>
 
-  <div><hr/></div>
+    <%= render 'shared/header' %>
 
-  <div id='main-content' class='row'>
-  
-    <% if flash[:notice] != nil %>
-    <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
-       <button type="button" class="close" data-dismiss="alert">×</button>
-       <div id="flash_notice">
-         <%= flash[:notice] %>
-       </div>
-    </div>
-    <% elsif flash[:error] != nil %>
-    <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
-       <button type="button" class="close" data-dismiss="alert">×</button>
-       <div id="flash_notice">
-         <%= flash[:error] %>
-       </div>
-    </div>
-    <% end %>
+    <div><hr/></div>
+
+    <div id='main-content' class='row'>
+
+      <% if flash[:notice] != nil %>
+      <div class="alert" style="width: 40%;margin-left:auto;margin-right:auto;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <div id="flash_notice">
+          <%= flash[:notice] %>
+        </div>
+      </div>
+      <% elsif flash[:error] != nil %>
+      <div class="alert alert-error" style="width: 40%;margin-left:auto;margin-right:auto;">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <div id="flash_notice">
+          <%= flash[:error] %>
+        </div>
+      </div>
+      <% end %>
       <% @profile = @user.profile %>
-      
-    	<div class='span3'>
+
+      <div class='span3'>
         <%= image_tag @user.profile.photo.url, {:width => '200px', :height => '200px', :class =>'img-polaroid'} %>
         <div class="btn-group">
-	  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" id="chat_status">
-	  <%if @user.chat_status == "available" %>
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" id="chat_status">
+            <%if @user.chat_status == "available" %>
             <span style="color: #0F0;">&bull;</span>Available</a>
-	  <%elsif @user.chat_status == "away" %>
+            <%elsif @user.chat_status == "away" %>
             <span style="color: #FA0;">&bull;</span> Away</a>
-	  <%else%>
+            <%else%>
             <span style="color: #F00;">&bull;</span> Busy</a>
-	  <%end%> 
+            <%end%> 
 
 
-  	  <ul class="dropdown-menu">
-	    <li>
-	      <%= link_to "/users/"+ current_user.id.to_s+"/chat_status/available", :class => "chat", :remote => true do %>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to "/users/"+ current_user.id.to_s+"/chat_status/available", :class => "chat", :remote => true do %>
                 <span style="color: #0F0;">&bull;</span> Available
-	      <%end%>
-	    </li>
-   	    <li>
-	      <%= link_to "/users/"+current_user.id.to_s+"/chat_status/away", :class => "chat", :remote => true do %>
+                <%end%>
+              </li>
+              <li>
+                <%= link_to "/users/"+current_user.id.to_s+"/chat_status/away", :class => "chat", :remote => true do %>
                 <span style="color: #FA0;">&bull;</span> Away
-	      <%end%>
-	    </li>
-    	    <li>
-	      <%= link_to "/users/"+current_user.id.to_s+"/chat_status/busy", :class => "chat", :remote => true do %>
-              <span style="color: #F00;">&bull;</span> Busy
-	      <%end%>
-	    </li>
-  	  </ul>
-	</div>
+                <%end%>
+              </li>
+              <li>
+                <%= link_to "/users/"+current_user.id.to_s+"/chat_status/busy", :class => "chat", :remote => true do %>
+                <span style="color: #F00;">&bull;</span> Busy
+                <%end%>
+              </li>
+            </ul>
+          </div>
 
-    
- 
-<br>
 
-      <ul class='profileInfo'>           
-          
+
+          <br>
+
+          <ul class='profileInfo'>           
+
             <%# display quick pitch %>
             <div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
-            <% if is_current_user(@user) %>
+              <% if is_current_user(@user) %>
               <em onmouseover="$('#quickPitchEdit').show()" onmouseout="$('#quickPitchEdit').hide()"><%= best_in_place @user.profile, :quickPitch%> <i id='quickPitchEdit' style='display:none;' class='icon-edit'></i></em>
-            <% else %>
-              <em><%= @user.profile.quickPitch %></em>
-            <% end %>
-       </ul>
-    
 
-        <ul class='profileInfo'>           
+              <% else %>
+              <em><%= @user.profile.quickPitch %></em>
+              <% end %>
+            </div>
+          </ul>
+
+
+          <ul class='profileInfo'>           
 
             <%# display user group %>
             <li onmouseover="$('#groupEdit').show()" onmouseout="$('#groupEdit').hide()" ><strong>Groups:</strong> <%= best_in_place @profile, :group %> <i id='groupEdit' style='display:none;' class='icon-edit'></i></li>
             <%# display user sector %>
             <li onmouseover="$('#sectorEdit').show()" onmouseout="$('#sectorEdit').hide()" ><strong>Sectors:</strong> <%= best_in_place @profile, :sector %> <i id='sectorEdit' style='display:none;' class='icon-edit'></i></li>
-       </ul>
+          </ul>
 
-      	</div>
-      
-      <div class='span8'>
-        <div id='profile-header'>
-        	<h2 class='profile-username'>
-            <%= @user.name %>
-          </h2>
+        </div>
 
-          <%# display about %>
+        <div class='span8'>
+          <div id='profile-header'>
+            <h2 class='profile-username'>
+              <%= @user.name %>
+            </h2>
+
+            <%# display about %>
             <div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
-            <% if is_current_user(@user) %>
+              <% if is_current_user(@user) %>
               <em onmouseover="$('#aboutEdit').show()" onmouseout="$('#aboutEdit').hide()"><%= best_in_place @user.profile, :about%> <i id='aboutEdit' style='display:none;' class='icon-edit'></i></em>
-            <% else %>
+              <% else %>
               <em><%= @user.profile.about %></em>
-            <% end %>
-          
-          </div>
-       
+              <% end %>
+
+            </div>
+
           </div>
 
           <div class='tabbable'>
@@ -121,18 +123,14 @@
                 <%= link_to 'Profile', '#profile' , {:id => 'profile_link', 'data-toggle' => 'tab'} %>
               </li>
               <li>
-                <%= link_to 'Exchanges', '#exchanges' , {:id => 'exch_link', 'data-toggle' => 'tab'} %></li>
+                <%= link_to 'Exchanges', '#exchanges' , {:id => 'exch_link', 'data-toggle' => 'tab'} %>
+              </li>
               <li>
                 <%= link_to @messagesTabTxt, '#messages' , {:id => 'message_link', 'data-toggle' => 'tab'} %>
               </li>
-             <!-- commenting out 'Transactions' Tab -->
-	     <!--
-	      <li>
-                <%= link_to 'Transactions', '#transactions' , {:id => 'transactions_link', 'data-toggle' => 'tab'} %>
-              </li>
-	     -->
+
             </ul>
-    	    
+
             <div class="tab-content">
               <div id='profile' class="tab-pane active">
                 <%= render :partial => 'profile', :locals => {:user => @user} %>
@@ -142,7 +140,7 @@
               </div>
               <div id='messages' class="tab-pane"></div>
               <div id='transactions' class="tab-pane">
-                 <div id='transContainer' data-url="/users/<%=@user.id%>/transactions"></div>
+                <div id='transContainer' data-url="/users/<%=@user.id%>/transactions"></div>
               </div>
             </div> <!-- /.tab-content -->
           </div><!-- /.tabbable -->
@@ -151,49 +149,46 @@
     </div><!-- #main-content .row -->
 
 
-<div class='row'> 
-  
-  <!-- UserListings-->
+    <div class='row-fluid'> 
 
-  <!-- NEEDS-->
-  <div class='span6'>
-    <div><span id='needLabel'>NEEDS - <%= @user.needs.count %></span> 
-        <% if is_current_user(@user) %>
+      <!-- UserListings-->
+
+      <!-- NEEDS-->
+      <div class='span6'>
+        <div><span id='needLabel'>NEEDS - <%= @user.needs.count %></span> 
+          <% if is_current_user(@user) %>
           <%= link_to 'Add Need', 
           new_userlisting_path(:type => "need"), 
           {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
-        <% end %>
-      </div>
-      <% for need in @user.needs %>
-        <div class="span6">
-        <% next if need.is_deleted %>
-        <%= render :partial => 'userlistings/show_need', :locals => {:listing => need } %>
+          <% end %>
         </div>
-      <% end %>
+        <% for need in @user.needs %>
+        <div class="span6">
+          <% next if need.is_deleted %>
+          <%= render :partial => 'userlistings/show_need', :locals => {:listing => need } %>
+        </div>
+        <% end %>
 
-  </div> 
-      
-  <!-- OFFERS-->
-  <div class='span6'>
-    <div><span id='offersLabel'>OFFERS - <%= @user.offers.count %></span>
-      <% if is_current_user(@user) %>
-        <%= link_to 'Add Offer', new_userlisting_path(:type => "offer"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
-      <% end %>
+      </div> 
+
+      <!-- OFFERS-->
+      <div class='span6'>
+        <div><span id='offersLabel'>OFFERS - <%= @user.offers.count %></span>
+          <% if is_current_user(@user) %>
+          <%= link_to 'Add Offer', new_userlisting_path(:type => "offer"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+          <% end %>
+        </div>
+        <% for offer in @user.offers %>
+        <div class="span6">
+          <% next if offer.is_deleted %>
+          <%= render :partial => 'userlistings/show_offer', :locals => {:listing => offer } %>
+        </div>
+        <%end%>
+      </div>
     </div>
-    <% for offer in @user.offers %>
-    <div class="span6">
-      <% next if offer.is_deleted %>
-      <%= render :partial => 'userlistings/show_offer', :locals => {:listing => offer } %>
-    </div>
-    <%end%>
-  </div>
-</div>
-      
+
 
     <%= render 'shared/footer' %>
 
-  <!-- Dynamobox Modal -->
-  <div class="modal fade hide" id="dynamobox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-  
-</body>
-  
+  </body>
+
