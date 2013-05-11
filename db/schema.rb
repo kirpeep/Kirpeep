@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421222324) do
+ActiveRecord::Schema.define(:version => 20130410195054) do
 
   create_table "actions", :force => true do |t|
     t.integer  "userId"
@@ -164,33 +164,14 @@ ActiveRecord::Schema.define(:version => 20130421222324) do
   end
 
   create_table "modified_exchanges", :force => true do |t|
-    t.integer "exchange_id",                            :null => false
-    t.string  "type"
-    t.string  "typeWhenTerm"
-    t.string  "initUser"
-    t.string  "targUser"
-    t.string  "init_list_id"
-    t.string  "targ_list_id"
-    t.boolean "initAcpt"
-    t.boolean "targAcpt"
-    t.boolean "initComp"
-    t.boolean "targComp"
-    t.boolean "initCode"
-    t.boolean "targCode"
-    t.integer "init_rating_time"
-    t.integer "init_rating_cost"
-    t.integer "init_rating_ease"
-    t.integer "init_rating_overall"
-    t.integer "targ_rating_time"
-    t.integer "targ_rating_cost"
-    t.integer "targ_rating_ease"
-    t.integer "targ_rating_overall"
-    t.text    "init_comments"
-    t.text    "targ_comments"
-    t.string  "type_when_term"
-    t.string  "initConfCode"
-    t.string  "targConfCode"
-    t.boolean "is_deleted",          :default => false, :null => false
+    t.integer  "modificationID"
+    t.integer  "exchangeID"
+    t.datetime "timeModified"
+    t.string   "itemIDModified"
+    t.string   "modification"
+    t.integer  "prevModification"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "profiles", :force => true do |t|

@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
   has_many :messages, :through => :exchange
   has_many :modifiedExchanges, :through => :exchange
   has_many :transactions
-  has_and_belongs_to_many :searchQueries
 
   searchable do 
     text :email, :name
