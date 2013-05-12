@@ -46,6 +46,7 @@ Kirpeep::Application.routes.draw do
   put '/userlisting/:id', :to => 'userlistings#update'
   get  '/edit_listing/',  :to => 'userlistings#edit'
   match  '/get_listing/', :to => 'userlistings#getListing'
+  get '/userlisting/random', :to => 'userlistings#random'
   get '/userlisting/:id/ditto/', :to => 'userlistings#ditto'
   get '/userlisting/:id/edit_location/', :to => 'userlistings#edit_location'
   get  '/sendmessage/?id=:id&replyTo=:reply_message_id'    , :to => 'messages#new'

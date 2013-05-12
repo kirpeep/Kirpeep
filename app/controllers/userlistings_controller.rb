@@ -137,6 +137,15 @@ class UserlistingsController < ApplicationController
     end
   end
 
+  # GET /userlistings/random
+  def random 
+    respond_to do |format|
+      format.json {
+        render :json => UserListing.GetRandomListing.to_json
+      }
+    end
+  end
+
   # PUT /users/1
   # PUT /users/1.json
   def update

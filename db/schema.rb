@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410195054) do
+ActiveRecord::Schema.define(:version => 20130512154328) do
 
   create_table "actions", :force => true do |t|
     t.integer  "userId"
@@ -141,6 +141,14 @@ ActiveRecord::Schema.define(:version => 20130410195054) do
     t.string  "initConfCode"
     t.string  "targConfCode"
     t.boolean "is_deleted",          :default => false, :null => false
+  end
+
+  create_table "listing_smashes", :force => true do |t|
+    t.integer  "listing_y"
+    t.integer  "listing_n"
+    t.integer  "reactiontime"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "messages", :force => true do |t|
