@@ -1,0 +1,28 @@
+<%= stylesheet_link_tag 'results.css' %>
+<% @listing1 = UserListing.GetRandomListing %>
+<% @listing2 = UserListing.GetRandomListing %>
+
+<div class='row align-center'>
+		<div class='span6 pull-right'>
+			<div class='row-fluid'>
+				<span>@listing1.title/span><br>
+				<div class="rounded-map">
+					<%= image_tag @listing1.photo(:url), :width => '100px' %>
+				</div><!--.rounded-map-->
+				<div class="button align-center">
+					<%= link_to "Like It", '/listingsmash/@listing2.id.to_s/over/@listing1.id.to_s/in/Time.now', :class => "btn btn-primary vote", :remote => true %>
+				</div><!-- .button -->
+			<div><!-- .row-fluid -->
+		</div><!--.span6 .pull-right-->
+		<div class='span6'>
+			<div class='row-fluid'>
+				<span>@listing2.title/span><br>
+				<div class="rounded-map">
+					<%= image_tag @listing2.photo(:url), :width => '100px' %>
+				</div><!--.rounded-map-->
+				<div class="button">
+					<%= link_to "Like It", '/listingsmash/@listing2.id.to_s/over/@listing1.id.to_s/in/Time.now', :class => "btn btn-primary vote", :remote => true %>
+				</div><!-- .button -->
+			<div><!-- .row-fluid -->
+		</div><!--.span6-->
+	</div><!--.row .align-center-->
