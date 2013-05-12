@@ -17,7 +17,10 @@
 			var url = $(this).attr('href');
 			var pattern =/(\d+)/g;
 			var listings = url.match(pattern);
-			var percent = $.load('/listingsmash/'+listings[0]+'/vs/'+listings[1]);
+			var percent;
+			$.get('/listingsmash/'+listings[0]+'/vs/'+listings[1], function(data){
+				percent = data;
+			});
 			$('#listingsmash').fadeOut();
 			$('#listingsmash').html(""+percent+"% of people made the same choice</span>");
 			$('#listingsmash').fadeIn();
