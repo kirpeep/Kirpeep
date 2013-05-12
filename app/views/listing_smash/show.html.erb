@@ -3,5 +3,17 @@
 		<%= image_tag 'ee.png' %><br>
 		<span id="marquee">Which one do you value more</span><br>
 	</div><!--.row .align-center-->
-	<%= render 'listings' %>
+	<div id="listingsmash">
+		<%= render 'listings' %>
+	</div>
 </div><!--.container-->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(.vote).live('click', function({
+			$('#listingsmash').fadeOut();
+			$('#listingsmash').html(<%=j render 'listings' %> );
+			$('#listingsmash').fadeIn();
+		}));
+	});
+	
+</script>

@@ -1,3 +1,3 @@
-ActiveAdmin.register Profiles do
+ActiveAdmin.register Profile do
   
 end
