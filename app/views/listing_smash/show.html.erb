@@ -11,7 +11,7 @@
 	$(document).ready(function(){
 		$('.vote').live('click', function(){
 			$('#listingsmash').fadeOut();
-			$('#listingsmash').html(<%=j render 'listings' %> );
+			$('#listingsmash').html("<%=j render 'listings' %>" );
 			$('#listingsmash').fadeIn();
 		});
 	});
