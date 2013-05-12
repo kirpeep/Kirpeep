@@ -9,11 +9,11 @@
 </div><!--.container-->
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('.vote').live('click', function({
+		$('.vote').live('click', function(){
 			$('#listingsmash').fadeOut();
 			$('#listingsmash').html(<%=j render 'listings' %> );
 			$('#listingsmash').fadeIn();
-		}));
+		});
 	});
 	
 </script>
