@@ -12,7 +12,7 @@
 		$('.vote').live('click', function(){
 			var new_listings;
 			$.get("/listingsmash/newlistings/", function(data){
-				newlistings = $(data);
+				newlistings = data;
 			});
 			var url = $(this).attr('href');
 			var pattern =/(\d+)/g;
