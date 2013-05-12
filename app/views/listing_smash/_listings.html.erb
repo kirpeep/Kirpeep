@@ -10,7 +10,7 @@
 				<%= image_tag @listing1.photo(:url), :width => '100px' %>
 			</div><!--.rounded-map-->
 			<div class="button align-center">
-				<%= link_to "Like It", '/listingsmash/'+@listing2.id.to_s+'/over/'+@listing1.id.to_s+'/in/'+Time.now.to_i.to_s, :class => "btn btn-primary vote", :remote => true %>
+				<%= link_to "Like It", '/listingsmash/'+@listing2.id.to_s+'/over/'+@listing1.id.to_s+'/in/'+Time.now.to_i.to_s, :class => "btn btn-primary vote", :remote => true, :method => 'post' %>
 			</div><!-- .button -->
 		</div><!-- .row-fluid -->
 	</div><!--.span6 .pull-right-->
