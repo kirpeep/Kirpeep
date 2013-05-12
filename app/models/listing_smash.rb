@@ -9,4 +9,11 @@ class ListingSmash < ActiveRecord::Base
      @ls.reactiontime = time
      @ls.save
   end
+
+  def self.percentVs(selected_listing, vs_listing)
+  	selected = self.where(:listing_y => selected_listing, :listing_n => vs_listing).count
+  	rejected = self.where(:listing_y => vs_listing, :listing_n => selected_listing).count
+  	total = (selected+rejected < 1) 1 : selected+rejected
+  	return (selected/total)*100
+  end
 end

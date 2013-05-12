@@ -16,4 +16,9 @@ class ListingSmashController < ApplicationController
 		render :partial => 'listings';
 	end
 
+	#GET /listingsmash/:lid1/vs/:lid2
+	def percentVs
+		render :text => ListingSmash.percentVs(params[:lid1], params[:lid2])
+	end
+
 end

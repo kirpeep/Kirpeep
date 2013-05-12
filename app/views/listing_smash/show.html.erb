@@ -10,8 +10,18 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.vote').live('click', function(){
+			var new_listings = $.load("/listingsmash/newlistings/");
+			var url = $(this).attr('href');
+			var pattern =/(\d+)/g;
+			var listings = url.match(pattern);
+			var percent = $.load('/listingsmash/'+listings[0]+'/vs/'+listings[1]);
 			$('#listingsmash').fadeOut();
-			$('#listingsmash').load("/listingsmash/newlistings/");
+			$('#listingsmash').html(""+percent+"% of people made the same choice</span>");
+			$('#listingsmash').fadeIn();
+			setTimeout(function(){
+				$('#listingsmash').fadeOut();
+			},3000);
+			$('#listingsmash').html(new_listings);
 			$('#listingsmash').fadeIn();
 		});
 	});
