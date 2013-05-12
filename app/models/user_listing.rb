@@ -98,4 +98,11 @@ class UserListing < ActiveRecord::Base
 	def self.GetByUserId(id)
 		listings =self.find_by_user_id(id, :conditions => {:is_deleted => false})
 	end
+
+	def self.GetRandomListing
+
+		listing = self.find(rand(self.all.count), :conditions => {:is_deleted => false})
+		rescue ActiveRecord::RecordNotFound
+			return self.GetRandomListing
+	end
 end
