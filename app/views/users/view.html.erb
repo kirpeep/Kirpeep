@@ -85,17 +85,17 @@ $(document).ready(function(){
         </ul>
         <%# Commenting out 'Reviews' until functional with if false%>    
         <% if false %>
-        <h1>Reviews</h1>
-        <% if  controller.review_list(@user).nil?%>
-        <span>No Reviews</span>
-        <% else %>
-        <% for review in controller.review_list(@user) %>
-        <div>
-          <span>Reviewed by: </span> bob<%= %>
-          <span>review.review</span>
-        </div>
-        <% end %>
-        <% end %>
+          <h1>Reviews</h1>
+          <% if  controller.review_list(@user).nil?%>
+            <span>No Reviews</span>
+          <% else %>
+            <% for review in controller.review_list(@user) %>
+              <div>
+                <span>Reviewed by: </span> bob<%= %>
+                <span>review.review</span>
+              </div>
+            <% end %>
+          <% end %>
         <% end %>
 
       </div>

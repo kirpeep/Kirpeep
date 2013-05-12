@@ -8,27 +8,27 @@
 
   <div id="need-listing" class="span12">
     <div>
-     <a href="/listing/<%= listing.id %>" >
-       <% if !(listing.photo.url =~ /missing.png/) %>
-       <%= image_tag(listing.photo.url, :style=>'width:95%;') %>
+      <a href="/listing/<%= listing.id %>" >
+        <% if !(listing.photo.url =~ /missing.png/) %>
+        <%= image_tag(listing.photo.url, :style=>'width:95%;') %>
 
-       <% else %>
-       <div class='noListingImage'></div>
-       <% end %>
-     </a>
-   </div>
- </div>
- <div class="span12">
-  <p class="need-desc"><%= listing.description %></p>
-  <span>Category: <%= listing.category %></span><br>
-  <strong>Posted <%= time_ago_in_words(listing.created_at) %> ago.</strong><br>
-  <% if listing.shippable %>
+        <% else %>
+        <div class='noListingImage'></div>
+        <% end %>
+      </a>
+    </div>
+  </div>
+  <div class="span12">
+    <p class="need-desc"><%= listing.description %></p>
+    <span>Category: <%= listing.category %></span><br>
+    <strong>Posted <%= time_ago_in_words(listing.created_at) %> ago.</strong><br>
+    <% if listing.shippable %>
     <i>Can meet-up or item can be shipped</i>
-  <%end%>
-  
+    <%end%>
+
 
   </div>
-  
+
   <div class="row-fluid">
     <div class="span4 pull-left">
       <% if signed_in? && listing.user.id == current_user.id %>
@@ -38,7 +38,7 @@
       <% end %>
       <%#= image_tag('stars.png') %>
     </div>
-    
+
     <div class='pull-left'>
       <%#= listing.user.name %>
     </div>
@@ -54,6 +54,6 @@
         (<%= listing.user.offers.count %>) offer(s) 
       </div>
     </div>
-    
+
   </div>
 </div>

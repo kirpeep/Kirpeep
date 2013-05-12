@@ -1,15 +1,13 @@
 
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <title>Kirpeep | <%= @title %></title>
+  <%= javascript_tag do %>
+  window.userID = <%= current_user.id %>
+  <% end %>
 
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<title>Kirpeep | <%= @title %></title>
-<%= javascript_tag do %>
-window.userID = <%= current_user.id %>
-<% end %>
-<%#= render 'needs/show' %>
-
-<%= javascript_include_tag "profile.js" %>
-
-<%= stylesheet_link_tag    "profile.css" %>
+  <%= javascript_include_tag "profile.js" %>
+  <%= stylesheet_link_tag    "profile.css" %>
 </head>
 
 <body>
@@ -115,80 +113,76 @@ window.userID = <%= current_user.id %>
 
             </div>
 
+            <div class='tabbable'>
+              <ul class='nav nav-tabs'>
+                <li class='active'>
+                  <%= link_to 'Profile', '#profile' , {:id => 'profile_link', 'data-toggle' => 'tab'} %>
+                </li>
+                <li>
+                  <%= link_to 'Exchanges', '#exchanges' , {:id => 'exch_link', 'data-toggle' => 'tab'} %>
+                </li>
+                <li>
+                  <%= link_to @messagesTabTxt, '#messages' , {:id => 'message_link', 'data-toggle' => 'tab'} %>
+                </li>
+
+              </ul>
+
+              <div class="tab-content">
+                <div id='profile' class="tab-pane active">
+                  <%= render :partial => 'profile', :locals => {:user => @user} %>
+                </div>
+                <div id='exchanges' class="tab-pane">
+                  <div id="exchContainer" data-url="/user_exchanges/<%=current_user.id%>"></div>
+                </div>
+                <div id='messages' class="tab-pane"></div>
+              </div> <!-- /.tab-content -->
+            </div><!-- /.tabbable -->
+          </div><!-- /#profile-header -->
+        </div> <!-- /.span8-->
+      </div><!-- #main-content .row -->
+
+
+      <div class='row-fluid'> 
+
+        <!-- UserListings-->
+
+        <!-- NEEDS-->
+        <div class='span6'>
+          <div><span id='needLabel'>NEEDS - <%= @user.needs.count %></span> 
+            <% if is_current_user(@user) %>
+            <%= link_to 'Add Need', 
+            new_userlisting_path(:type => "need"), 
+            {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+            <% end %>
           </div>
-
-          <div class='tabbable'>
-            <ul class='nav nav-tabs'>
-              <li class='active'>
-                <%= link_to 'Profile', '#profile' , {:id => 'profile_link', 'data-toggle' => 'tab'} %>
-              </li>
-              <li>
-                <%= link_to 'Exchanges', '#exchanges' , {:id => 'exch_link', 'data-toggle' => 'tab'} %>
-              </li>
-              <li>
-                <%= link_to @messagesTabTxt, '#messages' , {:id => 'message_link', 'data-toggle' => 'tab'} %>
-              </li>
-
-            </ul>
-
-            <div class="tab-content">
-              <div id='profile' class="tab-pane active">
-                <%= render :partial => 'profile', :locals => {:user => @user} %>
-              </div>
-              <div id='exchanges' class="tab-pane">
-                <div id="exchContainer" data-url="/user_exchanges/<%=current_user.id%>"></div>
-              </div>
-              <div id='messages' class="tab-pane"></div>
-              <div id='transactions' class="tab-pane">
-                <div id='transContainer' data-url="/users/<%=@user.id%>/transactions"></div>
-              </div>
-            </div> <!-- /.tab-content -->
-          </div><!-- /.tabbable -->
-        </div><!-- /#profile-header -->
-      </div> <!-- /.span8-->
-    </div><!-- #main-content .row -->
-
-
-    <div class='row-fluid'> 
-
-      <!-- UserListings-->
-
-      <!-- NEEDS-->
-      <div class='span6'>
-        <div><span id='needLabel'>NEEDS - <%= @user.needs.count %></span> 
-          <% if is_current_user(@user) %>
-          <%= link_to 'Add Need', 
-          new_userlisting_path(:type => "need"), 
-          {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
-          <% end %>
-        </div>
-        <% for need in @user.needs %>
-        <div class="span6">
+          <% for need in @user.needs %>
           <% next if need.is_deleted %>
-          <%= render :partial => 'userlistings/show_need', :locals => {:listing => need } %>
-        </div>
-        <% end %>
-
-      </div> 
-
-      <!-- OFFERS-->
-      <div class='span6'>
-        <div><span id='offersLabel'>OFFERS - <%= @user.offers.count %></span>
-          <% if is_current_user(@user) %>
-          <%= link_to 'Add Offer', new_userlisting_path(:type => "offer"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+          <div class="span6">
+            <%= render :partial => 'userlistings/show_need', :locals => {:listing => need } %>
+          </div>
           <% end %>
-        </div>
-        <% for offer in @user.offers %>
-        <div class="span6">
+
+        </div> 
+
+        <!-- OFFERS-->
+        <div class='span6'>
+          <div><span id='offersLabel'>OFFERS - <%= @user.offers.count %></span>
+            <% if is_current_user(@user) %>
+            <%= link_to 'Add Offer', new_userlisting_path(:type => "offer"), {:class => 'dynamolink btn', 'role' => "button", 'data-toggle' => "modal" }%>
+            <% end %>
+          </div>
+          <% for offer in @user.offers %>
           <% next if offer.is_deleted %>
-          <%= render :partial => 'userlistings/show_offer', :locals => {:listing => offer } %>
+          <div class="span6">
+            <%= render :partial => 'userlistings/show_offer', :locals => {:listing => offer } %>
+          </div>
+          <%end%>
         </div>
-        <%end%>
       </div>
+
+
+      <%= render 'shared/footer' %>
     </div>
-
-
-    <%= render 'shared/footer' %>
 
   </body>
 
