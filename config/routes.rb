@@ -79,6 +79,7 @@ Kirpeep::Application.routes.draw do
   post '/admin/credit', :to => 'admin#credit'
   
   post '/listingsmash/:id_y/over/:id_n/in/:time', :to => 'listing_smash#add_listing_smash_result'
+  get  '/listingsmash/newlistings', :to => 'listing_smash#render_new_listings'
   get  '/listingsmash', :to => 'listing_smash#show'
   #match '/signout', :to => 'sessions#destroy'
   #match '/home', :to => 'pages#index'

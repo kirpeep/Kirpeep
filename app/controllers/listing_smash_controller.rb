@@ -10,4 +10,9 @@ class ListingSmashController < ApplicationController
 		
 	end
 
+	#GET /listingsmash/newlistings
+	def render_new_listings
+		render 'listings';
+	end
+
 end
