@@ -10,7 +10,10 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.vote').live('click', function(){
-			var new_listings = $.load("/listingsmash/newlistings/");
+			var new_listings;
+			$.get("/listingsmash/newlistings/", function(data){
+				newlistings = $(data);
+			});
 			var url = $(this).attr('href');
 			var pattern =/(\d+)/g;
 			var listings = url.match(pattern);
