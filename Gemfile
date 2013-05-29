@@ -82,10 +82,11 @@ group :test, :development, :kyle, :john do
 	gem 'guard-rspec'
 	gem 'guard-livereload'
 	gem 'launchy'
-	gem 'ruby-debug19'
+	#gem 'ruby-debug19'
 	gem 'rails-erd'
 	gem 'rb-readline'
-	gem 'ruby-debug19'
+	#gem 'ruby-debug19'
+	gem 'debugger'
 end
 
 #Facebook login	

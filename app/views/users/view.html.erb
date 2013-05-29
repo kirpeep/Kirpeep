@@ -75,10 +75,6 @@ $(document).ready(function(){
       	<ul class='profileInfo'>
             <li><strong>Groups:</strong> <%= best_in_place @profile, :group %></li>
             <li><strong>Sectors:</strong> <%= best_in_place @profile, :sector %></li>
-            <li><strong>Location:</strong> <%= best_in_place @profile, :location %></li>
-            <li><strong>Zipcode:</strong> <%= best_in_place @profile, :zipcode %></li>
-            <li><strong>Languages:</strong> <%= best_in_place @profile, :languages %></li>
-            <li><strong><%= @user.needs.count %> Needs / <%= @user.offers.count %> Offers</strong> </li>
             <%# Commenting out 'Completed Exchanges' and 'Review' until functional %>
             <%# <li><strong>Completed Exchanges</strong> </li> %>
             <%# <li><strong>Review (stars)<strong></li> %>
@@ -105,6 +101,17 @@ $(document).ready(function(){
           	<h2 class='profile-username'>
               <%= @user.name %>
             </h2>
+
+            <%# display about %>
+            <div class='row-fluid' style='padding-top: 10px;padding-bottom:20px;' > 
+            <% if is_current_user(@user) %>
+              <em onmouseover="$('#aboutEdit').show()" onmouseout="$('#aboutEdit').hide()"><%= best_in_place @user.profile, :about%> <i id='aboutEdit' style='display:none;' class='icon-edit'></i></em>
+            <% else %>
+              <em><%= @user.profile.about %></em>
+            <% end %>
+
+            </div>
+
             <div class='tabbable'>
               <ul class='nav nav-tabs'>
                 <li class='active'>
