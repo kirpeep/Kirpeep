@@ -1,4 +1,25 @@
 
+<%# code for footer %>
+<script id="_webengage_script_tag" type="text/javascript">
+  window.webengageWidgetInit = window.webengageWidgetInit || function(){
+    webengage.init({
+      licenseCode:"~71680745"
+    }).onReady(function(){
+      webengage.render();
+    });
+  };
+
+  (function(d){
+    var _we = d.createElement('script');
+    _we.type = 'text/javascript';
+    _we.async = true;
+    _we.src = (d.location.protocol == 'https:' ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") +
+              "/js/widget/webengage-min-v-3.0.js";
+    var _sNode = d.getElementById('_webengage_script_tag');
+    _sNode.parentNode.insertBefore(_we, _sNode);
+  })(document);
+</script>
+
 <div class='row' id="footer">	
 	<div style='text-align:center; display:none'>
 		Can’t find what you’re looking for? Try <span class="orange-mid">advanced search</span>, <span class="blue-mid">browse</span>, or <span class="green-mid">add your own listing</span>!

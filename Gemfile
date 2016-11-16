@@ -61,7 +61,7 @@ gem 'jquery-rails'
 gem 'best_in_place'
 
 #Image Manipulation
-gem 'rmagick'
+gem 'rmagick', '2.13.2'
 
 #File uploading Gem
 gem 'paperclip'
@@ -82,15 +82,15 @@ group :test, :development, :kyle, :john do
 	gem 'guard-rspec'
 	gem 'guard-livereload'
 	gem 'launchy'
-	gem 'ruby-debug19'
+	gem 'debugger'
+	#gem 'ruby-debug19'
 	gem 'rails-erd'
 	gem 'rb-readline'
-	gem 'ruby-debug19'
+	#gem 'ruby-debug19'
 end
 
 #Facebook login	
 gem 'omniauth-facebook' 
-
 
 #Run the following the following(each is a line)
 #guard init
